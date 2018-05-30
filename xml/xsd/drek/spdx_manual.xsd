@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="spdx:xsd::1.0"
+           xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:niem-xs="http://release.niem.gov/niem/proxy/xsd/4.0/"
+           xmlns:structures="http://release.niem.gov/niem/structures/4.0/"
+           xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/"
+           xmlns:ism="urn:us:gov:ic:ism"
+           xmlns:owl="http://www.w3.org/2002/07/owl#"
+           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+           xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           targetNamespace="spdx:xsd::1.0"
+           version="1"
+           xsi:schemaLocation="http://release.niem.gov/niem/appinfo/4.0/ niem/utility/appinfo/4.0/appinfo.xsd http://release.niem.gov/niem/conformanceTargets/3.0/ niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
+           ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/#ReferenceSchemaDocument">
+   <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd"
+              namespace="http://release.niem.gov/niem/structures/4.0/"/>
+   <xs:import schemaLocation="ext/niem/utility/appinfo/4.0/appinfo.xsd"
+              namespace="http://release.niem.gov/niem/appinfo/4.0/"/>
+   <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd"
+              namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
+   <xs:import namespace="http://www.w3.org/2002/07/owl#" schemaLocation="ext/owl.xsd"/>
+   <xs:annotation>
+      <xs:documentation>This is a NIEM Conformant Reference Schema for Software Product Documentation Exchange (SPDX) information.</xs:documentation>
+   </xs:annotation>
+   <xs:simpleType name="AnnotationCategorySimpleType">
+      <xs:annotation>
+         <xs:documentation>A data type for a type of annotation.</xs:documentation>
+         <xs:appinfo>
+            <SimpleType name="Annotation" mapvar="annotationSimpleType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Other">
+            <xs:annotation>
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Review">
+            <xs:annotation>
+               <xs:documentation>A Review represents an audit and signoff by an individual, organization or tool on the information for an SpdxElement.</xs:documentation>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="DateTimeSimpleType">
+      <xs:annotation>
+         <xs:documentation>A data type for SPDX Date Properties.</xs:documentation>
+         <xs:appinfo>
+            <SimpleType name="Object Property" mapvar="objectPropertySimpleType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:dateTime"/>
+   </xs:simpleType>
+   <xs:simpleType name="HexBinarySimpleType">
+      <xs:annotation>
+         <xs:documentation>A data type for SPDX Hex Properties.</xs:documentation>
+         <xs:appinfo>
+            <SimpleType name="Object Property" mapvar="objectPropertySimpleType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:hexBinary"/>
+   </xs:simpleType>
+   <xs:simpleType name="LinkUrlSimpleType">
+      <xs:annotation>
+         <xs:documentation>A data type for URLs.</xs:documentation>
+         <xs:appinfo>
+            <SimpleType name="LinkUrl" mapvar="linkUrl"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:anyURI"/>
+   </xs:simpleType>
+   <xs:simpleType name="PropertyIndicatorSimpleType">
+      <xs:annotation>
+         <xs:documentation>A data type for the boolean indication of a property existence. True if known. False if not or not known.</xs:documentation>
+         <xs:appinfo>
+            <SimpleType name="Property Indicator" mapvar="propertyIndicator"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:boolean"/>
+   </xs:simpleType>
+   <xs:simpleType name="PropertySimpleType">
+      <xs:annotation>
+         <xs:documentation>A data type for SPDX Object Properties.</xs:documentation>
+         <xs:appinfo>
+            <SimpleType name="Object Property" mapvar="objectPropertySimpleType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string"/>
+   </xs:simpleType>   
+   <xs:complexType name="AnnotationType">
+      <xs:annotation>
+         <xs:documentation>A comment on an SpdxItem by an agent.</xs:documentation>
+         <xs:appinfo>
+            <owl:Class rdf:about="http://spdx.org/rdf/terms#Annotation"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="structures:ObjectType">
+            <xs:sequence>
+               <xs:element ref="Date" minOccurs="1"/>
+               <xs:element ref="AnnotationCategory"/>
+               <xs:element ref="Comment" minOccurs="1"/>
+               <xs:element ref="AnnotationCategory"/>
+               <xs:element ref="Annotator" minOccurs="1"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="AnnotationCategoryType">
+      <xs:annotation>
+         <xs:documentation>Type of the annotation.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="Annotation Type" mapvar="annotationType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="AnnotationCategorySimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ChecksumType">
+      <xs:annotation>
+         <xs:documentation>The checksum property provides a mechanism that can be used to verify that the contents of a File or Package have not changed.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="Checksum Type" mapvar="checksumType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="PropertySimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="CopyrightType">
+      <xs:annotation>
+         <xs:documentation>The text of copyright declarations recited in the Package or File.</xs:documentation>
+         <xs:appinfo>
+            <SimpleType name="Annotation" mapvar="annotationSimpleType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="structures:ObjectType">
+            <xs:choice>
+               <xs:element ref="NoAssertionIndicator">
+                  <xs:annotation>
+                     <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="NoneIndicator">
+                  <xs:annotation>
+                     <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the
+                                            property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element ref="CopyrightText">
+                  <xs:annotation>
+                     <xs:documentation>The text of copyright declarations recited in the Package or File.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:choice>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="DateTimeType">
+      <xs:annotation>
+         <xs:documentation>The date and time. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="Date Type" mapvar="date"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="DateTimeSimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="HexBinaryType">
+      <xs:annotation>
+         <xs:documentation>Verification code as a hex encoded value.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="Hex Binary" mapvar="hexBinary"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="HexBinarySimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LinkUrlType">
+      <xs:annotation>
+         <xs:documentation>A data type for URLs.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="Link Url Type" mapvar="linkUrl"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="LinkUrlSimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="PackageChecksumType">
+      <xs:annotation>
+         <xs:documentation>The checksum property provides a mechanism that can be used to verify that the contents of a File or Package have not changed.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="Checksum Type" mapvar="checksumType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="PropertySimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="PropertyIndicatorType">
+      <xs:annotation>
+         <xs:documentation>A data type for the boolean indication of a property existence. True if known. False if not or not known.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="Property Indicator" mapvar="propertyIndicator"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="PropertyIndicatorSimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="PropertyType">
+      <xs:annotation>
+         <xs:documentation>A data type for SPDX Object Properties.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="Property" mapvar="propertyType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="PropertySimpleType">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:element name="AnnotationCategory" type="AnnotationCategoryType">
+      <xs:annotation>
+         <xs:documentation>Type of the annotation.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AnnotationDate" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Identify when the comment was made. This is to be specified according to the combined date and time in the UTC format, as specified in the ISO 8601
+            standard.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Annotator" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>This field identifies the person, organization or tool that has commented on a file, package, or entire document. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ChecksumValue" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Comment" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Text information.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ContextualExample" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Example for use of the external repository identifier</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Copyright" type="CopyrightType">
+      <xs:annotation>
+         <xs:documentation>The text of copyright declarations recited in the Package or File..</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Created" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Creator" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must
+            conform to the agent and tool syntax.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Date" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>A date-time stamp.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DateTime" type="DateTimeType">
+      <xs:annotation>
+         <xs:documentation>The date and time. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Description" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Provides a detailed description of the package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Documentation" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Website containing the documentation related to the repository identifier</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DownloadLocation" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values
+            http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download
+            location, respectively.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Example" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Text for examples in describing an SPDX element.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalDocumentId" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalReferenceSite" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Website for the maintainers of the external reference site</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExtractedText" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Verbatim license or licensing notice text that was discovered.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FileChecksum" type="ChecksumType">
+      <xs:annotation>
+         <xs:documentation>The checksum property provides a mechanism that can be used to verify that the contents of a File or Package have not changed.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FileContributor" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>This field provides a place for the SPDX file creator to record file contributors. Contributors could include names of copyright holders and/or authors who may not
+            be copyright holders yet contributed to the file content.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FileName" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The name of the file relative to the root of the package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FilesAnalyzed" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Indicates whether the file content of this package has been available for or subjected to analysis when creating the SPDX document. If “false” indicates packages
+            that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Homepage" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="IsOsiApproved" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Indicates if the OSI has approved the license.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseComments" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>he licenseComments property allows the preparer of the SPDX document to describe why the licensing in spdx:licenseConcluded was chosen.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseExceptionId" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>short form license exception identifier in Appendix I.2 of the SPDX specification.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseExceptionText" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Full text of the license exception.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseId" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form "LicenseRef-"[idString]
+            where [idString] is a unique string containing letters, numbers, ".", "-" or "+".</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseListVersion" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseText" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Full text of the license.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LineNumber" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Line number within the reference starting at one.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LocatorFormat" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Regular expression for the format of the external repository identifier</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Name" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The full human readable name of the item. This should include version information when applicable.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NoAssertionIndicator" type="PropertyIndicatorType">
+      <xs:annotation>
+         <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NoneIndicator" type="PropertyIndicatorType">
+      <xs:annotation>
+         <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property.
+                                This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NoticeText" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>This field provides a place for the SPDX file creator to record potential legal notices found in the file. This may or may not include copyright
+            statements.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Offset" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Offset from the start of the reference.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Originator" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent
+            and tool syntax.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageChecksum" type="ChecksumType">
+      <xs:annotation>
+         <xs:documentation>The checksum property provides a mechanism that can be used to verify that the contents of a File or Package have not changed.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageFileName" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The base name of the package file name. For example, zlib-1.2.5.tar.gz.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageName" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Identify the full name of the package as given by Package Originator.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageVerificationCodeValue" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The actual package verification code as a hex encoded value.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ReferenceLocator" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The unique string with no spaces necessary to access the package-specific information, metadata, or content within the target location. The format of the locator is
+            subject to constraints defined by the &lt;type&gt;. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Reviewer" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The name and, optionally, contact information of the person who performed the review. Values of this property must conform to the agent and tool
+            syntax.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SnippetName" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Identify a specific snippet in a human convenient manner.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SourceInfo" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Allows the producer(s) of the SPDX document to describe how the package was acquired and/or changed from the original source.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SpecVersion" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0
+            and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StandardLicenseHeader" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>License author's preferred text to indicated that a file is covered by the license.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StandardLicenseTemplate" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>License template which describes sections of the license which can be varied. See License Template section of the specification for format
+            information.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Summary" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Provides a short description of the package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VerificationCodeExcludedFile" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>A file that was excluded when calculating the package verification code. This is usually a file containing SPDX data regarding the package. If a package contains
+            more than one SPDX file all SPDX files must be excluded from the package verification code. If this is not done it would be impossible to correctly calculate the verification codes in both
+            files.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VersionInfo" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Provides an indication of the version of the package that is described by this SpdxDocument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Agent" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Agent (eg. person, group, software or physical artifact)..</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Algorithm" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Identifies the algorithm used to produce the subject Checksum. Currently, SHA-1 is the only supported algorithm. It is anticipated that other algorithms will be
+            supported at a later time. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Annotation" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Provide additional information about an SpdxElement. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AnnotationType" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Type of the annotation.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ArtifactOf" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Indicates the project in which the SpdxElement originated. Tools must preserve doap:homepage and doap:name properties and the URI (if one is known) of doap:Project
+            resources that are values of this property. All other properties of doap:Projects are not directly supported by SPDX and may be dropped when translating to or from some SPDX
+            formats.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Checksum" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The checksum property provides a mechanism that can be used to verify that the contents of a File or Package have not changed.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CopyrightText" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The text of copyright declarations recited in the Package or File.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CreationInfo" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The creationInfo property relates an SpdxDocument to a set of information about the creation of the SpdxDocument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataLicense" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is
+            http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the
+            re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however
+            individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX
+            files.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DescribesFile" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The describesFile property relates an SpdxDocument to the file which it describes.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DescribesPackage" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The describesPackage property relates an SpdxDocument to the package which it describes.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="EndPointer" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Pointer to the end point of the range.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalDocumentRef" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Any external SPDX documents referenced within an SPDX document. This property is primarily used to verify the external SPDX document reference through use of the
+            checksum.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalRef" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>An External Reference allows a Package to reference an external source of additional information, metadata, enumerations, asset identifiers, or downloadable content
+            believed to be relevant to the Package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FileType" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The type of the file.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="HasExtractedLicensingInfo" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="HasFile" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Indicates that a particular file belongs to a package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseConcluded" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The licensing that the preparer of this SPDX document has concluded, based on the evidence, actually applies to the package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseDeclared" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The licensing that the creators of the software in the package, or the packager, have declared. Declarations by the original software creator should be preferred,
+            if they exist.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseException" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>An exception to a license.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseInfoFromFiles" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The licensing information that was discovered directly within the package. There will be an instance of this property for each distinct value of
+            alllicenseInfoInFile properties of all files contained in the package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseInfoInSnippets" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Licensing information that was discovered directly in the subject snippet. This is also considered a declared license for the snippet.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Member" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>A license, or other licensing information, that is a member of the subject license set.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageVerificationCode" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>A manifest based verification code (the algorithm is defined in section 4.7 of the full specification) of the package. This allows consumers of this data and/or
+            database to determine if a package they have in hand is identical to the package from which the data was produced. This algorithm works even if the SPDX document is included in the
+            package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Range" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>This field defines the byte range in the original host file (in X.2) that the snippet information applies to</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Reference" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Scope within which a single pointer operates.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ReferenceCategory" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Category for the external reference</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ReferenceType" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Type of the external reference. These are definined in an appendix in the SPDX specification.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="RelatedSpdxElement" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>A related SpdxElement.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Relationship" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Defines a relationship between two SPDX elements. The SPDX element may be a Package, File, or SpdxDocument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="RelationshipType" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Describes the type of relationship between two SPDX elements.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SnippetFromFile" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>File containing the SPDX element (e.g. the file contaning a snippet).</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SpdxDocument" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>A propoerty containing an SPDX document.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StartPointer" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Pointer to the start point of the range in a compound pointer.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Supplier" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be
+            different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="UsedBy" type="PropertyType">
+      <xs:annotation>
+         <xs:documentation>Describes how the related relatedSpdxElement is used by this SpdxElement.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+</xs:schema>

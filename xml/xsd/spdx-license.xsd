@@ -1,0 +1,3056 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="spdx:xsd::1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:spd="spdx:xsd::1.0/ref"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           targetNamespace="spdx:xsd::1.0"
+           version="1">
+   <xs:annotation>  
+      <xs:documentation>This specification describes the SPDX® language, defined as a dictionary of named properties and classes using W3C's RDF Technology. SPDX® is a designed to allow the exchange of data about software packages. This information includes general information about the package, licensing information about the package as a whole, a manifest of files contained in the package and licensing information related to the contained files. Known issues: - File fileType cardinality should be 0 or more instead of required one.</xs:documentation>
+      <xs:appinfo> 
+         <spd:Ontology name="SPDX 2.1"
+                       version="2.1"
+                       comment="This specification describes the SPDX® language, defined as a dictionary of named properties and classes using W3C's RDF Technology. SPDX® is a designed to allow the exchange of data about software packages. This information includes general information about the package, licensing information about the package as a whole, a manifest of files contained in the package and licensing information related to the contained files. Known issues: - File fileType cardinality should be 0 or more instead of required one."
+                       rdf="http://www.semanticweb.org/spdx/ontologies/2014/6/SPDX-2.1"/>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:simpleType name="AlgorithmCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Algorithm properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="AlgorithmCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#algorithm"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">   
+         <xs:enumeration value="Md5"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates the algorithm used was MD5</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#checksumAlgorithm_md5"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Sha1"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates the algorithm used was SHA-1</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#checksumAlgorithm_sha1"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Sha256"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates the algorithm used was SHA256</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#checksumAlgorithm_sha256"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="AnnotationTypeCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for AnnotationType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="AnnotationTypeCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#annotationType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">  
+         <xs:enumeration value="Other"> 
+            <xs:annotation>  
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types. Indicates the file is not a source, archive or binary file. A data type for Other to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#annotationType_other"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Review"> 
+            <xs:annotation>  
+               <xs:documentation>A Review represents an audit and signoff by an individual, organization or tool on the information for an SpdxElement.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#annotationType_review"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="CopyrightTextCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for CopyrightText properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="CopyrightTextCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#copyrightText"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">  
+         <xs:enumeration value="Noassertion"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#noassertion"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="None"> 
+            <xs:annotation>  
+               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#none"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="DownloadLocationCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for DownloadLocation properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="DownloadLocationCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#downloadLocation"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">  
+         <xs:enumeration value="Noassertion"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#noassertion"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="None"> 
+            <xs:annotation>  
+               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#none"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="FileTypeCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for FileType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="FileTypeCodeSimpleType" rdf="http://spdx.org/rdf/terms#fileType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">           
+         <xs:enumeration value="Application"> 
+            <xs:annotation>  
+               <xs:documentation>The file is associated with a specific application type (MIME type of application/* )</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_application"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Archive"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates the file is an archive file.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_archive"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Audio"> 
+            <xs:annotation>  
+               <xs:documentation>The file is associated with an audio file (MIME type of audio/* , ie. .mp3 ); IMAGE if the file is assoicated with an picture image file (MIME type of image/*, ie. .jpg, .gif )</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_audio"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Binary"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates the file is not a text file. spdx:filetype_archive is preferred for archive files even though they are binary.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_binary"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Documentation"> 
+            <xs:annotation>  
+               <xs:documentation>Website containing the documentation related to the repository identifier The file serves as documentation. To be used when SPDXRef-A provides documentation of SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_documentation"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Image"> 
+            <xs:annotation>  
+               <xs:documentation>The file is assoicated with an picture image file (MIME type of image/*, ie. .jpg, .gif ).</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_image"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Other"> 
+            <xs:annotation>  
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types. Indicates the file is not a source, archive or binary file. A data type for Other to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_other"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Source"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates the file is a source code file.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_source"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Spdx"> 
+            <xs:annotation>  
+               <xs:documentation>The file is an SPDX document.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_spdx"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Text"> 
+            <xs:annotation>  
+               <xs:documentation>The file is human readable text file (MIME type of text/*).</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_text"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Video"> 
+            <xs:annotation>  
+               <xs:documentation>The file is associated with a video file type (MIME type of video/*).</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType_video"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="LicenseConcludedCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for LicenseConcluded properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseConcludedCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#licenseConcluded"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">  
+         <xs:enumeration value="Noassertion"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#noassertion"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="None"> 
+            <xs:annotation>  
+               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#none"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="LicenseDeclaredCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for LicenseDeclared properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseDeclaredCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#licenseDeclared"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">  
+         <xs:enumeration value="Noassertion"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#noassertion"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="None"> 
+            <xs:annotation>  
+               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#none"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="LicenseInfoFromFilesCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for LicenseInfoFromFiles properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseInfoFromFilesCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#licenseInfoFromFiles"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">  
+         <xs:enumeration value="Noassertion"> 
+            <xs:annotation>  
+               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#noassertion"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="None"> 
+            <xs:annotation>  
+               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#none"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="PropertyIndicatorSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for the boolean indication of a property existence. True if known. False if not or not known.</xs:documentation>
+         <xs:appinfo> 
+            <spd:SimpleType name="Property Indicator" mapvar="propertyIndicator"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:boolean"/>
+   </xs:simpleType>
+   <xs:simpleType name="ReferenceCategoryCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for ReferenceCategory properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="ReferenceCategoryCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#referenceCategory"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">   
+         <xs:enumeration value="Other"> 
+            <xs:annotation>  
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types. Indicates the file is not a source, archive or binary file. A data type for Other to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#referenceCategory_other"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="PackageManager"> 
+            <xs:annotation>  
+               <xs:documentation>A data type for PackageManager</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#referenceCategory_packageManager"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Security"> 
+            <xs:annotation>  
+               <xs:documentation>A data type for Security</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#referenceCategory_security"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:simpleType name="RelationshipTypeCodeSimpleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for RelationshipType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="RelationshipTypeCodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#relationshipType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:restriction base="xs:string">                              
+         <xs:enumeration value="Amendment"> 
+            <xs:annotation>  
+               <xs:documentation>To be used when SPDXRef-A amends the SPDX information in SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_amendment"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="AncestorOf"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_ancestorOf expresses that an SPDXElement is an ancestor of (same lineage but pre-dates) the relatedSPDXElement. For example, an upstream File is an ancestor of a modified downstream File</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_ancestorOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="BuildToolOf"> 
+            <xs:annotation>  
+               <xs:documentation>To be used when SPDXRef-A is used to to build SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_buildToolOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ContainedBy"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_containedBy expresses that an SPDXElement is contained by the relatedSPDXElement. For example, a File contained by a Package.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_containedBy"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Contains"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_contains expresses that an SPDXElement contains the relatedSPDXElement. For example, a Package contains a File. (relationshipType_contains introduced in SPDX 2.0 deprecates property 'hasFile' from SPDX 1.2)</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_contains"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="CopyOf"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_copyOf expresses that the SPDXElement is an exact copy of the relatedSDPXElement. For example, a downstream distribution of a binary library which was copied from the upstream package.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_copyOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="DataFileOf"> 
+            <xs:annotation>  
+               <xs:documentation>Is to be used when SPDXRef-A is a data file used in SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://www.semanticweb.org/spdx/ontologies/2014/6/SPDX-2.1#relationshipType_dataFileOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="DescendantOf"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_descendantOf expresses that an SPDXElement is a descendant of (same lineage but post-dates) the relatedSPDXElement. For example, an downstream File that was modified is a descendant of an upstream File</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_descendantOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="DescribedBy"> 
+            <xs:annotation>  
+               <xs:documentation>Is to be used an SPDXRef-A is described by SPDXRef-Document.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_describedBy"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Describes"> 
+            <xs:annotation>  
+               <xs:documentation>Is to be used when SPDXRef-DOCUMENT describes SPDXRef-A.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_describes"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="DistributionArtifact"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_distributionArtifact expresses that distributing the SPDXElement requires that the relatedSPDXElement also be distributed. For example, distributing a binary File may require that a source tarball (another File) be made available with the distribuiton.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_distributionArtifact"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Documentation"> 
+            <xs:annotation>  
+               <xs:documentation>Website containing the documentation related to the repository identifier The file serves as documentation. To be used when SPDXRef-A provides documentation of SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_documentation"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="DynamicLink"> 
+            <xs:annotation>  
+               <xs:documentation>Is to be used when SPDXRef-A dynamically links to SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_dynamicLink"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="ExpandedFromArchive"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_expandedFromArchive expresses that the SPDXElement is a file which was epanded from a relatedSPDXElement file. For example, if there is an archive file xyz.tar.gz containing a file foo.c the archive file was expanded in a directory arch/xyz, the file arch/xyz/foo.c would have a relationshipType_expandedFromArchive with the file xyz.tar.gz.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_expandedFromArchive"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="FileAdded"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_fileAdded expresses that the SPDXElement is a file which has been added to the relatedSPDXElement package. For example, a package (the relatedSPDXElement) has been patched to remove a file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_fileAdded"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="FileDeleted"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_fileDeleted expresses that the SPDXElement is a package where the relatedSPDXElement file has been removed. For example, a package has been patched to remove a file a file (the relatedSPDXElement resulting in the patched package (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_fileDeleted"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="FileModified"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_fileModified expresses that the SPDXElement is a file which is a modified version of the relatedSPDXElement file. For example, a file (the SPDXElement) has been patched to modify the contents of the original file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_fileModified"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="GeneratedFrom"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_generatedFrom expresses that an SPDXElement was generated from the relatedSPDXElement. For example, a binary File might have been generated from a source File.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_generatedFrom"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Generates"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_generates expresses that an SPDXElement generates the relatedSPDXElement. For example, a source File generates a binary File.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_generates"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="HasPrerequisite"> 
+            <xs:annotation>  
+               <xs:documentation>Is to be used when SPDXRef-A has as a prerequisite SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_hasPrerequisite"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="MetafileOf"> 
+            <xs:annotation>  
+               <xs:documentation>To be used when SPDXRef-A is a metafile of SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_metafileOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="OptionalComponentOf"> 
+            <xs:annotation>  
+               <xs:documentation>To be used when SPDXRef-A is an optional component of SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_optionalComponentOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="Other"> 
+            <xs:annotation>  
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types. Indicates the file is not a source, archive or binary file. A data type for Other to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_other"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="PackageOf"> 
+            <xs:annotation>  
+               <xs:documentation>To be used when SPDXRef-A is used as a package as part of SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_packageOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="PatchApplied"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_patchApplied expresses that the SPDXElement is a 'patchfile' that was applied and produced the relatedSPDXElement. For example, a .diff File relates to a specific file where the diff was applied.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_patchApplied"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="PatchFor"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_patchFor expresses that the SPDXElement is a 'patchfile' that is designed to patch (apply modifications to) the relatedSPDXElement. For example, relationship from a .diff File to a Package it is designed to patch.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_patchFor"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="PrerequisiteFor"> 
+            <xs:annotation>  
+               <xs:documentation>Is to be used when SPDXRef-A is a prerequisite for SPDXRef-B</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_prerequisiteFor"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="StaticLink"> 
+            <xs:annotation>  
+               <xs:documentation>Is to be used when SPDXRef-A statically links to SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_staticLink"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="TestcaseOf"> 
+            <xs:annotation>  
+               <xs:documentation>Is to be used when SPDXRef-A is a test case used in testing SPDXRef-B.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_testcaseOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="VariantOf"> 
+            <xs:annotation>  
+               <xs:documentation>A Relationship of relationshipType_variantOf expresses that an SPDXElement is a variant of the relatedSPDXElement, but it is not clear which came first. For example, if the content of two Files differs by some edit, but there is no way to tell which came first (no reliable date information), then one File is a variant of the other File.</xs:documentation>
+               <xs:appinfo> 
+                  <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType_variantOf"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+      </xs:restriction>
+   </xs:simpleType>
+   <xs:complexType name="AlgorithmCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Algorithm properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="Algorithm CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#algorithm"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="AlgorithmCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="AnnotationDateType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Identify when the comment was made. This is to be specified according to the combined date and time in the UTC format, as specified in the ISO 8601 standard.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="AnnotationDate"
+                          comment="Identify when the comment was made. This is to be specified according to the combined date and time in the UTC format, as specified in the ISO 8601 standard."
+                          rdf="http://spdx.org/rdf/terms#annotationDate"
+                          domain="Annotation"
+                          subpropertyof="Date"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:dateTime"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="AnnotationType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Annotation type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Annotation"
+                       comment="An Annotation is a comment on an SpdxItem by an agent."
+                       rdf="http://spdx.org/rdf/terms#Annotation"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>     
+         <xs:element ref="Date" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="AnnotationTypeCode"/>
+         <xs:element ref="Comment" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="Annotator" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="AnnotationTypeCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for AnnotationType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="AnnotationType CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#annotationType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="AnnotationTypeCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="AnnotatorType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Annotator"
+                          comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document."
+                          rdf="http://spdx.org/rdf/terms#annotator"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="AnyLicenseInfoType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The AnyLicenseInfo class includes all resources that represent licensing information.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="AnyLicenseInfo"
+                       comment="The AnyLicenseInfo class includes all resources that represent licensing information."
+                       rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
+                       definedby="AnyLicenseInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ChecksumType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Checksum type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Checksum"
+                       comment="A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented."
+                       rdf="http://spdx.org/rdf/terms#Checksum"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>   
+         <xs:element ref="ChecksumValue" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="AlgorithmCode"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ChecksumValueType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ChecksumValue"
+                          comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm."
+                          rdf="http://spdx.org/rdf/terms#checksumValue"
+                          domain="Checksum"
+                          range="HexBinary"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:hexBinary"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="CommentType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Comment</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Comment"
+                          comment=""
+                          rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ConjunctiveLicenseSetType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for ConjunctiveLicenseSet type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="ConjunctiveLicenseSet"
+                       comment="A ConjunctiveLicenseSet represents a set of licensing information all of which apply."
+                       rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>   
+         <xs:element ref="Container"/>
+         <xs:element ref="AnyLicenseInfo" minOccurs="2" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ContainerType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Container"
+                       comment=""
+                       rdf="http://www.w3.org/2000/01/rdf-schema#Container"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ContextualExampleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Example for use of the external repository identifier</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ContextualExample"
+                          comment="Example for use of the external repository identifier"
+                          rdf="http://spdx.org/rdf/terms#contextualExample"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="CopyrightTextCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for CopyrightText properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="CopyrightText CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#copyrightText"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="CopyrightTextCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="CopyrightTextType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The text of copyright declarations recited in the Package or File.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="CopyrightText"
+                          comment="The text of copyright declarations recited in the Package or File."
+                          rdf="http://spdx.org/rdf/terms#copyrightText"
+                          range="Literal"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="CreatedType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Created"
+                          comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator."
+                          rdf="http://spdx.org/rdf/terms#created"
+                          domain="CreationInfo"
+                          range="DateTime"
+                          subpropertyof="Date"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:dateTime"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="CreationInfoType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for CreationInfo type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="CreationInfo"
+                       comment="A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument."
+                       rdf="http://spdx.org/rdf/terms#CreationInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>     
+         <xs:element ref="LicenseListVersion" minOccurs="0"/>
+         <xs:element ref="Created" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="Comment" minOccurs="0"/>
+         <xs:element ref="Creator" minOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="CreatorType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Creator"
+                          comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax."
+                          rdf="http://spdx.org/rdf/terms#creator"
+                          domain="CreationInfo"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="DateType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for A date-time stamp.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Date"
+                          comment="A date-time stamp."
+                          rdf="http://spdx.org/rdf/terms#date"
+                          domain="AnnotationCreationInfo"
+                          range="DateTime"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:dateTime"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="DescriptionType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Provides a detailed description of the package.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Description"
+                          comment="Provides a detailed description of the package."
+                          rdf="http://spdx.org/rdf/terms#description"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="DisjunctiveLicenseSetType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for DisjunctiveLicenseSet type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="DisjunctiveLicenseSet"
+                       comment="A DisjunctiveLicenseSet represents a set of licensing information where only one license applies at a time. This class implies that the recipient gets to choose one of these licenses they would prefer to use."
+                       rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>   
+         <xs:element ref="Container"/>
+         <xs:element ref="AnyLicenseInfo" minOccurs="2" maxOccurs="unbounded"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="DocumentationType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Website containing the documentation related to the repository identifier</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Documentation"
+                          comment="Website containing the documentation related to the repository identifier"
+                          rdf="http://spdx.org/rdf/terms#documentation"
+                          range="AnyURI"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:anyURI"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="DownloadLocationCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for DownloadLocation properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="DownloadLocation CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#downloadLocation"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="DownloadLocationCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="DownloadLocationType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="DownloadLocation"
+                          comment="The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively."
+                          rdf="http://spdx.org/rdf/terms#downloadLocation"
+                          range="AnyURI"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:anyURI"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ExampleType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Text for examples in describing an SPDX element.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Example"
+                          comment="Text for examples in describing an SPDX element."
+                          rdf="http://spdx.org/rdf/terms#example"
+                          domain="LicenseException"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ExternalDocumentIdType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ExternalDocumentId"
+                          comment="externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document."
+                          rdf="http://spdx.org/rdf/terms#externalDocumentId"
+                          domain="ExternalDocumentRef"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ExternalDocumentRefType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for ExternalDocumentRef type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="ExternalDocumentRef"
+                       comment="Information about an external SPDX document reference including the checksum. This allows for verification of the external references."
+                       rdf="http://spdx.org/rdf/terms#ExternalDocumentRef"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>    
+         <xs:element ref="Checksum" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="ExternalDocumentId" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="SpdxDocument" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ExternalRefType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for ExternalRef type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="ExternalRef"
+                       comment="An External Reference allows a Package to reference an external source of additional information, metadata, enumerations, asset identifiers, or downloadable content believed to be relevant to the Package."
+                       rdf="http://spdx.org/rdf/terms#ExternalRef"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>     
+         <xs:element ref="Comment" maxOccurs="1"/>
+         <xs:element ref="ReferenceLocator" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="ReferenceType" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="ReferenceCategoryCode"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ExternalReferenceSiteType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Website for the maintainers of the external reference site</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ExternalReferenceSite"
+                          comment="Website for the maintainers of the external reference site"
+                          rdf="http://spdx.org/rdf/terms#externalReferenceSite"
+                          range="AnyURI"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:anyURI"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ExtractedLicenseInfoType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for ExtractedLicenseInfo type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="ExtractedLicenseInfo"
+                       comment="An ExtractedLicensingInfo represents a license or licensing notice that was found in the package. Any license text that is recognized as a license may be represented as a License rather than an ExtractedLicensingInfo."
+                       rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>   
+         <xs:element ref="SimpleLicensingInfo"/>
+         <xs:element ref="ExtractedText" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="ExtractedTextType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Verbatim license or licensing notice text that was discovered.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ExtractedText"
+                          comment="Verbatim license or licensing notice text that was discovered."
+                          rdf="http://spdx.org/rdf/terms#extractedText"
+                          domain="ExtractedLicenseInfo"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="FileContributorType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for This field provides a place for the SPDX file creator to record file contributors. Contributors could include names of copyright holders and/or authors who may not be copyright holders yet contributed to the file content.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="FileContributor"
+                          comment="This field provides a place for the SPDX file creator to record file contributors. Contributors could include names of copyright holders and/or authors who may not be copyright holders yet contributed to the file content."
+                          rdf="http://spdx.org/rdf/terms#fileContributor"
+                          domain="File"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="FileNameType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The name of the file relative to the root of the package.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="FileName"
+                          comment="The name of the file relative to the root of the package."
+                          rdf="http://spdx.org/rdf/terms#fileName"
+                          domain="File"
+                          range="String"
+                          subpropertyof="Name"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="FileType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for File type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="File"
+                       comment="A File represents a named sequence of information that is contained in a software package."
+                       rdf="http://spdx.org/rdf/terms#File"
+                       disjointwith="Snippet"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>        
+         <xs:element ref="SpdxItem"/>
+         <xs:element ref="NoticeText" maxOccurs="1"/>
+         <xs:element ref="FileContributor" minOccurs="0"/>
+         <xs:element ref="Project" minOccurs="0"/>
+         <xs:element ref="FileName" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="FileTypeCode"/>
+         <xs:element ref="Checksum" minOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="FileTypeCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for FileType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="FileType CodeSimpleType" rdf="http://spdx.org/rdf/terms#fileType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="FileTypeCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="FilesAnalyzedType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Indicates whether the file content of this package has been available for or subjected to analysis when creating the SPDX document. If “false” indicates packages that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="FilesAnalyzed"
+                          comment="Indicates whether the file content of this package has been available for or subjected to analysis when creating the SPDX document. If “false” indicates packages that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files."
+                          rdf="http://spdx.org/rdf/terms#filesAnalyzed"
+                          range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="PropertyIndicatorSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="HomepageType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Homepage</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Homepage"
+                          comment=""
+                          rdf="http://usefulinc.com/ns/doap#homepage"
+                          range="AnyURI"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:anyURI"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="IsDeprecatedLicenseIdType">  
+      <xs:annotation>  
+         <xs:documentation>A data type that indicates if the license id is Deprecated.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="IsDeprecatedLicenseIdType"
+                          comment="Indicates if the license is is Deprecated."
+                          rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId"
+                          domain="License"
+                          range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="PropertyIndicatorSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="IsFsfLibreType">  
+      <xs:annotation>  
+         <xs:documentation>A data type to indicate if the license is is FSF Libre.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="IsFsfLibre"
+                          comment="Indicates if the license is is FSF Libre."
+                          rdf="http://spdx.org/rdf/terms#isFsfLibre"
+                          domain="License"
+                          range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="PropertyIndicatorSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="IsOsiApprovedType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Indicates if the OSI has approved the license.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="IsOsiApproved"
+                          comment="Indicates if the OSI has approved the license."
+                          rdf="http://spdx.org/rdf/terms#isOsiApproved"
+                          domain="License"
+                          range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="PropertyIndicatorSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseCommentsType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for he licenseComments property allows the preparer of the SPDX document to describe why the licensing in spdx:licenseConcluded was chosen.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseComments"
+                          comment="he licenseComments property allows the preparer of the SPDX document to describe why the licensing in spdx:licenseConcluded was chosen."
+                          rdf="http://spdx.org/rdf/terms#licenseComments"
+                          domain="SpdxItem"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseConcludedCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for LicenseConcluded properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseConcluded CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#licenseConcluded"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="LicenseConcludedCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseDeclaredCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for LicenseDeclared properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseDeclared CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#licenseDeclared"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="LicenseDeclaredCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseExceptionIdType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for short form license exception identifier in Appendix I.2 of the SPDX specification.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseExceptionId"
+                          comment="short form license exception identifier in Appendix I.2 of the SPDX specification."
+                          rdf="http://spdx.org/rdf/terms#licenseExceptionId"
+                          domain="LicenseException"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseExceptionTextType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Full text of the license exception.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseExceptionText"
+                          comment="Full text of the license exception."
+                          rdf="http://spdx.org/rdf/terms#licenseExceptionText"
+                          domain="LicenseException"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseExceptionType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for LicenseException type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="LicenseException"
+                       comment="An exception to a license."
+                       rdf="http://spdx.org/rdf/terms#LicenseException"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>       
+         <xs:element ref="LicenseExceptionText" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="Comment" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="Example" maxOccurs="1"/>
+         <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="SeeAlso" minOccurs="0"/>
+         <xs:element ref="LicenseExceptionId" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="LicenseIdType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form "LicenseRef-"[idString] where [idString] is a unique string containing letters, numbers, ".", "-" or "+".</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseId"
+                          comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &#34;LicenseRef-&#34;[idString] where [idString] is a unique string containing letters, numbers, &#34;.&#34;, &#34;-&#34; or &#34;+&#34;."
+                          rdf="http://spdx.org/rdf/terms#licenseId"
+                          domain="SimpleLicensingInfo"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseInfoFromFilesCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for LicenseInfoFromFiles properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseInfoFromFiles CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#licenseInfoFromFiles"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="LicenseInfoFromFilesCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseListVersionType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseListVersion"
+                          comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created."
+                          rdf="http://spdx.org/rdf/terms#licenseListVersion"
+                          domain="CreationInfo"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseTextType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Full text of the license.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseText"
+                          comment="Full text of the license."
+                          rdf="http://spdx.org/rdf/terms#licenseText"
+                          domain="License"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for License type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="License"
+                       comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
+                       rdf="http://spdx.org/rdf/terms#License"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>           
+         <xs:element ref="IsDeprecatedLicenseId" minOccurs="0"/>
+         <xs:element ref="StandardLicenseHeader" minOccurs="0"/>
+         <xs:element ref="StandardLicenseTemplate" minOccurs="0" maxOccurs="1"/>
+         <xs:element ref="LicenseText" minOccurs="0" maxOccurs="1"/>
+         <xs:element ref="IsOsiApproved" minOccurs="0" maxOccurs="1"/>
+         <xs:element ref="IsFsfLibre" minOccurs="0" maxOccurs="1"/>
+         <xs:element ref="LicenseId" minOccurs="0"/>
+         <xs:element ref="Name" minOccurs="0" maxOccurs="1"/>
+         <xs:element ref="SeeAlso" minOccurs="0" maxOccurs="10"/>
+         <xs:element ref="Comment" minOccurs="0" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="LineNumberType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Line number within the reference starting at one.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LineNumber"
+                          comment="Line number within the reference starting at one."
+                          rdf="http://www.w3.org/2009/pointers#lineNumber"
+                          domain="LineCharPointer"
+                          range="PositiveInteger"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:positiveInteger"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LocatorFormatType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Regular expression for the format of the external repository identifier</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LocatorFormat"
+                          comment="Regular expression for the format of the external repository identifier"
+                          rdf="http://spdx.org/rdf/terms#locatorFormat"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="NameType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Name"
+                          comment="The full human readable name of the item. This should include version information when applicable."
+                          rdf="http://spdx.org/rdf/terms#name"
+                          domain="SpdxElement"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="NoticeTextType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for This field provides a place for the SPDX file creator to record potential legal notices found in the file. This may or may not include copyright statements.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="NoticeText"
+                          comment="This field provides a place for the SPDX file creator to record potential legal notices found in the file. This may or may not include copyright statements."
+                          rdf="http://spdx.org/rdf/terms#noticeText"
+                          domain="File"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="OffsetType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Offset from the start of the reference.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Offset"
+                          comment="Offset from the start of the reference."
+                          rdf="http://www.w3.org/2009/pointers#offset"
+                          domain="OffsetPointer"
+                          range="PositiveInteger"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:positiveInteger"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="OrLaterOperatorType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for OrLaterOperator type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="OrLaterOperator"
+                       comment="A license with an or later operator indicating this license version or any later version of the license (e.g. GPL-2.0+)"
+                       rdf="http://spdx.org/rdf/terms#OrLaterOperator"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>  
+         <xs:element ref="SimpleLicensingInfo" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="OriginatorType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Originator"
+                          comment="The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax."
+                          rdf="http://spdx.org/rdf/terms#originator"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="PackageFileNameType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The base name of the package file name. For example, zlib-1.2.5.tar.gz.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="PackageFileName"
+                          comment="The base name of the package file name. For example, zlib-1.2.5.tar.gz."
+                          rdf="http://spdx.org/rdf/terms#packageFileName"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="PackageNameType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Identify the full name of the package as given by Package Originator.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="PackageName"
+                          comment="Identify the full name of the package as given by Package Originator."
+                          rdf="http://spdx.org/rdf/terms#packageName"
+                          domain="Package"
+                          range="String"
+                          subpropertyof="Name"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="PackageType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Package type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Package"
+                       comment="A Package represents a collection of software files that are delivered as a single functional component."
+                       rdf="http://spdx.org/rdf/terms#Package"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>                
+         <xs:element ref="SpdxItem"/>
+         <xs:element ref="ExternalRef" minOccurs="0"/>
+         <xs:element ref="PackageFileName" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="FilesAnalyzed" maxOccurs="1"/>
+         <xs:element ref="Description" maxOccurs="1"/>
+         <xs:element ref="Homepage" maxOccurs="1"/>
+         <xs:element ref="Originator" maxOccurs="1"/>
+         <xs:element ref="DownloadLocation" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="SourceInfo" maxOccurs="1"/>
+         <xs:element ref="Supplier" maxOccurs="1"/>
+         <xs:element ref="PackageVerificationCode" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="LicenseDeclaredCode"/>
+         <xs:element ref="VersionInfo" maxOccurs="1"/>
+         <xs:element ref="Summary" maxOccurs="1"/>
+         <xs:element ref="Checksum" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="PackageVerificationCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for PackageVerificationCode type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="PackageVerificationCode"
+                       comment="A manifest based verification code (the algorithm is defined in section 4.7 of the full specification) of the SPDX Item. This allows consumers of this data and/or database to determine if an SPDX item they have in hand is identical to the SPDX item from which the data was produced. This algorithm works even if the SPDX document is included in the SPDX item."
+                       rdf="http://spdx.org/rdf/terms#PackageVerificationCode"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>   
+         <xs:element ref="PackageVerificationCodeValue" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="VerificationCodeExcludedFile" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="PackageVerificationCodeValueType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The actual package verification code as a hex encoded value.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="PackageVerificationCodeValue"
+                          comment="The actual package verification code as a hex encoded value."
+                          rdf="http://spdx.org/rdf/terms#packageVerificationCodeValue"
+                          domain="PackageVerificationCode"
+                          range="HexBinary"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:hexBinary"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="PointerType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Abstract Pointer to be subclassed for extensibility.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Pointer"
+                       comment="Abstract Pointer to be subclassed for extensibility."
+                       rdf="http://www.w3.org/2009/pointers#Pointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ProjectType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Project"
+                       comment=""
+                       rdf="http://usefulinc.com/ns/doap#Project"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ReferenceCategoryCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for ReferenceCategory properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="ReferenceCategory CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#referenceCategory"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="ReferenceCategoryCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ReferenceLocatorType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The unique string with no spaces necessary to access the package-specific information, metadata, or content within the target location. The format of the locator is subject to constraints defined by the &lt;type&gt;.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ReferenceLocator"
+                          comment="The unique string with no spaces necessary to access the package-specific information, metadata, or content within the target location. The format of the locator is subject to constraints defined by the &lt;type&gt;."
+                          rdf="http://spdx.org/rdf/terms#referenceLocator"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ReferenceType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Scope within which a single pointer operates.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="Reference"
+                        comment="Scope within which a single pointer operates."
+                        rdf="http://www.w3.org/2009/pointers#reference"
+                        domain="SinglePointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="ReferenceTypeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for ReferenceType type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="ReferenceType"
+                       comment="Types used to external reference identifiers."
+                       rdf="http://spdx.org/rdf/terms#ReferenceType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>    
+         <xs:element ref="ExternalReferenceSite" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="ContextualExample" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="Documentation" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="RelationshipType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Relationship type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Relationship"
+                       comment="A Relationship represents a relationship between two SpdxElements."
+                       rdf="http://spdx.org/rdf/terms#Relationship"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>    
+         <xs:element ref="RelationshipTypeCode"/>
+         <xs:element ref="Comment" maxOccurs="1"/>
+         <xs:element ref="SpdxElement" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="RelationshipTypeCodeType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for RelationshipType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="RelationshipType CodeSimpleType"
+                          rdf="http://spdx.org/rdf/terms#relationshipType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="RelationshipTypeCodeSimpleType"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="SeeAlsoType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="SeeAlso"
+                          comment="rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource."
+                          rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:anyURI"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="SimpleLicensingInfoType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for SimpleLicensingInfo type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="SimpleLicensingInfo"
+                       comment="The SimpleLicenseInfo class includes all resources that represent simple, atomic, licensing information."
+                       rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>     
+         <xs:element ref="LicenseId" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="Comment" maxOccurs="1"/>
+         <xs:element ref="SeeAlso" minOccurs="0"/>
+         <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="SnippetNameType">  
+      <xs:annotation>  
+         <xs:documentation>A data type to name specific snippet in a human convenient manner</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="SnippetName"
+                          comment="Identify a specific snippet in a human convenient manner."
+                          rdf="http://spdx.org/rdf/terms#snippetName"
+                          subpropertyof="Name"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="SnippetType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Snippet type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Snippet"
+                       comment="The set of bytes in a file. The name of the snippet is the name of the file appended with the byte range in parenthesis (ie: &#34;./file/name(2145:5532)&#34;)"
+                       rdf="http://spdx.org/rdf/terms#Snippet"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>    
+         <xs:element ref="SpdxItem"/>
+         <xs:element ref="File" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="CompoundPointer" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="SourceInfoType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Allows the producer(s) of the SPDX document to describe how the package was acquired and/or changed from the original source.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="SourceInfo"
+                          comment="Allows the producer(s) of the SPDX document to describe how the package was acquired and/or changed from the original source."
+                          rdf="http://spdx.org/rdf/terms#sourceInfo"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="SpdxDocumentType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for SpdxDocument type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="SpdxDocument"
+                       comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information."
+                       rdf="http://spdx.org/rdf/terms#SpdxDocument"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>         
+         <xs:element ref="SpdxElement"/>
+         <xs:element ref="Package" minOccurs="0"/>
+         <xs:element ref="File" minOccurs="0"/>
+         <xs:element ref="ExtractedLicenseInfo" minOccurs="0"/>
+         <xs:element ref="CreationInfo" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="SpecVersion" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="ExternalDocumentRef" minOccurs="0"/>
+         <xs:element ref="DataLicense"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="SpdxElementType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for SpdxElement type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="SpdxElement"
+                       comment="An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements."
+                       rdf="http://spdx.org/rdf/terms#SpdxElement"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>     
+         <xs:element ref="Annotation" minOccurs="0"/>
+         <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="Comment" maxOccurs="1"/>
+         <xs:element ref="Relationship" minOccurs="0"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="SpdxItemType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for SpdxItem type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="SpdxItem"
+                       comment="An SpdxItem is a potentially copyrightable work."
+                       rdf="http://spdx.org/rdf/terms#SpdxItem"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>      
+         <xs:element ref="SpdxElement"/>
+         <xs:element ref="LicenseConcludedCode"/>
+         <xs:element ref="CopyrightText" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="SimpleLicensingInfo" minOccurs="1"/>
+         <xs:element ref="LicenseComments" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="SpecVersionType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="SpecVersion"
+                          comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes."
+                          rdf="http://spdx.org/rdf/terms#specVersion"
+                          domain="SpdxDocument"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="StandardLicenseHeaderType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for License author's preferred text to indicated that a file is covered by the license.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="StandardLicenseHeader"
+                          comment="License author's preferred text to indicated that a file is covered by the license."
+                          rdf="http://spdx.org/rdf/terms#standardLicenseHeader"
+                          domain="License"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="StandardLicenseTemplateType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for License template which describes sections of the license which can be varied. See License Template section of the specification for format information.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="StandardLicenseTemplate"
+                          comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information."
+                          rdf="http://spdx.org/rdf/terms#standardLicenseTemplate"
+                          domain="License"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="SummaryType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Provides a short description of the package.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Summary"
+                          comment="Provides a short description of the package."
+                          rdf="http://spdx.org/rdf/terms#summary"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="SupplierType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Supplier"
+                          comment="The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax."
+                          rdf="http://spdx.org/rdf/terms#supplier"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="VerificationCodeExcludedFileType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for A file that was excluded when calculating the package verification code. This is usually a file containing SPDX data regarding the package. If a package contains more than one SPDX file all SPDX files must be excluded from the package verification code. If this is not done it would be impossible to correctly calculate the verification codes in both files.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="VerificationCodeExcludedFile"
+                          comment="A file that was excluded when calculating the package verification code. This is usually a file containing SPDX data regarding the package. If a package contains more than one SPDX file all SPDX files must be excluded from the package verification code. If this is not done it would be impossible to correctly calculate the verification codes in both files."
+                          rdf="http://spdx.org/rdf/terms#verificationCodeExcludedFile"
+                          domain="PackageVerificationCode"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="VersionInfoType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for Provides an indication of the version of the package that is described by this SpdxDocument.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="VersionInfo"
+                          comment="Provides an indication of the version of the package that is described by this SpdxDocument."
+                          rdf="http://spdx.org/rdf/terms#versionInfo"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:string"/>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="WithExceptionOperatorType">  
+      <xs:annotation>  
+         <xs:documentation>A data type for WithExceptionOperator type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="WithExceptionOperator"
+                       comment="Sometimes a set of license terms apply except under special circumstances. In this case, use the binary “WITH” operator to construct a new &lt;SPDX-License-Expression&gt; to represent the special exception situation. A valid license expression is where the left operand is a valid &lt;SPDX-License-Expression&gt; value and the right operand is an SPDX License List Exception Identifier (SPDX LL Exception Identifier) that represents the special exception terms. SPDX License LL Identifiers can be found on the SPDX License List. The syntax for the “WITH” operator is: &lt;SPDX-License-Expression-2&gt; = (&lt;SPDX-License-Expression-1&gt; WITH &lt;SPDX-LL-Exception-Identifier&gt;) For example, when the Bison exception is to be applied to GPL-2.0+, the expression would be: (GPL-2.0+ WITH Bison-exception-2.2), where: &lt;SPDX-License-Expression-1&gt; = GPL-2.0+ &lt;SPDX-LL-Exception-Identifier&gt; = Bison-exception-2.2 &lt;SPDX-License-Expression-1&gt; = (GPL-2.0+ WITH Bison-exception-2.2) If the applicable exception is not found on the SPDX License List, then use LicenseRef-[idString] to express the license and exception."
+                       rdf="http://spdx.org/rdf/terms#WithExceptionOperator"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:sequence>   
+         <xs:element ref="SimpleLicensingInfo" minOccurs="1" maxOccurs="1"/>
+         <xs:element ref="LicenseException" minOccurs="1" maxOccurs="1"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="AlgorithmCode" type="AlgorithmCodeType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Algorithm properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="AlgorithmCode" rdf="http://spdx.org/rdf/terms#algorithm"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Annotation" type="AnnotationType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Annotation</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="Annotation"
+                         comment="An Annotation is a comment on an SpdxItem by an agent."
+                         rdf="http://spdx.org/rdf/terms#Annotation"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AnnotationDate" type="AnnotationDateType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Identify when the comment was made. This is to be specified according to the combined date and time in the UTC format, as specified in the ISO 8601 standard.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="AnnotationDate"
+                          comment="Identify when the comment was made. This is to be specified according to the combined date and time in the UTC format, as specified in the ISO 8601 standard."
+                          rdf="http://spdx.org/rdf/terms#annotationDate"
+                          domain="Annotation"
+                          subpropertyof="Date"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AnnotationTypeCode"
+               type="AnnotationTypeCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for AnnotationType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="AnnotationTypeCode"
+                          rdf="http://spdx.org/rdf/terms#annotationType"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Annotator" type="AnnotatorType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Annotator"
+                          comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document."
+                          rdf="http://spdx.org/rdf/terms#annotator"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="AnyLicenseInfo" type="AnyLicenseInfoType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for The AnyLicenseInfo class includes all resources that represent licensing information.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="AnyLicenseInfo"
+                       comment="The AnyLicenseInfo class includes all resources that represent licensing information."
+                       rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
+                       definedby="AnyLicenseInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ByteOffsetPointer" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for ByteOffsetPointer</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="ByteOffsetPointer"
+                         comment="Single pointer using a byte offset from the start of the reference."
+                         rdf="http://www.w3.org/2009/pointers#ByteOffsetPointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Checksum" type="ChecksumType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Checksum</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="Checksum"
+                         comment="A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented."
+                         rdf="http://spdx.org/rdf/terms#Checksum"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ChecksumValue" type="ChecksumValueType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ChecksumValue"
+                          comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm."
+                          rdf="http://spdx.org/rdf/terms#checksumValue"
+                          domain="Checksum"
+                          range="HexBinary"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Comment" type="CommentType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Comment</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Comment"
+                          comment=""
+                          rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CompoundPointer" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for CompoundPointer</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="CompoundPointer"
+                         comment="An abstract method made of a pair of pointers to a defined section to be subclassed for extensibility."
+                         rdf="http://www.w3.org/2009/pointers#CompoundPointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ConjunctiveLicenseSet"
+               type="ConjunctiveLicenseSetType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for ConjunctiveLicenseSet</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="ConjunctiveLicenseSet"
+                         comment="A ConjunctiveLicenseSet represents a set of licensing information all of which apply."
+                         rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Container" type="ContainerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Container"
+                       comment=""
+                       rdf="http://www.w3.org/2000/01/rdf-schema#Container"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ContextualExample"
+               type="ContextualExampleType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Example for use of the external repository identifier</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ContextualExample"
+                          comment="Example for use of the external repository identifier"
+                          rdf="http://spdx.org/rdf/terms#contextualExample"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CopyrightText" type="CopyrightTextType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The text of copyright declarations recited in the Package or File.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="CopyrightText"
+                          comment="The text of copyright declarations recited in the Package or File."
+                          rdf="http://spdx.org/rdf/terms#copyrightText"
+                          range="Literal"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CopyrightTextCode"
+               type="CopyrightTextCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for CopyrightText properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="CopyrightTextCode" rdf="http://spdx.org/rdf/terms#copyrightText"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Created" type="CreatedType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Created"
+                          comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator."
+                          rdf="http://spdx.org/rdf/terms#created"
+                          domain="CreationInfo"
+                          range="DateTime"
+                          subpropertyof="Date"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="CreationInfo" type="CreationInfoType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for CreationInfo</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="CreationInfo"
+                         comment="A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument."
+                         rdf="http://spdx.org/rdf/terms#CreationInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Creator" type="CreatorType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Creator"
+                          comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax."
+                          rdf="http://spdx.org/rdf/terms#creator"
+                          domain="CreationInfo"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DataLicense" type="LicenseIdType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="DataLicense"
+                        comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files."
+                        rdf="http://spdx.org/rdf/terms#dataLicense"
+                        domain="SpdxDocument"
+                        type="FunctionalProperty"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Date" type="DateType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for A date-time stamp.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Date"
+                          comment="A date-time stamp."
+                          rdf="http://spdx.org/rdf/terms#date"
+                          domain="AnnotationCreationInfo"
+                          range="DateTime"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DescribesFile" type="SpdxDocumentType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for The describesFile property relates an SpdxDocument to the file which it describes.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="DescribesFile"
+                        comment="The describesFile property relates an SpdxDocument to the file which it describes."
+                        rdf="http://spdx.org/rdf/terms#describesFile"
+                        domain="SpdxDocument"
+                        range="File"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DescribesPackage" type="SpdxDocumentType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for The describesPackage property relates an SpdxDocument to the package which it describes.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="DescribesPackage"
+                        comment="The describesPackage property relates an SpdxDocument to the package which it describes."
+                        rdf="http://spdx.org/rdf/terms#describesPackage"
+                        domain="SpdxDocument"
+                        range="Package"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Description" type="DescriptionType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Provides a detailed description of the package.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Description"
+                          comment="Provides a detailed description of the package."
+                          rdf="http://spdx.org/rdf/terms#description"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DisjunctiveLicenseSet"
+               type="DisjunctiveLicenseSetType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for DisjunctiveLicenseSet</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="DisjunctiveLicenseSet"
+                         comment="A DisjunctiveLicenseSet represents a set of licensing information where only one license applies at a time. This class implies that the recipient gets to choose one of these licenses they would prefer to use."
+                         rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Documentation" type="DocumentationType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Website containing the documentation related to the repository identifier</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Documentation"
+                          comment="Website containing the documentation related to the repository identifier"
+                          rdf="http://spdx.org/rdf/terms#documentation"
+                          range="AnyURI"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DownloadLocation" type="DownloadLocationType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="DownloadLocation"
+                          comment="The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively."
+                          rdf="http://spdx.org/rdf/terms#downloadLocation"
+                          range="AnyURI"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="DownloadLocationCode"
+               type="DownloadLocationCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for DownloadLocation properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="DownloadLocationCode"
+                          rdf="http://spdx.org/rdf/terms#downloadLocation"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="EndPointer" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Pointer to the end point of the range.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="EndPointer"
+                        comment="Pointer to the end point of the range."
+                        rdf="http://www.w3.org/2009/pointers#endPointer"
+                        domain="CompoundPointer"
+                        range="SinglePointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Example" type="ExampleType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Text for examples in describing an SPDX element.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Example"
+                          comment="Text for examples in describing an SPDX element."
+                          rdf="http://spdx.org/rdf/terms#example"
+                          domain="LicenseException"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalDocumentId"
+               type="ExternalDocumentIdType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ExternalDocumentId"
+                          comment="externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document."
+                          rdf="http://spdx.org/rdf/terms#externalDocumentId"
+                          domain="ExternalDocumentRef"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalDocumentRef"
+               type="ExternalDocumentRefType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for ExternalDocumentRef</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="ExternalDocumentRef"
+                         comment="Information about an external SPDX document reference including the checksum. This allows for verification of the external references."
+                         rdf="http://spdx.org/rdf/terms#ExternalDocumentRef"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalRef" type="ExternalRefType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for ExternalRef</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="ExternalRef"
+                         comment="An External Reference allows a Package to reference an external source of additional information, metadata, enumerations, asset identifiers, or downloadable content believed to be relevant to the Package."
+                         rdf="http://spdx.org/rdf/terms#ExternalRef"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExternalReferenceSite"
+               type="ExternalReferenceSiteType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Website for the maintainers of the external reference site</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ExternalReferenceSite"
+                          comment="Website for the maintainers of the external reference site"
+                          rdf="http://spdx.org/rdf/terms#externalReferenceSite"
+                          range="AnyURI"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExtractedLicenseInfo"
+               type="ExtractedLicenseInfoType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for ExtractedLicenseInfo</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="ExtractedLicenseInfo"
+                         comment="An ExtractedLicensingInfo represents a license or licensing notice that was found in the package. Any license text that is recognized as a license may be represented as a License rather than an ExtractedLicensingInfo."
+                         rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ExtractedText" type="ExtractedTextType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Verbatim license or licensing notice text that was discovered.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ExtractedText"
+                          comment="Verbatim license or licensing notice text that was discovered."
+                          rdf="http://spdx.org/rdf/terms#extractedText"
+                          domain="ExtractedLicenseInfo"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="File" type="FileType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for File</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="File"
+                         comment="A File represents a named sequence of information that is contained in a software package."
+                         rdf="http://spdx.org/rdf/terms#File"
+                         disjointwith="Snippet"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FileContributor" type="FileContributorType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for This field provides a place for the SPDX file creator to record file contributors. Contributors could include names of copyright holders and/or authors who may not be copyright holders yet contributed to the file content.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="FileContributor"
+                          comment="This field provides a place for the SPDX file creator to record file contributors. Contributors could include names of copyright holders and/or authors who may not be copyright holders yet contributed to the file content."
+                          rdf="http://spdx.org/rdf/terms#fileContributor"
+                          domain="File"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FileName" type="FileNameType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The name of the file relative to the root of the package.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="FileName"
+                          comment="The name of the file relative to the root of the package."
+                          rdf="http://spdx.org/rdf/terms#fileName"
+                          domain="File"
+                          range="String"
+                          subpropertyof="Name"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FileTypeCode" type="FileTypeCodeType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for FileType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="FileTypeCode" rdf="http://spdx.org/rdf/terms#fileType"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="FilesAnalyzed" type="FilesAnalyzedType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Indicates whether the file content of this package has been available for or subjected to analysis when creating the SPDX document. If “false” indicates packages that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="FilesAnalyzed"
+                          comment="Indicates whether the file content of this package has been available for or subjected to analysis when creating the SPDX document. If “false” indicates packages that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files."
+                          rdf="http://spdx.org/rdf/terms#filesAnalyzed"
+                          range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="HasExtractedLicensingInfo"
+               type="SpdxDocumentType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="HasExtractedLicensingInfo"
+                        comment="Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument."
+                        rdf="http://spdx.org/rdf/terms#hasExtractedLicensingInfo"
+                        domain="ExtractedLicenseInfoSpdxDocument"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="HasFile" type="PackageType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Indicates that a particular file belongs to a package.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="HasFile"
+                        comment="Indicates that a particular file belongs to a package."
+                        rdf="http://spdx.org/rdf/terms#hasFile"
+                        domain="Package"
+                        range="File"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Homepage" type="HomepageType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Homepage</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Homepage"
+                          comment=""
+                          rdf="http://usefulinc.com/ns/doap#homepage"
+                          range="AnyURI"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="IsDeprecatedLicenseId"
+               type="IsDeprecatedLicenseIdType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item that indicates if the license id is Deprecated.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="IsDeprecatedLicenseId"
+                          comment="Indicates if the license id is Deprecated."
+                          rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId"
+                          domain="License"
+                          range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="IsFsfLibre" type="IsFsfLibreType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item to indicate if the license is FSF Libre.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="IsFsfLibre"
+                          comment="Indicates if the license is is FSF Libre."
+                          rdf="http://spdx.org/rdf/terms#isFsfLibre"
+                          domain="License"
+                          range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="IsOsiApproved" type="IsOsiApprovedType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Indicates if the OSI has approved the license.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="IsOsiApproved"
+                          comment="Indicates if the OSI has approved the license."
+                          rdf="http://spdx.org/rdf/terms#isOsiApproved"
+                          domain="License"
+                          range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="License" type="LicenseType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for License type</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="License"
+                       comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
+                       rdf="http://spdx.org/rdf/terms#License"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseComments" type="LicenseCommentsType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for he licenseComments property allows the preparer of the SPDX document to describe why the licensing in spdx:licenseConcluded was chosen.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseComments"
+                          comment="he licenseComments property allows the preparer of the SPDX document to describe why the licensing in spdx:licenseConcluded was chosen."
+                          rdf="http://spdx.org/rdf/terms#licenseComments"
+                          domain="SpdxItem"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseConcludedCode"
+               type="LicenseConcludedCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for LicenseConcluded properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseConcludedCode"
+                          rdf="http://spdx.org/rdf/terms#licenseConcluded"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseDeclared" type="SpdxItemType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for The licensing that the creators of the software in the package, or the packager, have declared. Declarations by the original software creator should be preferred, if they exist.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="LicenseDeclared"
+                        comment="The licensing that the creators of the software in the package, or the packager, have declared. Declarations by the original software creator should be preferred, if they exist."
+                        rdf="http://spdx.org/rdf/terms#licenseDeclared"
+                        domain="SpdxItem"
+                        range="AnyLicenseInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseDeclaredCode"
+               type="LicenseDeclaredCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for LicenseDeclared properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseDeclaredCode"
+                          rdf="http://spdx.org/rdf/terms#licenseDeclared"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseException" type="LicenseExceptionType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for LicenseException</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="LicenseException"
+                         comment="An exception to a license."
+                         rdf="http://spdx.org/rdf/terms#LicenseException"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseExceptionId"
+               type="LicenseExceptionIdType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for short form license exception identifier in Appendix I.2 of the SPDX specification.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseExceptionId"
+                          comment="short form license exception identifier in Appendix I.2 of the SPDX specification."
+                          rdf="http://spdx.org/rdf/terms#licenseExceptionId"
+                          domain="LicenseException"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseExceptionText"
+               type="LicenseExceptionTextType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Full text of the license exception.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseExceptionText"
+                          comment="Full text of the license exception."
+                          rdf="http://spdx.org/rdf/terms#licenseExceptionText"
+                          domain="LicenseException"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseId" type="LicenseIdType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form "LicenseRef-"[idString] where [idString] is a unique string containing letters, numbers, ".", "-" or "+".</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseId"
+                          comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &#34;LicenseRef-&#34;[idString] where [idString] is a unique string containing letters, numbers, &#34;.&#34;, &#34;-&#34; or &#34;+&#34;."
+                          rdf="http://spdx.org/rdf/terms#licenseId"
+                          domain="SimpleLicensingInfo"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseInfoFromFilesCode"
+               type="LicenseInfoFromFilesCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for LicenseInfoFromFiles properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="LicenseInfoFromFilesCode"
+                          rdf="http://spdx.org/rdf/terms#licenseInfoFromFiles"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseListVersion"
+               type="LicenseListVersionType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseListVersion"
+                          comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created."
+                          rdf="http://spdx.org/rdf/terms#licenseListVersion"
+                          domain="CreationInfo"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LicenseText" type="LicenseTextType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Full text of the license.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LicenseText"
+                          comment="Full text of the license."
+                          rdf="http://spdx.org/rdf/terms#licenseText"
+                          domain="License"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LineCharPointer" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for LineCharPointer</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="LineCharPointer"
+                         comment="Single pointer using line and char numbers."
+                         rdf="http://www.w3.org/2009/pointers#LineCharPointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LineNumber" type="LineNumberType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Line number within the reference starting at one.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LineNumber"
+                          comment="Line number within the reference starting at one."
+                          rdf="http://www.w3.org/2009/pointers#lineNumber"
+                          domain="LineCharPointer"
+                          range="PositiveInteger"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ListedLicense" type="LicenseType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for ListedLicense</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="ListedLicense"
+                         comment="A license which is included in the SPDX License List (http://spdx.org/licenses)."
+                         rdf="http://spdx.org/rdf/terms#ListedLicense"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="LocatorFormat" type="LocatorFormatType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Regular expression for the format of the external repository identifier</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="LocatorFormat"
+                          comment="Regular expression for the format of the external repository identifier"
+                          rdf="http://spdx.org/rdf/terms#locatorFormat"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Name" type="NameType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Name"
+                          comment="The full human readable name of the item. This should include version information when applicable."
+                          rdf="http://spdx.org/rdf/terms#name"
+                          domain="SpdxElement"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="NoticeText" type="NoticeTextType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for This field provides a place for the SPDX file creator to record potential legal notices found in the file. This may or may not include copyright statements.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="NoticeText"
+                          comment="This field provides a place for the SPDX file creator to record potential legal notices found in the file. This may or may not include copyright statements."
+                          rdf="http://spdx.org/rdf/terms#noticeText"
+                          domain="File"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Offset" type="OffsetType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Offset from the start of the reference.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Offset"
+                          comment="Offset from the start of the reference."
+                          rdf="http://www.w3.org/2009/pointers#offset"
+                          domain="OffsetPointer"
+                          range="PositiveInteger"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="OffsetPointer" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for OffsetPointer</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="OffsetPointer"
+                         comment="Generic single pointer based on an offset."
+                         rdf="http://www.w3.org/2009/pointers#OffsetPointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="OrLaterOperator" type="OrLaterOperatorType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for OrLaterOperator</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="OrLaterOperator"
+                         comment="A license with an or later operator indicating this license version or any later version of the license (e.g. GPL-2.0+)"
+                         rdf="http://spdx.org/rdf/terms#OrLaterOperator"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Originator" type="OriginatorType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Originator"
+                          comment="The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax."
+                          rdf="http://spdx.org/rdf/terms#originator"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Package" type="PackageType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Package</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="Package"
+                         comment="A Package represents a collection of software files that are delivered as a single functional component."
+                         rdf="http://spdx.org/rdf/terms#Package"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageFileName" type="PackageFileNameType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The base name of the package file name. For example, zlib-1.2.5.tar.gz.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="PackageFileName"
+                          comment="The base name of the package file name. For example, zlib-1.2.5.tar.gz."
+                          rdf="http://spdx.org/rdf/terms#packageFileName"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageName" type="PackageNameType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Identify the full name of the package as given by Package Originator.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="PackageName"
+                          comment="Identify the full name of the package as given by Package Originator."
+                          rdf="http://spdx.org/rdf/terms#packageName"
+                          domain="Package"
+                          range="String"
+                          subpropertyof="Name"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageVerificationCode"
+               type="PackageVerificationCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for PackageVerificationCode</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="PackageVerificationCode"
+                         comment="A manifest based verification code (the algorithm is defined in section 4.7 of the full specification) of the SPDX Item. This allows consumers of this data and/or database to determine if an SPDX item they have in hand is identical to the SPDX item from which the data was produced. This algorithm works even if the SPDX document is included in the SPDX item."
+                         rdf="http://spdx.org/rdf/terms#PackageVerificationCode"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="PackageVerificationCodeValue"
+               type="PackageVerificationCodeValueType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The actual package verification code as a hex encoded value.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="PackageVerificationCodeValue"
+                          comment="The actual package verification code as a hex encoded value."
+                          rdf="http://spdx.org/rdf/terms#packageVerificationCodeValue"
+                          domain="PackageVerificationCode"
+                          range="HexBinary"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Project" type="ProjectType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for</xs:documentation>
+         <xs:appinfo> 
+            <spd:Class name="Project"
+                       comment=""
+                       rdf="http://usefulinc.com/ns/doap#Project"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Range" type="SnippetType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for This field defines the byte range in the original host file (in X.2) that the snippet information applies to</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="Range"
+                        comment="This field defines the byte range in the original host file (in X.2) that the snippet information applies to"
+                        rdf="http://spdx.org/rdf/terms#range"
+                        domain="Snippet"
+                        range="CompoundPointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Reference" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Scope within which a single pointer operates.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="Reference"
+                        comment="Scope within which a single pointer operates."
+                        rdf="http://www.w3.org/2009/pointers#reference"
+                        domain="SinglePointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ReferenceCategoryCode"
+               type="ReferenceCategoryCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for ReferenceCategory properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="ReferenceCategoryCode"
+                          rdf="http://spdx.org/rdf/terms#referenceCategory"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ReferenceLocator" type="ReferenceLocatorType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The unique string with no spaces necessary to access the package-specific information, metadata, or content within the target location. The format of the locator is subject to constraints defined by the &lt;type&gt;.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="ReferenceLocator"
+                          comment="The unique string with no spaces necessary to access the package-specific information, metadata, or content within the target location. The format of the locator is subject to constraints defined by the &lt;type&gt;."
+                          rdf="http://spdx.org/rdf/terms#referenceLocator"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="ReferenceType" type="ReferenceTypeType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for ReferenceType</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="ReferenceType"
+                         comment="Types used to external reference identifiers."
+                         rdf="http://spdx.org/rdf/terms#ReferenceType"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="RelatedSpdxElement" type="RelationshipType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for A related SpdxElement.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="RelatedSpdxElement"
+                        comment="A related SpdxElement."
+                        rdf="http://spdx.org/rdf/terms#relatedSpdxElement"
+                        domain="Relationship"
+                        range="SpdxElement"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Relationship" type="RelationshipType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Relationship</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="Relationship"
+                         comment="A Relationship represents a relationship between two SpdxElements."
+                         rdf="http://spdx.org/rdf/terms#Relationship"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="RelationshipTypeCode"
+               type="RelationshipTypeCodeType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for RelationshipType properties</xs:documentation>
+         <xs:appinfo> 
+            <spd:Codelist name="RelationshipTypeCode"
+                          rdf="http://spdx.org/rdf/terms#relationshipType"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SeeAlso" type="SeeAlsoType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="SeeAlso"
+                          comment="rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource."
+                          rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SimpleLicensingInfo"
+               type="SimpleLicensingInfoType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for SimpleLicensingInfo</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="SimpleLicensingInfo"
+                         comment="The SimpleLicenseInfo class includes all resources that represent simple, atomic, licensing information."
+                         rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SinglePointer" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for SinglePointer</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="SinglePointer"
+                         comment="Abstract pointer to a single point to be subclassed for extensibility."
+                         rdf="http://www.w3.org/2009/pointers#SinglePointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Snippet" type="SnippetType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Snippet</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="Snippet"
+                         comment="The set of bytes in a file. The name of the snippet is the name of the file appended with the byte range in parenthesis (ie: &#34;./file/name(2145:5532)&#34;)"
+                         rdf="http://spdx.org/rdf/terms#Snippet"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SnippetFromFile" type="SnippetType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for File containing the SPDX element (e.g. the file contaning a snippet).</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="SnippetFromFile"
+                        comment="File containing the SPDX element (e.g. the file contaning a snippet)."
+                        rdf="http://spdx.org/rdf/terms#snippetFromFile"
+                        domain="Snippet"
+                        range="File"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SnippetName" type="SnippetNameType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item to name a specific snippet in a human convenient manner</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="SnippetName"
+                          comment="Identify a specific snippet in a human convenient manner."
+                          rdf="http://spdx.org/rdf/terms#snippetName"
+                          subpropertyof="Name"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SourceInfo" type="SourceInfoType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Allows the producer(s) of the SPDX document to describe how the package was acquired and/or changed from the original source.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="SourceInfo"
+                          comment="Allows the producer(s) of the SPDX document to describe how the package was acquired and/or changed from the original source."
+                          rdf="http://spdx.org/rdf/terms#sourceInfo"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SpdxDocument" type="SpdxDocumentType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for SpdxDocument</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="SpdxDocument"
+                         comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information."
+                         rdf="http://spdx.org/rdf/terms#SpdxDocument"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SpdxElement" type="SpdxElementType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for SpdxElement</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="SpdxElement"
+                         comment="An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements."
+                         rdf="http://spdx.org/rdf/terms#SpdxElement"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SpdxItem" type="SpdxItemType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for SpdxItem</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="SpdxItem"
+                         comment="An SpdxItem is a potentially copyrightable work."
+                         rdf="http://spdx.org/rdf/terms#SpdxItem"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="SpecVersion" type="SpecVersionType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="SpecVersion"
+                          comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes."
+                          rdf="http://spdx.org/rdf/terms#specVersion"
+                          domain="SpdxDocument"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StandardLicenseHeader"
+               type="StandardLicenseHeaderType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for License author's preferred text to indicated that a file is covered by the license.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="StandardLicenseHeader"
+                          comment="License author's preferred text to indicated that a file is covered by the license."
+                          rdf="http://spdx.org/rdf/terms#standardLicenseHeader"
+                          domain="License"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StandardLicenseTemplate"
+               type="StandardLicenseTemplateType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for License template which describes sections of the license which can be varied. See License Template section of the specification for format information.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="StandardLicenseTemplate"
+                          comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information."
+                          rdf="http://spdx.org/rdf/terms#standardLicenseTemplate"
+                          domain="License"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StartEndPointer" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for StartEndPointer</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="StartEndPointer"
+                         comment="Compound pointer to a range with a start and an end point."
+                         rdf="http://www.w3.org/2009/pointers#StartEndPointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="StartPointer" type="PointerType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for Pointer to the start point of the range in a compound pointer.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Object name="StartPointer"
+                        comment="Pointer to the start point of the range in a compound pointer."
+                        rdf="http://www.w3.org/2009/pointers#startPointer"
+                        domain="CompoundPointer"
+                        range="SinglePointer"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Summary" type="SummaryType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Provides a short description of the package.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Summary"
+                          comment="Provides a short description of the package."
+                          rdf="http://spdx.org/rdf/terms#summary"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="Supplier" type="SupplierType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="Supplier"
+                          comment="The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax."
+                          rdf="http://spdx.org/rdf/terms#supplier"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VerificationCodeExcludedFile"
+               type="VerificationCodeExcludedFileType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for A file that was excluded when calculating the package verification code. This is usually a file containing SPDX data regarding the package. If a package contains more than one SPDX file all SPDX files must be excluded from the package verification code. If this is not done it would be impossible to correctly calculate the verification codes in both files.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="VerificationCodeExcludedFile"
+                          comment="A file that was excluded when calculating the package verification code. This is usually a file containing SPDX data regarding the package. If a package contains more than one SPDX file all SPDX files must be excluded from the package verification code. If this is not done it would be impossible to correctly calculate the verification codes in both files."
+                          rdf="http://spdx.org/rdf/terms#verificationCodeExcludedFile"
+                          domain="PackageVerificationCode"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="VersionInfo" type="VersionInfoType" nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data type for Provides an indication of the version of the package that is described by this SpdxDocument.</xs:documentation>
+         <xs:appinfo> 
+            <spd:Datatype name="VersionInfo"
+                          comment="Provides an indication of the version of the package that is described by this SpdxDocument."
+                          rdf="http://spdx.org/rdf/terms#versionInfo"
+                          domain="Package"
+                          range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="WithExceptionOperator"
+               type="WithExceptionOperatorType"
+               nillable="true"> 
+      <xs:annotation>  
+         <xs:documentation>A data item for WithExceptionOperator</xs:documentation>
+         <xs:appinfo> 
+            <spd:Element name="WithExceptionOperator"
+                         comment="Sometimes a set of license terms apply except under special circumstances. In this case, use the binary “WITH” operator to construct a new &lt;SPDX-License-Expression&gt; to represent the special exception situation. A valid license expression is where the left operand is a valid &lt;SPDX-License-Expression&gt; value and the right operand is an SPDX License List Exception Identifier (SPDX LL Exception Identifier) that represents the special exception terms. SPDX License LL Identifiers can be found on the SPDX License List. The syntax for the “WITH” operator is: &lt;SPDX-License-Expression-2&gt; = (&lt;SPDX-License-Expression-1&gt; WITH &lt;SPDX-LL-Exception-Identifier&gt;) For example, when the Bison exception is to be applied to GPL-2.0+, the expression would be: (GPL-2.0+ WITH Bison-exception-2.2), where: &lt;SPDX-License-Expression-1&gt; = GPL-2.0+ &lt;SPDX-LL-Exception-Identifier&gt; = Bison-exception-2.2 &lt;SPDX-License-Expression-1&gt; = (GPL-2.0+ WITH Bison-exception-2.2) If the applicable exception is not found on the SPDX License List, then use LicenseRef-[idString] to express the license and exception."
+                         rdf="http://spdx.org/rdf/terms#WithExceptionOperator"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+</xs:schema>

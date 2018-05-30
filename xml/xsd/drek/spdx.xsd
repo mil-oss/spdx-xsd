@@ -1,0 +1,2232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="spdx:xsd"
+           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:owl="http://www.w3.org/2002/07/owl#"
+           xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+           xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/" 
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:niem-xs="http://release.niem.gov/niem/proxy/xsd/4.0/" 
+           xmlns:structures="http://release.niem.gov/niem/structures/4.0/" 
+           xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/"
+           xmlns:ism="urn:us:gov:ic:ism" 
+           attributeFormDefault="unqualified" 
+           elementFormDefault="qualified" 
+           targetNamespace="urn:seva::1.0" version="1"
+           xsi:schemaLocation="http://release.niem.gov/niem/appinfo/4.0/ niem/utility/appinfo/4.0/appinfo.xsd http://release.niem.gov/niem/conformanceTargets/3.0/ ext/niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
+           ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/#ReferenceSchemaDocument">
+   <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd" namespace="http://release.niem.gov/niem/structures/4.0/"/>
+   <xs:import schemaLocation="ext/niem/utility/appinfo/4.0/appinfo.xsd" namespace="http://release.niem.gov/niem/appinfo/4.0/"/>
+   <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd" namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
+   <xs:import namespace="http://www.w3.org/2002/07/owl#" schemaLocation="ext/owl.xsd"/>
+   
+   <xs:complexType name="AnnotationType">
+      <xs:annotation>
+         <xs:documentation>An Annotation is a comment on an SpdxItem by an agent.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#date"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#annotationType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#annotationType_other"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#annotationType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#annotationType_review"/>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#annotator"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="AnnotationClassType">
+      <xs:annotation>
+         <xs:documentation>An Annotation is a comment on an SpdxItem by an agent.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#date"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#annotationType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#annotationType_other"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#annotationType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#annotationType_review"/>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#annotator"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="AnyLicenseInfo" abstract="true">
+      <xs:annotation>
+         <xs:documentation>The AnyLicenseInfo class includes all resources that represent licensing information.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="AnyLicenseInfoClassType">
+      <xs:annotation>
+         <xs:documentation>The AnyLicenseInfo class includes all resources that represent licensing information.</xs:documentation>
+         <xs:appinfo>
+            <ns:term_status>stable</ns:term_status>
+            <rdfs:isDefinedBy>http://spdx.org/rdf/terms#AnyLicenseInfo</rdfs:isDefinedBy>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="Checksum" abstract="true">
+      <xs:annotation>
+         <xs:documentation>A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class
+            allows the results of a variety of checksum and cryptographic message digest algorithms to be represented. </xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ChecksumClassType">
+      <xs:annotation>
+         <xs:documentation>A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#checksumValue"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#hexBinary"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#algorithm"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#checksumAlgorithm_md5"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#algorithm"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#checksumAlgorithm_sha1"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#algorithm"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#checksumAlgorithm_sha256"/>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="ConjunctiveLicenseSetType">
+      <xs:annotation>
+         <xs:documentation>A ConjunctiveLicenseSet represents a set of licensing information all of which apply.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#member"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ConjunctiveLicenseSetClassType">
+      <xs:annotation>
+         <xs:documentation>A ConjunctiveLicenseSet represents a set of licensing information all of which apply.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#member"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="CreationInfo" abstract="true">
+      <xs:annotation>
+         <xs:documentation>A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="CreationInfoClassType">
+      <xs:annotation>
+         <xs:documentation>A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseListVersion"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#created"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTimeStamp"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#creator"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="DisjunctiveLicenseSetType">
+      <xs:annotation>
+         <xs:documentation>A DisjunctiveLicenseSet represents a set of licensing information where only one license applies at a time. This class implies that the recipient gets to choose one of these licenses they would prefer to use.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#member"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="DisjunctiveLicenseSetClassType">
+      <xs:annotation>
+         <xs:documentation>A DisjunctiveLicenseSet represents a set of licensing information where only one license applies at a time. This class implies that the recipient gets to choose one of these licenses they would prefer to use.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2000/01/rdf-schema#Container"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#member"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">2</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="ExternalDocumentRef" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Information about an external SPDX document reference including the checksum. This allows for verification of the external references.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ExternalDocumentRefClassType">
+      <xs:annotation>
+         <xs:documentation>Information about an external SPDX document reference including the checksum. This allows for verification of the external references.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#checksum"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Checksum"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#externalDocumentId"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#spdxDocument"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SpdxDocument"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="ExternalRef" abstract="true">
+      <xs:annotation>
+         <xs:documentation>An External Reference allows a Package to reference an external source of additional information, metadata, enumerations, asset identifiers, or downloadable content
+            believed to be relevant to the Package.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ExternalRefClassType">
+      <xs:annotation>
+         <xs:documentation>An External Reference allows a Package to reference an external source of additional information, metadata, enumerations, asset identifiers, or downloadable content believed to be relevant to the Package.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#referenceLocator"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#referenceType"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#ReferenceType"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#referenceCategory"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#referenceCategory_other"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#referenceCategory"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#referenceCategory_packageManager"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#referenceCategory"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#referenceCategory_security"/>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="ExtractedLicenseInfoType">
+      <xs:annotation>
+         <xs:documentation>An ExtractedLicensingInfo represents a license or licensing notice that was found in the package. Any license text that is recognized as a license may be represented as a License rather than an ExtractedLicensingInfo.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#extractedText"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ExtractedLicenseInfoClassType">
+      <xs:annotation>
+         <xs:documentation>An ExtractedLicensingInfo represents a license or licensing notice that was found in the package. Any license text that is recognized as a license may be represented as a License rather than an ExtractedLicensingInfo.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#extractedText"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="FileType">
+      <xs:annotation>
+         <xs:documentation>A File represents a named sequence of information that is contained in a software package.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxItem"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#noticeText"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileContributor"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#artifactOf"/>
+                  <owl:onClass rdf:resource="http://usefulinc.com/ns/doap#Project"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileName"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_application"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_archive"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_audio"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_binary"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_documentation"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_image"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_other"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_source"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_spdx"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_text"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_video"/>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#checksum"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Checksum"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <owl:disjointWith rdf:resource="http://spdx.org/rdf/terms#Snippet"/>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="FileClassType">
+      <xs:annotation>
+         <xs:documentation>A File represents a named sequence of information that is contained in a software package.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxItem"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#noticeText"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileContributor"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#artifactOf"/>
+                  <owl:onClass rdf:resource="http://usefulinc.com/ns/doap#Project"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileName"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_application"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_archive"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_audio"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_binary"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_documentation"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_image"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_other"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_source"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_spdx"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_text"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#fileType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#fileType_video"/>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#checksum"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Checksum"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <owl:disjointWith rdf:resource="http://spdx.org/rdf/terms#Snippet"/>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="LicenseType">
+      <xs:annotation>
+         <xs:documentation>A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#isOsiApproved"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#standardLicenseHeader"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseText"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#standardLicenseTemplate"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseClassType">
+      <xs:annotation>
+         <xs:documentation>A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#isOsiApproved"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#standardLicenseHeader"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseText"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#standardLicenseTemplate"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="LicenseException" abstract="true">
+      <xs:annotation>
+         <xs:documentation>An exception to a license.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="LicenseExceptionClassType">
+      <xs:annotation>
+         <xs:documentation>An exception to a license.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseExceptionText"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#example"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#name"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseExceptionId"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="ListedLicenseType">
+      <xs:annotation>
+         <xs:documentation>A license which is included in the SPDX License List (http://spdx.org/licenses).</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#License"/>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ListedLicenseClassType">
+      <xs:annotation>
+         <xs:documentation>A license which is included in the SPDX License List (http://spdx.org/licenses).</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#License"/>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="OrLaterOperatorType">
+      <xs:annotation>
+         <xs:documentation>A license with an or later operator indicating this license version or any later version of the license (e.g. GPL-2.0+)</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#member"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OrLaterOperatorClassType">
+      <xs:annotation>
+         <xs:documentation>A license with an or later operator indicating this license version or any later version of the license (e.g. GPL-2.0+)</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#member"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="PackageType">
+      <xs:annotation>
+         <xs:documentation>A Package represents a collection of software files that are delivered as a single functional component.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxItem"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#externalRef"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#ExternalRef"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#packageFileName"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#filesAnalyzed"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#description"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://usefulinc.com/ns/doap#homepage"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#originator"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#downloadLocation"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#sourceInfo"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#supplier"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#packageVerificationCode"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#PackageVerificationCode"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseDeclared"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#noassertion"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseDeclared"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#none"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseDeclared"/>
+                              <owl:onClass rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+                              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#versionInfo"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#summary"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#checksum"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Checksum"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="PackageClassType">
+      <xs:annotation>
+         <xs:documentation>A Package represents a collection of software files that are delivered as a single functional component.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxItem"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#externalRef"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#ExternalRef"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#packageFileName"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#filesAnalyzed"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#description"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://usefulinc.com/ns/doap#homepage"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#originator"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#downloadLocation"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#sourceInfo"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#supplier"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#packageVerificationCode"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#PackageVerificationCode"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseDeclared"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#noassertion"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseDeclared"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#none"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseDeclared"/>
+                              <owl:onClass rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+                              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#versionInfo"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#summary"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#checksum"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Checksum"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="PackageVerificationCode" abstract="true">
+      <xs:annotation>
+         <xs:documentation>A manifest based verification code (the algorithm is defined in section 4.7 of the full specification) of the SPDX Item. This allows consumers of this data and/or
+            database to determine if an SPDX item they have in hand is identical to the SPDX item from which the data was produced. This algorithm works even if the SPDX document is included in the
+            SPDX item.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="PackageVerificationCodeClassType">
+      <xs:annotation>
+         <xs:documentation>A manifest based verification code (the algorithm is defined in section 4.7 of the full specification) of the SPDX Item. This allows consumers of this data and/or database to determine if an SPDX item they have in hand is identical to the SPDX item from which the data was produced. This algorithm works even if the SPDX document is included in the SPDX item.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#packageVerificationCodeValue"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#verificationCodeExcludedFile"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="ReferenceType" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Types used to external reference identifiers.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ReferenceTypeClassType">
+      <xs:annotation>
+         <xs:documentation>Types used to external reference identifiers.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#externalReferenceSite"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#contextualExample"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#documentation"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="RelationshipType">
+      <xs:annotation>
+         <xs:documentation>A Relationship represents a relationship between two SpdxElements.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_amendment"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_ancestorOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_buildToolOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_containedBy"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_contains"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_copyOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_descendantOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_describedBy"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_describes"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_distributionArtifact"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_documentation"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_dynamicLink"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_expandedFromArchive"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_fileAdded"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_fileDeleted"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_fileModified"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_generatedFrom"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_generates"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_hasPrerequisite"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_metafileOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_optionalComponentOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_other"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_packageOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_patchApplied"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_patchFor"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_prerequisiteFor"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_staticLink"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_testcaseOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://www.semanticweb.org/spdx/ontologies/2014/6/SPDX-2.1#relationshipType_dataFileOf"/>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relatedSpdxElement"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SpdxElement"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="RelationshipClassType">
+      <xs:annotation>
+         <xs:documentation>A Relationship represents a relationship between two SpdxElements.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_amendment"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_ancestorOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_buildToolOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_containedBy"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_contains"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_copyOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_descendantOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_describedBy"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_describes"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_distributionArtifact"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_documentation"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_dynamicLink"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_expandedFromArchive"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_fileAdded"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_fileDeleted"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_fileModified"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_generatedFrom"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_generates"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_hasPrerequisite"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_metafileOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_optionalComponentOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_other"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_packageOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_patchApplied"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_patchFor"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_prerequisiteFor"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_staticLink"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#relationshipType_testcaseOf"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationshipType"/>
+                              <owl:hasValue rdf:resource="http://www.semanticweb.org/spdx/ontologies/2014/6/SPDX-2.1#relationshipType_dataFileOf"/>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relatedSpdxElement"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SpdxElement"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="ReviewClassType">
+      <xs:annotation>
+         <xs:documentation>A Review represents an audit and signoff by an individual, organization or tool on the information in an SpdxDocument.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#reviewDate"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#dateTime"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#reviewer"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <owl:deprecatedClass xml:lang="en">This class has been deprecated in favor of an Annotation with an Annotation type of review.</owl:deprecatedClass>
+            <ns:term_status xml:lang="en">deprecated</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="SimpleLicenseingInfoType">
+      <xs:annotation>
+         <xs:documentation>The SimpleLicenseInfo class includes all resources that represent simple, atomic, licensing information.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseId"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#name"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SimpleLicenseingInfoClassType">
+      <xs:annotation>
+         <xs:documentation>The SimpleLicenseInfo class includes all resources that represent simple, atomic, licensing information.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseId"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#anyURI"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#name"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="SnippetType">
+      <xs:annotation>
+         <xs:documentation>The set of bytes in a file. The name of the snippet is the name of the file appended with the byte range in parenthesis (ie: "./file/name(2145:5532)")</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxItem"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#snippetFromFile"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#File"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#range"/>
+                  <owl:onClass rdf:resource="http://www.w3.org/2009/pointers#CompoundPointer"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SnippetClassType">
+      <xs:annotation>
+         <xs:documentation>The set of bytes in a file. The name of the snippet is the name of the file appended with the byte range in parenthesis (ie: "./file/name(2145:5532)")</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxItem"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#snippetFromFile"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#File"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#range"/>
+                  <owl:onClass rdf:resource="http://www.w3.org/2009/pointers#CompoundPointer"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="SpdxDocumentType">
+      <xs:annotation>
+         <xs:documentation>An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxElement"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#describesPackage"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Package"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#describesFile"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#File"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#hasExtractedLicensingInfo"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#ExtractedLicenseInfo"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#creationInfo"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#CreationInfo"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#specVersion"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#externalDocumentRef"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#ExternalDocumentRef"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#dataLicense"/>
+                  <owl:hasValue rdf:resource="http://spdx.org/licenses/CC0-1.0"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SpdxDocumentClassType">
+      <xs:annotation>
+         <xs:documentation>An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxElement"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#describesPackage"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Package"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#describesFile"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#File"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#hasExtractedLicensingInfo"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#ExtractedLicenseInfo"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#creationInfo"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#CreationInfo"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#specVersion"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#externalDocumentRef"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#ExternalDocumentRef"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#dataLicense"/>
+                  <owl:hasValue rdf:resource="http://spdx.org/licenses/CC0-1.0"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="SpdxElementType">
+      <xs:annotation>
+         <xs:documentation>An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#annotation"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Annotation"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#name"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationship"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Relationship"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SpdxElementClassType">
+      <xs:annotation>
+         <xs:documentation>An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#annotation"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Annotation"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#name"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://www.w3.org/2000/01/rdf-schema#comment"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#relationship"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#Relationship"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">0</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="SpdxItemType">
+      <xs:annotation>
+         <xs:documentation>An SpdxItem is a potentially copyrightable work.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxElement"/>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseConcluded"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#noassertion"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseConcluded"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#none"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseConcluded"/>
+                              <owl:onClass rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+                              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#copyrightText"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseInfoFromFiles"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseComments"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SpdxItemClassType">
+      <xs:annotation>
+         <xs:documentation>An SpdxItem is a potentially copyrightable work.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#SpdxElement"/>
+            <rdfs:subClassOf>
+               <xs:element name="" abstract="true">
+                  <xs:annotation>
+                     <xs:documentation/>
+                  </xs:annotation>
+               </xs:element>
+               <xs:complexType name="ClassType">
+                  <xs:annotation>
+                     <xs:documentation/>
+                     <xs:appinfo>
+                        <owl:unionOf rdf:parseType="Collection">
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseConcluded"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#noassertion"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseConcluded"/>
+                              <owl:hasValue rdf:resource="http://spdx.org/rdf/terms#none"/>
+                           </owl:Restriction>
+                           <owl:Restriction>
+                              <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseConcluded"/>
+                              <owl:onClass rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+                              <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                           </owl:Restriction>
+                        </owl:unionOf>
+                     </xs:appinfo>
+                  </xs:annotation>
+               </xs:complexType>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#copyrightText"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseInfoFromFiles"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+                  <owl:minQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:minQualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseComments"/>
+                  <owl:maxQualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:maxQualifiedCardinality>
+                  <owl:onDataRange rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="WithExceptionOperatorType">
+      <xs:annotation>
+         <xs:documentation>Sometimes a set of license terms apply except under special circumstances. In this case, use the binary “WITH” operator to construct a new &lt;SPDX-License-Expression&gt; to represent the special exception situation. A valid license expression is where the left operand is a valid &lt;SPDX-License-Expression&gt; value and the right operand is an SPDX License List Exception Identifier (SPDX LL Exception Identifier) that represents the special exception terms. SPDX License LL Identifiers can be found on the SPDX License List. The syntax for the “WITH” operator is: &lt;SPDX-License-Expression-2&gt; = (&lt;SPDX-License-Expression-1&gt; WITH &lt;SPDX-LL-Exception-Identifier&gt;) For example, when the Bison exception is to be applied to GPL-2.0+, the expression would be: (GPL-2.0+ WITH Bison-exception-2.2), where: &lt;SPDX-License-Expression-1&gt; = GPL-2.0+ &lt;SPDX-LL-Exception-Identifier&gt; = Bison-exception-2.2 &lt;SPDX-License-Expression-1&gt; = (GPL-2.0+ WITH Bison-exception-2.2) If the applicable exception is not found on the SPDX License List, then use LicenseRef-[idString] to express the license and exception.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#member"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseException"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#LicenseException"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type">
+            <xs:element ref=""/>
+            <xs:element ref=""/>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="WithExceptionOperatorClassType">
+      <xs:annotation>
+         <xs:documentation>Sometimes a set of license terms apply except under special circumstances. In this case, use the binary “WITH” operator to construct a new &lt;SPDX-License-Expression&gt; to represent the special exception situation. A valid license expression is where the left operand is a valid &lt;SPDX-License-Expression&gt; value and the right operand is an SPDX License List Exception Identifier (SPDX LL Exception Identifier) that represents the special exception terms. SPDX License LL Identifiers can be found on the SPDX License List. The syntax for the “WITH” operator is: &lt;SPDX-License-Expression-2&gt; = (&lt;SPDX-License-Expression-1&gt; WITH &lt;SPDX-LL-Exception-Identifier&gt;) For example, when the Bison exception is to be applied to GPL-2.0+, the expression would be: (GPL-2.0+ WITH Bison-exception-2.2), where: &lt;SPDX-License-Expression-1&gt; = GPL-2.0+ &lt;SPDX-LL-Exception-Identifier&gt; = Bison-exception-2.2 &lt;SPDX-License-Expression-1&gt; = (GPL-2.0+ WITH Bison-exception-2.2) If the applicable exception is not found on the SPDX License List, then use LicenseRef-[idString] to express the license and exception.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#member"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <rdfs:subClassOf>
+               <owl:Restriction>
+                  <owl:onProperty rdf:resource="http://spdx.org/rdf/terms#licenseException"/>
+                  <owl:onClass rdf:resource="http://spdx.org/rdf/terms#LicenseException"/>
+                  <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+               </owl:Restriction>
+            </rdfs:subClassOf>
+            <ns:term_status xml:lang="en">stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="Project" abstract="true">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ProjectClassType">
+      <xs:annotation>
+         <xs:documentation/>
+         <xs:appinfo/>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="Container" abstract="true">
+      <xs:annotation>
+         <xs:documentation/>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="ContainerClassType">
+      <xs:annotation>
+         <xs:documentation/>
+         <xs:appinfo/>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="ByteOffsetPointerType">
+      <xs:annotation>
+         <xs:documentation>Single pointer using a byte offset from the start of the reference.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#OffsetPointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="ByteOffsetPointerClassType">
+      <xs:annotation>
+         <xs:documentation>Single pointer using a byte offset from the start of the reference.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#OffsetPointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="CompoundPointerType">
+      <xs:annotation>
+         <xs:documentation>An abstract method made of a pair of pointers to a defined section to be subclassed for extensibility.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#Pointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="CompoundPointerClassType">
+      <xs:annotation>
+         <xs:documentation>An abstract method made of a pair of pointers to a defined section to be subclassed for extensibility.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#Pointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="LineCharPointerType">
+      <xs:annotation>
+         <xs:documentation>Single pointer using line and char numbers.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#OffsetPointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="LineCharPointerClassType">
+      <xs:annotation>
+         <xs:documentation>Single pointer using line and char numbers.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#OffsetPointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="OffsetPointerType">
+      <xs:annotation>
+         <xs:documentation>Generic single pointer based on an offset.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#SinglePointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="OffsetPointerClassType">
+      <xs:annotation>
+         <xs:documentation>Generic single pointer based on an offset.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#SinglePointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:element name="Pointer" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Abstract Pointer to be subclassed for extensibility.</xs:documentation>
+      </xs:annotation>
+   </xs:element>
+   <xs:complexType name="PointerClassType">
+      <xs:annotation>
+         <xs:documentation>Abstract Pointer to be subclassed for extensibility.</xs:documentation>
+         <xs:appinfo>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="SinglePointerType">
+      <xs:annotation>
+         <xs:documentation>Abstract pointer to a single point to be subclassed for extensibility.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#Pointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="SinglePointerClassType">
+      <xs:annotation>
+         <xs:documentation>Abstract pointer to a single point to be subclassed for extensibility.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#Pointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+   <xs:complexType name="StartEndPointerType">
+      <xs:annotation>
+         <xs:documentation>Compound pointer to a range with a start and an end point.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#CompoundPointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="Type"/>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StartEndPointerClassType">
+      <xs:annotation>
+         <xs:documentation>Compound pointer to a range with a start and an end point.</xs:documentation>
+         <xs:appinfo>
+            <rdfs:subClassOf rdf:resource="http://www.w3.org/2009/pointers#CompoundPointer"/>
+            <ns:term_status>stable</ns:term_status>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:complexType>
+</xs:schema>

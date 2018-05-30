@@ -1,0 +1,1478 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SPDX>
+   <Ontology name="SPDX 2.1"
+             version="2.1"
+             comment="This specification describes the SPDX® language, defined as a dictionary of named properties and classes using W3C's RDF Technology. SPDX® is a designed to allow the exchange of data about software packages. This information includes general information about the package, licensing information about the package as a whole, a manifest of files contained in the package and licensing information related to the contained files. Known issues: - File fileType cardinality should be 0 or more instead of required one."
+             rdf="http://www.semanticweb.org/spdx/ontologies/2014/6/SPDX-2.1"/>
+   <Object name="Agent"
+           comment="Agent (eg. person, group, software or physical artifact).."
+           rdf="http://spdx.org/rdf/terms#agent"
+           domain="Annotation"/>
+   <Object name="Algorithm"
+           comment="Identifies the algorithm used to produce the subject Checksum. Currently, SHA-1 is the only supported algorithm. It is anticipated that other algorithms will be supported at a later time."
+           rdf="http://spdx.org/rdf/terms#algorithm"
+           domain="Checksum">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#algorithm">
+            <Restriction rdf="http://spdx.org/rdf/terms#checksumAlgorithm_md5"
+                         onproperty="Algorithm"
+                         hasvalue="Md5"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#checksumAlgorithm_sha1"
+                         onproperty="Algorithm"
+                         hasvalue="Sha1"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#checksumAlgorithm_sha256"
+                         onproperty="Algorithm"
+                         hasvalue="Sha256"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="Annotation"
+           comment="Provide additional information about an SpdxElement."
+           rdf="http://spdx.org/rdf/terms#annotation"
+           domain="SpdxElement"
+           range="Annotation"/>
+   <Object name="AnnotationType"
+           comment="Type of the annotation."
+           rdf="http://spdx.org/rdf/terms#annotationType"
+           domain="Annotation">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#annotationType">
+            <Restriction rdf="http://spdx.org/rdf/terms#annotationType_other"
+                         onproperty="AnnotationType"
+                         hasvalue="Other"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#annotationType_review"
+                         onproperty="AnnotationType"
+                         hasvalue="Review"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="Checksum"
+           comment="The checksum property provides a mechanism that can be used to verify that the contents of a File or Package have not changed."
+           rdf="http://spdx.org/rdf/terms#checksum"
+           range="Checksum"/>
+   <Object name="CopyrightText"
+           comment="The text of copyright declarations recited in the Package or File."
+           rdf="http://spdx.org/rdf/terms#copyrightText"
+           domain="SpdxItem">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#copyrightText">
+            <Restriction rdf="http://spdx.org/rdf/terms#noassertion"
+                         onproperty="CopyrightText"
+                         hasvalue="Noassertion"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#none"
+                         onproperty="CopyrightText"
+                         hasvalue="None"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="CreationInfo"
+           comment="The creationInfo property relates an SpdxDocument to a set of information about the creation of the SpdxDocument."
+           rdf="http://spdx.org/rdf/terms#creationInfo"
+           domain="SpdxDocument"
+           range="CreationInfo"/>
+   <Object name="DataLicense"
+           comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files."
+           rdf="http://spdx.org/rdf/terms#dataLicense"
+           domain="SpdxDocument"
+           type="FunctionalProperty">
+      <Restriction rdf="http://spdx.org/licenses/CC0-1.0"
+                   onproperty="DataLicense"
+                   hasvalue="CC0-1.0"/>
+   </Object>
+   <Object name="DescribesFile"
+           comment="The describesFile property relates an SpdxDocument to the file which it describes."
+           rdf="http://spdx.org/rdf/terms#describesFile"
+           domain="SpdxDocument"
+           range="File"/>
+   <Object name="DescribesPackage"
+           comment="The describesPackage property relates an SpdxDocument to the package which it describes."
+           rdf="http://spdx.org/rdf/terms#describesPackage"
+           domain="SpdxDocument"
+           range="Package"/>
+   <Object name="DownloadLocation"
+           comment="The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively."
+           rdf="http://spdx.org/rdf/terms#downloadLocation"
+           domain="PackageSpdxDocument">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#downloadLocation">
+            <Restriction rdf="http://spdx.org/rdf/terms#noassertion"
+                         onproperty="DownloadLocation"
+                         hasvalue="Noassertion"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#none"
+                         onproperty="DownloadLocation"
+                         hasvalue="None"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="ExternalDocumentRef"
+           comment="Any external SPDX documents referenced within an SPDX document. This property is primarily used to verify the external SPDX document reference through use of the checksum."
+           rdf="http://spdx.org/rdf/terms#externalDocumentRef"/>
+   <Object name="ExternalRef"
+           comment="An External Reference allows a Package to reference an external source of additional information, metadata, enumerations, asset identifiers, or downloadable content believed to be relevant to the Package."
+           rdf="http://spdx.org/rdf/terms#externalRef"
+           range="ExternalRef"/>
+   <Object name="FileType"
+           comment="The type of the file."
+           rdf="http://spdx.org/rdf/terms#fileType">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#fileType">
+            <Restriction rdf="http://spdx.org/rdf/terms#fileType_archive"
+                         onproperty="FileType"
+                         hasvalue="Archive"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#fileType_binary"
+                         onproperty="FileType"
+                         hasvalue="Binary"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#fileType_other"
+                         onproperty="FileType"
+                         hasvalue="Other"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#fileType_source"
+                         onproperty="FileType"
+                         hasvalue="Source"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="HasExtractedLicensingInfo"
+           comment="Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument."
+           rdf="http://spdx.org/rdf/terms#hasExtractedLicensingInfo"
+           domain="ExtractedLicenseInfoSpdxDocument"/>
+   <Object name="HasFile"
+           comment="Indicates that a particular file belongs to a package."
+           rdf="http://spdx.org/rdf/terms#hasFile"
+           domain="Package"
+           range="File"/>
+   <Object name="LicenseConcluded"
+           comment="The licensing that the preparer of this SPDX document has concluded, based on the evidence, actually applies to the package."
+           rdf="http://spdx.org/rdf/terms#licenseConcluded"
+           domain="SpdxItem"
+           type="FunctionalProperty">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#licenseConcluded">
+            <Description name="AnyLicenseInfo" rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#noassertion"
+                         onproperty="LicenseConcluded"
+                         hasvalue="Noassertion"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#none"
+                         onproperty="LicenseConcluded"
+                         hasvalue="None"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="LicenseDeclared"
+           comment="The licensing that the creators of the software in the package, or the packager, have declared. Declarations by the original software creator should be preferred, if they exist."
+           rdf="http://spdx.org/rdf/terms#licenseDeclared"
+           domain="SpdxItem"
+           range="AnyLicenseInfo"/>
+   <Object name="LicenseException"
+           comment="An exception to a license."
+           rdf="http://spdx.org/rdf/terms#licenseException"
+           domain="WithExceptionOperator"
+           range="LicenseException"/>
+   <Object name="LicenseInfoFromFiles"
+           comment="The licensing information that was discovered directly within the package. There will be an instance of this property for each distinct value of alllicenseInfoInFile properties of all files contained in the package."
+           rdf="http://spdx.org/rdf/terms#licenseInfoFromFiles"
+           domain="Package">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#licenseInfoFromFiles">
+            <Description name="SimpleLicensingInfo"
+                         rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#noassertion"
+                         onproperty="LicenseInfoFromFiles"
+                         hasvalue="Noassertion"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#none"
+                         onproperty="LicenseInfoFromFiles"
+                         hasvalue="None"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="Member"
+           comment="A license, or other licensing information, that is a member of the subject license set."
+           rdf="http://spdx.org/rdf/terms#member"
+           range="AnyLicenseInfo"/>
+   <Object name="Originator"
+           comment="The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax."
+           rdf="http://spdx.org/rdf/terms#originator"
+           domain="Package">
+      <Restriction rdf="http://spdx.org/rdf/terms#none"
+                   onproperty="Originator"
+                   hasvalue="None"/>
+   </Object>
+   <Object name="PackageVerificationCode"
+           comment="A manifest based verification code (the algorithm is defined in section 4.7 of the full specification) of the package. This allows consumers of this data and/or database to determine if a package they have in hand is identical to the package from which the data was produced. This algorithm works even if the SPDX document is included in the package."
+           rdf="http://spdx.org/rdf/terms#packageVerificationCode"
+           range="PackageVerificationCode"/>
+   <Object name="Range"
+           comment="This field defines the byte range in the original host file (in X.2) that the snippet information applies to"
+           rdf="http://spdx.org/rdf/terms#range"
+           domain="Snippet"
+           range="CompoundPointer"/>
+   <Object name="ReferenceCategory"
+           comment="Category for the external reference"
+           rdf="http://spdx.org/rdf/terms#referenceCategory">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#referenceCategory">
+            <Restriction rdf="http://spdx.org/rdf/terms#referenceCategory_other"
+                         onproperty="ReferenceCategory"
+                         hasvalue="Other"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#referenceCategory_packageManager"
+                         onproperty="ReferenceCategory"
+                         hasvalue="PackageManager"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#referenceCategory_security"
+                         onproperty="ReferenceCategory"
+                         hasvalue="Security"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="ReferenceType"
+           comment="Type of the external reference. These are definined in an appendix in the SPDX specification."
+           rdf="http://spdx.org/rdf/terms#referenceType"/>
+   <Object name="RelatedSpdxElement"
+           comment="A related SpdxElement."
+           rdf="http://spdx.org/rdf/terms#relatedSpdxElement"
+           domain="Relationship"
+           range="SpdxElement"/>
+   <Object name="Relationship"
+           comment="Defines a relationship between two SPDX elements. The SPDX element may be a Package, File, or SpdxDocument."
+           rdf="http://spdx.org/rdf/terms#relationship"
+           domain="SpdxElement"
+           range="Relationship"/>
+   <Object name="RelationshipType"
+           comment="Describes the type of relationship between two SPDX elements."
+           rdf="http://spdx.org/rdf/terms#relationshipType"
+           domain="Relationship">
+      <Class>
+         <Union rdf="http://spdx.org/rdf/terms#relationshipType">
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_ancestorOf"
+                         onproperty="RelationshipType"
+                         hasvalue="AncestorOf"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_containedBy"
+                         onproperty="RelationshipType"
+                         hasvalue="ContainedBy"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_contains"
+                         onproperty="RelationshipType"
+                         hasvalue="Contains"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_copyOf"
+                         onproperty="RelationshipType"
+                         hasvalue="CopyOf"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_descendantOf"
+                         onproperty="RelationshipType"
+                         hasvalue="DescendantOf"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_distributionArtifact"
+                         onproperty="RelationshipType"
+                         hasvalue="DistributionArtifact"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_expandedFromArchive"
+                         onproperty="RelationshipType"
+                         hasvalue="ExpandedFromArchive"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_fileAdded"
+                         onproperty="RelationshipType"
+                         hasvalue="FileAdded"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_fileDeleted"
+                         onproperty="RelationshipType"
+                         hasvalue="FileDeleted"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_fileModified"
+                         onproperty="RelationshipType"
+                         hasvalue="FileModified"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_generatedFrom"
+                         onproperty="RelationshipType"
+                         hasvalue="GeneratedFrom"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_generates"
+                         onproperty="RelationshipType"
+                         hasvalue="Generates"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_patchApplied"
+                         onproperty="RelationshipType"
+                         hasvalue="PatchApplied"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_patchFor"
+                         onproperty="RelationshipType"
+                         hasvalue="PatchFor"/>
+            <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_variantOf"
+                         onproperty="RelationshipType"
+                         hasvalue="VariantOf"/>
+         </Union>
+      </Class>
+   </Object>
+   <Object name="SnippetFromFile"
+           comment="File containing the SPDX element (e.g. the file contaning a snippet)."
+           rdf="http://spdx.org/rdf/terms#snippetFromFile"
+           domain="Snippet"
+           range="File"/>
+   <Object name="SpdxDocument"
+           comment="A propoerty containing an SPDX document."
+           rdf="http://spdx.org/rdf/terms#spdxDocument"
+           range="SpdxDocument"/>
+   <Object name="Supplier"
+           comment="The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax."
+           rdf="http://spdx.org/rdf/terms#supplier"
+           domain="Package">
+      <Restriction rdf="http://spdx.org/rdf/terms#none"
+                   onproperty="Supplier"
+                   hasvalue="None"/>
+   </Object>
+   <Object name="UsedBy"
+           comment="Describes how the related relatedSpdxElement is used by this SpdxElement."
+           rdf="http://spdx.org/rdf/terms#usedBy"
+           domain="Relationship"/>
+   <Object name="LicenseInfoInSnippets"
+           comment="Licensing information that was discovered directly in the subject snippet. This is also considered a declared license for the snippet."
+           rdf="http://www.semanticweb.org/spdx/ontologies/2014/6/SPDX-2.1#licenseInfoInSnippets"
+           subpropertyof="LicenseInfoFromFiles"/>
+   <Object name="Member"
+           comment=""
+           rdf="http://www.w3.org/2000/01/rdf-schema#member"/>
+   <Object name="EndPointer"
+           comment="Pointer to the end point of the range."
+           rdf="http://www.w3.org/2009/pointers#endPointer"
+           domain="CompoundPointer"
+           range="SinglePointer"/>
+   <Object name="Reference"
+           comment="Scope within which a single pointer operates."
+           rdf="http://www.w3.org/2009/pointers#reference"
+           domain="SinglePointer"/>
+   <Object name="StartPointer"
+           comment="Pointer to the start point of the range in a compound pointer."
+           rdf="http://www.w3.org/2009/pointers#startPointer"
+           domain="CompoundPointer"
+           range="SinglePointer"/>
+   <Datatype name="AnnotationDate"
+             comment="Identify when the comment was made. This is to be specified according to the combined date and time in the UTC format, as specified in the ISO 8601 standard."
+             rdf="http://spdx.org/rdf/terms#annotationDate"
+             domain="Annotation"
+             subpropertyof="Date"/>
+   <Datatype name="Annotator"
+             comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document."
+             rdf="http://spdx.org/rdf/terms#annotator"
+             range="String"/>
+   <Datatype name="ChecksumValue"
+             comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm."
+             rdf="http://spdx.org/rdf/terms#checksumValue"
+             domain="Checksum"
+             range="HexBinary"/>
+   <Datatype name="ContextualExample"
+             comment="Example for use of the external repository identifier"
+             rdf="http://spdx.org/rdf/terms#contextualExample"
+             range="String"/>
+   <Datatype name="CopyrightText"
+             comment="The text of copyright declarations recited in the Package or File."
+             rdf="http://spdx.org/rdf/terms#copyrightText"
+             range="Literal"/>
+   <Datatype name="Created"
+             comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator."
+             rdf="http://spdx.org/rdf/terms#created"
+             domain="CreationInfo"
+             range="DateTime"
+             subpropertyof="Date"/>
+   <Datatype name="Creator"
+             comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax."
+             rdf="http://spdx.org/rdf/terms#creator"
+             domain="CreationInfo"
+             range="String"/>
+   <Datatype name="Date"
+             comment="A date-time stamp."
+             rdf="http://spdx.org/rdf/terms#date"
+             domain="AnnotationCreationInfo"
+             range="DateTime"/>
+   <Datatype name="Description"
+             comment="Provides a detailed description of the package."
+             rdf="http://spdx.org/rdf/terms#description"
+             domain="Package"
+             range="String"/>
+   <Datatype name="Documentation"
+             comment="Website containing the documentation related to the repository identifier"
+             rdf="http://spdx.org/rdf/terms#documentation"
+             range="AnyURI"/>
+   <Datatype name="DownloadLocation"
+             comment="The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively."
+             rdf="http://spdx.org/rdf/terms#downloadLocation"
+             range="AnyURI"/>
+   <Datatype name="Example"
+             comment="Text for examples in describing an SPDX element."
+             rdf="http://spdx.org/rdf/terms#example"
+             domain="LicenseException"
+             range="String"/>
+   <Datatype name="ExternalDocumentId"
+             comment="externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document."
+             rdf="http://spdx.org/rdf/terms#externalDocumentId"
+             domain="ExternalDocumentRef"
+             range="String"/>
+   <Datatype name="ExternalReferenceSite"
+             comment="Website for the maintainers of the external reference site"
+             rdf="http://spdx.org/rdf/terms#externalReferenceSite"
+             range="AnyURI"/>
+   <Datatype name="ExtractedText"
+             comment="Verbatim license or licensing notice text that was discovered."
+             rdf="http://spdx.org/rdf/terms#extractedText"
+             domain="ExtractedLicenseInfo"
+             range="String"/>
+   <Datatype name="FileContributor"
+             comment="This field provides a place for the SPDX file creator to record file contributors. Contributors could include names of copyright holders and/or authors who may not be copyright holders yet contributed to the file content."
+             rdf="http://spdx.org/rdf/terms#fileContributor"
+             domain="File"
+             range="String"/>
+   <Datatype name="FileName"
+             comment="The name of the file relative to the root of the package."
+             rdf="http://spdx.org/rdf/terms#fileName"
+             domain="File"
+             range="String"
+             subpropertyof="Name"/>
+   <Datatype name="FilesAnalyzed"
+             comment="Indicates whether the file content of this package has been available for or subjected to analysis when creating the SPDX document. If “false” indicates packages that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files."
+             rdf="http://spdx.org/rdf/terms#filesAnalyzed"
+             range="Boolean"/>
+   <Datatype name="IsOsiApproved"
+             comment="Indicates if the OSI has approved the license."
+             rdf="http://spdx.org/rdf/terms#isOsiApproved"
+             domain="License"
+             range="Boolean"/>
+   <Datatype name="LicenseComments"
+             comment="he licenseComments property allows the preparer of the SPDX document to describe why the licensing in spdx:licenseConcluded was chosen."
+             rdf="http://spdx.org/rdf/terms#licenseComments"
+             domain="SpdxItem"
+             range="String"/>
+   <Datatype name="LicenseExceptionId"
+             comment="short form license exception identifier in Appendix I.2 of the SPDX specification."
+             rdf="http://spdx.org/rdf/terms#licenseExceptionId"
+             domain="LicenseException"
+             range="String"/>
+   <Datatype name="LicenseExceptionText"
+             comment="Full text of the license exception."
+             rdf="http://spdx.org/rdf/terms#licenseExceptionText"
+             domain="LicenseException"
+             range="String"/>
+   <Datatype name="LicenseId"
+             comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &#34;LicenseRef-&#34;[idString] where [idString] is a unique string containing letters, numbers, &#34;.&#34;, &#34;-&#34; or &#34;+&#34;."
+             rdf="http://spdx.org/rdf/terms#licenseId"
+             domain="SimpleLicensingInfo"
+             range="String"/>
+   <Datatype name="LicenseListVersion"
+             comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created."
+             rdf="http://spdx.org/rdf/terms#licenseListVersion"
+             domain="CreationInfo"
+             range="String"/>
+   <Datatype name="LicenseText"
+             comment="Full text of the license."
+             rdf="http://spdx.org/rdf/terms#licenseText"
+             domain="License"
+             range="String"/>
+   <Datatype name="LocatorFormat"
+             comment="Regular expression for the format of the external repository identifier"
+             rdf="http://spdx.org/rdf/terms#locatorFormat"
+             range="String"/>
+   <Datatype name="Name"
+             comment="The full human readable name of the item. This should include version information when applicable."
+             rdf="http://spdx.org/rdf/terms#name"
+             domain="SpdxElement"
+             range="String"/>
+   <Datatype name="NoticeText"
+             comment="This field provides a place for the SPDX file creator to record potential legal notices found in the file. This may or may not include copyright statements."
+             rdf="http://spdx.org/rdf/terms#noticeText"
+             domain="File"
+             range="String"/>
+   <Datatype name="Originator"
+             comment="The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax."
+             rdf="http://spdx.org/rdf/terms#originator"
+             range="String"/>
+   <Datatype name="PackageFileName"
+             comment="The base name of the package file name. For example, zlib-1.2.5.tar.gz."
+             rdf="http://spdx.org/rdf/terms#packageFileName"
+             domain="Package"
+             range="String"/>
+   <Datatype name="PackageName"
+             comment="Identify the full name of the package as given by Package Originator."
+             rdf="http://spdx.org/rdf/terms#packageName"
+             domain="Package"
+             range="String"
+             subpropertyof="Name"/>
+   <Datatype name="PackageVerificationCodeValue"
+             comment="The actual package verification code as a hex encoded value."
+             rdf="http://spdx.org/rdf/terms#packageVerificationCodeValue"
+             domain="PackageVerificationCode"
+             range="HexBinary"/>
+   <Datatype name="ReferenceLocator"
+             comment="The unique string with no spaces necessary to access the package-specific information, metadata, or content within the target location. The format of the locator is subject to constraints defined by the &lt;type&gt;."
+             rdf="http://spdx.org/rdf/terms#referenceLocator"
+             range="String"/>
+   <Datatype name="SnippetName"
+             comment="Identify a specific snippet in a human convenient manner."
+             rdf="http://spdx.org/rdf/terms#snippetName"
+             subpropertyof="Name"/>
+   <Datatype name="SourceInfo"
+             comment="Allows the producer(s) of the SPDX document to describe how the package was acquired and/or changed from the original source."
+             rdf="http://spdx.org/rdf/terms#sourceInfo"
+             domain="Package"
+             range="String"/>
+   <Datatype name="SpecVersion"
+             comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes."
+             rdf="http://spdx.org/rdf/terms#specVersion"
+             domain="SpdxDocument"
+             range="String"/>
+   <Datatype name="StandardLicenseHeader"
+             comment="License author's preferred text to indicated that a file is covered by the license."
+             rdf="http://spdx.org/rdf/terms#standardLicenseHeader"
+             domain="License"
+             range="String"/>
+   <Datatype name="StandardLicenseTemplate"
+             comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information."
+             rdf="http://spdx.org/rdf/terms#standardLicenseTemplate"
+             domain="License"
+             range="String"/>
+   <Datatype name="Summary"
+             comment="Provides a short description of the package."
+             rdf="http://spdx.org/rdf/terms#summary"
+             domain="Package"
+             range="String"/>
+   <Datatype name="Supplier"
+             comment="The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax."
+             rdf="http://spdx.org/rdf/terms#supplier"
+             range="String"/>
+   <Datatype name="VerificationCodeExcludedFile"
+             comment="A file that was excluded when calculating the package verification code. This is usually a file containing SPDX data regarding the package. If a package contains more than one SPDX file all SPDX files must be excluded from the package verification code. If this is not done it would be impossible to correctly calculate the verification codes in both files."
+             rdf="http://spdx.org/rdf/terms#verificationCodeExcludedFile"
+             domain="PackageVerificationCode"
+             range="String"/>
+   <Datatype name="VersionInfo"
+             comment="Provides an indication of the version of the package that is described by this SpdxDocument."
+             rdf="http://spdx.org/rdf/terms#versionInfo"
+             domain="Package"
+             range="String"/>
+   <Datatype name="Homepage"
+             comment=""
+             rdf="http://usefulinc.com/ns/doap#homepage"
+             range="AnyURI"/>
+   <Datatype name="Comment"
+             comment=""
+             rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+   <Datatype name="SeeAlso"
+             comment="rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource."
+             rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+   <Datatype name="LineNumber"
+             comment="Line number within the reference starting at one."
+             rdf="http://www.w3.org/2009/pointers#lineNumber"
+             domain="LineCharPointer"
+             range="PositiveInteger"/>
+   <Datatype name="Offset"
+             comment="Offset from the start of the reference."
+             rdf="http://www.w3.org/2009/pointers#offset"
+             domain="OffsetPointer"
+             range="PositiveInteger"/>
+   <Class name="Annotation"
+          comment="An Annotation is a comment on an SpdxItem by an agent."
+          rdf="http://spdx.org/rdf/terms#Annotation">
+      <SubClass rdf="http://www.w3.org/2002/07/owl#Thing" name="Thing"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Date"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="DateTimeStamp"/>
+      </SubClass>
+      <SubClass>
+         <Class>
+            <Union rdf="http://spdx.org/rdf/terms#annotationType">
+               <Restriction rdf="http://spdx.org/rdf/terms#annotationType_other"
+                            onproperty="AnnotationType"
+                            hasvalue="Other"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#annotationType_review"
+                            onproperty="AnnotationType"
+                            hasvalue="Review"/>
+            </Union>
+         </Class>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Comment"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Annotator"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="AnyLicenseInfo"
+          comment="The AnyLicenseInfo class includes all resources that represent licensing information."
+          rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
+          definedby="AnyLicenseInfo">
+      <rdfs:isDefinedBy xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">http://spdx.org/rdf/terms#AnyLicenseInfo</rdfs:isDefinedBy>
+   </Class>
+   <Class name="Checksum"
+          comment="A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented."
+          rdf="http://spdx.org/rdf/terms#Checksum">
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="ChecksumValue"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="HexBinary"/>
+      </SubClass>
+      <SubClass>
+         <Class>
+            <Union rdf="http://spdx.org/rdf/terms#algorithm">
+               <Restriction rdf="http://spdx.org/rdf/terms#checksumAlgorithm_md5"
+                            onproperty="Algorithm"
+                            hasvalue="Md5"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#checksumAlgorithm_sha1"
+                            onproperty="Algorithm"
+                            hasvalue="Sha1"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#checksumAlgorithm_sha256"
+                            onproperty="Algorithm"
+                            hasvalue="Sha256"/>
+            </Union>
+         </Class>
+      </SubClass>
+   </Class>
+   <Class name="ConjunctiveLicenseSet"
+          comment="A ConjunctiveLicenseSet represents a set of licensing information all of which apply."
+          rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet">
+      <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo" name="AnyLicenseInfo"/>
+      <SubClass rdf="http://www.w3.org/2000/01/rdf-schema#Container" name="Container"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="AnyLicenseInfo"
+                      minOccurs="2"
+                      maxOccurs="unbounded"/>
+      </SubClass>
+   </Class>
+   <Class name="CreationInfo"
+          comment="A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument."
+          rdf="http://spdx.org/rdf/terms#CreationInfo">
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="LicenseListVersion"
+                      minOccurs="0"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Created"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="DateTimeStamp"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Comment" minOccurs="0" ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Creator" minOccurs="1" ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="DisjunctiveLicenseSet"
+          comment="A DisjunctiveLicenseSet represents a set of licensing information where only one license applies at a time. This class implies that the recipient gets to choose one of these licenses they would prefer to use."
+          rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet">
+      <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo" name="AnyLicenseInfo"/>
+      <SubClass rdf="http://www.w3.org/2000/01/rdf-schema#Container" name="Container"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="AnyLicenseInfo"
+                      minOccurs="2"
+                      maxOccurs="unbounded"/>
+      </SubClass>
+   </Class>
+   <Class name="ExternalDocumentRef"
+          comment="Information about an external SPDX document reference including the checksum. This allows for verification of the external references."
+          rdf="http://spdx.org/rdf/terms#ExternalDocumentRef">
+      <SubClass>
+         <Restriction rdf="" onproperty="Checksum" minOccurs="1" maxOccurs="1"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="ExternalDocumentId"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="AnyURI"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="SpdxDocument" minOccurs="1" maxOccurs="1"/>
+      </SubClass>
+   </Class>
+   <Class name="ExternalRef"
+          comment="An External Reference allows a Package to reference an external source of additional information, metadata, enumerations, asset identifiers, or downloadable content believed to be relevant to the Package."
+          rdf="http://spdx.org/rdf/terms#ExternalRef">
+      <SubClass>
+         <Restriction rdf="" onproperty="Comment" maxOccurs="1" ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="ReferenceLocator"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="ReferenceType" minOccurs="1" maxOccurs="1"/>
+      </SubClass>
+      <SubClass>
+         <Class>
+            <Union rdf="http://spdx.org/rdf/terms#referenceCategory">
+               <Restriction rdf="http://spdx.org/rdf/terms#referenceCategory_other"
+                            onproperty="ReferenceCategory"
+                            hasvalue="Other"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#referenceCategory_packageManager"
+                            onproperty="ReferenceCategory"
+                            hasvalue="PackageManager"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#referenceCategory_security"
+                            onproperty="ReferenceCategory"
+                            hasvalue="Security"/>
+            </Union>
+         </Class>
+      </SubClass>
+   </Class>
+   <Class name="ExtractedLicenseInfo"
+          comment="An ExtractedLicensingInfo represents a license or licensing notice that was found in the package. Any license text that is recognized as a license may be represented as a License rather than an ExtractedLicensingInfo."
+          rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo">
+      <SubClass rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"
+                name="SimpleLicensingInfo"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="ExtractedText"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="File"
+          comment="A File represents a named sequence of information that is contained in a software package."
+          rdf="http://spdx.org/rdf/terms#File"
+          disjointwith="Snippet">
+      <SubClass rdf="http://spdx.org/rdf/terms#SpdxItem" name="SpdxItem"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="NoticeText"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="FileContributor"
+                      minOccurs="0"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Project" minOccurs="0"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="FileName"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Class>
+            <Union rdf="http://spdx.org/rdf/terms#fileType">
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_application"
+                            onproperty="FileType"
+                            hasvalue="Application"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_archive"
+                            onproperty="FileType"
+                            hasvalue="Archive"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_audio"
+                            onproperty="FileType"
+                            hasvalue="Audio"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_binary"
+                            onproperty="FileType"
+                            hasvalue="Binary"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_documentation"
+                            onproperty="FileType"
+                            hasvalue="Documentation"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_image"
+                            onproperty="FileType"
+                            hasvalue="Image"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_other"
+                            onproperty="FileType"
+                            hasvalue="Other"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_source"
+                            onproperty="FileType"
+                            hasvalue="Source"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_spdx"
+                            onproperty="FileType"
+                            hasvalue="Spdx"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_text"
+                            onproperty="FileType"
+                            hasvalue="Text"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#fileType_video"
+                            onproperty="FileType"
+                            hasvalue="Video"/>
+            </Union>
+         </Class>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Checksum" minOccurs="1"/>
+      </SubClass>
+   </Class>
+   <Class name="License"
+          comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
+          rdf="http://spdx.org/rdf/terms#License">
+      <SubClass rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"
+                name="SimpleLicensingInfo"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="IsOsiApproved"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="Boolean"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="StandardLicenseHeader"
+                      minOccurs="0"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="LicenseText"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="StandardLicenseTemplate"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="LicenseException"
+          comment="An exception to a license."
+          rdf="http://spdx.org/rdf/terms#LicenseException">
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="LicenseExceptionText"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Comment"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Example" maxOccurs="1" ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Name"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="SeeAlso" minOccurs="0" ondatarange="AnyURI"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="LicenseExceptionId"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="ListedLicense"
+          comment="A license which is included in the SPDX License List (http://spdx.org/licenses)."
+          rdf="http://spdx.org/rdf/terms#ListedLicense">
+      <SubClass rdf="http://spdx.org/rdf/terms#License" name="License"/>
+   </Class>
+   <Class name="OrLaterOperator"
+          comment="A license with an or later operator indicating this license version or any later version of the license (e.g. GPL-2.0+)"
+          rdf="http://spdx.org/rdf/terms#OrLaterOperator">
+      <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo" name="AnyLicenseInfo"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="SimpleLicensingInfo"
+                      minOccurs="1"
+                      maxOccurs="1"/>
+      </SubClass>
+   </Class>
+   <Class name="Package"
+          comment="A Package represents a collection of software files that are delivered as a single functional component."
+          rdf="http://spdx.org/rdf/terms#Package">
+      <SubClass rdf="http://spdx.org/rdf/terms#SpdxItem" name="SpdxItem"/>
+      <SubClass>
+         <Restriction rdf="" onproperty="ExternalRef" minOccurs="0"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="PackageFileName"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="FilesAnalyzed"
+                      maxOccurs="1"
+                      ondatarange="Boolean"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Description"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Homepage" maxOccurs="1" ondatarange="AnyURI"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Originator"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="DownloadLocation"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="SourceInfo"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Supplier" maxOccurs="1" ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="PackageVerificationCode"
+                      minOccurs="1"
+                      maxOccurs="1"/>
+      </SubClass>
+      <SubClass>
+         <Class>
+            <Union rdf="http://spdx.org/rdf/terms#licenseDeclared">
+               <Restriction rdf="http://spdx.org/rdf/terms#noassertion"
+                            onproperty="LicenseDeclared"
+                            hasvalue="Noassertion"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#none"
+                            onproperty="LicenseDeclared"
+                            hasvalue="None"/>
+               <Restriction rdf="" onproperty="AnyLicenseInfo" minOccurs="1" maxOccurs="1"/>
+            </Union>
+         </Class>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="VersionInfo"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Summary" maxOccurs="1" ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Checksum" maxOccurs="1"/>
+      </SubClass>
+   </Class>
+   <Class name="PackageVerificationCode"
+          comment="A manifest based verification code (the algorithm is defined in section 4.7 of the full specification) of the SPDX Item. This allows consumers of this data and/or database to determine if an SPDX item they have in hand is identical to the SPDX item from which the data was produced. This algorithm works even if the SPDX document is included in the SPDX item."
+          rdf="http://spdx.org/rdf/terms#PackageVerificationCode">
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="PackageVerificationCodeValue"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="VerificationCodeExcludedFile"
+                      minOccurs="0"
+                      ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="ReferenceType"
+          comment="Types used to external reference identifiers."
+          rdf="http://spdx.org/rdf/terms#ReferenceType">
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="ExternalReferenceSite"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="AnyURI"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="ContextualExample"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="AnyURI"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Documentation"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="Relationship"
+          comment="A Relationship represents a relationship between two SpdxElements."
+          rdf="http://spdx.org/rdf/terms#Relationship">
+      <SubClass rdf="http://www.w3.org/2002/07/owl#Thing" name="Thing"/>
+      <SubClass>
+         <Class>
+            <Union rdf="http://spdx.org/rdf/terms#relationshipType">
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_amendment"
+                            onproperty="RelationshipType"
+                            hasvalue="Amendment"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_ancestorOf"
+                            onproperty="RelationshipType"
+                            hasvalue="AncestorOf"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_buildToolOf"
+                            onproperty="RelationshipType"
+                            hasvalue="BuildToolOf"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_containedBy"
+                            onproperty="RelationshipType"
+                            hasvalue="ContainedBy"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_contains"
+                            onproperty="RelationshipType"
+                            hasvalue="Contains"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_copyOf"
+                            onproperty="RelationshipType"
+                            hasvalue="CopyOf"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_descendantOf"
+                            onproperty="RelationshipType"
+                            hasvalue="DescendantOf"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_describedBy"
+                            onproperty="RelationshipType"
+                            hasvalue="DescribedBy"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_describes"
+                            onproperty="RelationshipType"
+                            hasvalue="Describes"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_distributionArtifact"
+                            onproperty="RelationshipType"
+                            hasvalue="DistributionArtifact"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_documentation"
+                            onproperty="RelationshipType"
+                            hasvalue="Documentation"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_dynamicLink"
+                            onproperty="RelationshipType"
+                            hasvalue="DynamicLink"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_expandedFromArchive"
+                            onproperty="RelationshipType"
+                            hasvalue="ExpandedFromArchive"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_fileAdded"
+                            onproperty="RelationshipType"
+                            hasvalue="FileAdded"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_fileDeleted"
+                            onproperty="RelationshipType"
+                            hasvalue="FileDeleted"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_fileModified"
+                            onproperty="RelationshipType"
+                            hasvalue="FileModified"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_generatedFrom"
+                            onproperty="RelationshipType"
+                            hasvalue="GeneratedFrom"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_generates"
+                            onproperty="RelationshipType"
+                            hasvalue="Generates"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_hasPrerequisite"
+                            onproperty="RelationshipType"
+                            hasvalue="HasPrerequisite"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_metafileOf"
+                            onproperty="RelationshipType"
+                            hasvalue="MetafileOf"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_optionalComponentOf"
+                            onproperty="RelationshipType"
+                            hasvalue="OptionalComponentOf"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_other"
+                            onproperty="RelationshipType"
+                            hasvalue="Other"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_packageOf"
+                            onproperty="RelationshipType"
+                            hasvalue="PackageOf"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_patchApplied"
+                            onproperty="RelationshipType"
+                            hasvalue="PatchApplied"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_patchFor"
+                            onproperty="RelationshipType"
+                            hasvalue="PatchFor"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_prerequisiteFor"
+                            onproperty="RelationshipType"
+                            hasvalue="PrerequisiteFor"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_staticLink"
+                            onproperty="RelationshipType"
+                            hasvalue="StaticLink"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#relationshipType_testcaseOf"
+                            onproperty="RelationshipType"
+                            hasvalue="TestcaseOf"/>
+               <Restriction rdf="http://www.semanticweb.org/spdx/ontologies/2014/6/SPDX-2.1#relationshipType_dataFileOf"
+                            onproperty="RelationshipType"
+                            hasvalue="DataFileOf"/>
+            </Union>
+         </Class>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Comment" maxOccurs="1" ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="SpdxElement" minOccurs="1" maxOccurs="1"/>
+      </SubClass>
+   </Class>
+   <Class name="SimpleLicensingInfo"
+          comment="The SimpleLicenseInfo class includes all resources that represent simple, atomic, licensing information."
+          rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo">
+      <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo" name="AnyLicenseInfo"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="LicenseId"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Comment" maxOccurs="1" ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="SeeAlso" minOccurs="0" ondatarange="AnyURI"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Name"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="Snippet"
+          comment="The set of bytes in a file. The name of the snippet is the name of the file appended with the byte range in parenthesis (ie: &#34;./file/name(2145:5532)&#34;)"
+          rdf="http://spdx.org/rdf/terms#Snippet">
+      <SubClass rdf="http://spdx.org/rdf/terms#SpdxItem" name="SpdxItem"/>
+      <SubClass>
+         <Restriction rdf="" onproperty="File" minOccurs="1" maxOccurs="1"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="CompoundPointer" minOccurs="1" maxOccurs="1"/>
+      </SubClass>
+   </Class>
+   <Class name="SpdxDocument"
+          comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information."
+          rdf="http://spdx.org/rdf/terms#SpdxDocument">
+      <SubClass rdf="http://spdx.org/rdf/terms#SpdxElement" name="SpdxElement"/>
+      <SubClass>
+         <Restriction rdf="" onproperty="Package" minOccurs="0"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="File" minOccurs="0"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="ExtractedLicenseInfo" minOccurs="0"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="CreationInfo" minOccurs="1" maxOccurs="1"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="SpecVersion"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="ExternalDocumentRef" minOccurs="0"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="http://spdx.org/licenses/CC0-1.0"
+                      onproperty="DataLicense"
+                      hasvalue="CC0-1.0"/>
+      </SubClass>
+   </Class>
+   <Class name="SpdxElement"
+          comment="An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements."
+          rdf="http://spdx.org/rdf/terms#SpdxElement">
+      <SubClass rdf="http://www.w3.org/2002/07/owl#Thing" name="Thing"/>
+      <SubClass>
+         <Restriction rdf="" onproperty="Annotation" minOccurs="0"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="Name"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Comment" maxOccurs="1" ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="Relationship" minOccurs="0"/>
+      </SubClass>
+   </Class>
+   <Class name="SpdxItem"
+          comment="An SpdxItem is a potentially copyrightable work."
+          rdf="http://spdx.org/rdf/terms#SpdxItem">
+      <SubClass rdf="http://spdx.org/rdf/terms#SpdxElement" name="SpdxElement"/>
+      <SubClass>
+         <Class>
+            <Union rdf="http://spdx.org/rdf/terms#licenseConcluded">
+               <Restriction rdf="http://spdx.org/rdf/terms#noassertion"
+                            onproperty="LicenseConcluded"
+                            hasvalue="Noassertion"/>
+               <Restriction rdf="http://spdx.org/rdf/terms#none"
+                            onproperty="LicenseConcluded"
+                            hasvalue="None"/>
+               <Restriction rdf="" onproperty="AnyLicenseInfo" minOccurs="1" maxOccurs="1"/>
+            </Union>
+         </Class>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="CopyrightText"
+                      minOccurs="1"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf="" onproperty="SimpleLicensingInfo" minOccurs="1"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="LicenseComments"
+                      maxOccurs="1"
+                      ondatarange="String"/>
+      </SubClass>
+   </Class>
+   <Class name="WithExceptionOperator"
+          comment="Sometimes a set of license terms apply except under special circumstances. In this case, use the binary “WITH” operator to construct a new &lt;SPDX-License-Expression&gt; to represent the special exception situation. A valid license expression is where the left operand is a valid &lt;SPDX-License-Expression&gt; value and the right operand is an SPDX License List Exception Identifier (SPDX LL Exception Identifier) that represents the special exception terms. SPDX License LL Identifiers can be found on the SPDX License List. The syntax for the “WITH” operator is: &lt;SPDX-License-Expression-2&gt; = (&lt;SPDX-License-Expression-1&gt; WITH &lt;SPDX-LL-Exception-Identifier&gt;) For example, when the Bison exception is to be applied to GPL-2.0+, the expression would be: (GPL-2.0+ WITH Bison-exception-2.2), where: &lt;SPDX-License-Expression-1&gt; = GPL-2.0+ &lt;SPDX-LL-Exception-Identifier&gt; = Bison-exception-2.2 &lt;SPDX-License-Expression-1&gt; = (GPL-2.0+ WITH Bison-exception-2.2) If the applicable exception is not found on the SPDX License List, then use LicenseRef-[idString] to express the license and exception."
+          rdf="http://spdx.org/rdf/terms#WithExceptionOperator">
+      <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo" name="AnyLicenseInfo"/>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="SimpleLicensingInfo"
+                      minOccurs="1"
+                      maxOccurs="1"/>
+      </SubClass>
+      <SubClass>
+         <Restriction rdf=""
+                      onproperty="LicenseException"
+                      minOccurs="1"
+                      maxOccurs="1"/>
+      </SubClass>
+   </Class>
+   <Class name="Project"
+          comment=""
+          rdf="http://usefulinc.com/ns/doap#Project"/>
+   <Class name="Container"
+          comment=""
+          rdf="http://www.w3.org/2000/01/rdf-schema#Container"/>
+   <Class name="ByteOffsetPointer"
+          comment="Single pointer using a byte offset from the start of the reference."
+          rdf="http://www.w3.org/2009/pointers#ByteOffsetPointer">
+      <SubClass rdf="http://www.w3.org/2009/pointers#OffsetPointer"
+                name="OffsetPointer"/>
+   </Class>
+   <Class name="CompoundPointer"
+          comment="An abstract method made of a pair of pointers to a defined section to be subclassed for extensibility."
+          rdf="http://www.w3.org/2009/pointers#CompoundPointer">
+      <SubClass rdf="http://www.w3.org/2009/pointers#Pointer" name="Pointer"/>
+   </Class>
+   <Class name="LineCharPointer"
+          comment="Single pointer using line and char numbers."
+          rdf="http://www.w3.org/2009/pointers#LineCharPointer">
+      <SubClass rdf="http://www.w3.org/2009/pointers#OffsetPointer"
+                name="OffsetPointer"/>
+   </Class>
+   <Class name="OffsetPointer"
+          comment="Generic single pointer based on an offset."
+          rdf="http://www.w3.org/2009/pointers#OffsetPointer">
+      <SubClass rdf="http://www.w3.org/2009/pointers#SinglePointer"
+                name="SinglePointer"/>
+   </Class>
+   <Class name="Pointer"
+          comment="Abstract Pointer to be subclassed for extensibility."
+          rdf="http://www.w3.org/2009/pointers#Pointer"/>
+   <Class name="SinglePointer"
+          comment="Abstract pointer to a single point to be subclassed for extensibility."
+          rdf="http://www.w3.org/2009/pointers#SinglePointer">
+      <SubClass rdf="http://www.w3.org/2009/pointers#Pointer" name="Pointer"/>
+   </Class>
+   <Class name="StartEndPointer"
+          comment="Compound pointer to a range with a start and an end point."
+          rdf="http://www.w3.org/2009/pointers#StartEndPointer">
+      <SubClass rdf="http://www.w3.org/2009/pointers#CompoundPointer"
+                name="CompoundPointer"/>
+   </Class>
+   <NamedIndividual name="CC0-1.0"
+                    rdf="http://spdx.org/licenses/CC0-1.0"
+                    comment="A data type for CC0-1.0"/>
+   <NamedIndividual name="Other"
+                    rdf="http://spdx.org/rdf/terms#annotationType_other"
+                    comment="Type of annotation which does not fit in any of the pre-defined annotation types."/>
+   <NamedIndividual name="Review"
+                    rdf="http://spdx.org/rdf/terms#annotationType_review"
+                    comment="A Review represents an audit and signoff by an individual, organization or tool on the information for an SpdxElement."/>
+   <NamedIndividual name="Md5"
+                    rdf="http://spdx.org/rdf/terms#checksumAlgorithm_md5"
+                    comment="Indicates the algorithm used was MD5"/>
+   <NamedIndividual name="Sha1"
+                    rdf="http://spdx.org/rdf/terms#checksumAlgorithm_sha1"
+                    comment="Indicates the algorithm used was SHA-1"/>
+   <NamedIndividual name="Sha256"
+                    rdf="http://spdx.org/rdf/terms#checksumAlgorithm_sha256"
+                    comment="Indicates the algorithm used was SHA256"/>
+   <NamedIndividual name="Application"
+                    rdf="http://spdx.org/rdf/terms#fileType_application"
+                    comment="The file is associated with a specific application type (MIME type of application/* )"/>
+   <NamedIndividual name="Archive"
+                    rdf="http://spdx.org/rdf/terms#fileType_archive"
+                    comment="Indicates the file is an archive file."/>
+   <NamedIndividual name="Audio"
+                    rdf="http://spdx.org/rdf/terms#fileType_audio"
+                    comment="The file is associated with an audio file (MIME type of audio/* , ie. .mp3 ); IMAGE if the file is assoicated with an picture image file (MIME type of image/*, ie. .jpg, .gif )"/>
+   <NamedIndividual name="Binary"
+                    rdf="http://spdx.org/rdf/terms#fileType_binary"
+                    comment="Indicates the file is not a text file. spdx:filetype_archive is preferred for archive files even though they are binary."/>
+   <NamedIndividual name="Documentation"
+                    rdf="http://spdx.org/rdf/terms#fileType_documentation"
+                    comment="The file serves as documentation."/>
+   <NamedIndividual name="Image"
+                    rdf="http://spdx.org/rdf/terms#fileType_image"
+                    comment="The file is assoicated with an picture image file (MIME type of image/*, ie. .jpg, .gif )."/>
+   <NamedIndividual name="Other"
+                    rdf="http://spdx.org/rdf/terms#fileType_other"
+                    comment="Indicates the file is not a source, archive or binary file."/>
+   <NamedIndividual name="Source"
+                    rdf="http://spdx.org/rdf/terms#fileType_source"
+                    comment="Indicates the file is a source code file."/>
+   <NamedIndividual name="Spdx"
+                    rdf="http://spdx.org/rdf/terms#fileType_spdx"
+                    comment="The file is an SPDX document."/>
+   <NamedIndividual name="Text"
+                    rdf="http://spdx.org/rdf/terms#fileType_text"
+                    comment="The file is human readable text file (MIME type of text/*)."/>
+   <NamedIndividual name="Video"
+                    rdf="http://spdx.org/rdf/terms#fileType_video"
+                    comment="The file is associated with a video file type (MIME type of video/*)."/>
+   <NamedIndividual name="Noassertion"
+                    rdf="http://spdx.org/rdf/terms#noassertion"
+                    comment="Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field."/>
+   <NamedIndividual name="None"
+                    rdf="http://spdx.org/rdf/terms#none"
+                    comment="When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion."/>
+   <NamedIndividual name="Other"
+                    rdf="http://spdx.org/rdf/terms#referenceCategory_other"
+                    comment="A data type for Other"/>
+   <NamedIndividual name="PackageManager"
+                    rdf="http://spdx.org/rdf/terms#referenceCategory_packageManager"
+                    comment="A data type for PackageManager"/>
+   <NamedIndividual name="Security"
+                    rdf="http://spdx.org/rdf/terms#referenceCategory_security"
+                    comment="A data type for Security"/>
+   <NamedIndividual name="Amendment"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_amendment"
+                    comment="To be used when SPDXRef-A amends the SPDX information in SPDXRef-B."/>
+   <NamedIndividual name="AncestorOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_ancestorOf"
+                    comment="A Relationship of relationshipType_ancestorOf expresses that an SPDXElement is an ancestor of (same lineage but pre-dates) the relatedSPDXElement. For example, an upstream File is an ancestor of a modified downstream File"/>
+   <NamedIndividual name="BuildToolOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_buildToolOf"
+                    comment="To be used when SPDXRef-A is used to to build SPDXRef-B."/>
+   <NamedIndividual name="ContainedBy"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_containedBy"
+                    comment="A Relationship of relationshipType_containedBy expresses that an SPDXElement is contained by the relatedSPDXElement. For example, a File contained by a Package."/>
+   <NamedIndividual name="Contains"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_contains"
+                    comment="A Relationship of relationshipType_contains expresses that an SPDXElement contains the relatedSPDXElement. For example, a Package contains a File. (relationshipType_contains introduced in SPDX 2.0 deprecates property 'hasFile' from SPDX 1.2)"/>
+   <NamedIndividual name="CopyOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_copyOf"
+                    comment="A Relationship of relationshipType_copyOf expresses that the SPDXElement is an exact copy of the relatedSDPXElement. For example, a downstream distribution of a binary library which was copied from the upstream package."/>
+   <NamedIndividual name="DescendantOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_descendantOf"
+                    comment="A Relationship of relationshipType_descendantOf expresses that an SPDXElement is a descendant of (same lineage but post-dates) the relatedSPDXElement. For example, an downstream File that was modified is a descendant of an upstream File"/>
+   <NamedIndividual name="DescribedBy"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_describedBy"
+                    comment="Is to be used an SPDXRef-A is described by SPDXRef-Document."/>
+   <NamedIndividual name="Describes"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_describes"
+                    comment="Is to be used when SPDXRef-DOCUMENT describes SPDXRef-A."/>
+   <NamedIndividual name="DistributionArtifact"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_distributionArtifact"
+                    comment="A Relationship of relationshipType_distributionArtifact expresses that distributing the SPDXElement requires that the relatedSPDXElement also be distributed. For example, distributing a binary File may require that a source tarball (another File) be made available with the distribuiton."/>
+   <NamedIndividual name="Documentation"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_documentation"
+                    comment="To be used when SPDXRef-A provides documentation of SPDXRef-B."/>
+   <NamedIndividual name="DynamicLink"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_dynamicLink"
+                    comment="Is to be used when SPDXRef-A dynamically links to SPDXRef-B."/>
+   <NamedIndividual name="ExpandedFromArchive"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_expandedFromArchive"
+                    comment="A Relationship of relationshipType_expandedFromArchive expresses that the SPDXElement is a file which was epanded from a relatedSPDXElement file. For example, if there is an archive file xyz.tar.gz containing a file foo.c the archive file was expanded in a directory arch/xyz, the file arch/xyz/foo.c would have a relationshipType_expandedFromArchive with the file xyz.tar.gz."/>
+   <NamedIndividual name="FileAdded"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_fileAdded"
+                    comment="A Relationship of relationshipType_fileAdded expresses that the SPDXElement is a file which has been added to the relatedSPDXElement package. For example, a package (the relatedSPDXElement) has been patched to remove a file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present."/>
+   <NamedIndividual name="FileDeleted"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_fileDeleted"
+                    comment="A Relationship of relationshipType_fileDeleted expresses that the SPDXElement is a package where the relatedSPDXElement file has been removed. For example, a package has been patched to remove a file a file (the relatedSPDXElement resulting in the patched package (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present."/>
+   <NamedIndividual name="FileModified"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_fileModified"
+                    comment="A Relationship of relationshipType_fileModified expresses that the SPDXElement is a file which is a modified version of the relatedSPDXElement file. For example, a file (the SPDXElement) has been patched to modify the contents of the original file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present."/>
+   <NamedIndividual name="GeneratedFrom"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_generatedFrom"
+                    comment="A Relationship of relationshipType_generatedFrom expresses that an SPDXElement was generated from the relatedSPDXElement. For example, a binary File might have been generated from a source File."/>
+   <NamedIndividual name="Generates"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_generates"
+                    comment="A Relationship of relationshipType_generates expresses that an SPDXElement generates the relatedSPDXElement. For example, a source File generates a binary File."/>
+   <NamedIndividual name="HasPrerequisite"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_hasPrerequisite"
+                    comment="Is to be used when SPDXRef-A has as a prerequisite SPDXRef-B."/>
+   <NamedIndividual name="MetafileOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_metafileOf"
+                    comment="To be used when SPDXRef-A is a metafile of SPDXRef-B."/>
+   <NamedIndividual name="OptionalComponentOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_optionalComponentOf"
+                    comment="To be used when SPDXRef-A is an optional component of SPDXRef-B."/>
+   <NamedIndividual name="Other"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_other"
+                    comment="to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field."/>
+   <NamedIndividual name="PackageOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_packageOf"
+                    comment="To be used when SPDXRef-A is used as a package as part of SPDXRef-B."/>
+   <NamedIndividual name="PatchApplied"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_patchApplied"
+                    comment="A Relationship of relationshipType_patchApplied expresses that the SPDXElement is a 'patchfile' that was applied and produced the relatedSPDXElement. For example, a .diff File relates to a specific file where the diff was applied."/>
+   <NamedIndividual name="PatchFor"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_patchFor"
+                    comment="A Relationship of relationshipType_patchFor expresses that the SPDXElement is a 'patchfile' that is designed to patch (apply modifications to) the relatedSPDXElement. For example, relationship from a .diff File to a Package it is designed to patch."/>
+   <NamedIndividual name="PrerequisiteFor"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_prerequisiteFor"
+                    comment="Is to be used when SPDXRef-A is a prerequisite for SPDXRef-B"/>
+   <NamedIndividual name="StaticLink"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_staticLink"
+                    comment="Is to be used when SPDXRef-A statically links to SPDXRef-B."/>
+   <NamedIndividual name="TestcaseOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_testcaseOf"
+                    comment="Is to be used when SPDXRef-A is a test case used in testing SPDXRef-B."/>
+   <NamedIndividual name="VariantOf"
+                    rdf="http://spdx.org/rdf/terms#relationshipType_variantOf"
+                    comment="A Relationship of relationshipType_variantOf expresses that an SPDXElement is a variant of the relatedSPDXElement, but it is not clear which came first. For example, if the content of two Files differs by some edit, but there is no way to tell which came first (no reliable date information), then one File is a variant of the other File."/>
+   <NamedIndividual name="DataFileOf"
+                    rdf="http://www.semanticweb.org/spdx/ontologies/2014/6/SPDX-2.1#relationshipType_dataFileOf"
+                    comment="Is to be used when SPDXRef-A is a data file used in SPDXRef-B."/>
+   <Description type="AllDifferent" rdf="http://www.w3.org/2002/07/owl#AllDifferent">
+      <Choice>
+         <Description name="Other" rdf="http://spdx.org/rdf/terms#annotationType_other"/>
+         <Description name="Review" rdf="http://spdx.org/rdf/terms#annotationType_review"/>
+      </Choice>
+   </Description>
+   <Description type="AllDisjointClasses"
+                rdf="http://www.w3.org/2002/07/owl#AllDisjointClasses">
+      <Sequence>
+         <Description name="Annotation" rdf="http://spdx.org/rdf/terms#Annotation"/>
+         <Description name="Relationship" rdf="http://spdx.org/rdf/terms#Relationship"/>
+         <Description name="SpdxElement" rdf="http://spdx.org/rdf/terms#SpdxElement"/>
+      </Sequence>
+   </Description>
+   <Description type="AllDifferent" rdf="http://www.w3.org/2002/07/owl#AllDifferent">
+      <Choice>
+         <Description name="Noassertion" rdf="http://spdx.org/rdf/terms#noassertion"/>
+         <Description name="None" rdf="http://spdx.org/rdf/terms#none"/>
+      </Choice>
+   </Description>
+</SPDX>
