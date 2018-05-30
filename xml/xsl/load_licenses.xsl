@@ -7,13 +7,13 @@
 
     <xsl:variable name="spdxxsd" select="document('../xsd/spdx-ref.xsd')"/>
 
-    <xsl:variable name="rdfdir" select="'file:/home/jdn/DATA/Neushul_Solutions/Projects/SEvA/IonChannel/spdx/license-list-data/rdfxml/'"/>
+    <xsl:variable name="rdfdir" select="'./../../resources/license-list-data/rdfxml/'"/>
 
-    <xsl:variable name="outdir" select="'../instance/licenses/'"/>
+    <xsl:variable name="outdir" select="'./../../resources/xml-licenses/'"/>
 
     <xsl:variable name="licensefiles">
         <xsl:for-each select="document(concat($rdfdir, 'licenses.rdf'))/rdf:RDF/spdx:License">
-            <License path="{concat($rdfdir,spdx:licenseId,'.rdf')}"/>
+            <License path="{concat(spdx:licenseId,'.rdf')}"/>
         </xsl:for-each>
     </xsl:variable>
     
@@ -21,7 +21,7 @@
 
     <xsl:template name="main">
         <xsl:for-each select="$licensefiles/*">
-            <xsl:apply-templates select="document(@path)/rdf:RDF/spdx:License"/>
+            <xsl:apply-templates select="document(concat($rdfdir,@path))/rdf:RDF/spdx:License"/>
         </xsl:for-each>
     </xsl:template>
 
@@ -32,7 +32,7 @@
         <xsl:variable name="lic" select="."/>
         <!--<xsl:value-of select="concat($outdir,$n)"/>-->
         <xsl:result-document href="{concat($outdir,$n,'.xml')}">
-            <License xmlns="spdx:xsd::1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spdx:xsd::1.0 ../../xsd/spdx-ref.xsd">
+            <License xmlns="spdx:xsd::1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
                 <xsl:for-each select="$licenseType/xs:complexContent/xs:extension/xs:sequence/xs:element">
                     <xsl:variable name="n" select="@ref"/>
                     <xsl:variable name="rdfn" select="substring-after($spdxxsd/xs:schema/xs:element[@name=$n]/xs:annotation/xs:appinfo/*/@rdf,'#')"/>

@@ -1,17 +1,14 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<License xmlns="spdx:xsd::1.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns:spdx="http://spdx.org/rdf/terms#"
-         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-         xsi:schemaLocation="spdx:xsd::1.0 ../xsd/spdx-ref.xsd">
-   <IsDeprecatedLicenseId>false</IsDeprecatedLicenseId>
-   <StandardLicenseHeader>Standard License Template text</StandardLicenseHeader>
-   <StandardLicenseTemplate>Standard License Template text</StandardLicenseTemplate>
-   <LicenseText>License text</LicenseText>
-   <IsOsiApproved>true</IsOsiApproved>
-   <IsFsfLibre>true</IsFsfLibre>
-   <LicenseId>Unlicense</LicenseId>
-   <Name>The Unlicense</Name>
-   <SeeAlso>http://test.org/</SeeAlso>
-   <Comment>License comment</Comment>
+<?xml version="1.0"?>
+<License xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="spdx:xsd::1.0" xsi:schemaLocation="spdx:xsd::1.0  ../xsd/spdx-license.xsd">
+  <IsDeprecatedLicenseId>true</IsDeprecatedLicenseId>
+  <StandardLicenseHeader>Test string one</StandardLicenseHeader>
+  <StandardLicenseTemplate>Test string one</StandardLicenseTemplate>
+  <LicenseText>Test string one</LicenseText>
+  <IsOsiApproved>true</IsOsiApproved>
+  <IsFsfLibre>true</IsFsfLibre>
+  <LicenseId>Test string one</LicenseId>
+  <Name>Test string one</Name>
+  <SeeAlso>http://anyuri.org</SeeAlso>
+  <SeeAlso>http://anyuri.org</SeeAlso>
+  <Comment>Test string one</Comment>
 </License>

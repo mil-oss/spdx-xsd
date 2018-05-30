@@ -1,27 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:spd="spdx:xsd::1.0/ref" version="1.0">
+<xsl:stylesheet 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:spd="spdx:xsd::1.0/ref" 
+    xmlns:exsl="http://exslt.org/common" 
+    version="1.0">
     <xsl:output method="xml" indent="yes"/>
 
     <!--<xsl:include href="identity.xsl"/>
     <xsl:include href="spdx_map.xsl"/>-->
 
-    <xsl:variable name="spdx_xsd" select="document('../xsd/spdx-ref.xsd')"/>
+    <!-- <xsl:variable name="spdx_xsd" select="document('../xsd/spdx-ref.xsd')"/>-->
+
+    <xsl:variable name="Root" select="'LicenseType'"/>
+    <xsl:variable name="RootEl" select="'License'"/>
 
     <xsl:template match="/">
         <xsl:call-template name="main"/>
     </xsl:template>
 
     <xsl:template name="main">
-        <xsl:result-document href="../xsd/spdx-license.xsd">
-            <xs:schema xmlns="spdx:xsd::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <xsl:apply-templates select="$spdx_xsd/xs:schema/*"/>
-            </xs:schema>
-        </xsl:result-document>
+        <!--        <xsl:result-document href="../xsd/spdx-license.xsd">-->
+        <xs:schema xmlns="spdx:xsd::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <!-- <xsl:apply-templates select="$spdx_xsd/xs:schema/*"/>-->
+            <xsl:apply-templates select="/xs:schema/*[@name = $Root]"/>
+            <xsl:variable name="allnodes">
+                <xsl:apply-templates select="/xs:schema/*[@name = $RootEl]"/>
+                <xs:simpleType name="PropertyIndicatorSimpleType">
+                    <xs:annotation>
+                        <xs:documentation>A data type for the boolean indication of a property existence. True if known. False if not or not known.</xs:documentation>
+                        <xs:appinfo>
+                            <spd:SimpleType name="Property Indicator" mapvar="propertyIndicator"/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:restriction base="xs:boolean"/>
+                </xs:simpleType>
+                <xsl:call-template name="deDupList">
+                    <xsl:with-param name="list">
+                        <xsl:apply-templates select="/xs:schema/*[@name = $Root]//xs:element" mode="iterate"/>
+                    </xsl:with-param>
+                </xsl:call-template>
+            </xsl:variable>
+            <xsl:for-each select="exsl:node-set($allnodes)/xs:simpleType">
+                <xsl:sort select="@name"/>
+                <xsl:copy-of select="."/>
+            </xsl:for-each>
+            <xsl:for-each select="exsl:node-set($allnodes)/xs:complexType">
+                <xsl:sort select="@name"/>
+                <xsl:copy-of select="."/>
+            </xsl:for-each>
+            <xsl:for-each select="exsl:node-set($allnodes)/xs:element">
+                <xsl:sort select="@name"/>
+                <xsl:copy-of select="."/>
+            </xsl:for-each>
+        </xs:schema>
+        <!--</xsl:result-document>-->
+    </xsl:template>
+
+    <xsl:template match="*" mode="iterate">
+        <xsl:variable name="br">
+            <xsl:value-of select="@ref"/>
+            <xsl:value-of select=".//@base"/>
+        </xsl:variable>
+        <xsl:apply-templates select="/xs:schema/*[@name = $br]"/>
+        <xsl:variable name="t" select="/xs:schema/*[@name = $br]/@type"/>
+        <xsl:apply-templates  select="/xs:schema/*[@name = $t]"/>
+        <xsl:apply-templates select="/xs:schema/*[@name = $t]//xs:element" mode="iterate"/>
     </xsl:template>
 
     <xsl:template match="*">
-        <xsl:copy copy-namespaces="no">
+        <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <xsl:apply-templates select="text()"/>
             <xsl:apply-templates select="*"/>
@@ -53,13 +102,13 @@
             </xs:extension>
         </xs:simpleContent>
     </xsl:template>
-    
+
 
     <xsl:template match="xs:element/xs:annotation/xs:appinfo/*">
-       <!-- <xsl:variable name="xpath">
+        <!-- <xsl:variable name="xpath">
             <xsl:apply-templates select="ancestor::xs:element" mode="makeXpath"/>
         </xsl:variable>-->
-        <xsl:copy copy-namespaces="no">
+        <xsl:copy>
             <xsl:apply-templates select="@*"/>
             <!--<xsl:attribute name="xpath">
                 <xsl:value-of select="concat(substring-before($xpath, 'xs:complexContent/xs:extension'), substring-after($xpath, 'xs:complexContent/xs:extension'))"/>
@@ -236,7 +285,22 @@
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
-
+    <xsl:template name="deDupList">
+        <xsl:param name="list"/>
+        <xsl:for-each select="exsl:node-set($list)/*">
+            <xsl:sort select="@name"/>
+            <xsl:sort select="@value"/>
+            <xsl:variable name="n" select="@name"/>
+            <xsl:variable name="v" select="@value"/>
+            <xsl:choose>
+                <xsl:when test="preceding-sibling::*[@name = $n]"/>
+                <xsl:when test="preceding-sibling::*[@value = $v]"/>
+                <xsl:otherwise>
+                    <xsl:copy-of select="."/>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:for-each>
+    </xsl:template>
 
 
 </xsl:stylesheet>

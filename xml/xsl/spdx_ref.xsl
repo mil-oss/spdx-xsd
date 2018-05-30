@@ -53,15 +53,21 @@
 
     <xsl:variable name="Objects">
         <xsl:for-each select="$spdxMap/SPDX/Object">
-            <xsl:variable name="n" select="@name"/>
+            <xsl:variable name="n" select="@xmlname"/>
+            <xsl:variable name="r" select="@rdf"/>
             <xsl:choose>
+                <xsl:when test="$r='http://www.w3.org/2000/01/rdf-schema#member'"/>
+                <xsl:when test="$n='LicenseInfoFromFiles'">
+                    <xsl:apply-templates select="." mode="element">
+                        <xsl:with-param name="type" select="'LicenseInfoFromFilesCode'"/>
+                    </xsl:apply-templates>
+                </xsl:when>
                 <xsl:when test="Class/Union/Restriction"/>
-                <xsl:when test="$spdxMap/SPDX/Class[@name = $n]"/>
-                <xsl:when test="$spdxMap/SPDX/Datatype[@name = $n]"/>
+                <xsl:when test="$spdxMap/SPDX/Class[@xmlname = $n]"/>
+                <xsl:when test="$spdxMap/SPDX/Datatype[@xmlname = $n]"/>
                 <xsl:when test="$n = 'Agent'"/>
                 <xsl:when test="$n = 'UsedBy'"/>
                 <xsl:when test="$n = 'LicenseInfoInSnippets'"/>
-                <xsl:when test="$n = 'Member'"/>
                 <xsl:when test="$n = 'FileType'">
                     <xsl:apply-templates select="." mode="element">
                         <xsl:with-param name="type" select="'FileType'"/>
@@ -69,7 +75,7 @@
                 </xsl:when>
                 <xsl:when test="$n = 'DataLicense'">
                     <xsl:apply-templates select="." mode="element">
-                        <xsl:with-param name="type" select="'LicenseId'"/>
+                        <xsl:with-param name="type" select="'LicenseID'"/>
                     </xsl:apply-templates>
                 </xsl:when>
                 <xsl:when test="$n = 'HasExtractedLicensingInfo'">
@@ -226,191 +232,74 @@
     </xsl:template>
 
     <xsl:template match="SPDX/Class">
-        <xsl:choose>
-            <xsl:when test="@name = 'License'">
-                <xs:complexType name="LicenseType">
-                    <xs:annotation>
-                        <xs:documentation>A data type for License type</xs:documentation>
-                        <xs:appinfo>
-                            <spd:Class name="License"
-                                comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
-                                rdf="http://spdx.org/rdf/terms#License"/>
-                        </xs:appinfo>
-                    </xs:annotation>
-                    <xs:complexContent>
-                        <xs:extension base="structures:ObjectType">
-                            <xs:sequence>
-                                <xs:element ref="IsDeprecatedLicenseId" minOccurs="0"/>
-                                <xs:element ref="StandardLicenseHeader" minOccurs="0"/>
-                                <xs:element ref="StandardLicenseTemplate" minOccurs="0" maxOccurs="1"/>
-                                <xs:element ref="LicenseText" minOccurs="0" maxOccurs="1"/>
-                                <xs:element ref="IsOsiApproved" minOccurs="0" maxOccurs="1"/>
-                                <xs:element ref="IsFsfLibre" minOccurs="0" maxOccurs="1"/>
-                                <xs:element ref="LicenseId" minOccurs="0"/>
-                                <xs:element ref="Name" minOccurs="0" maxOccurs="1"/>
-                                <xs:element ref="SeeAlso" minOccurs="0" maxOccurs="10"/>
-                                <xs:element ref="Comment" minOccurs="0" maxOccurs="1"/>
-                                <xs:element ref="LicenseAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
-                            </xs:sequence>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-                <xs:element name="License" type="LicenseType" nillable="true">
-                    <xs:annotation>
-                        <xs:documentation>A data type for License type</xs:documentation>
-                        <xs:appinfo>
-                            <spd:Class name="License"
-                                comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
-                                rdf="http://spdx.org/rdf/terms#License"/>
-                        </xs:appinfo>
-                    </xs:annotation>
-                </xs:element>
-                <xs:element name="LicenseAugmentationPoint" abstract="true">
-                    <xs:annotation>
-                        <xs:documentation>An augmentation point for LicenseType</xs:documentation>
-                        <xs:appinfo>
-                            <spd:Element name="License Augmentation Point"/>
-                        </xs:appinfo>
-                    </xs:annotation>
-                </xs:element>
-            </xsl:when>
-            <xsl:when test="@name = 'Pointer'">
-                <xs:complexType name="{concat(@name,'Type')}">
-                    <xs:annotation>
-                        <xs:documentation>
-                            <xsl:value-of select="concat('A data type for ', @comment)"/>
-                        </xs:documentation>
-                        <xs:appinfo>
-                            <xsl:element name="{concat('spd:',name())}">
-                                <xsl:apply-templates select="@*" mode="identity"/>
-                            </xsl:element>
-                        </xs:appinfo>
-                    </xs:annotation>
-                    <xs:simpleContent>
-                        <xs:extension base="xs:string">
-                            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
-                        </xs:extension>
-                    </xs:simpleContent>
-                </xs:complexType>
-            </xsl:when>
-            <xsl:when test="ends-with(@name, 'Pointer')">
-                <xs:element name="{@name}" type="PointerType" nillable="true">
-                    <xs:annotation>
-                        <xs:documentation>
-                            <xsl:value-of select="concat('A data item for ', @name)"/>
-                        </xs:documentation>
-                        <xs:appinfo>
-                            <spd:Element>
-                                <xsl:apply-templates select="@*" mode="identity"/>
-                            </spd:Element>
-                        </xs:appinfo>
-                    </xs:annotation>
-                </xs:element>
-            </xsl:when>
-            <xsl:when test="@name = 'Project'">
-                <xsl:apply-templates select="." mode="ctype">
-                    <xsl:with-param name="type" select="'Project'"/>
-                </xsl:apply-templates>
-                <xsl:apply-templates select="." mode="element">
-                    <xsl:with-param name="type" select="'Project'"/>
-                </xsl:apply-templates>
-            </xsl:when>
-            <xsl:when test="@name = 'Container'">
-                <xsl:apply-templates select="." mode="ctype">
-                    <xsl:with-param name="type" select="'Container'"/>
-                </xsl:apply-templates>
-                <xsl:apply-templates select="." mode="element">
-                    <xsl:with-param name="type" select="'Container'"/>
-                </xsl:apply-templates>
-            </xsl:when>
-            <xsl:when test="@name = 'AnyLicenseInfo'">
-                <xsl:apply-templates select="." mode="ctype">
-                    <xsl:with-param name="type" select="'AnyLicenseInfo'"/>
-                </xsl:apply-templates>
-                <xsl:apply-templates select="." mode="element">
-                    <xsl:with-param name="type" select="'AnyLicenseInfo'"/>
-                </xsl:apply-templates>
-            </xsl:when>
-            <xsl:when test="not(SubClass/Restriction)">
-                <xsl:variable name="type">
-                    <xsl:choose>
-                        <xsl:when test="SubClass[@rdf]/@name">
-                            <xsl:value-of select="concat(SubClass[@rdf]/@name, 'Type')"/>
-                        </xsl:when>
-                        <xsl:otherwise>
-                            <xsl:value-of select="concat(@name, 'Type')"/>
-                        </xsl:otherwise>
-                    </xsl:choose>
-                </xsl:variable>
-                <xs:element name="{@name}" type="{$type}" nillable="true">
-                    <xs:annotation>
-                        <xs:documentation>
-                            <xsl:value-of select="concat('A data item for ', @name)"/>
-                        </xs:documentation>
-                        <xs:appinfo>
-                            <spd:Element>
-                                <xsl:apply-templates select="@*" mode="identity"/>
-                            </spd:Element>
-                        </xs:appinfo>
-                    </xs:annotation>
-                </xs:element>
-            </xsl:when>
-            <xsl:otherwise>
-                <xs:complexType name="{concat(@name,'Type')}">
-                    <xs:annotation>
-                        <xs:documentation>
-                            <xsl:value-of select="concat('A data type for ', @name, ' type')"/>
-                        </xs:documentation>
-                        <xs:appinfo>
-                            <xsl:element name="{concat('spd:',name())}">
-                                <xsl:apply-templates select="@*" mode="identity"/>
-                            </xsl:element>
-                        </xs:appinfo>
-                    </xs:annotation>
-                    <xs:complexContent>
-                        <xs:extension base="structures:ObjectType">
-                            <xs:sequence>
-                                <xsl:apply-templates select="SubClass" mode="sclass"/>
-                                <xs:element ref="{concat(@name,'AugmentationPoint')}" minOccurs="0" maxOccurs="unbounded"/>
-                            </xs:sequence>
-                        </xs:extension>
-                    </xs:complexContent>
-                </xs:complexType>
-                <xs:element name="{concat(@name,'AugmentationPoint')}" abstract="true">
-                    <xs:annotation>
-                        <xs:documentation>
-                            <xsl:value-of select="concat('An augmentation point for ', @name)"/>
-                        </xs:documentation>
-                        <xs:appinfo>
-                            <spd:Element name="{concat(@name,' Augmentation Point')}" xmlns=""/>
-                        </xs:appinfo>
-                    </xs:annotation>
-                </xs:element>
-                <xs:element name="{@name}" type="{concat(@name,'Type')}" nillable="true">
-                    <xs:annotation>
-                        <xs:documentation>
-                            <xsl:value-of select="concat('A data item for ', @name)"/>
-                        </xs:documentation>
-                        <xs:appinfo>
-                            <spd:Element>
-                                <xsl:apply-templates select="@*" mode="identity"/>
-                            </spd:Element>
-                        </xs:appinfo>
-                    </xs:annotation>
-                </xs:element>
-            </xsl:otherwise>
-        </xsl:choose>
+        <xsl:variable name="base">
+            <xsl:choose>
+                <xsl:when test="SubClass[1]/@name='Thing'">
+                    <xsl:text>xs:anyType</xsl:text>
+                </xsl:when>
+                <xsl:when test="SubClass[1]/@name">
+                    <xsl:value-of select="concat(SubClass[1]/@name,'Type')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:text>xs:anyType</xsl:text>
+                </xsl:otherwise>
+            </xsl:choose>
+        </xsl:variable>
+        <xs:complexType name="{concat(@xmlname,'Type')}">
+            <xs:annotation>
+                <xs:documentation>
+                    <xsl:value-of select="concat('A data type for ', @xmlname, ' type')"/>
+                </xs:documentation>
+                <xs:appinfo>
+                    <xsl:element name="{concat('spd:',name())}">
+                        <xsl:apply-templates select="@*" mode="identity"/>
+                    </xsl:element>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:complexContent>
+                <xs:restriction base="{$base}">
+                    <xs:sequence>
+                        <xsl:apply-templates select="SubClass" mode="sclass"/>
+                        <xs:element ref="{concat(@xmlname,'AugmentationPoint')}" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                </xs:restriction>
+            </xs:complexContent>
+        </xs:complexType>
+        <xs:element name="{concat(@xmlname,'AugmentationPoint')}" abstract="true">
+            <xs:annotation>
+                <xs:documentation>
+                    <xsl:value-of select="concat('An augmentation point for ', @xmlname)"/>
+                </xs:documentation>
+                <xs:appinfo>
+                    <spd:Element name="{concat(@xmlname,' Augmentation Point')}" xmlns=""/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+
+        <xs:element name="{@xmlname}" type="{concat(@xmlname,'Type')}" nillable="true">
+            <xs:annotation>
+                <xs:documentation>
+                    <xsl:value-of select="concat('A data item for ', @xmlname)"/>
+                </xs:documentation>
+                <xs:appinfo>
+                    <spd:Element>
+                        <xsl:apply-templates select="@*" mode="identity"/>
+                    </spd:Element>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
     </xsl:template>
 
     <xsl:template match="SubClass" mode="sclass">
         <xsl:choose>
-            <xsl:when test="@name = 'Thing'"/>
-            <xsl:when test="@name = 'AnyLicenseInfo'"/>
+            <xsl:when test="@xmlname = 'Thing'"/>
+            <xsl:when test="@xmlname = 'AnyLicenseInfo'"/>
             <xsl:when test="Class/Union/Restriction">
                 <xs:element ref="{concat(Class/Union/Restriction[1]/@onproperty,'Code')}"/>
             </xsl:when>
-            <xsl:when test="@name">
-                <xs:element ref="{@name}"/>
+            <xsl:when test="Restriction/@xmlname='ArtifactOf'"/>
+            <xsl:when test="Restriction/@xmlname">
+                <xs:element ref="{Restriction/@xmlname}"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:apply-templates select="*" mode="sclass"/>
@@ -468,12 +357,12 @@
             <xs:annotation>
                 <xs:documentation>
                     <xsl:choose>
-                        <xsl:when test="//*[@name = $v]/@comment">
-                            <xsl:value-of select="//*[@name = $v]/@comment"/>
+                        <xsl:when test="//*[@xmlname = $v]/@comment">
+                            <xsl:value-of select="//*[@xmlname = $v]/@comment"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:call-template name="breakIntoWords">
-                                <xsl:with-param name="string" select="@name"/>
+                                <xsl:with-param name="string" select="@xmlname"/>
                             </xsl:call-template>
                         </xsl:otherwise>
                     </xsl:choose>
@@ -485,9 +374,15 @@
         </xs:enumeration>
     </xsl:template>
 
-    <xsl:template match="Restriction" mode="sclass">
-        
+    <xsl:template match="Restriction" mode="sclass">       
         <xsl:choose>
+            <xsl:when test="@xmlname='ArtifactOf'"/>
+            <xsl:when test="@xmlname">
+                <xs:element ref="{@xmlname}">
+                    <xsl:copy-of select="@minOccurs"/>
+                    <xsl:copy-of select="@maxOccurs"/>
+                </xs:element>
+            </xsl:when>
             <xsl:when test="@onproperty">
                 <xs:element ref="{@onproperty}">
                     <xsl:copy-of select="@minOccurs"/>
@@ -501,16 +396,19 @@
                 </xs:element>
             </xsl:when>
         </xsl:choose>
-
+    </xsl:template>
+    
+    <xsl:template match="Description">
+        <xs:element ref="{@name}"/>
     </xsl:template>
 
     <xsl:template match="SPDX/Datatype" mode="dt">
         <xsl:variable name="base">
             <xsl:choose>
-                <xsl:when test="@name = 'SeeAlso'">
+                <xsl:when test="@xmlname = 'SeeAlso'">
                     <xsl:text>xs:anyURI</xsl:text>
                 </xsl:when>
-                <xsl:when test="@name = 'Comment'">
+                <xsl:when test="@xmlname = 'Comment'">
                     <xsl:text>xs:string</xsl:text>
                 </xsl:when>
                 <xsl:when test="@range = 'String'">
@@ -548,18 +446,18 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xs:complexType name="{concat(@name,'Type')}">
+        <xs:complexType name="{concat(@xmlname,'Type')}">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:choose>
-                        <xsl:when test="@name = 'SnippetName'">
+                        <xsl:when test="@xmlname = 'SnippetName'">
                             <xsl:text>A data type to name specific snippet in a human convenient manner</xsl:text>
                         </xsl:when>
                         <xsl:when test="string-length(@comment) &gt; 0">
                             <xsl:value-of select="concat('A data type for ', @comment)"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="concat('A data type for ', @name)"/>
+                            <xsl:value-of select="concat('A data type for ', @xmlname)"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xs:documentation>
@@ -575,18 +473,18 @@
                 </xs:extension>
             </xs:simpleContent>
         </xs:complexType>
-        <xs:element name="{@name}" type="{concat(@name,'Type')}" nillable="true">
+        <xs:element name="{@xmlname}" type="{concat(@xmlname,'Type')}" nillable="true">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:choose>
-                        <xsl:when test="@name = 'SnippetName'">
+                        <xsl:when test="@xmlname = 'SnippetName'">
                             <xsl:text>A data item to name a specific snippet in a human convenient manner</xsl:text>
                         </xsl:when>
                         <xsl:when test="string-length(@comment) &gt; 0">
                             <xsl:value-of select="concat('A data type for ', @comment)"/>
                         </xsl:when>
                         <xsl:otherwise>
-                            <xsl:value-of select="concat('A data type for ', @name)"/>
+                            <xsl:value-of select="concat('A data type for ', @xmlname)"/>
                         </xsl:otherwise>
                     </xsl:choose>
                 </xs:documentation>
@@ -600,7 +498,7 @@
     </xsl:template>
 
     <xsl:template match="*" mode="ctype">
-        <xs:complexType name="{concat(@name,'Type')}">
+        <xs:complexType name="{concat(@xmlname,'Type')}">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:value-of select="concat('A data type for ', @comment)"/>
@@ -621,7 +519,7 @@
 
     <xsl:template match="*" mode="element">
         <xsl:param name="type"/>
-        <xs:element name="{@name}" type="{concat($type,'Type')}" nillable="true">
+        <xs:element name="{@xmlname}" type="{concat($type,'Type')}" nillable="true">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:value-of select="concat('A data item for ', @comment)"/>
@@ -637,7 +535,6 @@
 
     <xsl:template match="SPDX/NamedIndividual"/>
 
-    <xsl:template match="SPDX/Description"/>
 
     <xsl:template match="SPDX/Ontology"/>
 

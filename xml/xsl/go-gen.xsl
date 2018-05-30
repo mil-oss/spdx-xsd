@@ -49,6 +49,12 @@
     <xsl:variable name="roottype" select="xs:schema/xs:element[@name = $rootname]/@type"/>
     <xsl:variable name="ns" select="xs:schema/@targetNamespace"/>
 
+    <xsl:variable name="changes">
+        <node name="IsDeprecatedLicenseId" changeto="IsDeprecatedLicenseID"/>
+        <node name="LicenseId" changeto="LicenseID"/>
+        <node name="ReferenceId" changeto="ReferenceID"/>
+    </xsl:variable>
+
     <xsl:template match="/">
         <xsl:value-of select="concat('package main', $cr, $cr)"/>
         <xsl:value-of select="concat('import ', $qt, 'encoding/xml', $qt, $cr, $cr)"/>
