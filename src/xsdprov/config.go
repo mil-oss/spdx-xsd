@@ -4,17 +4,18 @@ import (
 	"encoding/json"
 	"io/ioutil"
 )
+
 const (
-	cfgpath string = "config/xsdccm.json"
+	cfgpath string = "config/xsdsvc.json"
 )
 
-
-//Cfg ...
+// Cfg ...
 type Cfg struct {
-	Project string `json:"project,omitempty"`,
-	Reflink   string   = `json:"reflink,omitempty"`,
-	Testlink  string   = `json:"testlink,omitempty"`,
-	Homeurl	string	= `json:"homeurl,omitempty"`,
+	Project  string `json:"project,omitempty"`
+	Reflink  string `json:"reflink,omitempty"`
+	Testlink string `json:"testlink,omitempty"`
+	Homeurl  string `json:"homeurl,omitempty"`
+	Port     string `json:"port,omitempty"`
 }
 
 func getConfig() Cfg {

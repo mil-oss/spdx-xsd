@@ -1,6 +1,7 @@
 {
     "project":"spdx",
-    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/resources/xml/xsd/spdx-ref.xsd",
-    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/resources/xml/instance/test_data.xml",
-    "homeurl":"localhost:8181"
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-ref.xsd",
+    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/test_data.xml",
+    "homeurl":"http://localhost",
+    "port":":8181"
 }

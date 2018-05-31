@@ -12,8 +12,6 @@ import (
 )
 
 var (
-	reflink      = cfg.Reflink
-	testlink     = cfg.Testlink
 	testinstance string
 	iepderr      error
 	valerr       []error
@@ -23,6 +21,7 @@ var (
 //BuildIep ... Generate XML, Code and Test Artifacts
 func BuildIep() (map[int64]ProvEntry, []error, error) {
 	log.Println("BuildIep")
+	log.Println("reflink " + reflink)
 	getSourceResources()
 	generateResources()
 	validateResources()
@@ -72,10 +71,10 @@ func getSourceResources() {
 	tempfiles[snr] = tpath + resources[snr]
 	pe := loadRemote(snr, tpath, reflink)
 	provreport[time.Now().UnixNano()] = pe
-	ped := checkDigest(path+resources[snr], pe.Digest, tempdigests[snr])
+	ped := checkDigest(resources[snr], pe.Digest, tempdigests[snr])
 	provreport[time.Now().UnixNano()] = ped
 	if ped.Status == "Fail" {
-		CopyFile(tpath+resources[snr], path+resources[snr])
+		CopyFile(tpath+resources[snr], resources[snr])
 		pcp := loadRemote(snr, tpath, reflink)
 		pcp.Message = "Resource Updated"
 		provreport[time.Now().UnixNano()] = pcp
@@ -84,10 +83,10 @@ func getSourceResources() {
 	var tdx = "test_data.xml"
 	pex := loadRemote(tdx, tpath, testlink)
 	provreport[time.Now().UnixNano()] = pex
-	pedx := checkDigest(path+resources[tdx], pex.Digest, tempdigests[tdx])
+	pedx := checkDigest(resources[tdx], pex.Digest, tempdigests[tdx])
 	provreport[time.Now().UnixNano()] = pedx
 	if pedx.Status == "Fail" {
-		CopyFile(tpath+resources[tdx], path+resources[tdx])
+		CopyFile(tpath+resources[tdx], resources[tdx])
 		tcp := loadRemote(tdx, tpath, testlink)
 		tcp.Message = "Resource Updated"
 		provreport[time.Now().UnixNano()] = tcp

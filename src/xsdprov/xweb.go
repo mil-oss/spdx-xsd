@@ -30,15 +30,16 @@ var (
 )
 
 //StartWeb .. simple web server
-func StartWeb(path string, tmppath string) {
+func StartWeb(tmppath string) {
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
+	log.Println("Port .. " + port)
 	temppath = tmppath
-	flag.StringVar(&listenAddr, "listen-addr", ":8080", "server listen address")
+	flag.StringVar(&listenAddr, "listen-addr", port, "server listen address")
 	flag.Parse()
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
-	logger.Println("Starting HTTP Server. .. " + path)
+	logger.Println("Starting HTTP Server. .. ")
 	router := http.NewServeMux()
 	router.Handle("/", index())
 	router.Handle("/update", update())

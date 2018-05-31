@@ -38,10 +38,10 @@ func DownloadFile(filepath string, w http.ResponseWriter) error {
 }
 
 // CopyDirs ...
-func CopyDirs(path string, dest string, resdirectories map[string]string) {
+func CopyDirs(dest string, resdirectories map[string]string) {
 	// Copy XML dependencies
 	for _, d := range resdirectories {
-		err = CopyDir(path+d, dest+d)
+		err = CopyDir(d, dest+d)
 		if err != nil {
 			log.Fatal(err)
 		}
