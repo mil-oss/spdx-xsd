@@ -6,7 +6,6 @@
            xmlns:niem-xs="http://release.niem.gov/niem/proxy/xsd/4.0/"
            xmlns:structures="http://release.niem.gov/niem/structures/4.0/"
            xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/"
-           xmlns:ism="urn:us:gov:ic:ism"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            attributeFormDefault="unqualified"
            elementFormDefault="qualified"
@@ -20,7 +19,6 @@
               namespace="http://release.niem.gov/niem/appinfo/4.0/"/>
    <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd"
               namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
-   <xs:import namespace="http://www.w3.org/2002/07/owl#" schemaLocation="ext/owl.xsd"/>
    <xs:annotation>
       <xs:documentation>This specification describes the SPDX® language, defined as a dictionary of named properties and classes using W3C's RDF Technology. SPDX® is a designed to allow the exchange of data about software packages. This information includes general information about the package, licensing information about the package as a whole, a manifest of files contained in the package and licensing information related to the contained files. Known issues: - File fileType cardinality should be 0 or more instead of required one.</xs:documentation>
       <xs:appinfo>
@@ -76,7 +74,7 @@
       <xs:restriction base="xs:string">
          <xs:enumeration value="Other">
             <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types. Indicates the file is not a source, archive or binary file.  to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
                <xs:appinfo>
                   <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#annotationType"/>
                </xs:appinfo>
@@ -188,7 +186,7 @@
          </xs:enumeration>
          <xs:enumeration value="Documentation">
             <xs:annotation>
-               <xs:documentation>Website containing the documentation related to the repository identifier The file serves as documentation. To be used when SPDXRef-A provides documentation of SPDXRef-B.</xs:documentation>
+               <xs:documentation>Website containing the documentation related to the repository identifier</xs:documentation>
                <xs:appinfo>
                   <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
@@ -204,7 +202,7 @@
          </xs:enumeration>
          <xs:enumeration value="Other">
             <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types. Indicates the file is not a source, archive or binary file.  to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
                <xs:appinfo>
                   <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
@@ -345,7 +343,7 @@
       <xs:restriction base="xs:string">
          <xs:enumeration value="Other">
             <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types. Indicates the file is not a source, archive or binary file.  to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
                <xs:appinfo>
                   <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#referenceCategory"/>
                </xs:appinfo>
@@ -353,7 +351,7 @@
          </xs:enumeration>
          <xs:enumeration value="PackageManager">
             <xs:annotation>
-               <xs:documentation/>
+               <xs:documentation>Reference Category</xs:documentation>
                <xs:appinfo>
                   <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#referenceCategory"/>
                </xs:appinfo>
@@ -361,7 +359,7 @@
          </xs:enumeration>
          <xs:enumeration value="Security">
             <xs:annotation>
-               <xs:documentation/>
+               <xs:documentation>Reference Category</xs:documentation>
                <xs:appinfo>
                   <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#referenceCategory"/>
                </xs:appinfo>
@@ -468,7 +466,7 @@
          </xs:enumeration>
          <xs:enumeration value="Documentation">
             <xs:annotation>
-               <xs:documentation>Website containing the documentation related to the repository identifier The file serves as documentation. To be used when SPDXRef-A provides documentation of SPDXRef-B.</xs:documentation>
+               <xs:documentation>Website containing the documentation related to the repository identifier</xs:documentation>
                <xs:appinfo>
                   <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -556,7 +554,7 @@
          </xs:enumeration>
          <xs:enumeration value="Other">
             <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types. Indicates the file is not a source, archive or binary file.  to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
                <xs:appinfo>
                   <spd:NamedIndividual rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -659,11 +657,12 @@
             <spd:Class name="Annotation"
                        xmlname="Annotation"
                        comment="An Annotation is a comment on an SpdxItem by an agent."
-                       rdf="http://spdx.org/rdf/terms#Annotation"/>
+                       rdf="http://spdx.org/rdf/terms#Annotation"
+                       subclassof="Thing"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="Date"/>
                <xs:element ref="AnnotationTypeCode"/>
@@ -673,7 +672,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="AnnotationTypeCodeType">
@@ -719,13 +718,13 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="AnyLicenseInfoAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ByteOffsetPointerType">
@@ -735,17 +734,18 @@
             <spd:Class name="ByteOffsetPointer"
                        xmlname="ByteOffsetPointer"
                        comment="Single pointer using a byte offset from the start of the reference."
-                       rdf="http://www.w3.org/2009/pointers#ByteOffsetPointer"/>
+                       rdf="http://www.w3.org/2009/pointers#ByteOffsetPointer"
+                       subclassof="OffsetPointer"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="ByteOffsetPointerAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ChecksumType">
@@ -759,13 +759,13 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="ChecksumValue"/>
                <xs:element ref="AlgorithmCode"/>
                <xs:element ref="ChecksumAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ChecksumValueType">
@@ -809,17 +809,18 @@
             <spd:Class name="CompoundPointer"
                        xmlname="CompoundPointer"
                        comment="An abstract method made of a pair of pointers to a defined section to be subclassed for extensibility."
-                       rdf="http://www.w3.org/2009/pointers#CompoundPointer"/>
+                       rdf="http://www.w3.org/2009/pointers#CompoundPointer"
+                       subclassof="Pointer"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="CompoundPointerAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ConjunctiveLicenseSetType">
@@ -829,18 +830,19 @@
             <spd:Class name="ConjunctiveLicenseSet"
                        xmlname="ConjunctiveLicenseSet"
                        comment="A ConjunctiveLicenseSet represents a set of licensing information all of which apply."
-                       rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet"/>
+                       rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet"
+                       subclassof="AnyLicenseInfoContainer"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="Member"/>
                <xs:element ref="ConjunctiveLicenseSetAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ContainerType">
@@ -854,13 +856,13 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="ContainerAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ContextualExampleType">
@@ -941,7 +943,7 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="LicenseListVersion"/>
                <xs:element ref="Created"/>
@@ -951,7 +953,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="CreatorType">
@@ -1015,18 +1017,19 @@
             <spd:Class name="DisjunctiveLicenseSet"
                        xmlname="DisjunctiveLicenseSet"
                        comment="A DisjunctiveLicenseSet represents a set of licensing information where only one license applies at a time. This class implies that the recipient gets to choose one of these licenses they would prefer to use."
-                       rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet"/>
+                       rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet"
+                       subclassof="AnyLicenseInfoContainer"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="Member"/>
                <xs:element ref="DisjunctiveLicenseSetAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="DocumentationType">
@@ -1124,7 +1127,7 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="Checksum"/>
                <xs:element ref="ExternalDocumentID"/>
@@ -1133,7 +1136,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ExternalRefType">
@@ -1147,7 +1150,7 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="Comment"/>
                <xs:element ref="ReferenceLocator"/>
@@ -1157,7 +1160,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ExternalReferenceSiteType">
@@ -1184,18 +1187,19 @@
             <spd:Class name="ExtractedLicenseInfo"
                        xmlname="ExtractedLicenseInfo"
                        comment="An ExtractedLicensingInfo represents a license or licensing notice that was found in the package. Any license text that is recognized as a license may be represented as a License rather than an ExtractedLicensingInfo."
-                       rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo"/>
+                       rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo"
+                       subclassof="SimpleLicensingInfo"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="ExtractedText"/>
                <xs:element ref="ExtractedLicenseInfoAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ExtractedTextType">
@@ -1261,11 +1265,12 @@
                        xmlname="File"
                        comment="A File represents a named sequence of information that is contained in a software package."
                        rdf="http://spdx.org/rdf/terms#File"
-                       disjointwith="Snippet"/>
+                       disjointwith="Snippet"
+                       subclassof="SpdxItem"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="NoticeText"/>
                <xs:element ref="FileContributor"/>
@@ -1274,7 +1279,7 @@
                <xs:element ref="Checksum"/>
                <xs:element ref="FileAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="FileTypeCodeType">
@@ -1469,7 +1474,7 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="LicenseExceptionText"/>
                <xs:element ref="Comment"/>
@@ -1481,7 +1486,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="LicenseIDType">
@@ -1559,11 +1564,12 @@
             <spd:Class name="License"
                        xmlname="License"
                        comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
-                       rdf="http://spdx.org/rdf/terms#License"/>
+                       rdf="http://spdx.org/rdf/terms#License"
+                       subclassof="SimpleLicensingInfo"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="IsOsiApproved"/>
                <xs:element ref="StandardLicenseHeader"/>
@@ -1571,7 +1577,7 @@
                <xs:element ref="StandardLicenseTemplate"/>
                <xs:element ref="LicenseAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="LineCharPointerType">
@@ -1581,17 +1587,18 @@
             <spd:Class name="LineCharPointer"
                        xmlname="LineCharPointer"
                        comment="Single pointer using line and char numbers."
-                       rdf="http://www.w3.org/2009/pointers#LineCharPointer"/>
+                       rdf="http://www.w3.org/2009/pointers#LineCharPointer"
+                       subclassof="OffsetPointer"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="LineCharPointerAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="LineNumberType">
@@ -1619,17 +1626,18 @@
             <spd:Class name="ListedLicense"
                        xmlname="ListedLicense"
                        comment="A license which is included in the SPDX License List (http://spdx.org/licenses)."
-                       rdf="http://spdx.org/rdf/terms#ListedLicense"/>
+                       rdf="http://spdx.org/rdf/terms#ListedLicense"
+                       subclassof="License"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="ListedLicenseAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="LocatorFormatType">
@@ -1692,17 +1700,18 @@
             <spd:Class name="OffsetPointer"
                        xmlname="OffsetPointer"
                        comment="Generic single pointer based on an offset."
-                       rdf="http://www.w3.org/2009/pointers#OffsetPointer"/>
+                       rdf="http://www.w3.org/2009/pointers#OffsetPointer"
+                       subclassof="SinglePointer"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="OffsetPointerAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="OffsetType">
@@ -1730,18 +1739,19 @@
             <spd:Class name="OrLaterOperator"
                        xmlname="OrLaterOperator"
                        comment="A license with an or later operator indicating this license version or any later version of the license (e.g. GPL-2.0+)"
-                       rdf="http://spdx.org/rdf/terms#OrLaterOperator"/>
+                       rdf="http://spdx.org/rdf/terms#OrLaterOperator"
+                       subclassof="AnyLicenseInfo"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="Member"/>
                <xs:element ref="OrLaterOperatorAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="OriginatorType">
@@ -1805,11 +1815,12 @@
             <spd:Class name="Package"
                        xmlname="Package"
                        comment="A Package represents a collection of software files that are delivered as a single functional component."
-                       rdf="http://spdx.org/rdf/terms#Package"/>
+                       rdf="http://spdx.org/rdf/terms#Package"
+                       subclassof="SpdxItem"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="ExternalRef"/>
                <xs:element ref="PackageFileName"/>
@@ -1827,7 +1838,7 @@
                <xs:element ref="Checksum"/>
                <xs:element ref="PackageAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="PackageVerificationCodeType">
@@ -1841,7 +1852,7 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="PackageVerificationCodeValue"/>
                <xs:element ref="VerificationCodeExcludedFile"/>
@@ -1849,7 +1860,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="PackageVerificationCodeValueType">
@@ -1881,11 +1892,11 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="PointerAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ProjectType">
@@ -1899,11 +1910,11 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="ProjectAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ReferenceCategoryCodeType">
@@ -1931,7 +1942,7 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="ExternalReferenceSite"/>
                <xs:element ref="ContextualExample"/>
@@ -1940,7 +1951,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="ReferenceLocatorType">
@@ -1984,11 +1995,12 @@
             <spd:Class name="Relationship"
                        xmlname="Relationship"
                        comment="A Relationship represents a relationship between two SpdxElements."
-                       rdf="http://spdx.org/rdf/terms#Relationship"/>
+                       rdf="http://spdx.org/rdf/terms#Relationship"
+                       subclassof="Thing"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="RelationshipTypeCode"/>
                <xs:element ref="Comment"/>
@@ -1997,7 +2009,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="RelationshipTypeCodeType">
@@ -2037,11 +2049,12 @@
             <spd:Class name="SimpleLicenseingInfo"
                        xmlname="SimpleLicensingInfo"
                        comment="The SimpleLicenseInfo class includes all resources that represent simple, atomic, licensing information."
-                       rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+                       rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"
+                       subclassof="AnyLicenseInfo"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="LicenseID"/>
                <xs:element ref="Comment"/>
@@ -2051,7 +2064,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="SinglePointerType">
@@ -2061,17 +2074,18 @@
             <spd:Class name="SinglePointer"
                        xmlname="SinglePointer"
                        comment="Abstract pointer to a single point to be subclassed for extensibility."
-                       rdf="http://www.w3.org/2009/pointers#SinglePointer"/>
+                       rdf="http://www.w3.org/2009/pointers#SinglePointer"
+                       subclassof="Pointer"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="SinglePointerAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="SnippetNameType">
@@ -2098,17 +2112,18 @@
             <spd:Class name="Snippet"
                        xmlname="Snippet"
                        comment="The set of bytes in a file. The name of the snippet is the name of the file appended with the byte range in parenthesis (ie: &#34;./file/name(2145:5532)&#34;)"
-                       rdf="http://spdx.org/rdf/terms#Snippet"/>
+                       rdf="http://spdx.org/rdf/terms#Snippet"
+                       subclassof="SpdxItem"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="SnippetFromFile"/>
                <xs:element ref="Range"/>
                <xs:element ref="SnippetAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="SourceInfoType">
@@ -2136,11 +2151,12 @@
             <spd:Class name="SpdxDocument"
                        xmlname="SpdxDocument"
                        comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information."
-                       rdf="http://spdx.org/rdf/terms#SpdxDocument"/>
+                       rdf="http://spdx.org/rdf/terms#SpdxDocument"
+                       subclassof="SpdxElement"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="DescribesPackage"/>
                <xs:element ref="DescribesFile"/>
@@ -2153,7 +2169,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="SpdxElementType">
@@ -2163,11 +2179,12 @@
             <spd:Class name="SpdxElement"
                        xmlname="SpdxElement"
                        comment="An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements."
-                       rdf="http://spdx.org/rdf/terms#SpdxElement"/>
+                       rdf="http://spdx.org/rdf/terms#SpdxElement"
+                       subclassof="Thing"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="Annotation"/>
                <xs:element ref="Name"/>
@@ -2177,7 +2194,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="SpdxItemType">
@@ -2187,11 +2204,12 @@
             <spd:Class name="SpdxItem"
                        xmlname="SpdxItem"
                        comment="An SpdxItem is a potentially copyrightable work."
-                       rdf="http://spdx.org/rdf/terms#SpdxItem"/>
+                       rdf="http://spdx.org/rdf/terms#SpdxItem"
+                       subclassof="SpdxElement"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="LicenseConcludedCode"/>
                <xs:element ref="CopyrightText"/>
@@ -2199,7 +2217,7 @@
                <xs:element ref="LicenseComments"/>
                <xs:element ref="SpdxItemAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="SpecVersionType">
@@ -2263,17 +2281,18 @@
             <spd:Class name="StartEndPointer"
                        xmlname="StartEndPointer"
                        comment="Compound pointer to a range with a start and an end point."
-                       rdf="http://www.w3.org/2009/pointers#StartEndPointer"/>
+                       rdf="http://www.w3.org/2009/pointers#StartEndPointer"
+                       subclassof="CompoundPointer"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="StartEndPointerAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="SummaryType">
@@ -2354,11 +2373,12 @@
             <spd:Class name="WithExceptionOperator"
                        xmlname="WithExceptionOperator"
                        comment="Sometimes a set of license terms apply except under special circumstances. In this case, use the binary “WITH” operator to construct a new &lt;SPDX-License-Expression&gt; to represent the special exception situation. A valid license expression is where the left operand is a valid &lt;SPDX-License-Expression&gt; value and the right operand is an SPDX License List Exception Identifier (SPDX LL Exception Identifier) that represents the special exception terms. SPDX License LL Identifiers can be found on the SPDX License List. The syntax for the “WITH” operator is: &lt;SPDX-License-Expression-2&gt; = (&lt;SPDX-License-Expression-1&gt; WITH &lt;SPDX-LL-Exception-Identifier&gt;) For example, when the Bison exception is to be applied to GPL-2.0+, the expression would be: (GPL-2.0+ WITH Bison-exception-2.2), where: &lt;SPDX-License-Expression-1&gt; = GPL-2.0+ &lt;SPDX-LL-Exception-Identifier&gt; = Bison-exception-2.2 &lt;SPDX-License-Expression-1&gt; = (GPL-2.0+ WITH Bison-exception-2.2) If the applicable exception is not found on the SPDX License List, then use LicenseRef-[idString] to express the license and exception."
-                       rdf="http://spdx.org/rdf/terms#WithExceptionOperator"/>
+                       rdf="http://spdx.org/rdf/terms#WithExceptionOperator"
+                       subclassof="AnyLicenseInfo"/>
          </xs:appinfo>
       </xs:annotation>
       <xs:complexContent>
-         <xs:restriction base="xs:anyType">
+         <xs:extension base="structures:ObjectType">
             <xs:sequence>
                <xs:element ref="Member"/>
                <xs:element ref="LicenseException"/>
@@ -2366,7 +2386,7 @@
                            minOccurs="0"
                            maxOccurs="unbounded"/>
             </xs:sequence>
-         </xs:restriction>
+         </xs:extension>
       </xs:complexContent>
    </xs:complexType>
    <xs:element name="AlgorithmCode" type="AlgorithmCodeType" nillable="true">
@@ -2384,7 +2404,8 @@
             <spd:Element name="Annotation"
                          xmlname="Annotation"
                          comment="An Annotation is a comment on an SpdxItem by an agent."
-                         rdf="http://spdx.org/rdf/terms#Annotation"/>
+                         rdf="http://spdx.org/rdf/terms#Annotation"
+                         subclassof="Thing"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -2461,7 +2482,8 @@
             <spd:Element name="ByteOffsetPointer"
                          xmlname="ByteOffsetPointer"
                          comment="Single pointer using a byte offset from the start of the reference."
-                         rdf="http://www.w3.org/2009/pointers#ByteOffsetPointer"/>
+                         rdf="http://www.w3.org/2009/pointers#ByteOffsetPointer"
+                         subclassof="OffsetPointer"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -2523,7 +2545,8 @@
             <spd:Element name="CompoundPointer"
                          xmlname="CompoundPointer"
                          comment="An abstract method made of a pair of pointers to a defined section to be subclassed for extensibility."
-                         rdf="http://www.w3.org/2009/pointers#CompoundPointer"/>
+                         rdf="http://www.w3.org/2009/pointers#CompoundPointer"
+                         subclassof="Pointer"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -2544,7 +2567,8 @@
             <spd:Element name="ConjunctiveLicenseSet"
                          xmlname="ConjunctiveLicenseSet"
                          comment="A ConjunctiveLicenseSet represents a set of licensing information all of which apply."
-                         rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet"/>
+                         rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet"
+                         subclassof="AnyLicenseInfoContainer"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -2731,7 +2755,8 @@
             <spd:Element name="DisjunctiveLicenseSet"
                          xmlname="DisjunctiveLicenseSet"
                          comment="A DisjunctiveLicenseSet represents a set of licensing information where only one license applies at a time. This class implies that the recipient gets to choose one of these licenses they would prefer to use."
-                         rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet"/>
+                         rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet"
+                         subclassof="AnyLicenseInfoContainer"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -2882,7 +2907,8 @@
             <spd:Element name="ExtractedLicenseInfo"
                          xmlname="ExtractedLicenseInfo"
                          comment="An ExtractedLicensingInfo represents a license or licensing notice that was found in the package. Any license text that is recognized as a license may be represented as a License rather than an ExtractedLicensingInfo."
-                         rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo"/>
+                         rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo"
+                         subclassof="SimpleLicensingInfo"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -2915,7 +2941,8 @@
                          xmlname="File"
                          comment="A File represents a named sequence of information that is contained in a software package."
                          rdf="http://spdx.org/rdf/terms#File"
-                         disjointwith="Snippet"/>
+                         disjointwith="Snippet"
+                         subclassof="SpdxItem"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3059,7 +3086,8 @@
             <spd:Element name="License"
                          xmlname="License"
                          comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
-                         rdf="http://spdx.org/rdf/terms#License"/>
+                         rdf="http://spdx.org/rdf/terms#License"
+                         subclassof="SimpleLicensingInfo"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3181,9 +3209,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseInfoFromFiles"
-               type="LicenseInfoFromFilesCodeType"
-               nillable="true">
+   <xs:element name="LicenseInfoFromFiles" type="PackageType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for The licensing information that was discovered directly within the package. There will be an instance of this property for each distinct value of alllicenseInfoInFile properties of all files contained in the package.</xs:documentation>
          <xs:appinfo>
@@ -3241,7 +3267,8 @@
             <spd:Element name="LineCharPointer"
                          xmlname="LineCharPointer"
                          comment="Single pointer using line and char numbers."
-                         rdf="http://www.w3.org/2009/pointers#LineCharPointer"/>
+                         rdf="http://www.w3.org/2009/pointers#LineCharPointer"
+                         subclassof="OffsetPointer"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3273,7 +3300,8 @@
             <spd:Element name="ListedLicense"
                          xmlname="ListedLicense"
                          comment="A license which is included in the SPDX License List (http://spdx.org/licenses)."
-                         rdf="http://spdx.org/rdf/terms#ListedLicense"/>
+                         rdf="http://spdx.org/rdf/terms#ListedLicense"
+                         subclassof="License"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3355,7 +3383,8 @@
             <spd:Element name="OffsetPointer"
                          xmlname="OffsetPointer"
                          comment="Generic single pointer based on an offset."
-                         rdf="http://www.w3.org/2009/pointers#OffsetPointer"/>
+                         rdf="http://www.w3.org/2009/pointers#OffsetPointer"
+                         subclassof="SinglePointer"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3374,7 +3403,8 @@
             <spd:Element name="OrLaterOperator"
                          xmlname="OrLaterOperator"
                          comment="A license with an or later operator indicating this license version or any later version of the license (e.g. GPL-2.0+)"
-                         rdf="http://spdx.org/rdf/terms#OrLaterOperator"/>
+                         rdf="http://spdx.org/rdf/terms#OrLaterOperator"
+                         subclassof="AnyLicenseInfo"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3405,7 +3435,8 @@
             <spd:Element name="Package"
                          xmlname="Package"
                          comment="A Package represents a collection of software files that are delivered as a single functional component."
-                         rdf="http://spdx.org/rdf/terms#Package"/>
+                         rdf="http://spdx.org/rdf/terms#Package"
+                         subclassof="SpdxItem"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3605,7 +3636,8 @@
             <spd:Element name="Relationship"
                          xmlname="Relationship"
                          comment="A Relationship represents a relationship between two SpdxElements."
-                         rdf="http://spdx.org/rdf/terms#Relationship"/>
+                         rdf="http://spdx.org/rdf/terms#Relationship"
+                         subclassof="Thing"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3648,7 +3680,8 @@
             <spd:Element name="SimpleLicenseingInfo"
                          xmlname="SimpleLicensingInfo"
                          comment="The SimpleLicenseInfo class includes all resources that represent simple, atomic, licensing information."
-                         rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"/>
+                         rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"
+                         subclassof="AnyLicenseInfo"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3667,7 +3700,8 @@
             <spd:Element name="SinglePointer"
                          xmlname="SinglePointer"
                          comment="Abstract pointer to a single point to be subclassed for extensibility."
-                         rdf="http://www.w3.org/2009/pointers#SinglePointer"/>
+                         rdf="http://www.w3.org/2009/pointers#SinglePointer"
+                         subclassof="Pointer"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3686,7 +3720,8 @@
             <spd:Element name="Snippet"
                          xmlname="Snippet"
                          comment="The set of bytes in a file. The name of the snippet is the name of the file appended with the byte range in parenthesis (ie: &#34;./file/name(2145:5532)&#34;)"
-                         rdf="http://spdx.org/rdf/terms#Snippet"/>
+                         rdf="http://spdx.org/rdf/terms#Snippet"
+                         subclassof="SpdxItem"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3743,7 +3778,8 @@
             <spd:Element name="SpdxDocument"
                          xmlname="SpdxDocument"
                          comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information."
-                         rdf="http://spdx.org/rdf/terms#SpdxDocument"/>
+                         rdf="http://spdx.org/rdf/terms#SpdxDocument"
+                         subclassof="SpdxElement"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3762,7 +3798,8 @@
             <spd:Element name="SpdxElement"
                          xmlname="SpdxElement"
                          comment="An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements."
-                         rdf="http://spdx.org/rdf/terms#SpdxElement"/>
+                         rdf="http://spdx.org/rdf/terms#SpdxElement"
+                         subclassof="Thing"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3781,7 +3818,8 @@
             <spd:Element name="SpdxItem"
                          xmlname="SpdxItem"
                          comment="An SpdxItem is a potentially copyrightable work."
-                         rdf="http://spdx.org/rdf/terms#SpdxItem"/>
+                         rdf="http://spdx.org/rdf/terms#SpdxItem"
+                         subclassof="SpdxElement"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3843,7 +3881,8 @@
             <spd:Element name="StartEndPointer"
                          xmlname="StartEndPointer"
                          comment="Compound pointer to a range with a start and an end point."
-                         rdf="http://www.w3.org/2009/pointers#StartEndPointer"/>
+                         rdf="http://www.w3.org/2009/pointers#StartEndPointer"
+                         subclassof="CompoundPointer"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
@@ -3930,7 +3969,8 @@
             <spd:Element name="WithExceptionOperator"
                          xmlname="WithExceptionOperator"
                          comment="Sometimes a set of license terms apply except under special circumstances. In this case, use the binary “WITH” operator to construct a new &lt;SPDX-License-Expression&gt; to represent the special exception situation. A valid license expression is where the left operand is a valid &lt;SPDX-License-Expression&gt; value and the right operand is an SPDX License List Exception Identifier (SPDX LL Exception Identifier) that represents the special exception terms. SPDX License LL Identifiers can be found on the SPDX License List. The syntax for the “WITH” operator is: &lt;SPDX-License-Expression-2&gt; = (&lt;SPDX-License-Expression-1&gt; WITH &lt;SPDX-LL-Exception-Identifier&gt;) For example, when the Bison exception is to be applied to GPL-2.0+, the expression would be: (GPL-2.0+ WITH Bison-exception-2.2), where: &lt;SPDX-License-Expression-1&gt; = GPL-2.0+ &lt;SPDX-LL-Exception-Identifier&gt; = Bison-exception-2.2 &lt;SPDX-License-Expression-1&gt; = (GPL-2.0+ WITH Bison-exception-2.2) If the applicable exception is not found on the SPDX License List, then use LicenseRef-[idString] to express the license and exception."
-                         rdf="http://spdx.org/rdf/terms#WithExceptionOperator"/>
+                         rdf="http://spdx.org/rdf/terms#WithExceptionOperator"
+                         subclassof="AnyLicenseInfo"/>
          </xs:appinfo>
       </xs:annotation>
    </xs:element>

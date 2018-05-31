@@ -112,6 +112,11 @@
                             <xsl:apply-templates select="owl:disjointWith/@rdf:resource" mode="getname"/>
                         </xsl:attribute>
                     </xsl:if>
+                    <xsl:if test="rdfs:subClassOf[@rdf:resource]">
+                    <xsl:attribute name="subclassof">
+                        <xsl:apply-templates select="rdfs:subClassOf/@rdf:resource" mode="getname"/>
+                    </xsl:attribute>
+                    </xsl:if>
                     <xsl:apply-templates select="*"/>
                 </Class>
             </xsl:when>
@@ -273,6 +278,7 @@
     <xsl:template match="rdfs:comment"/>
     <xsl:template match="rdfs:domain"/>
     <xsl:template match="rdfs:subPropertyOf"/>
+    <xsl:template match="rdfs:isDefinedBy"/>
     <xsl:template match="ns:term_status"/>
     <xsl:template match="owl:Axiom"/>
     <xsl:template match="owl:disjointWith"/>

@@ -678,7 +678,8 @@
    <Class name="Annotation"
           xmlname="Annotation"
           comment="An Annotation is a comment on an SpdxItem by an agent."
-          rdf="http://spdx.org/rdf/terms#Annotation">
+          rdf="http://spdx.org/rdf/terms#Annotation"
+          subclassof="Thing">
       <SubClass rdf="http://www.w3.org/2002/07/owl#Thing" hasvalue="Thing"/>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#date"
@@ -723,9 +724,7 @@
           xmlname="AnyLicenseInfo"
           comment="The AnyLicenseInfo class includes all resources that represent licensing information."
           rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
-          definedby="AnyLicenseInfo">
-      <rdfs:isDefinedBy xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">http://spdx.org/rdf/terms#AnyLicenseInfo</rdfs:isDefinedBy>
-   </Class>
+          definedby="AnyLicenseInfo"/>
    <Class name="Checksum"
           xmlname="Checksum"
           comment="A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented."
@@ -760,7 +759,8 @@
    <Class name="ConjunctiveLicenseSet"
           xmlname="ConjunctiveLicenseSet"
           comment="A ConjunctiveLicenseSet represents a set of licensing information all of which apply."
-          rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet">
+          rdf="http://spdx.org/rdf/terms#ConjunctiveLicenseSet"
+          subclassof="AnyLicenseInfoContainer">
       <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
                 hasvalue="AnyLicenseInfo"/>
       <SubClass rdf="http://www.w3.org/2000/01/rdf-schema#Container"
@@ -811,7 +811,8 @@
    <Class name="DisjunctiveLicenseSet"
           xmlname="DisjunctiveLicenseSet"
           comment="A DisjunctiveLicenseSet represents a set of licensing information where only one license applies at a time. This class implies that the recipient gets to choose one of these licenses they would prefer to use."
-          rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet">
+          rdf="http://spdx.org/rdf/terms#DisjunctiveLicenseSet"
+          subclassof="AnyLicenseInfoContainer">
       <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
                 hasvalue="AnyLicenseInfo"/>
       <SubClass rdf="http://www.w3.org/2000/01/rdf-schema#Container"
@@ -903,7 +904,8 @@
    <Class name="ExtractedLicenseInfo"
           xmlname="ExtractedLicenseInfo"
           comment="An ExtractedLicensingInfo represents a license or licensing notice that was found in the package. Any license text that is recognized as a license may be represented as a License rather than an ExtractedLicensingInfo."
-          rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo">
+          rdf="http://spdx.org/rdf/terms#ExtractedLicenseInfo"
+          subclassof="SimpleLicensingInfo">
       <SubClass rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"
                 hasvalue="SimpleLicensingInfo"/>
       <SubClass>
@@ -919,7 +921,8 @@
           xmlname="File"
           comment="A File represents a named sequence of information that is contained in a software package."
           rdf="http://spdx.org/rdf/terms#File"
-          disjointwith="Snippet">
+          disjointwith="Snippet"
+          subclassof="SpdxItem">
       <SubClass rdf="http://spdx.org/rdf/terms#SpdxItem" hasvalue="SpdxItem"/>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#noticeText"
@@ -1011,7 +1014,8 @@
    <Class name="License"
           xmlname="License"
           comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
-          rdf="http://spdx.org/rdf/terms#License">
+          rdf="http://spdx.org/rdf/terms#License"
+          subclassof="SimpleLicensingInfo">
       <SubClass rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"
                 hasvalue="SimpleLicensingInfo"/>
       <SubClass>
@@ -1099,13 +1103,15 @@
    <Class name="ListedLicense"
           xmlname="ListedLicense"
           comment="A license which is included in the SPDX License List (http://spdx.org/licenses)."
-          rdf="http://spdx.org/rdf/terms#ListedLicense">
+          rdf="http://spdx.org/rdf/terms#ListedLicense"
+          subclassof="License">
       <SubClass rdf="http://spdx.org/rdf/terms#License" hasvalue="License"/>
    </Class>
    <Class name="OrLaterOperator"
           xmlname="OrLaterOperator"
           comment="A license with an or later operator indicating this license version or any later version of the license (e.g. GPL-2.0+)"
-          rdf="http://spdx.org/rdf/terms#OrLaterOperator">
+          rdf="http://spdx.org/rdf/terms#OrLaterOperator"
+          subclassof="AnyLicenseInfo">
       <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
                 hasvalue="AnyLicenseInfo"/>
       <SubClass>
@@ -1120,7 +1126,8 @@
    <Class name="Package"
           xmlname="Package"
           comment="A Package represents a collection of software files that are delivered as a single functional component."
-          rdf="http://spdx.org/rdf/terms#Package">
+          rdf="http://spdx.org/rdf/terms#Package"
+          subclassof="SpdxItem">
       <SubClass rdf="http://spdx.org/rdf/terms#SpdxItem" hasvalue="SpdxItem"/>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#externalRef"
@@ -1289,7 +1296,8 @@
    <Class name="Relationship"
           xmlname="Relationship"
           comment="A Relationship represents a relationship between two SpdxElements."
-          rdf="http://spdx.org/rdf/terms#Relationship">
+          rdf="http://spdx.org/rdf/terms#Relationship"
+          subclassof="Thing">
       <SubClass rdf="http://www.w3.org/2002/07/owl#Thing" hasvalue="Thing"/>
       <SubClass>
          <Class>
@@ -1432,7 +1440,8 @@
    <Class name="SimpleLicenseingInfo"
           xmlname="SimpleLicensingInfo"
           comment="The SimpleLicenseInfo class includes all resources that represent simple, atomic, licensing information."
-          rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo">
+          rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo"
+          subclassof="AnyLicenseInfo">
       <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
                 hasvalue="AnyLicenseInfo"/>
       <SubClass>
@@ -1469,7 +1478,8 @@
    <Class name="Snippet"
           xmlname="Snippet"
           comment="The set of bytes in a file. The name of the snippet is the name of the file appended with the byte range in parenthesis (ie: &#34;./file/name(2145:5532)&#34;)"
-          rdf="http://spdx.org/rdf/terms#Snippet">
+          rdf="http://spdx.org/rdf/terms#Snippet"
+          subclassof="SpdxItem">
       <SubClass rdf="http://spdx.org/rdf/terms#SpdxItem" hasvalue="SpdxItem"/>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#snippetFromFile"
@@ -1491,7 +1501,8 @@
    <Class name="SpdxDocument"
           xmlname="SpdxDocument"
           comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information."
-          rdf="http://spdx.org/rdf/terms#SpdxDocument">
+          rdf="http://spdx.org/rdf/terms#SpdxDocument"
+          subclassof="SpdxElement">
       <SubClass rdf="http://spdx.org/rdf/terms#SpdxElement" hasvalue="SpdxElement"/>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#describesPackage"
@@ -1547,7 +1558,8 @@
    <Class name="SpdxElement"
           xmlname="SpdxElement"
           comment="An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements."
-          rdf="http://spdx.org/rdf/terms#SpdxElement">
+          rdf="http://spdx.org/rdf/terms#SpdxElement"
+          subclassof="Thing">
       <SubClass rdf="http://www.w3.org/2002/07/owl#Thing" hasvalue="Thing"/>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#annotation"
@@ -1582,7 +1594,8 @@
    <Class name="SpdxItem"
           xmlname="SpdxItem"
           comment="An SpdxItem is a potentially copyrightable work."
-          rdf="http://spdx.org/rdf/terms#SpdxItem">
+          rdf="http://spdx.org/rdf/terms#SpdxItem"
+          subclassof="SpdxElement">
       <SubClass rdf="http://spdx.org/rdf/terms#SpdxElement" hasvalue="SpdxElement"/>
       <SubClass>
          <Class>
@@ -1630,7 +1643,8 @@
    <Class name="WithExceptionOperator"
           xmlname="WithExceptionOperator"
           comment="Sometimes a set of license terms apply except under special circumstances. In this case, use the binary “WITH” operator to construct a new &lt;SPDX-License-Expression&gt; to represent the special exception situation. A valid license expression is where the left operand is a valid &lt;SPDX-License-Expression&gt; value and the right operand is an SPDX License List Exception Identifier (SPDX LL Exception Identifier) that represents the special exception terms. SPDX License LL Identifiers can be found on the SPDX License List. The syntax for the “WITH” operator is: &lt;SPDX-License-Expression-2&gt; = (&lt;SPDX-License-Expression-1&gt; WITH &lt;SPDX-LL-Exception-Identifier&gt;) For example, when the Bison exception is to be applied to GPL-2.0+, the expression would be: (GPL-2.0+ WITH Bison-exception-2.2), where: &lt;SPDX-License-Expression-1&gt; = GPL-2.0+ &lt;SPDX-LL-Exception-Identifier&gt; = Bison-exception-2.2 &lt;SPDX-License-Expression-1&gt; = (GPL-2.0+ WITH Bison-exception-2.2) If the applicable exception is not found on the SPDX License List, then use LicenseRef-[idString] to express the license and exception."
-          rdf="http://spdx.org/rdf/terms#WithExceptionOperator">
+          rdf="http://spdx.org/rdf/terms#WithExceptionOperator"
+          subclassof="AnyLicenseInfo">
       <SubClass rdf="http://spdx.org/rdf/terms#AnyLicenseInfo"
                 hasvalue="AnyLicenseInfo"/>
       <SubClass>
@@ -1661,27 +1675,31 @@
    <Class name="ByteOffsetPointer"
           xmlname="ByteOffsetPointer"
           comment="Single pointer using a byte offset from the start of the reference."
-          rdf="http://www.w3.org/2009/pointers#ByteOffsetPointer">
+          rdf="http://www.w3.org/2009/pointers#ByteOffsetPointer"
+          subclassof="OffsetPointer">
       <SubClass rdf="http://www.w3.org/2009/pointers#OffsetPointer"
                 hasvalue="OffsetPointer"/>
    </Class>
    <Class name="CompoundPointer"
           xmlname="CompoundPointer"
           comment="An abstract method made of a pair of pointers to a defined section to be subclassed for extensibility."
-          rdf="http://www.w3.org/2009/pointers#CompoundPointer">
+          rdf="http://www.w3.org/2009/pointers#CompoundPointer"
+          subclassof="Pointer">
       <SubClass rdf="http://www.w3.org/2009/pointers#Pointer" hasvalue="Pointer"/>
    </Class>
    <Class name="LineCharPointer"
           xmlname="LineCharPointer"
           comment="Single pointer using line and char numbers."
-          rdf="http://www.w3.org/2009/pointers#LineCharPointer">
+          rdf="http://www.w3.org/2009/pointers#LineCharPointer"
+          subclassof="OffsetPointer">
       <SubClass rdf="http://www.w3.org/2009/pointers#OffsetPointer"
                 hasvalue="OffsetPointer"/>
    </Class>
    <Class name="OffsetPointer"
           xmlname="OffsetPointer"
           comment="Generic single pointer based on an offset."
-          rdf="http://www.w3.org/2009/pointers#OffsetPointer">
+          rdf="http://www.w3.org/2009/pointers#OffsetPointer"
+          subclassof="SinglePointer">
       <SubClass rdf="http://www.w3.org/2009/pointers#SinglePointer"
                 hasvalue="SinglePointer"/>
    </Class>
@@ -1692,13 +1710,15 @@
    <Class name="SinglePointer"
           xmlname="SinglePointer"
           comment="Abstract pointer to a single point to be subclassed for extensibility."
-          rdf="http://www.w3.org/2009/pointers#SinglePointer">
+          rdf="http://www.w3.org/2009/pointers#SinglePointer"
+          subclassof="Pointer">
       <SubClass rdf="http://www.w3.org/2009/pointers#Pointer" hasvalue="Pointer"/>
    </Class>
    <Class name="StartEndPointer"
           xmlname="StartEndPointer"
           comment="Compound pointer to a range with a start and an end point."
-          rdf="http://www.w3.org/2009/pointers#StartEndPointer">
+          rdf="http://www.w3.org/2009/pointers#StartEndPointer"
+          subclassof="CompoundPointer">
       <SubClass rdf="http://www.w3.org/2009/pointers#CompoundPointer"
                 hasvalue="CompoundPointer"/>
    </Class>

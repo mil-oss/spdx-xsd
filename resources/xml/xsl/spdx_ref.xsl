@@ -9,7 +9,7 @@
 
     <xsl:variable name="spdxMap">
         <xsl:call-template name="mapSpdx">
-            <xsl:with-param name="rdfData" select="document('../../resources/SPDX.rdf')"/>
+            <xsl:with-param name="rdfData" select="document('../../SPDX.rdf')"/>
         </xsl:call-template>
     </xsl:variable>
 
@@ -59,7 +59,7 @@
                 <xsl:when test="$r='http://www.w3.org/2000/01/rdf-schema#member'"/>
                 <xsl:when test="$n='LicenseInfoFromFiles'">
                     <xsl:apply-templates select="." mode="element">
-                        <xsl:with-param name="type" select="'LicenseInfoFromFilesCode'"/>
+                        <xsl:with-param name="type" select="'Package'"/>
                     </xsl:apply-templates>
                 </xsl:when>
                 <xsl:when test="Class/Union/Restriction"/>
@@ -170,17 +170,21 @@
 
     <xsl:template name="main">
         <xsl:result-document href="{$xsdOut}">
-            <xs:schema xmlns="spdx:xsd::1.0" xmlns:spd="spdx:xsd::1.0/ref" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:owl="http://www.w3.org/2002/07/owl#"
-                xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:niem-xs="http://release.niem.gov/niem/proxy/xsd/4.0/"
-                xmlns:structures="http://release.niem.gov/niem/structures/4.0/" xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/" xmlns:ism="urn:us:gov:ic:ism"
+            <xs:schema xmlns="spdx:xsd::1.0" 
+                xmlns:spd="spdx:xsd::1.0/ref" 
+                xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" 
+                xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/" 
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                xmlns:niem-xs="http://release.niem.gov/niem/proxy/xsd/4.0/"
+                xmlns:structures="http://release.niem.gov/niem/structures/4.0/" 
+                xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/" 
                 attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1"
                 xsi:schemaLocation="http://release.niem.gov/niem/appinfo/4.0/ niem/utility/appinfo/4.0/appinfo.xsd http://release.niem.gov/niem/conformanceTargets/3.0/ ext/niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
                 ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/#ReferenceSchemaDocument">
                 <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd" namespace="http://release.niem.gov/niem/structures/4.0/"/>
                 <xs:import schemaLocation="ext/niem/utility/appinfo/4.0/appinfo.xsd" namespace="http://release.niem.gov/niem/appinfo/4.0/"/>
                 <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd" namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
-                <xs:import namespace="http://www.w3.org/2002/07/owl#" schemaLocation="ext/owl.xsd"/>
                 <xsl:apply-templates select="$spdxMap/SPDX/Ontology" mode="annot"/>
                 <xsl:variable name="allnodes">
                     <xs:simpleType name="PropertyIndicatorSimpleType">
@@ -234,14 +238,20 @@
     <xsl:template match="SPDX/Class">
         <xsl:variable name="base">
             <xsl:choose>
+                <xsl:when test="@subclassof='Thing'">
+                    <xsl:text>structures:ObjectType</xsl:text>
+                </xsl:when>
                 <xsl:when test="SubClass[1]/@name='Thing'">
-                    <xsl:text>xs:anyType</xsl:text>
+                    <xsl:text>structures:ObjectType</xsl:text>
+                </xsl:when>
+                <xsl:when test="@subclassof='Thing'">
+                    <xsl:value-of select="@subclassof"/>
                 </xsl:when>
                 <xsl:when test="SubClass[1]/@name">
                     <xsl:value-of select="concat(SubClass[1]/@name,'Type')"/>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text>xs:anyType</xsl:text>
+                    <xsl:text>structures:ObjectType</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -257,12 +267,12 @@
                 </xs:appinfo>
             </xs:annotation>
             <xs:complexContent>
-                <xs:restriction base="{$base}">
+                <xs:extension base="{$base}">
                     <xs:sequence>
                         <xsl:apply-templates select="SubClass" mode="sclass"/>
                         <xs:element ref="{concat(@xmlname,'AugmentationPoint')}" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
-                </xs:restriction>
+                </xs:extension>
             </xs:complexContent>
         </xs:complexType>
         <xs:element name="{concat(@xmlname,'AugmentationPoint')}" abstract="true">
@@ -357,8 +367,8 @@
             <xs:annotation>
                 <xs:documentation>
                     <xsl:choose>
-                        <xsl:when test="//*[@xmlname = $v]/@comment">
-                            <xsl:value-of select="//*[@xmlname = $v]/@comment"/>
+                        <xsl:when test="//*[@xmlname = $v][string-length(@comment)&gt;0]">
+                            <xsl:value-of select="//*[@xmlname = $v][string-length(@comment)&gt;0][1]/@comment"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:call-template name="breakIntoWords">
@@ -439,10 +449,10 @@
                     <xsl:text>xs:string</xsl:text>
                 </xsl:when>
                 <xsl:when test="@subpropertyof = 'LicenseInfoFromFiles'">
-                    <xsl:text>PropertyIndicatorSimpleType</xsl:text>
+                    <xsl:text>PackageType</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text>PropertyIndicatorSimpleType</xsl:text>
+                    <xsl:text>structures:Object</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
