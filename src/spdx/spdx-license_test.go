@@ -27,35 +27,17 @@ func TestSpdxLicense(t *testing.T) {
         fmt.Printf(err.Error())
     }
     g.Describe("SPDX",func() {
-        g.It("Must have ",func() {
-            Expect(spdxlic.IsDeprecatedLicenseID).To(Equal(""))
-        })
-        g.It("Must have StandardLicenseHeader",func() {
-            Expect(spdxlic.StandardLicenseHeader).To(Equal("Test string one"))
-        })
-        g.It("Must have StandardLicenseTemplate",func() {
-            Expect(spdxlic.StandardLicenseTemplate).To(Equal("Test string one"))
-        })
-        g.It("Must have LicenseText",func() {
-            Expect(spdxlic.LicenseText).To(Equal("Test string one"))
-        })
-        g.It("Must have IsOsiApproved",func() {
+        g.It("Must have isOsiApproved",func() {
             Expect(spdxlic.IsOsiApproved).To(Equal("true"))
         })
-        g.It("Must have IsFsfLibre",func() {
-            Expect(spdxlic.IsFsfLibre).To(Equal("true"))
+        g.It("Must have standardLicenseHeader",func() {
+            Expect(spdxlic.StandardLicenseHeader).To(Equal("Test string one"))
         })
-        g.It("Must have ",func() {
-            Expect(spdxlic.LicenseID).To(Equal(""))
+        g.It("Must have licenseText",func() {
+            Expect(spdxlic.LicenseText).To(Equal("Test string one"))
         })
-        g.It("Must have Name",func() {
-            Expect(spdxlic.Name).To(Equal("Test string one"))
-        })
-        g.It("Must have SeeAlso",func() {
-            Expect(spdxlic.SeeAlso[0]).To(Equal("http://anyuri.org"))
-        })
-        g.It("Must have Comment",func() {
-            Expect(spdxlic.Comment).To(Equal("Test string one"))
+        g.It("Must have standardLicenseTemplate",func() {
+            Expect(spdxlic.StandardLicenseTemplate).To(Equal("Test string one"))
         })
     })
 

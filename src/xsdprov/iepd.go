@@ -33,7 +33,7 @@ func BuildIep() (map[int64]ProvEntry, []error, error) {
 }
 
 func zipIEPD() {
-	cerr := compress(tpath+"/iepd", tpath+"/SevA.zip")
+	cerr := compress(tpath, "/tmp/IEPD/"+name+".zip")
 	check(cerr)
 }
 
@@ -282,6 +282,7 @@ func checkDigest(fpath string, auth string, test string) ProvEntry {
 	}
 	return pe
 }
+
 func check(e error) error {
 	if e != nil {
 		fmt.Printf("error: %v\n", e)
@@ -289,6 +290,7 @@ func check(e error) error {
 	iepderr = e
 	return e
 }
+
 func checka(e []error) []error {
 	if e != nil {
 		fmt.Printf("error: %v\n", e)

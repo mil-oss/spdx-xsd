@@ -90,12 +90,12 @@ func index() http.Handler {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
-		http.Redirect(w, r, "https://sevaxsd.specchain.org", 301)
-		//w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		//w.Header().Set("Access-Control-Allow-Origin", "*")
-		//w.Header().Set("X-Content-Type-Options", "nosniff")
-		//w.WriteHeader(http.StatusOK)
-		//fmt.Fprintln(w, "SEvA 1.0")
+		//http.Redirect(w, r, "https://sevaxsd.specchain.org", 301)
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintln(w, "SPDX-XSD 1.0")
 		//fmt.Fprintln(w, temppath)
 	})
 }
@@ -121,7 +121,7 @@ func getResource() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
 			var p = filepath.Base(r.URL.Path)
-			f, err := ioutil.ReadFile(resources[p])
+			f, err := ioutil.ReadFile(tpath + resources[p])
 			check(err)
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -211,7 +211,7 @@ func dload() http.Handler {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if atomic.LoadInt32(&healthy) == 1 {
-			DownloadFile(temppath+"/SevA.zip", w)
+			DownloadFile("/tmp/IEPD/"+name+".zip", w)
 			//w.WriteHeader(http.StatusOK)
 			index()
 		}

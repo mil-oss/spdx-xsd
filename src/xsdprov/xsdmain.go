@@ -29,7 +29,7 @@ var Datastruct interface{}
 func Setup(pckgname string, assetpath string, resrces map[string]string, dirs map[string]string, dstruct interface{}) {
 	Datastruct = dstruct
 	dbloc = "/tmp/" + pckgname
-	temppath = "/tmp/IEPD"
+	temppath = "/tmp/IEPD/iepd"
 	path = assetpath
 	name = pckgname
 	resources = resrces
