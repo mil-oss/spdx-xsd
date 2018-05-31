@@ -27,16 +27,15 @@ var cfg Cfg
 var Datastruct interface{}
 
 //Setup ...
-func Setup(pckgname string, assetpath string, resrces map[string]string, dirs map[string]string, dstruct interface{}) {
+func Setup(resrces map[string]string, dirs map[string]string, dstruct interface{}) {
 	cfg := getConfig()
 	Datastruct = dstruct
-	dbloc = "/tmp/" + pckgname
+	dbloc = "/tmp/" + Cfg.Project
 	temppath = "/tmp/IEPD/iepd"
-	path = assetpath
-	name = pckgname
+	name = Cfg.Project
 	resources = resrces
 	resourcedirs = dirs
-	tpath = temppath + "/" + path
+	tpath = temppath + "/"
 	err = os.MkdirAll(dbloc+"/db", 0777)
 	if err != nil {
 		return

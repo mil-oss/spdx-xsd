@@ -11,9 +11,10 @@ const (
 
 //Cfg ...
 type Cfg struct {
-	Project string `json:"project,omitempty"`
-	Reflink      = `json:"reflink,omitempty"`
-	Testlink     = `json:"testlink,omitempty"`
+	Project string `json:"project,omitempty"`,
+	Reflink   string   = `json:"reflink,omitempty"`,
+	Testlink  string   = `json:"testlink,omitempty"`,
+	Homeurl	string	= `json:"homeurl,omitempty"`,
 }
 
 func getConfig() Cfg {

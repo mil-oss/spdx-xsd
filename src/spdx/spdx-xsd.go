@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	xsdprov.Setup("spdx", "", Resources, Resdirectories, NewLicense())
+	xsdprov.Setup(Resources, Resdirectories, NewLicense())
 }
 
 // Resources ...
