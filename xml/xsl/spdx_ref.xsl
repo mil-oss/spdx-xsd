@@ -9,7 +9,7 @@
 
     <xsl:variable name="spdxMap">
         <xsl:call-template name="mapSpdx">
-            <xsl:with-param name="rdfData" select="document('../../SPDX.rdf')"/>
+            <xsl:with-param name="rdfData" select="document('../../resources/SPDX.rdf')"/>
         </xsl:call-template>
     </xsl:variable>
 

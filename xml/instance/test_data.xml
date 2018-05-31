@@ -41,11 +41,6 @@
             <True2 valid="true">None</True2>
             <False1 valid="true">Stuff</False1>
         </LicenseInfoFromFilesCodeSimpleType>
-        <PropertyIndicatorSimpleType>
-            <True1 valid="true">true</True1>
-            <True2 valid="true">false</True2>
-            <False1 valid="false">maybe</False1>
-        </PropertyIndicatorSimpleType>
         <ReferenceCategoryCodeSimpleType>
             <True1 valid="true">PackageManager</True1>
             <True2 valid="true">Security</True2>
@@ -56,6 +51,11 @@
             <True2 valid="true">ContainedBy</True2>
             <False1 valid="false">Underneath</False1>
         </RelationshipTypeCodeSimpleType>
+        <Boolean>
+            <True1 valid="true">true</True1>
+            <True2 valid="true">false</True2>
+            <False1 valid="false">maybe</False1>
+        </Boolean>
         <String>
             <True1 valid="true">Test string one</True1>
             <True2 valid="true">Test string two</True2>

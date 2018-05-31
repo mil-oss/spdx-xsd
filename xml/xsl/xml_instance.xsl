@@ -39,6 +39,9 @@
         <xsl:variable name="base" select="$typbase/xs:restriction/@base"/>
         <xsl:variable name="testValue">
             <xsl:choose>
+                <xsl:when test="$simplebase='xs:boolean'">
+                    <xsl:value-of select="document($TestData)//*[name()='Boolean']/*[@valid='true'][1]"/>   
+                </xsl:when>
                 <xsl:when test="$simplebase='xs:string'">
                     <xsl:value-of select="document($TestData)//*[name()='String']/*[@valid='true'][1]"/>   
                 </xsl:when>
@@ -61,6 +64,20 @@
             </xsl:element>
         </xsl:if>
     </xsl:template>
+    
+    <xsl:template match="xs:extension">
+        <xsl:variable name="b" select="@base"/>
+        <xsl:choose>
+            <xsl:when test="//xs:schema/xs:complexType[@name = $b]">
+                <xsl:apply-templates select="//xs:schema/xs:complexType[@name = $b]/*"/>
+                <xsl:apply-templates select="*"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="*"/>
+            </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    
     <xsl:template match="xs:annotation"/>
     <xsl:template match="xs:sequence">
         <xsl:apply-templates select="*"/>
@@ -78,9 +95,6 @@
         <xsl:apply-templates select="*"/>
     </xsl:template>
     <xsl:template match="xs:complexContent">
-        <xsl:apply-templates select="*"/>
-    </xsl:template>
-    <xsl:template match="xs:extension">
         <xsl:apply-templates select="*"/>
     </xsl:template>
     <xsl:template match="text()"/>
