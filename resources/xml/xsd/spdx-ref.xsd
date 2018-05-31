@@ -11,7 +11,7 @@
            elementFormDefault="qualified"
            targetNamespace="spdx:xsd::1.0"
            version="1"
-           xsi:schemaLocation="http://release.niem.gov/niem/appinfo/4.0/ niem/utility/appinfo/4.0/appinfo.xsd http://release.niem.gov/niem/conformanceTargets/3.0/ ext/niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
+           xsi:schemaLocation="http://release.niem.gov/niem/appinfo/4.0/ ext/niem/utility/appinfo/4.0/appinfo.xsd http://release.niem.gov/niem/conformanceTargets/3.0/ ext/niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
            ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/#ReferenceSchemaDocument">
    <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd"
               namespace="http://release.niem.gov/niem/structures/4.0/"/>

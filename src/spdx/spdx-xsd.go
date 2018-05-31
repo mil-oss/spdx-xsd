@@ -10,11 +10,11 @@ func main() {
 
 // Resources ...
 var Resources = map[string]string{
-	"spdx-ref.xsd":             "resources/xml/xsd/spdx-ref.xsd",
-	"spdx-license.xsd":         "resources/xml/xsd/spdx-license.xsd",
+	"ref.xsd":                  "resources/xml/xsd/spdx-ref.xsd",
+	"iep.xsd":                  "resources/xml/xsd/spdx-license.xsd",
 	"XMLSchema.xsd":            "resources/xml/xsd/ext/w3c/XMLSchema.xsd",
 	"xslt.xsd":                 "resources/xml/xsd/ext/w3c/xslt.xsd",
-	"spdx_license_iep.xsl":     "resources/xml/xsl/spdx_license_iep.xsl",
+	"iep_xsd.xsl":              "resources/xml/xsl/spdx_license_iep.xsl",
 	"xml_instance.xsl":         "resources/xml/xsl/xml_instance.xsl",
 	"xsd_json.xsl":             "resources/xml/xsl/xsd_json.xsl",
 	"xml_json.xsl":             "resources/xml/xsl/xml_json.xsl",
@@ -26,8 +26,8 @@ var Resources = map[string]string{
 	"iep_xsd.json":             "resources/json/spdx-license.json",
 	"ref_xsd.json":             "resources/json/spdx-ref.json",
 	"test_instance.json":       "resources/json/test_instance.json",
-	"spdx-license.go":          "src/spdx/spdx-license.go",
-	"spdx-license_test.go":     "src/spdx/spdx-license_test.go",
+	"xsd-struct.go":            "src/spdx/spdx-license.go",
+	"xsd-test.go":              "src/spdx/spdx-license_test.go",
 	"spdx-xsd.go":              "src/spdx/spdx-xsd.go",
 	"provenance_report.json":   "resources/tests/provenance_report.json",
 	"resources.json":           "resources/json/resources.json",

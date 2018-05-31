@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	reflink      = "https://raw.githubusercontent.com/ion-channel/SEVA/master/ref_xsd/ref.xsd"
-	testlink     = "https://raw.githubusercontent.com/ion-channel/SEVA/master/iepd/xml/instance/test_data.xml"
+	reflink      = "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/resources/xml/xsd/spdx-ref.xsd"
+	testlink     = "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/resources/xml/instance/test_data.xml"
 	testinstance string
 	iepderr      error
 	valerr       []error
@@ -22,6 +22,7 @@ var (
 
 //BuildIep ... Generate XML, Code and Test Artifacts
 func BuildIep() (map[int64]ProvEntry, []error, error) {
+	log.Println("BuildIep")
 	getSourceResources()
 	generateResources()
 	validateResources()
@@ -65,7 +66,7 @@ func provenanceRpt() []byte {
 }
 
 func getSourceResources() {
-	log.Println("Load Source Resources")
+	log.Println("getSourceResources")
 	//Compare local copy of Ref XSD to Authoritative copy on GitHub
 	var snr = "ref.xsd"
 	tempfiles[snr] = tpath + resources[snr]
