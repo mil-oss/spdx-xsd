@@ -1,0 +1,5 @@
+{
+    "project":"spdx",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/resources/xml/xsd/spdx-ref.xsd",
+	"testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/resources/xml/instance/test_data.xml"
+}

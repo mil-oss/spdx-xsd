@@ -21,12 +21,14 @@ var name string
 var path string
 var tpath string
 var dbloc string
+var cfg Cfg
 
 //Datastruct ...
 var Datastruct interface{}
 
 //Setup ...
 func Setup(pckgname string, assetpath string, resrces map[string]string, dirs map[string]string, dstruct interface{}) {
+	cfg := getConfig()
 	Datastruct = dstruct
 	dbloc = "/tmp/" + pckgname
 	temppath = "/tmp/IEPD/iepd"

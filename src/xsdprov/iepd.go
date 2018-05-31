@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	reflink      = "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/resources/xml/xsd/spdx-ref.xsd"
-	testlink     = "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/resources/xml/instance/test_data.xml"
+	reflink      = cfg.Reflink
+	testlink     = cfg.Testlink
 	testinstance string
 	iepderr      error
 	valerr       []error
