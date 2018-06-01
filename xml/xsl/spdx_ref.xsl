@@ -131,7 +131,7 @@
             <xs:annotation>
                 <xs:documentation>A data type to indicate if the license is is FSF Libre.</xs:documentation>
                 <xs:appinfo>
-                    <Element name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean" xmlns="spdx:xsd::1.0"/>
+                    <ComplexType name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleContent>
@@ -143,20 +143,20 @@
     </xsl:variable>
 
     <xsl:variable name="IsDeprecatedLicenseId">
-        <xs:element name="IsDeprecatedLicenseId" type="IsDeprecatedLicenseIdType" nillable="true">
+        <xs:element name="IsDeprecatedLicenseID" type="IsDeprecatedLicenseIDType" nillable="true">
             <xs:annotation>
                 <xs:documentation>A data item that indicates if the license id is Deprecated.</xs:documentation>
                 <xs:appinfo>
-                    <Element name="IsDeprecatedLicenseId" comment="Indicates if the license id is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
+                    <Element name="IsDeprecatedLicenseID" comment="Indicates if the license id is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
                         range="Boolean" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
-        <xs:complexType name="IsDeprecatedLicenseIdType">
+        <xs:complexType name="IsDeprecatedLicenseIDType">
             <xs:annotation>
                 <xs:documentation>A data type that indicates if the license id is Deprecated.</xs:documentation>
                 <xs:appinfo>
-                    <Element name="IsDeprecatedLicenseIdType" comment="Indicates if the license is is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
+                    <ComplexType name="IsDeprecatedLicenseIDType" comment="Indicates if the license is is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
                         range="Boolean" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
@@ -183,7 +183,7 @@
             <xs:complexContent>
                 <xs:extension base="SimpleLicensingInfoType">
                     <xs:sequence>
-                        <xs:element ref="IsDeprecatedLicenseId" minOccurs="0"/>
+                        <xs:element ref="IsDeprecatedLicenseID" minOccurs="0"/>
                         <xs:element ref="IsOsiApproved" minOccurs="1"/>
                         <xs:element ref="IsFsfLibre" minOccurs="0"/>
                         <xs:element ref="StandardLicenseHeader" minOccurs="0"/>
