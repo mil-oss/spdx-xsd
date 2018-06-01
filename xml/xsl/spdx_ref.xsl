@@ -123,7 +123,7 @@
             <xs:annotation>
                 <xs:documentation>A data item to indicate if the license is FSF Libre.</xs:documentation>
                 <xs:appinfo>
-                    <spd:Datatype name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean"/>
+                    <Element name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
@@ -131,7 +131,7 @@
             <xs:annotation>
                 <xs:documentation>A data type to indicate if the license is is FSF Libre.</xs:documentation>
                 <xs:appinfo>
-                    <spd:Datatype name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean"/>
+                    <Element name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleContent>
@@ -147,8 +147,8 @@
             <xs:annotation>
                 <xs:documentation>A data item that indicates if the license id is Deprecated.</xs:documentation>
                 <xs:appinfo>
-                    <spd:Datatype name="IsDeprecatedLicenseId" comment="Indicates if the license id is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
-                        range="Boolean"/>
+                    <Element name="IsDeprecatedLicenseId" comment="Indicates if the license id is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
+                        range="Boolean" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
@@ -156,8 +156,8 @@
             <xs:annotation>
                 <xs:documentation>A data type that indicates if the license id is Deprecated.</xs:documentation>
                 <xs:appinfo>
-                    <spd:Datatype name="IsDeprecatedLicenseIdType" comment="Indicates if the license is is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
-                        range="Boolean"/>
+                    <Element name="IsDeprecatedLicenseIdType" comment="Indicates if the license is is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
+                        range="Boolean" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleContent>
@@ -173,11 +173,11 @@
             <xs:annotation>
                 <xs:documentation>A data type for License type</xs:documentation>
                 <xs:appinfo>
-                    <spd:Class name="License"
+                    <ComplexType name="License"
                         xmlname="License"
                         comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
                         rdf="http://spdx.org/rdf/terms#License"
-                        subclassof="SimpleLicensingInfo"/>
+                        subclassof="SimpleLicensingInfo" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:complexContent>
@@ -247,11 +247,11 @@
             <xs:documentation>
                 <xsl:value-of select="@comment"/>
             </xs:documentation>
-            <xs:appinfo>
-                <xsl:element name="{concat('spd:',name())}">
+           <!--  <xs:appinfo>
+                <xsl:element name="{name()}">
                     <xsl:apply-templates select="@*" mode="identity"/>
                 </xsl:element>
-            </xs:appinfo>
+            </xs:appinfo> -->
         </xs:annotation>
     </xsl:template>
 
@@ -282,7 +282,7 @@
                     <xsl:value-of select="concat('A data type for ', @xmlname, ' type')"/>
                 </xs:documentation>
                 <xs:appinfo>
-                    <xsl:element name="{concat('spd:',name())}">
+                    <xsl:element name="ComplexType" xmlns="spdx:xsd::1.0">
                         <xsl:apply-templates select="@*" mode="identity"/>
                     </xsl:element>
                 </xs:appinfo>
@@ -303,7 +303,7 @@
                     <xsl:value-of select="concat('An augmentation point for ', @xmlname)"/>
                 </xs:documentation>
                 <xs:appinfo>
-                    <spd:Element name="{concat(@xmlname,' Augmentation Point')}" xmlns=""/>
+                    <Element name="{concat(@xmlname,' Augmentation Point')}" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
@@ -313,9 +313,9 @@
                     <xsl:value-of select="concat('A data item for ', @xmlname)"/>
                 </xs:documentation>
                 <xs:appinfo>
-                    <spd:Element>
+                    <Element xmlns="spdx:xsd::1.0">
                         <xsl:apply-templates select="@*" mode="identity"/>
-                    </spd:Element>
+                    </Element>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
@@ -345,7 +345,7 @@
                     <xsl:value-of select="concat('A data type for ', $prop, ' properties')"/>
                 </xs:documentation>
                 <xs:appinfo>
-                    <spd:Codelist name="{concat($prop,'CodeSimpleType')}" rdf="{@rdf}"/>
+                    <SimpleType name="{concat($prop,'CodeSimpleType')}" rdf="{@rdf}" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:restriction base="xs:string">
@@ -358,7 +358,7 @@
                     <xsl:value-of select="concat('A data type for ', $prop, ' properties')"/>
                 </xs:documentation>
                 <xs:appinfo>
-                    <spd:Codelist name="{$prop,'CodeSimpleType'}" rdf="{@rdf}"/>
+                    <ComplexType name="{$prop,'CodeSimpleType'}" rdf="{@rdf}" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleContent>
@@ -373,7 +373,7 @@
                     <xsl:value-of select="concat('A data item for ', $prop, ' properties')"/>
                 </xs:documentation>
                 <xs:appinfo>
-                    <spd:Codelist name="{concat($prop,'Code')}" rdf="{@rdf}"/>
+                    <Element name="{concat($prop,'Code')}" rdf="{@rdf}" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
@@ -396,7 +396,7 @@
                     </xsl:choose>
                 </xs:documentation>
                 <xs:appinfo>
-                    <spd:NamedIndividual rdf="{@rdf}"/>
+                    <Enum rdf="{@rdf}" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:enumeration>
@@ -490,7 +490,7 @@
                     </xsl:choose>
                 </xs:documentation>
                 <xs:appinfo>
-                    <xsl:element name="{concat('spd:',name())}">
+                    <xsl:element name="ComplexType" xmlns="spdx:xsd::1.0">
                         <xsl:apply-templates select="@*" mode="identity"/>
                     </xsl:element>
                 </xs:appinfo>
@@ -517,7 +517,7 @@
                     </xsl:choose>
                 </xs:documentation>
                 <xs:appinfo>
-                    <xsl:element name="{concat('spd:',name())}">
+                    <xsl:element name="Element" xmlns="spdx:xsd::1.0">
                         <xsl:apply-templates select="@*" mode="identity"/>
                     </xsl:element>
                 </xs:appinfo>
@@ -532,9 +532,9 @@
                     <xsl:value-of select="concat('A data type for ', @comment)"/>
                 </xs:documentation>
                 <xs:appinfo>
-                    <xsl:element name="{concat('spd:',name())}">
+                    <ComplexType xmlns="spdx:xsd::1.0">
                         <xsl:apply-templates select="@*" mode="identity"/>
-                    </xsl:element>
+                    </ComplexType>
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleContent>
@@ -553,7 +553,7 @@
                     <xsl:value-of select="concat('A data item for ', @comment)"/>
                 </xs:documentation>
                 <xs:appinfo>
-                    <xsl:element name="{concat('spd:',name())}">
+                    <xsl:element name="Element" xmlns="spdx:xsd::1.0">
                         <xsl:apply-templates select="@*" mode="identity"/>
                     </xsl:element>
                 </xs:appinfo>
