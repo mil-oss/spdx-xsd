@@ -31,15 +31,6 @@
                 <xsl:apply-templates select="/xs:schema/*[@name = $Super]"/>
                 <xsl:apply-templates select="/xs:schema/*[@name = $Top]"/>
                 <xsl:apply-templates select="/xs:schema/*[@name = $RootEl]"/>
-                <xs:simpleType name="PropertyIndicatorSimpleType">
-                    <xs:annotation>
-                        <xs:documentation>A data type for the boolean indication of a property existence. True if known. False if not or not known.</xs:documentation>
-                        <xs:appinfo>
-                            <spd:SimpleType name="Property Indicator" mapvar="propertyIndicator"/>
-                        </xs:appinfo>
-                    </xs:annotation>
-                    <xs:restriction base="xs:boolean"/>
-                </xs:simpleType>
                 <xsl:call-template name="deDupList">
                     <xsl:with-param name="list">
                         <xsl:apply-templates select="/xs:schema/*[@name = $Root]//xs:element" mode="iterate"/>

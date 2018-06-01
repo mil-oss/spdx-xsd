@@ -20,15 +20,6 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:simpleType name="PropertyIndicatorSimpleType">
-    <xs:annotation>
-      <xs:documentation>A data type for the boolean indication of a property existence. True if known. False if not or not known.</xs:documentation>
-      <xs:appinfo>
-        <spd:SimpleType name="Property Indicator" mapvar="propertyIndicator"/>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:restriction base="xs:boolean"/>
-  </xs:simpleType>
   <xs:complexType name="AnyLicenseInfoType">
     <xs:annotation>
       <xs:documentation>A data type for AnyLicenseInfo type</xs:documentation>
