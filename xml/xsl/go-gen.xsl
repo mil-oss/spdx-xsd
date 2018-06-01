@@ -66,12 +66,12 @@
             <xsl:value-of select="concat('func ', 'NewLicense', '()', $as, $n, $lb, $cr)"/>
             <xsl:value-of select="concat($in, 'return ', $a, $n, $lb, $cr)"/>
             <xsl:if test="@name = $rootname">
-                <xsl:value-of select="concat($in, $in, '// Required for the proper namespacing', $n, $cr)"/>
+                <xsl:value-of select="concat($in, $in, '// Required for the proper namespacing', $cr)"/>
                 <xsl:value-of select="concat($in, $in, 'AttrXmlnsXsi', ':', $qt, 'http://www.w3.org/2001/XMLSchema-instance', $qt, $cm, $cr)"/>
                 <xsl:value-of select="concat($in, $in, 'AttrXmlns', ':', $qt, 'spdx:xsd::1.0', $qt, $cm, $cr)"/>
             </xsl:if>
-            <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar"/>
-            <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]" mode="makevar"/>
+            <!--<xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar"/>
+            <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]" mode="makevar"/>-->
             <xsl:value-of select="concat($in, $rb, $cr)"/>
             <xsl:value-of select="concat($rb, $cr)"/>
         </xsl:if>
@@ -97,7 +97,7 @@
             </xsl:if>
             <xsl:choose>
                 <xsl:when test="$b='xs:boolean'">
-                    <xsl:text>boolean</xsl:text>
+                    <xsl:text>bool</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:text>string</xsl:text>
