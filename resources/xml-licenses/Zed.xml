@@ -4,17 +4,22 @@
          xmlns:spdx="http://spdx.org/rdf/terms#"
          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
-   <StandardLicenseTemplate>(c) Jim Davies, January 1995
-
-You may copy and distribute this file freely. Any queries and complaints should be forwarded to Jim.Davies@comlab.ox.ac.uk.
-
-If you make any changes to this file, please do not distribute the results under the name `zed-csp.sty'.</StandardLicenseTemplate>
+   <LicenseID>Zed</LicenseID>
+   <Comment/>
+   <SeeAlso>https://fedoraproject.org/wiki/Licensing/Zed</SeeAlso>
+   <Name>Zed License</Name>
+   <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+   <IsOsiApproved>false</IsOsiApproved>
+   <IsFsfLibre>false</IsFsfLibre>
+   <StandardLicenseHeader/>
    <LicenseText>(c) Jim Davies, January 1995
 
 You may copy and distribute this file freely. Any queries and complaints should be forwarded to Jim.Davies@comlab.ox.ac.uk.
 
 If you make any changes to this file, please do not distribute the results under the name `zed-csp.sty'.</LicenseText>
-   <LicenseId>Zed</LicenseId>
-   <Name>Zed License</Name>
-   <SeeAlso>https://fedoraproject.org/wiki/Licensing/Zed</SeeAlso>
+   <StandardLicenseTemplate>(c) Jim Davies, January 1995
+
+You may copy and distribute this file freely. Any queries and complaints should be forwarded to Jim.Davies@comlab.ox.ac.uk.
+
+If you make any changes to this file, please do not distribute the results under the name `zed-csp.sty'.</StandardLicenseTemplate>
 </License>

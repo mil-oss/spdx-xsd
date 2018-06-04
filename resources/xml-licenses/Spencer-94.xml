@@ -4,19 +4,14 @@
          xmlns:spdx="http://spdx.org/rdf/terms#"
          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
-   <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; Copyright 1992, 1993, 1994 Henry Spencer. All rights reserved.&lt;&lt;endOptional&gt;&gt;
-
-This software is not subject to any license of the American Telephone and Telegraph Company or of the Regents of the University of California.
-
-Permission is granted to anyone to use this software for any purpose on any computer system, and to alter it and redistribute it, subject to the following restrictions:
-
-   &lt;&lt;var;name="bullet";original="1.";match=".{0,20}"&gt;&gt; The author is not responsible for the consequences of use of this software, no matter how awful, even if they arise from flaws in it.
-
-   &lt;&lt;var;name="bullet";original="2.";match=".{0,20}"&gt;&gt; The origin of this software must not be misrepresented, either by explicit claim or by omission. Since few users ever read sources, credits must appear in the documentation.
-
-   &lt;&lt;var;name="bullet";original="3.";match=".{0,20}"&gt;&gt; Altered versions must be plainly marked as such, and must not be misrepresented as being the original software. Since few users ever read sources, credits must appear in the documentation.
-
-   &lt;&lt;var;name="bullet";original="4.";match=".{0,20}"&gt;&gt; This notice may not be removed or altered.</StandardLicenseTemplate>
+   <LicenseID>Spencer-94</LicenseID>
+   <Comment/>
+   <SeeAlso>https://fedoraproject.org/wiki/Licensing/Henry_Spencer_Reg-Ex_Library_License</SeeAlso>
+   <Name>Spencer License 94</Name>
+   <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+   <IsOsiApproved>false</IsOsiApproved>
+   <IsFsfLibre>false</IsFsfLibre>
+   <StandardLicenseHeader/>
    <LicenseText>Copyright 1992, 1993, 1994 Henry Spencer. All rights reserved.
 
 This software is not subject to any license of the American Telephone and Telegraph Company or of the Regents of the University of California.
@@ -30,7 +25,17 @@ Permission is granted to anyone to use this software for any purpose on any comp
    3. Altered versions must be plainly marked as such, and must not be misrepresented as being the original software. Since few users ever read sources, credits must appear in the documentation.
 
    4. This notice may not be removed or altered.</LicenseText>
-   <LicenseId>Spencer-94</LicenseId>
-   <Name>Spencer License 94</Name>
-   <SeeAlso>https://fedoraproject.org/wiki/Licensing/Henry_Spencer_Reg-Ex_Library_License</SeeAlso>
+   <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; Copyright 1992, 1993, 1994 Henry Spencer. All rights reserved.&lt;&lt;endOptional&gt;&gt;
+
+This software is not subject to any license of the American Telephone and Telegraph Company or of the Regents of the University of California.
+
+Permission is granted to anyone to use this software for any purpose on any computer system, and to alter it and redistribute it, subject to the following restrictions:
+
+   &lt;&lt;var;name="bullet";original="1.";match=".{0,20}"&gt;&gt; The author is not responsible for the consequences of use of this software, no matter how awful, even if they arise from flaws in it.
+
+   &lt;&lt;var;name="bullet";original="2.";match=".{0,20}"&gt;&gt; The origin of this software must not be misrepresented, either by explicit claim or by omission. Since few users ever read sources, credits must appear in the documentation.
+
+   &lt;&lt;var;name="bullet";original="3.";match=".{0,20}"&gt;&gt; Altered versions must be plainly marked as such, and must not be misrepresented as being the original software. Since few users ever read sources, credits must appear in the documentation.
+
+   &lt;&lt;var;name="bullet";original="4.";match=".{0,20}"&gt;&gt; This notice may not be removed or altered.</StandardLicenseTemplate>
 </License>

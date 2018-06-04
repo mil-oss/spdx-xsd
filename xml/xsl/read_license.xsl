@@ -4,9 +4,7 @@
     <xsl:output method="xml" indent="yes"/>
 
     <xsl:variable name="spdxxsd" select="document('../xsd/spdx-license.xsd')"/>
-
     <xsl:variable name="rdfdir" select="'./../../resources/license-list-data/'"/>
-
     <xsl:variable name="outdir" select="'./../../resources/xml-licenses/'"/>
 
     <xsl:variable name="licensefiles">
@@ -36,12 +34,9 @@
                     <xsl:variable name="n" select="@ref"/>
                     <xsl:variable name="t" select="$spdxxsd/xs:schema/xs:element[@name = $n]/@type"/>
                     <xsl:variable name="b" select="$spdxxsd/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
-
                     <xsl:variable name="rdfn" select="substring-after($spdxxsd/xs:schema/xs:element[@name = $n]/xs:annotation/xs:appinfo/*/@rdf, '#')"/>
                     <xsl:choose>
-                        <xsl:when test="$b = 'xs:boolean' and not($lic/*[substring-after(name(), ':') = $rdfn])">
-                            <xsl:element name="{$n}" xmlns="spdx:xsd::1.0">false</xsl:element>
-                        </xsl:when>
+                        <xsl:when test="$b = 'xs:boolean' and not($lic/*[substring-after(name(), ':') = $rdfn])"/>
                         <xsl:when test="not($lic/*[substring-after(name(), ':') = $rdfn])">
                             <xsl:element name="{$n}" xmlns="spdx:xsd::1.0"/>
                         </xsl:when>
@@ -56,9 +51,7 @@
                     <xsl:variable name="b" select="$spdxxsd/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
                     <xsl:variable name="rdfn" select="substring-after($spdxxsd/xs:schema/xs:element[@name = $n]/xs:annotation/xs:appinfo/*/@rdf, '#')"/>
                     <xsl:choose>
-                        <xsl:when test="$b = 'xs:boolean' and not($lic/*[substring-after(name(), ':') = $rdfn])">
-                            <xsl:element name="{$n}" xmlns="spdx:xsd::1.0">false</xsl:element>
-                        </xsl:when>
+                        <xsl:when test="$b = 'xs:boolean' and not($lic/*[substring-after(name(), ':') = $rdfn])"/>
                         <xsl:when test="not($lic/*[substring-after(name(), ':') = $rdfn])">
                             <xsl:element name="{$n}" xmlns="spdx:xsd::1.0"/>
                         </xsl:when>
@@ -82,7 +75,7 @@
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="$match/*/@name">
-                <xsl:element name="{$match/*/@name}" xmlns="spdx:xsd::1.0">
+                <xsl:element name="{$n}" xmlns="spdx:xsd::1.0">
                     <xsl:apply-templates select="text()" mode="readrdf"/>
                     <xsl:apply-templates select="*" mode="readrdf"/>
                 </xsl:element>

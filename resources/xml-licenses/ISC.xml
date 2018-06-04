@@ -4,15 +4,15 @@
          xmlns:spdx="http://spdx.org/rdf/terms#"
          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
-   <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; &lt;&lt;var;name="title";original="ISC License";match="(The )?ISC License( \(ISC[L]?\))?:?"&gt;&gt;&lt;&lt;endOptional&gt;&gt;
-
-Copyright (c) &lt;&lt;var;name="copyright";original="2004-2010 by Internet Systems Consortium, Inc. ("ISC")
-
-Copyright (c) 1995-2003 by Internet Software Consortium";match=".+"&gt;&gt;
-
-Permission to use, copy, modify, and&lt;&lt;beginOptional&gt;&gt; /or&lt;&lt;endOptional&gt;&gt; distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
-
-THE SOFTWARE IS PROVIDED "AS IS" AND &lt;&lt;var;name="copyrightHolder";original="ISC";match=".+"&gt;&gt; DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL &lt;&lt;var;name="copyrightHolderLiability";original="ISC";match=".+"&gt;&gt; BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</StandardLicenseTemplate>
+   <LicenseID>ISC</LicenseID>
+   <Comment/>
+   <SeeAlso>http://www.opensource.org/licenses/ISC</SeeAlso>
+   <SeeAlso>https://www.isc.org/downloads/software-support-policy/isc-license/</SeeAlso>
+   <Name>ISC License</Name>
+   <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+   <IsOsiApproved>true</IsOsiApproved>
+   <IsFsfLibre>true</IsFsfLibre>
+   <StandardLicenseHeader/>
    <LicenseText>ISC License
 
 Copyright (c) 2004-2010 by Internet Systems Consortium, Inc. ("ISC")
@@ -22,10 +22,13 @@ Copyright (c) 1995-2003 by Internet Software Consortium
 Permission to use, copy, modify, and /or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
 
 THE SOFTWARE IS PROVIDED "AS IS" AND ISC DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL ISC BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</LicenseText>
-   <IsOsiApproved>true</IsOsiApproved>
-   <IsFsfLibre>true</IsFsfLibre>
-   <LicenseId>ISC</LicenseId>
-   <Name>ISC License</Name>
-   <SeeAlso>http://www.opensource.org/licenses/ISC</SeeAlso>
-   <SeeAlso>https://www.isc.org/downloads/software-support-policy/isc-license/</SeeAlso>
+   <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; &lt;&lt;var;name="title";original="ISC License";match="(The )?ISC License( \(ISC[L]?\))?:?"&gt;&gt;&lt;&lt;endOptional&gt;&gt;
+
+Copyright (c) &lt;&lt;var;name="copyright";original="2004-2010 by Internet Systems Consortium, Inc. ("ISC")
+
+Copyright (c) 1995-2003 by Internet Software Consortium";match=".+"&gt;&gt;
+
+Permission to use, copy, modify, and&lt;&lt;beginOptional&gt;&gt; /or&lt;&lt;endOptional&gt;&gt; distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND &lt;&lt;var;name="copyrightHolder";original="ISC";match=".+"&gt;&gt; DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL &lt;&lt;var;name="copyrightHolderLiability";original="ISC";match=".+"&gt;&gt; BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.</StandardLicenseTemplate>
 </License>

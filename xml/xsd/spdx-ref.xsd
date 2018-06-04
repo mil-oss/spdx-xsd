@@ -1490,7 +1490,7 @@
                <xs:element ref="Comment" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="Example" maxOccurs="1"/>
                <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="SeeAlso" minOccurs="0"/>
+               <xs:element ref="SeeAlso" minOccurs="0" maxOccurs="unbounded"/>
                <xs:element ref="LicenseExceptionID" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="LicenseExceptionAugmentationPoint"
                            minOccurs="0"
@@ -2045,7 +2045,7 @@
             <xs:sequence>
                <xs:element ref="LicenseID" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="Comment" maxOccurs="1"/>
-               <xs:element ref="SeeAlso" minOccurs="0"/>
+               <xs:element ref="SeeAlso" minOccurs="0" maxOccurs="unbounded"/>
                <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="SimpleLicensingInfoAugmentationPoint"
                            minOccurs="0"

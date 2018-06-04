@@ -405,6 +405,9 @@
     <xsl:template match="Restriction" mode="sclass">    
         <xsl:choose>
             <xsl:when test="@xmlname='ArtifactOf'"/>
+            <xsl:when test="@xmlname='SeeAlso'">
+                <xs:element ref="{@xmlname}" minOccurs="0" maxOccurs="unbounded"/>
+            </xsl:when>
             <xsl:when test="@xmlname">
                 <xs:element ref="{@xmlname}">
                     <xsl:copy-of select="@minOccurs"/>

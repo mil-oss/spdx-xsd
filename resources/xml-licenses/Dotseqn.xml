@@ -4,17 +4,22 @@
          xmlns:spdx="http://spdx.org/rdf/terms#"
          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
-   <StandardLicenseTemplate>Copyright (C) 1995 by Donald Arseneau
-
-This file may be freely transmitted and reproduced, but it may not be changed unless the name is changed also (except that you may freely change the paper-size option for \documentclass).
-
-This notice must be left intact.</StandardLicenseTemplate>
+   <LicenseID>Dotseqn</LicenseID>
+   <Comment/>
+   <SeeAlso>https://fedoraproject.org/wiki/Licensing/Dotseqn</SeeAlso>
+   <Name>Dotseqn License</Name>
+   <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+   <IsOsiApproved>false</IsOsiApproved>
+   <IsFsfLibre>false</IsFsfLibre>
+   <StandardLicenseHeader/>
    <LicenseText>Copyright (C) 1995 by Donald Arseneau
 
 This file may be freely transmitted and reproduced, but it may not be changed unless the name is changed also (except that you may freely change the paper-size option for \documentclass).
 
 This notice must be left intact.</LicenseText>
-   <LicenseId>Dotseqn</LicenseId>
-   <Name>Dotseqn License</Name>
-   <SeeAlso>https://fedoraproject.org/wiki/Licensing/Dotseqn</SeeAlso>
+   <StandardLicenseTemplate>Copyright (C) 1995 by Donald Arseneau
+
+This file may be freely transmitted and reproduced, but it may not be changed unless the name is changed also (except that you may freely change the paper-size option for \documentclass).
+
+This notice must be left intact.</StandardLicenseTemplate>
 </License>

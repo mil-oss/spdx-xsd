@@ -4,13 +4,15 @@
          xmlns:spdx="http://spdx.org/rdf/terms#"
          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
-   <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; Fair License&lt;&lt;endOptional&gt;&gt;
-
-&lt;Copyright Information&gt;
-
-Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
-
-DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.</StandardLicenseTemplate>
+   <LicenseID>Fair</LicenseID>
+   <Comment/>
+   <SeeAlso>http://www.opensource.org/licenses/Fair</SeeAlso>
+   <SeeAlso>http://fairlicense.org/</SeeAlso>
+   <Name>Fair License</Name>
+   <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+   <IsOsiApproved>true</IsOsiApproved>
+   <IsFsfLibre>false</IsFsfLibre>
+   <StandardLicenseHeader/>
    <LicenseText>Fair License
 
 &lt;Copyright Information&gt;
@@ -18,9 +20,11 @@ DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.</StandardLicenseTemplate>
 Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
 
 DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.</LicenseText>
-   <IsOsiApproved>true</IsOsiApproved>
-   <LicenseId>Fair</LicenseId>
-   <Name>Fair License</Name>
-   <SeeAlso>http://www.opensource.org/licenses/Fair</SeeAlso>
-   <SeeAlso>http://fairlicense.org/</SeeAlso>
+   <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; Fair License&lt;&lt;endOptional&gt;&gt;
+
+&lt;Copyright Information&gt;
+
+Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
+
+DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.</StandardLicenseTemplate>
 </License>
