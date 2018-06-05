@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<License xmlns="spdx:xsd::1.0">
+  <LicenseID>dvipdfm</LicenseID>
+  <Comment/>
+  <SeeAlso>https://fedoraproject.org/wiki/Licensing/dvipdfm</SeeAlso>
+  <Name>dvipdfm License</Name>
+  <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+  <IsOsiApproved>false</IsOsiApproved>
+  <IsFsfLibre>false</IsFsfLibre>
+  <StandardLicenseHeader/>
+  <LicenseText>A modified version of this file may be distributed, but it should be distributed with a *different* name. Changed files must be distributed *together with a complete and unchanged* distribution of these files.</LicenseText>
+  <StandardLicenseTemplate>A modified version of this file may be distributed, but it should be distributed with a *different* name. Changed files must be distributed *together with a complete and unchanged* distribution of these files.</StandardLicenseTemplate>
+</License>

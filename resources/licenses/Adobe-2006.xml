@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<License xmlns="spdx:xsd::1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spdx="http://spdx.org/rdf/terms#" xsi:schemaLocation="spdx:xsd::1.0 https://spdx-xsd.specchain.org/file/spdx-license.xsd">
+<License xmlns="spdx:xsd::1.0">
   <LicenseID>Adobe-2006</LicenseID>
   <Comment/>
   <SeeAlso>https://fedoraproject.org/wiki/Licensing/AdobeLicense</SeeAlso>

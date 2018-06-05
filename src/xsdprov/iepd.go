@@ -155,7 +155,7 @@ func GenerateResource(xslname string, xmlname string, resultname string) (ProvEn
 	check(err)
 	ferr := writeFile(resulTpath, doc)
 	check(ferr)
-	tempdigests[resultname] = spaceMap(getHash(resulTpath, "Sha256"))
+	tempdigests[resultname] = spaceMap(GetHash(resulTpath, "Sha256"))
 	tempfiles[resultname] = resulTpath
 	pe.Digest = tempdigests[resultname]
 	pe.Status = "Pass"
@@ -175,7 +175,7 @@ func GenerateResourceParam(xslname string, xmlname string, resultname string, te
 	check(err)
 	ferr := writeFile(resulTpath, doc)
 	check(ferr)
-	tempdigests[resultname] = spaceMap(getHash(resulTpath, "Sha256"))
+	tempdigests[resultname] = spaceMap(GetHash(resulTpath, "Sha256"))
 	tempfiles[resultname] = resulTpath
 	pe.Digest = tempdigests[resultname]
 	pe.Status = "Pass"
@@ -209,7 +209,7 @@ func MarshalXML(srcpath string, desTpath string) ProvEntry {
 	writeStructXML(tempfiles[ft], s)
 	pe := provEntry("Marshal Data", tempfiles[ft])
 	pe.Status = "Pass"
-	pe.Digest = spaceMap(getHash(tempfiles[ft], "Sha256"))
+	pe.Digest = spaceMap(GetHash(tempfiles[ft], "Sha256"))
 	return pe
 }
 
@@ -264,7 +264,7 @@ func loadRemote(name string, path string, link string) ProvEntry {
 	check(err)
 	pe.Status = "Pass"
 	pe.Message = "Loaded Remote Resource"
-	tempdigests[name] = spaceMap(getHash(refpath, "Sha256"))
+	tempdigests[name] = spaceMap(GetHash(refpath, "Sha256"))
 	pe.Digest = tempdigests[name]
 	return pe
 }

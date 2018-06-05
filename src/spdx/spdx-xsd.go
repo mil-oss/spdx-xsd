@@ -8,8 +8,8 @@ var Tpath = "/tmp/IEPD/iepd/"
 func main() {
 	xsdprov.Setup(Tpath, Resources, Resdirectories, NewLicense())
 	MakeLicenses(Resources, Tpath)
-	//xsdprov.BuildIep()
-	//xsdprov.StartWeb(Tpath)
+	xsdprov.BuildIep()
+	xsdprov.StartWeb(Tpath)
 }
 
 // Resources ...
@@ -37,6 +37,7 @@ var Resources = map[string]string{
 	"resources.json":           "json/resources.json",
 	"make_license.xsl":         "xml/xsl/make_license.xsl",
 	"licenses.rdf":             "resources/licenses.rdf",
+	"licenses.json":            "resources/licenses.json",
 }
 
 // Resdirectories ...

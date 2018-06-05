@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<License xmlns="spdx:xsd::1.0">
+  <LicenseID>Zed</LicenseID>
+  <Comment/>
+  <SeeAlso>https://fedoraproject.org/wiki/Licensing/Zed</SeeAlso>
+  <Name>Zed License</Name>
+  <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+  <IsOsiApproved>false</IsOsiApproved>
+  <IsFsfLibre>false</IsFsfLibre>
+  <StandardLicenseHeader/>
+  <LicenseText>(c) Jim Davies, January 1995
+
+You may copy and distribute this file freely. Any queries and complaints should be forwarded to Jim.Davies@comlab.ox.ac.uk.
+
+If you make any changes to this file, please do not distribute the results under the name `zed-csp.sty'.</LicenseText>
+  <StandardLicenseTemplate>(c) Jim Davies, January 1995
+
+You may copy and distribute this file freely. Any queries and complaints should be forwarded to Jim.Davies@comlab.ox.ac.uk.
+
+If you make any changes to this file, please do not distribute the results under the name `zed-csp.sty'.</StandardLicenseTemplate>
+</License>

@@ -43,6 +43,7 @@ func StartWeb(tmppath string) {
 	router.Handle("/", index())
 	router.Handle("/update", update())
 	router.Handle("/file/", getResource())
+	router.Handle("/license/", getLicense())
 	router.Handle("/iepd/", getResource())
 	router.Handle("/dload", dload())
 	router.Handle("/validate", validate())
@@ -123,8 +124,6 @@ func update() http.Handler {
 func getResource() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
-			var p = filepath.Base(r.URL.Path)
-			f, err := ioutil.ReadFile(Tpath + resources[p])
 			check(err)
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -132,12 +131,34 @@ func getResource() http.Handler {
 			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
 			w.Header().Set("Pragma", "no-cache")
 			w.Header().Set("X-Accel-Expires", "0")
+			var p = filepath.Base(r.URL.Path)
+			f, err := ioutil.ReadFile(Tpath + resources[p])
+			check(err)
 			w.Write(f)
+
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
+func getLicense() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if atomic.LoadInt32(&healthy) == 1 {
+			check(err)
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
+			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+			w.Header().Set("Pragma", "no-cache")
+			w.Header().Set("X-Accel-Expires", "0")
+			var p = filepath.Base(r.URL.Path)
+			f, err := ioutil.ReadFile(Tpath + "resources/licenses/" + p)
+			check(err)
+			w.Write(f)
 
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
 func verify() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
@@ -208,7 +229,6 @@ func transform() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-
 func dload() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -221,7 +241,6 @@ func dload() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-
 func logging(logger *log.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

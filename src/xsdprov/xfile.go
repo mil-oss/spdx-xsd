@@ -151,7 +151,7 @@ func getDigests(fileslist map[string]string, dir string, algo string) map[string
 		var path = dir + res
 		//log.Println(path)
 		if fileExists(path) {
-			digests[r] = getHash(path, algo)
+			digests[r] = GetHash(path, algo)
 		}
 	}
 	return digests
@@ -196,7 +196,9 @@ func hashFile(fname string, algo string) string {
 	}
 	return "Error"
 }
-func getHash(fname string, algo string) string {
+
+//GetHash ...
+func GetHash(fname string, algo string) string {
 	file, err := os.OpenFile(fname, os.O_RDONLY, 0666)
 	if err != nil {
 		log.Fatal(err)

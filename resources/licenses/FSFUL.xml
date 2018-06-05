@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<License xmlns="spdx:xsd::1.0">
+  <LicenseID>FSFUL</LicenseID>
+  <Comment/>
+  <SeeAlso>https://fedoraproject.org/wiki/Licensing/FSF_Unlimited_License</SeeAlso>
+  <Name>FSF Unlimited License</Name>
+  <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+  <IsOsiApproved>false</IsOsiApproved>
+  <IsFsfLibre>false</IsFsfLibre>
+  <StandardLicenseHeader/>
+  <LicenseText>Copyright (C) 1992-1996, 1998-2012 Free Software Foundation, Inc.
+
+This configure script is free software; the Free Software Foundation gives unlimited permission to copy, distribute and modify it.</LicenseText>
+  <StandardLicenseTemplate>Copyright (C) 1992-1996, 1998-2012 Free Software Foundation, Inc.
+
+This configure script is free software; the Free Software Foundation gives unlimited permission to copy, distribute and modify it.</StandardLicenseTemplate>
+</License>

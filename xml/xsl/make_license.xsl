@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:spdx="http://spdx.org/rdf/terms#"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:exsl="http://exslt.org/common" exclude-result-prefixes="xs rdf exsl" version="1.0">
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:exsl="http://exslt.org/common" exclude-result-prefixes="xs rdf exsl spdx" version="1.0">
     <xsl:output method="xml" indent="yes"/>
 
     <xsl:param name="spdxxsd" select="document('../xsd/spdx-license.xsd')"/>
@@ -14,7 +14,7 @@
 
     <xsl:template match="spdx:License">
         <xsl:variable name="lic" select="."/>
-        <License xmlns="spdx:xsd::1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="spdx:xsd::1.0 https://spdx-xsd.specchain.org/file/spdx-license.xsd">
+        <License xmlns="spdx:xsd::1.0">
             <xsl:for-each select="$simpleLicenseType/xs:complexContent/xs:extension/xs:sequence/xs:element">
                 <xsl:variable name="r" select="@ref"/>
                 <xsl:variable name="t" select="$spdxxsd/xs:schema/xs:element[@name = $r]/@type"/>

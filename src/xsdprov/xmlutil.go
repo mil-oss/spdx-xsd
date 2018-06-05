@@ -57,7 +57,7 @@ func ValidateXML(validationdata ValidationData) (bool, []error) {
 	log.Println("xsd: " + validationdata.XSDName)
 	var xsddoc, derr = xsd.ParseFromFile(Tpath + resources[validationdata.XSDName])
 	check(derr)
-	ioutil.ReadFile(validationdata.XMLPath)
+	//ioutil.ReadFile(validationdata.XMLPath)
 	doc, err := libxml2.ParseString(validationdata.XMLString)
 	check(err)
 	if err := xsddoc.Validate(doc); err != nil {
