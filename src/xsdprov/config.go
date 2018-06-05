@@ -16,6 +16,7 @@ type Cfg struct {
 	Testlink string `json:"testlink,omitempty"`
 	Homeurl  string `json:"homeurl,omitempty"`
 	Port     string `json:"port,omitempty"`
+	Redirect string `json:"redirect,omitempty"`
 }
 
 func getConfig() Cfg {

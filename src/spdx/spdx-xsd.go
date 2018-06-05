@@ -1,11 +1,15 @@
 package main
 
-import (
-	"xsdprov"
-)
+import "xsdprov"
+
+//Tpath ...
+var Tpath = "/tmp/IEPD/iepd/"
 
 func main() {
-	xsdprov.Setup(Resources, Resdirectories, NewLicense())
+	xsdprov.Setup(Tpath, Resources, Resdirectories, NewLicense())
+	MakeLicenses(Resources, Tpath)
+	//xsdprov.BuildIep()
+	//xsdprov.StartWeb(Tpath)
 }
 
 // Resources ...
@@ -31,17 +35,19 @@ var Resources = map[string]string{
 	"spdx-xsd.go":              "src/spdx/spdx-xsd.go",
 	"provenance_report.json":   "resources/reports/provenance_report.json",
 	"resources.json":           "json/resources.json",
+	"make_license.xsl":         "xml/xsl/make_license.xsl",
+	"licenses.rdf":             "resources/licenses.rdf",
 }
 
 // Resdirectories ...
 var Resdirectories = map[string]string{
-	"niem":     "xml/xsd/ext/niem",
-	"w3c":      "xml/xsd/ext/w3c",
-	"xsl":      "xml/xsl",
-	"xsd":      "xml/xsd",
-	"json":     "json",
-	"instance": "xml/instance",
-	"licences": "resources/xml-licenses",
-	"spdx":     "src/spdx",
-	"xsdprov":  "src/xsdprov",
+	"niem":      "xml/xsd/ext/niem",
+	"w3c":       "xml/xsd/ext/w3c",
+	"xsl":       "xml/xsl",
+	"xsd":       "xml/xsd",
+	"json":      "json",
+	"instance":  "xml/instance",
+	"resources": "resources",
+	"spdx":      "src/spdx",
+	"xsdprov":   "src/xsdprov",
 }

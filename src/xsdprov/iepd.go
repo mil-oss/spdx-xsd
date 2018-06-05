@@ -32,7 +32,7 @@ func BuildIep() (map[int64]ProvEntry, []error, error) {
 }
 
 func zipIEPD() {
-	cerr := compress(tpath, "/tmp/IEPD/"+name+".zip")
+	cerr := compress(Tpath, "/tmp/IEPD/"+name+".zip")
 	check(cerr)
 }
 
@@ -50,7 +50,7 @@ func resrcJSON() []byte {
 	check(ferr)
 	wferr := writeFile(resources["resources.json"], rs)
 	check(wferr)
-	rsferr := writeFile(tpath+resources["resources.json"], rs)
+	rsferr := writeFile(Tpath+resources["resources.json"], rs)
 	check(rsferr)
 	return rs
 }
@@ -58,8 +58,8 @@ func resrcJSON() []byte {
 func provenanceRpt() []byte {
 	pr, err := json.Marshal(provreport)
 	check(err)
-	log.Println(tpath + resources["provenance_report.json"])
-	ferr := writeFile(tpath+resources["provenance_report.json"], pr)
+	log.Println(Tpath + resources["provenance_report.json"])
+	ferr := writeFile(Tpath+resources["provenance_report.json"], pr)
 	check(ferr)
 	return pr
 }
@@ -68,30 +68,30 @@ func getSourceResources() {
 	log.Println("getSourceResources")
 	//Compare local copy of Ref XSD to Authoritative copy on GitHub
 	var snr = "ref.xsd"
-	tempfiles[snr] = tpath + resources[snr]
-	pe := loadRemote(snr, tpath, reflink)
+	tempfiles[snr] = Tpath + resources[snr]
+	pe := loadRemote(snr, Tpath, reflink)
 	provreport[time.Now().UnixNano()] = pe
 	ped := checkDigest(resources[snr], pe.Digest, tempdigests[snr])
 	provreport[time.Now().UnixNano()] = ped
 	if ped.Status == "Fail" {
-		CopyFile(tpath+resources[snr], resources[snr])
-		pcp := loadRemote(snr, tpath, reflink)
+		CopyFile(Tpath+resources[snr], resources[snr])
+		pcp := loadRemote(snr, Tpath, reflink)
 		pcp.Message = "Resource Updated"
 		provreport[time.Now().UnixNano()] = pcp
 	}
 	//Test Data
 	var tdx = "test_data.xml"
-	pex := loadRemote(tdx, tpath, testlink)
+	pex := loadRemote(tdx, Tpath, testlink)
 	provreport[time.Now().UnixNano()] = pex
 	pedx := checkDigest(resources[tdx], pex.Digest, tempdigests[tdx])
 	provreport[time.Now().UnixNano()] = pedx
 	if pedx.Status == "Fail" {
-		CopyFile(tpath+resources[tdx], resources[tdx])
-		tcp := loadRemote(tdx, tpath, testlink)
+		CopyFile(Tpath+resources[tdx], resources[tdx])
+		tcp := loadRemote(tdx, Tpath, testlink)
 		tcp.Message = "Resource Updated"
 		provreport[time.Now().UnixNano()] = tcp
 	}
-	tempfiles[tdx] = tpath + resources[tdx]
+	tempfiles[tdx] = Tpath + resources[tdx]
 }
 
 func generateResources() {
@@ -119,7 +119,7 @@ func generateResources() {
 	provreport[time.Now().UnixNano()], err = GenerateResource("go-test-gen.xsl", "iep.xsd", "xsd-test.go")
 	check(err)
 	//Marshal instance
-	provreport[time.Now().UnixNano()] = MarshalXML(tpath+resources["test_instance.xml"], resources["test_instance-golang.xml"])
+	provreport[time.Now().UnixNano()] = MarshalXML(Tpath+resources["test_instance.xml"], resources["test_instance-golang.xml"])
 }
 
 func validateResources() {
@@ -148,15 +148,15 @@ func validateResources() {
 //GenerateResource ... generate IepXsd using XSLT
 func GenerateResource(xslname string, xmlname string, resultname string) (ProvEntry, error) {
 	log.Println("GenerateResource: " + resultname + "  XML Doc " + xmlname)
-	pe := provEntry("GenerateResource", tpath+resources[resultname])
-	xslpath, xmlpath, resultpath := getPaths(xslname, xmlname, resultname)
+	pe := provEntry("GenerateResource", Tpath+resources[resultname])
+	xslpath, xmlpath, resulTpath := getPaths(xslname, xmlname, resultname)
 	pe.XslPath = xslpath
 	doc, err := doTransform(xslpath, xmlpath)
 	check(err)
-	ferr := writeFile(resultpath, doc)
+	ferr := writeFile(resulTpath, doc)
 	check(ferr)
-	tempdigests[resultname] = spaceMap(getHash(resultpath, "Sha256"))
-	tempfiles[resultname] = resultpath
+	tempdigests[resultname] = spaceMap(getHash(resulTpath, "Sha256"))
+	tempfiles[resultname] = resulTpath
 	pe.Digest = tempdigests[resultname]
 	pe.Status = "Pass"
 	if err != nil {
@@ -168,15 +168,15 @@ func GenerateResource(xslname string, xmlname string, resultname string) (ProvEn
 //GenerateResourceParam ... generate IepXsd using XSLT
 func GenerateResourceParam(xslname string, xmlname string, resultname string, testd string) ProvEntry {
 	log.Println("GenerateResourceParam: " + resultname + "  XML Doc " + xmlname)
-	pe := provEntry("GenerateResource", tpath+resources[resultname])
-	xslpath, xmlpath, resultpath := getPaths(xslname, xmlname, resultname)
+	pe := provEntry("GenerateResource", Tpath+resources[resultname])
+	xslpath, xmlpath, resulTpath := getPaths(xslname, xmlname, resultname)
 	pe.XslPath = xslpath
 	doc, err := doTransformParam(xslpath, xmlpath, testd)
 	check(err)
-	ferr := writeFile(resultpath, doc)
+	ferr := writeFile(resulTpath, doc)
 	check(ferr)
-	tempdigests[resultname] = spaceMap(getHash(resultpath, "Sha256"))
-	tempfiles[resultname] = resultpath
+	tempdigests[resultname] = spaceMap(getHash(resulTpath, "Sha256"))
+	tempfiles[resultname] = resulTpath
 	pe.Digest = tempdigests[resultname]
 	pe.Status = "Pass"
 	if err != nil {
@@ -186,9 +186,9 @@ func GenerateResourceParam(xslname string, xmlname string, resultname string, te
 }
 
 func getPaths(xslname string, xmlname string, resultname string) (string, string, string) {
-	var xslpath = tpath + resources[xslname]
-	var xmlpath = tpath + resources[xmlname]
-	var resultpath = tpath + resources[resultname]
+	var xslpath = Tpath + resources[xslname]
+	var xmlpath = Tpath + resources[xmlname]
+	var resulTpath = Tpath + resources[resultname]
 	if val, ok := tempfiles[xslname]; ok {
 		xslpath = val
 	}
@@ -197,15 +197,15 @@ func getPaths(xslname string, xmlname string, resultname string) (string, string
 	}
 	log.Println("xslpath: " + xslpath)
 	log.Println("xmlpath: " + xmlpath)
-	log.Println("resultpath: " + resultpath)
-	return xslpath, xmlpath, resultpath
+	log.Println("resulTpath: " + resulTpath)
+	return xslpath, xmlpath, resulTpath
 }
 
 //MarshalXML ...
-func MarshalXML(srcpath string, destpath string) ProvEntry {
+func MarshalXML(srcpath string, desTpath string) ProvEntry {
 	var s = readStructXML(srcpath, Datastruct)
-	var ft = filepath.Base(destpath)
-	tempfiles[ft] = tpath + "/" + destpath
+	var ft = filepath.Base(desTpath)
+	tempfiles[ft] = Tpath + "/" + desTpath
 	writeStructXML(tempfiles[ft], s)
 	pe := provEntry("Marshal Data", tempfiles[ft])
 	pe.Status = "Pass"
@@ -215,8 +215,8 @@ func MarshalXML(srcpath string, destpath string) ProvEntry {
 
 //ValidateFile ... validate XML using XSD
 func ValidateFile(xmlname string, xsdname string) (pe ProvEntry, errs []error, err error) {
-	var xsdpath = tpath + resources[xsdname]
-	var xmlpath = tpath + resources[xmlname]
+	var xsdpath = Tpath + resources[xsdname]
+	var xmlpath = Tpath + resources[xmlname]
 	if val, ok := tempfiles[xsdname]; ok {
 		xsdpath = val
 	}

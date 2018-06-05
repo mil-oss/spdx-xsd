@@ -3,6 +3,7 @@
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-ref.xsd",
     "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/test_data.xml",
     "license-list":"https://raw.githubusercontent.com/spdx/license-list-data/master/rdfxml/licenses.rdf",
-    "homeurl":"http://localhost",
+    "homeurl":"http://spdx.specchain.org",
+    "redirect":"http://spdx-xsd.specchain.org",
     "port":":8080"
 }

@@ -17,6 +17,7 @@ ADD src /go/src
 #ADD resources/ /resources/
 
 WORKDIR /go/src/spdx
+ADD  config /go/src/config
 ADD . .
 
 #build the binary with debug information removed
