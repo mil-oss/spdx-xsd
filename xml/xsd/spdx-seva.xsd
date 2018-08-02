@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xs:schema xmlns="spdx-seva:xsd::1.0" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:spd="spdx:xsd::1.0" 
+  xmlns:seva="urn:seva::1.0" 
+  attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx-seva:xsd::1.0" version="1">
+  <xs:import schemaLocation="seva.xsd" namespace="urn:seva::1.0"/>
+  <xs:import schemaLocation="spdx-doc.xsd" namespace="spdx:xsd::1.0"/>
+  <xs:annotation>
+    <xs:documentation>Software Evidence Archive (SEvA) in an SPDX Document.</xs:documentation>
+  </xs:annotation>
+  
+  <xs:element name="SPDXSoftwareEvidenceArchive" type="SPDXSoftwareEvidenceArchiveType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>SPDX Software Evidence Archive in an SPDX Document</xs:documentation>
+      <xs:appinfo>
+        <Element name="SPDX Software Evidence Archive"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  
+  <xs:complexType name="SPDXSoftwareEvidenceArchiveType">
+    <xs:annotation>
+      <xs:documentation>SPDX Software Evidence Archive in an SPDX Document</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="SPDX Software Evidence Archive"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="spd:SpdxDocumentType">
+        <xs:sequence>
+          <xs:element ref="seva:SoftwareEvidenceArchive"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+
+</xs:schema>

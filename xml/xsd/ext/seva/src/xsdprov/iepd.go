@@ -12,6 +12,8 @@ import (
 )
 
 var (
+	reflink      = "https://raw.githubusercontent.com/ion-channel/SEVA/master/ref_xsd/ref.xsd?token=AAVJcOXbi1SCgAcKSmP3st-jKYmxRpWxks5bYJi4wA%3D%3D"
+	testlink     = "https://raw.githubusercontent.com/ion-channel/SEVA/master/iepd/xml/instance/test_data.xml?token=AAVJcOJMzUXTo-fdpYsd3VZv0UYZSEUpks5bYJl4wA%3D%3D"
 	testinstance string
 	iepderr      error
 	valerr       []error
@@ -20,8 +22,6 @@ var (
 
 //BuildIep ... Generate XML, Code and Test Artifacts
 func BuildIep() (map[int64]ProvEntry, []error, error) {
-	log.Println("BuildIep")
-	log.Println("reflink " + reflink)
 	getSourceResources()
 	generateResources()
 	validateResources()
@@ -32,7 +32,7 @@ func BuildIep() (map[int64]ProvEntry, []error, error) {
 }
 
 func zipIEPD() {
-	cerr := compress(tpath, "/tmp/IEPD/"+name+".zip")
+	cerr := compress(tpath+"/iepd", tpath+"/SevA.zip")
 	check(cerr)
 }
 
@@ -65,16 +65,16 @@ func provenanceRpt() []byte {
 }
 
 func getSourceResources() {
-	log.Println("getSourceResources")
+	log.Println("Load Source Resources")
 	//Compare local copy of Ref XSD to Authoritative copy on GitHub
 	var snr = "ref.xsd"
 	tempfiles[snr] = tpath + resources[snr]
 	pe := loadRemote(snr, tpath, reflink)
 	provreport[time.Now().UnixNano()] = pe
-	ped := checkDigest(resources[snr], pe.Digest, tempdigests[snr])
+	ped := checkDigest(path+resources[snr], pe.Digest, tempdigests[snr])
 	provreport[time.Now().UnixNano()] = ped
 	if ped.Status == "Fail" {
-		CopyFile(tpath+resources[snr], resources[snr])
+		CopyFile(tpath+resources[snr], path+resources[snr])
 		pcp := loadRemote(snr, tpath, reflink)
 		pcp.Message = "Resource Updated"
 		provreport[time.Now().UnixNano()] = pcp
@@ -83,10 +83,10 @@ func getSourceResources() {
 	var tdx = "test_data.xml"
 	pex := loadRemote(tdx, tpath, testlink)
 	provreport[time.Now().UnixNano()] = pex
-	pedx := checkDigest(resources[tdx], pex.Digest, tempdigests[tdx])
+	pedx := checkDigest(path+resources[tdx], pex.Digest, tempdigests[tdx])
 	provreport[time.Now().UnixNano()] = pedx
 	if pedx.Status == "Fail" {
-		CopyFile(tpath+resources[tdx], resources[tdx])
+		CopyFile(tpath+resources[tdx], path+resources[tdx])
 		tcp := loadRemote(tdx, tpath, testlink)
 		tcp.Message = "Resource Updated"
 		provreport[time.Now().UnixNano()] = tcp
@@ -96,87 +96,51 @@ func getSourceResources() {
 
 func generateResources() {
 	log.Println("Generate Resources")
-	//GenerateResource - spdx-license.xsd - Information Exchange Package XML Schema
-	provreport[time.Now().UnixNano()], err = GenerateResource("spdx-license-iep.xsl", "spdx-ref.xsd", "spdx-license.xsd")
+	//GenerateResource - iep.xsd - Information Exchange Package XML Schema
+	provreport[time.Now().UnixNano()], err = GenerateResource("iep_xsd.xsl", "ref.xsd", "iep.xsd")
 	check(err)
-	//GenerateResource - spdx-doc.xsd - Information Exchange Package XML Schema
-	provreport[time.Now().UnixNano()], err = GenerateResource("spdx-doc-iep.xsl", "spdx-ref.xsd", "spdx-doc.xsd")
-	check(err)
-	//license_test_instance.xml - Information Exchange Package XML Instance
-	provreport[time.Now().UnixNano()], err = GenerateResource("spdx-license-.xsl", "spdx-license.xsd", "spdx-license-test-instance.xml")
-	check(err)
-	//doc_test_instance.xml - Information Exchange Package XML Instance
-	provreport[time.Now().UnixNano()], err = GenerateResource("spdx-doc-.xsl", "spdx-doc.xsd", "spdx-doc-test-instance.xml")
+	//test_instance.xml - Information Exchange Package XML Instance
+	provreport[time.Now().UnixNano()], err = GenerateResource("xml_instance.xsl", "iep.xsd", "test_instance.xml")
 	check(err)
 	//JSON
 	//iep.ref.json - JSON representation of ref.xsd
-	provreport[time.Now().UnixNano()], err = GenerateResource("xsd_json.xsl", "spdx-ref.xsd", "spdx-ref_xsd.json")
+	provreport[time.Now().UnixNano()], err = GenerateResource("xsd_json.xsl", "ref.xsd", "ref_xsd.json")
 	check(err)
-	//iep.xsd.json - JSON representation of spdx-license-iep-xsd
-	provreport[time.Now().UnixNano()], err = GenerateResource("xsd_json.xsl", "spdx-license.xsd", "spdx-license-iep-xsd.json")
+	//iep.xsd.json - JSON representation of iep.xsd
+	provreport[time.Now().UnixNano()], err = GenerateResource("xsd_json.xsl", "iep.xsd", "iep_xsd.json")
 	check(err)
-	//iep.xsd.json - JSON representation of spdx-doc-iep.xsd
-	provreport[time.Now().UnixNano()], err = GenerateResource("xsd_json.xsl", "spdx-doc.xsd", "spdx-doc-iep-xsd.json")
+	//xml.json - JSON representation test_instance.xml
+	provreport[time.Now().UnixNano()], err = GenerateResource("xml_json.xsl", "test_instance.xml", "test_instance.json")
 	check(err)
-	//xml.json - JSON representation license_test_instance.xml
-	provreport[time.Now().UnixNano()], err = GenerateResource("xml_json.xsl", "spdx-license-test_instance.xml", "spdx-license-test-instance.json")
-	check(err)
-	//xml.json - JSON representation doc-test_instance.xml
-	provreport[time.Now().UnixNano()], err = GenerateResource("xml_json.xsl", "spdx-doc-test_instance.xml", "spdx-doc-test_instance.json")
-	check(err)
-	//spdx-license iep.xsd - Golang struct iep.go
-	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen.xsl", "spdx-license.xsd", "spdx-license-struct.go")
-	check(err)
-	//spdx-license iep.xsd - Golang test iep.go
-	provreport[time.Now().UnixNano()], err = GenerateResource("go-test-gen.xsl", "spdx-license.xsd", "xsd-test.go")
-	check(err)
-	//spdx-doc iep.xsd - Golang struct iep.go
-
-	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen.xsl", "spdx-doc.xsd", "spdx-doc-struct.go")
+	//iep.xsd - Golang struct iep.go
+	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen.xsl", "iep.xsd", "xsd-struct.go")
 	check(err)
 	//iep.xsd - Golang test iep.go
-	provreport[time.Now().UnixNano()], err = GenerateResource("go-test-gen.xsl", "spdx-doc.xsd", "spdx-doc-test.go")
+	provreport[time.Now().UnixNano()], err = GenerateResource("go-test-gen.xsl", "iep.xsd", "xsd-test.go")
 	check(err)
 	//Marshal instance
-	provreport[time.Now().UnixNano()] = MarshalXML(tpath+resources["spdx-license-test_instance.xml"], resources["spdx-license-test_instance-golang.xml"])
-	//Marshal instance
-	provreport[time.Now().UnixNano()] = MarshalXML(tpath+resources["spdx-doc-test_instance.xml"], resources["spdx-doc-test_instance-golang.xml"])
+	provreport[time.Now().UnixNano()] = MarshalXML(tpath+resources["test_instance.xml"], resources["test_instance-golang.xml"])
 }
 
 func validateResources() {
 	log.Println("Validate Resources")
 	var errs []error
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-ref.xsd", "XMLSchema.xsd")
+	provreport[time.Now().UnixNano()], errs, err = ValidateFile("ref.xsd", "XMLSchema.xsd")
 	check(err)
 	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-license.xsd", "XMLSchema.xsd")
+	provreport[time.Now().UnixNano()], errs, err = ValidateFile("iep.xsd", "XMLSchema.xsd")
 	check(err)
 	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-doc.xsd", "XMLSchema.xsd")
+	provreport[time.Now().UnixNano()], errs, err = ValidateFile("test_instance.xml", "iep.xsd")
 	check(err)
 	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-license-test_instance.xml", "spdx-license.xsd")
+	provreport[time.Now().UnixNano()], errs, err = ValidateFile("test_instance.xml", "ref.xsd")
 	check(err)
 	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-license-test_instance.xml", "spdx-ref.xsd")
+	provreport[time.Now().UnixNano()], errs, err = ValidateFile("test_instance-golang.xml", "iep.xsd")
 	check(err)
 	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-doc-test_instance.xml", "spdx-doc.xsd")
-	check(err)
-	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-doc-test_instance.xml", "spdx-ref.xsd")
-	check(err)
-	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-license-test_instance-golang", "spdx-license.xsd")
-	check(err)
-	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-license-test_instance-golang", "spdx-ref.xsd")
-	check(err)
-	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-doc-test_instance-golang", "spdx-doc.xsd")
-	check(err)
-	checka(errs)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("spdx-doc-test_instance-golang", "spdx-ref.xsd")
+	provreport[time.Now().UnixNano()], errs, err = ValidateFile("test_instance-golang.xml", "ref.xsd")
 	check(err)
 	checka(errs)
 }
@@ -317,7 +281,6 @@ func checkDigest(fpath string, auth string, test string) ProvEntry {
 	}
 	return pe
 }
-
 func check(e error) error {
 	if e != nil {
 		fmt.Printf("error: %v\n", e)
@@ -325,7 +288,6 @@ func check(e error) error {
 	iepderr = e
 	return e
 }
-
 func checka(e []error) []error {
 	if e != nil {
 		fmt.Printf("error: %v\n", e)

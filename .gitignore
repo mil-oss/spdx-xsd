@@ -1,5 +1,6 @@
 report.html
 .DS_Store
+*.xpr
 bin/
 pkg/
 src/github.com/
