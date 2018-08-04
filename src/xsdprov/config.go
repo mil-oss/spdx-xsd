@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	cfgpath string = "config/xsdsvc.json"
+	cfgpath string = "config/spdx.json"
 )
 
 // Cfg ...
