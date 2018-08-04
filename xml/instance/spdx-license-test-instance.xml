@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<License xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xmlns="spdx:xsd::1.0"
-         xsi:schemaLocation="spdx:xsd::1.0  ../xsd/spdx-license.xsd">
-   <LicenseID>Test string one</LicenseID>
-   <Comment>Test string one</Comment>
-   <SeeAlso>http://anyuri.org</SeeAlso>
-   <Name>Test string one</Name>
-   <IsDeprecatedLicenseID>true</IsDeprecatedLicenseID>
-   <IsOsiApproved>true</IsOsiApproved>
-   <IsFsfLibre>true</IsFsfLibre>
-   <StandardLicenseHeader>Test string one</StandardLicenseHeader>
-   <LicenseText>Test string one</LicenseText>
-   <StandardLicenseTemplate>Test string one</StandardLicenseTemplate>
+<?xml version="1.0"?>
+<License xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="spdx:xsd::1.0" xsi:schemaLocation="spdx:xsd::1.0  ../xsd/spdx-license.xsd">
+  <LicenseID>Test string one</LicenseID>
+  <Comment>Test string one</Comment>
+  <SeeAlso>http://anyuri.org</SeeAlso>
+  <Name>Test string one</Name>
+  <IsDeprecatedLicenseID>true</IsDeprecatedLicenseID>
+  <IsOsiApproved>true</IsOsiApproved>
+  <IsFsfLibre>true</IsFsfLibre>
+  <StandardLicenseHeader>Test string one</StandardLicenseHeader>
+  <LicenseText>Test string one</LicenseText>
+  <StandardLicenseTemplate>Test string one</StandardLicenseTemplate>
 </License>

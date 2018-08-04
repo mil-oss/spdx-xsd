@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="1.0">
     <xsl:output method="xml" indent="yes"/>
 
     <!-- 
@@ -8,7 +9,7 @@
    -->
 
     <xsl:param name="XSD" select="document('../xsd/spdx-doc.xsd')"/>
-    <xsl:param name="TestData" select="'../instance/test_data.xml'"/>
+    <xsl:param name="TestData" select="'../instance/spdx-test-data.xml'"/>
     <xsl:param name="Root" select="'SpdxDocumentType'"/>
     
     <xsl:variable name="testData" select="document($TestData)"/>
@@ -18,11 +19,11 @@
     </xsl:template>
 
     <xsl:template name="main">
-        <xsl:result-document href="../instance/spdx-doc-test-instance.xml">
+        <!--<xsl:result-document href="../instance/spdx-doc-test-instance.xml">
             <xsl:apply-templates select="$XSD/xs:schema/xs:complexType[@name = $Root]" mode="root"/>
-        </xsl:result-document>
-        <!--<xsl:apply-templates select="document('../xsd/spdx-license.xsd')/xs:schema/xs:complexType[@name = $Root]" mode="root"/>-->
-        <!--<xsl:apply-templates select="xs:schema/xs:complexType[@name = $Root]" mode="root"/>-->
+        </xsl:result-document>-->
+        <!--<xsl:apply-templates select="$XSD/xs:schema/xs:complexType[@name = $Root]" mode="root"/>-->
+        <xsl:apply-templates select="xs:schema/xs:complexType[@name = $Root]" mode="root"/>
     </xsl:template>
 
     <xsl:template match="xs:schema/xs:complexType" mode="root">
@@ -30,11 +31,12 @@
         <xsl:variable name="namevar" select="@name"/>
         <xsl:variable name="elname" select="//xs:schema/xs:element[@type = $namevar]/@name"/>
         <xsl:variable name="typevar" select="@type"/>
-        <SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns="spdx:xsd::1.0" xsi:schemaLocation="spdx:xsd::1.0  ../xsd/spdx-doc.xsd">
+        <SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="spdx:xsd::1.0" xsi:schemaLocation="spdx:xsd::1.0  ../xsd/spdx-doc.xsd">
             <xsl:apply-templates select="*[not(name() = 'xsd:annotation')]"/> 
         </SpdxDocument>
     </xsl:template>
+    
+    <!--Recursive Elements-->
     
     <xsl:template match="xs:element[@ref]">
         <xsl:choose>
@@ -112,20 +114,27 @@
     <xsl:template match="xs:sequence">
         <xsl:apply-templates select="*"/>
     </xsl:template>
+    
     <xsl:template match="xs:choice">
         <xsl:apply-templates select="*[2]"/>
     </xsl:template>
+    
     <xsl:template match="xs:complexType">
         <xsl:apply-templates select="*"/>
     </xsl:template>
+    
     <xsl:template match="xs:simpleType">
         <xsl:apply-templates select="*"/>
     </xsl:template>
+    
     <xsl:template match="xs:simpleContent">
         <xsl:apply-templates select="*"/>
     </xsl:template>
+    
     <xsl:template match="xs:complexContent">
         <xsl:apply-templates select="*"/>
     </xsl:template>
+    
     <xsl:template match="text()"/>
+    
 </xsl:stylesheet>

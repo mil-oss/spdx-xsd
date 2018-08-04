@@ -4,8 +4,15 @@ import (
 	"xsdprov"
 )
 
+var testinstances = map[string]string{
+	"spdx-license-test-instance.xml": "spdx-license-test-instance.xml",
+	"spdx-doc-test-instance.xml":     "xml/instance/spdx-doc-test-instance.xml",
+}
+
 func main() {
-	xsdprov.Setup(Resources, Resdirectories, NewLicense())
+	xsdprov.LicenceDatastruct = NewLicense()
+	xsdprov.SPDXDocDatastruct = NewSpdxDocument()
+	xsdprov.Setup(Resources, Resdirectories)
 }
 
 // Resources ...
@@ -21,8 +28,10 @@ var Resources = map[string]string{
 	"spdx-doc-instance.xsl":                 "xml/xsl/spdx-doc-instance.xsl",
 	"xsd-json.xsl":                          "xml/xsl/xsd-json.xsl",
 	"xml-json.xsl":                          "xml/xsl/xml-json.xsl",
-	"go-gen.xsl":                            "xml/xsl/go-gen.xsl",
-	"go-test-gen.xsl":                       "xml/xsl/go-test-gen.xsl",
+	"go-gen-lic.xsl":                        "xml/xsl/go-gen-lic.xsl",
+	"go-gen-lic-test.xsl":                   "xml/xsl/go-gen-lic-test.xsl",
+	"go-gen-doc.xsl":                        "xml/xsl/go-gen-doc.xsl",
+	"go-gen-doc-test.xsl":                   "xml/xsl/go-gen-doc-test.xsl",
 	"spdx-test-data.xml":                    "xml/instance/spdx-test-data.xml",
 	"spdx-license-test-instance.xml":        "xml/instance/spdx-license-test-instance.xml",
 	"spdx-doc-test-instance.xml":            "xml/instance/spdx-doc-test-instance.xml",
@@ -34,9 +43,9 @@ var Resources = map[string]string{
 	"spdx-license-test-instance.json":       "json/spdx-license-test-instance.json",
 	"spdx-doc-test-instance.json":           "json/spdx-doc-test-instance.json",
 	"spdx-license-struct.go":                "src/spdx/spdx-license-struct.go",
-	"spdx-license-test.go":                  "src/spdx/spdx-license-test.go",
+	"spdx-license_test.go":                  "src/spdx/spdx-license_test.go",
 	"spdx-doc-struct.go":                    "src/spdx/spdx-doc-struct.go",
-	"spdx-doc-test.go":                      "src/spdx/spdx-doc-test.go",
+	"spdx-doc_test.go":                      "src/spdx/spdx-doc_test.go",
 	"spdx-xsd.go":                           "src/spdx/spdx-xsd.go",
 	"provenance-report.json":                "resources/reports/provenance-report.json",
 	"resources.json":                        "json/resources.json",

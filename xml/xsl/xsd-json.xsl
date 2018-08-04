@@ -15,7 +15,6 @@
     output: /iepd/json/iep_xsd.json
    -->
 
-
     <!--********************** JSON ********************-->
     <xsl:variable name="q" select="'&quot;'"/>
     <xsl:variable name="a" select='"&apos;"'/>
@@ -289,6 +288,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <!-- Escape the double quote ("). -->
     <xsl:template name="escape-quot-string">
         <xsl:param name="s"/>
@@ -308,6 +308,7 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
+    
     <!-- Replace tab, line feed and/or carriage return by its matching escape code. Can't escape backslash
 		   or double quote here, because they don't replace characters (&#x0; becomes \t), but they prefix
 		   characters (\ becomes \\). Besides, backslash should be seperate anyway, because it should be

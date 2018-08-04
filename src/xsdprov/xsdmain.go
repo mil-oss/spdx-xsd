@@ -22,13 +22,15 @@ var reflink string
 var testlink string
 var port string
 
-//Datastruct ...
-var Datastruct interface{}
+//LicenceDatastruct ...
+var LicenceDatastruct interface{}
+
+//SPDXDocDatastruct ...
+var SPDXDocDatastruct interface{}
 
 //Setup ...
-func Setup(resrces map[string]string, dirs map[string]string, dstruct interface{}) {
+func Setup(resrces map[string]string, dirs map[string]string) {
 	cfg := getConfig()
-	Datastruct = dstruct
 	dbloc = "/tmp/" + cfg.Project
 	temppath = "/tmp/IEPD/iepd"
 	name = cfg.Project

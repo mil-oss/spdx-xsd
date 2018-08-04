@@ -125,22 +125,21 @@ func generateResources() {
 	provreport[time.Now().UnixNano()], err = GenerateResource("xml-json.xsl", "spdx-doc-test-instance.xml", "spdx-doc-test-instance.json")
 	check(err)
 	//spdx-license iep.xsd - Golang struct iep.go
-	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen.xsl", "spdx-license.xsd", "spdx-license-struct.go")
+	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen-lic.xsl", "spdx-license.xsd", "spdx-license-struct.go")
 	check(err)
 	//spdx-license iep.xsd - Golang test iep.go
-	provreport[time.Now().UnixNano()], err = GenerateResource("go-test-gen.xsl", "spdx-license.xsd", "spdx-license-test.go")
+	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen-lic-test.xsl", "spdx-license.xsd", "spdx-license_test.go")
 	check(err)
 	//spdx-doc iep.xsd - Golang struct iep.go
-
-	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen.xsl", "spdx-doc.xsd", "spdx-doc-struct.go")
+	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen-doc.xsl", "spdx-doc.xsd", "spdx-doc-struct.go")
 	check(err)
 	//iep.xsd - Golang test iep.go
-	provreport[time.Now().UnixNano()], err = GenerateResource("go-test-gen.xsl", "spdx-doc.xsd", "spdx-doc-test.go")
+	provreport[time.Now().UnixNano()], err = GenerateResource("go-gen-doc-test.xsl", "spdx-doc.xsd", "spdx-doc_test.go")
 	check(err)
 	//Marshal instance
-	provreport[time.Now().UnixNano()] = MarshalXML(tpath+resources["spdx-license-test-instance.xml"], resources["spdx-license-test-instance-golang.xml"])
+	provreport[time.Now().UnixNano()] = MarshalXML(tpath+resources["spdx-license-test-instance.xml"], resources["spdx-license-test-instance-golang.xml"], LicenceDatastruct)
 	//Marshal instance
-	provreport[time.Now().UnixNano()] = MarshalXML(tpath+resources["spdx-doc-test-instance.xml"], resources["spdx-doc-test-instance-golang.xml"])
+	provreport[time.Now().UnixNano()] = MarshalXML(tpath+resources["spdx-doc-test-instance.xml"], resources["spdx-doc-test-instance-golang.xml"], SPDXDocDatastruct)
 }
 
 func validateResources() {
@@ -238,8 +237,9 @@ func getPaths(xslname string, xmlname string, resultname string) (string, string
 }
 
 //MarshalXML ...
-func MarshalXML(srcpath string, destpath string) ProvEntry {
-	var s = readStructXML(srcpath, Datastruct)
+func MarshalXML(srcpath string, destpath string, dstruct interface{}) ProvEntry {
+	log.Println("MarshalXML: " + srcpath + "  to " + destpath)
+	var s = readStructXML(srcpath, dstruct)
 	var ft = filepath.Base(destpath)
 	tempfiles[ft] = tpath + "/" + destpath
 	writeStructXML(tempfiles[ft], s)

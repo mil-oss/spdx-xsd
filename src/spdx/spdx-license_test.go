@@ -10,15 +10,11 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-var testinstances = map[string]string{
-	"test_instance.xml": "xml/test_instance.xml",
-}
-
 func TestSpdxLicense(t *testing.T) {
 	g := Goblin(t)
 	RegisterFailHandler(func(m string, _ ...int) { g.Fail(m) })
 
-	xf, ferr := ioutil.ReadFile(testinstances["test_instance.xml"])
+	xf, ferr := ioutil.ReadFile(testinstances["spdx-license-test-instance.xml"])
 	if ferr != nil {
 		fmt.Printf(ferr.Error())
 	}

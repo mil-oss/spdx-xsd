@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="2.0">
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="1.0">
     <xsl:output method="xml" indent="yes"/>
     
     <!-- 
@@ -9,7 +9,7 @@
    -->
     
     <xsl:param name="XSD" select="document('../xsd/spdx-license.xsd')"/>
-    <xsl:param name="TestData" select="'../instance/test_data.xml'"/>
+    <xsl:param name="TestData" select="'../instance/spdx-test-data.xml'"/>
     <xsl:param name="Root" select="'LicenseType'"/>
     
     <xsl:template match="/">
@@ -17,11 +17,11 @@
     </xsl:template>
     
     <xsl:template name="main">
-        <xsl:result-document href="../instance/spdx-license-test-instance.xml">
+        <!--<xsl:result-document href="../instance/spdx-license-test-instance.xml">
             <xsl:apply-templates select="$XSD/xs:schema/xs:complexType[@name = $Root]" mode="root"/>
-        </xsl:result-document>
+        </xsl:result-document>-->
         <!--<xsl:apply-templates select="document('../xsd/spdx-license.xsd')/xs:schema/xs:complexType[@name = $Root]" mode="root"/>-->
-        <!--<xsl:apply-templates select="xs:schema/xs:complexType[@name = $Root]" mode="root"/>-->
+        <xsl:apply-templates select="xs:schema/xs:complexType[@name = $Root]" mode="root"/>
     </xsl:template> 
     
     <xsl:template match="xs:schema/xs:complexType" mode="root">

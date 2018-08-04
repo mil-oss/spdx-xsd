@@ -63,8 +63,8 @@
         <xsl:if test="//xs:complexType[@name = $t]//xs:element[@ref]">
             <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
             <xsl:value-of select="concat('//NewSpdxDocument ...', $cr)"/>
-            <xsl:value-of select="concat('func ', 'NewSpdxDocument', '()', $as, $n, $lb, $cr)"/>
-            <xsl:value-of select="concat($in, 'return ', $a, $n, $lb, $cr)"/>
+            <xsl:value-of select="concat('func ', 'NewSpdxDocument', '() ', $as, $t, $lb, $cr)"/>
+            <xsl:value-of select="concat($in, 'return ', $a, $t, $lb, $cr)"/>
             <xsl:if test="@name = $rootname">
                 <xsl:value-of select="concat($in, $in, '// Required for the proper namespacing', $cr)"/>
                 <xsl:value-of select="concat($in, $in, 'AttrXmlnsXsi', ':', $qt, 'http://www.w3.org/2001/XMLSchema-instance', $qt, $cm, $cr)"/>
@@ -91,22 +91,9 @@
         </xsl:variable>
         <xsl:variable name="t" select="/xs:schema/xs:element[@name = $r]/@type"/>
         <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//@base"/>
-        <xsl:variable name="typ">
-            <xsl:if test="@maxOccurs">
-                <xsl:text>[]</xsl:text>
-            </xsl:if>
-            <xsl:choose>
-                <xsl:when test="$b='xs:boolean'">
-                    <xsl:text>bool</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text>string</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
         <xsl:variable name="ptr">
             <xsl:choose>
-                <xsl:when test="@maxOccurs">
+                <xsl:when test="number(@maxOccurs) > 1">
                     <xsl:text/>
                 </xsl:when>
                 <xsl:otherwise>
@@ -114,20 +101,37 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <!--<xsl:variable name="dt">
+        <xsl:variable name="typ">
+            <xsl:if test="number(@maxOccurs) > 1">
+                <xsl:text>[]</xsl:text>
+            </xsl:if>
             <xsl:choose>
-                <xsl:when test="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
-                    <xsl:value-of select="concat($typ, $ptr, $r)"/>
-                    <!-\-<xsl:value-of select="$r"/>-\->
+                <xsl:when test="$b = 'xs:boolean'">
+                    <xsl:text>bool</xsl:text>
                 </xsl:when>
-                <xsl:when test="@maxOccurs">
-                    <xsl:text>[]</xsl:text>
+                <xsl:when test="$b = 'xs:string'">
+                    <xsl:text>string</xsl:text>
+                </xsl:when>
+                <xsl:when test="$b = 'xs:dateTime'">
+                    <xsl:text>string</xsl:text>
+                </xsl:when>
+                <xsl:when test="$b = 'xs:hexBinary'">
+                    <xsl:text>string</xsl:text>
+                </xsl:when>
+                <xsl:when test="$b = 'AlgorithmCodeSimpleType'">
+                    <xsl:text>string</xsl:text>
+                </xsl:when>
+                <xsl:when test="$b = 'AnnotationTypeCodeSimpleType'">
+                    <xsl:text>string</xsl:text>
+                </xsl:when>
+                <xsl:when test="$b = 'RelationshipTypeCodeSimpleType'">
+                    <xsl:text>string</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text>string</xsl:text>
+                    <xsl:value-of select="concat($ptr, $t)"/>
                 </xsl:otherwise>
             </xsl:choose>
-        </xsl:variable>-->
+        </xsl:variable>
         <xsl:variable name="rspcs">
             <xsl:call-template name="mkspc">
                 <xsl:with-param name="spc" select="number($tab) - string-length($r)"/>
@@ -139,7 +143,6 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:value-of select="concat($in, $in, $nr, $rspcs, $typ, $vspcs, $bq, 'xml:', $qt, @ref, $cm, $omitempty, $qt, ' ', $json, $qt, @ref, $cm, $omitempty, $qt, $bq, $cr)"/>
-        
     </xsl:template>
 
     <xsl:template match="xs:schema/xs:element">
@@ -170,89 +173,38 @@
                 <xsl:with-param name="spc" select="number($tab) - string-length('string')"/>
             </xsl:call-template>
         </xsl:variable>
-        <xsl:if test="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
-            <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
-            <xsl:value-of select="concat('//', $n, ' ... ', substring-before(xs:annotation/xs:documentation, '.'), $cr)"/>
-            <xsl:value-of select="concat('type ', $n, ' struct ', $lb, $cr)"/>
-            <xsl:if test="@name = $rootname">
-                <xsl:value-of
-                    select="concat($in, $in, 'AttrXmlnsXsi', $att1spc, 'string', $strspc, $bq, 'xml:', $qt, 'xmlns:xsi,attr', $qt, $json, $qt, 'AttrXmlnsXsi', $cm, $omitempty, $qt, $bq, $cr)"/>
-                <xsl:value-of select="concat($in, $in, 'AttrXmlns', $att2spc, 'string', $strspc, $bq, 'xml:', $qt, 'xmlns,attr', $qt, $json, $qt, 'AttrXmlns', $cm, $omitempty, $qt, $bq, $cr)"/>
-            </xsl:if>
-            <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar"/>
-            <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]" mode="makevar"/>
-            <xsl:value-of select="concat($in, $in, 'XMLName', $xspcs, 'xml.Name', $tspcs, $bq, 'xml:', $qt, $n, $cm, $omitempty, $qt, ' ', $json, $qt, $n, $cm, $omitempty, $qt, $bq, $cr)"/>
-            <xsl:value-of select="concat($rb, $cr)"/>
-        </xsl:if>
-    </xsl:template>
-
-    <!--Processes Ref Elements-->
-    <xsl:template match="xs:sequence/xs:element[@ref]">
-        <xsl:variable name="r" select="@ref"/>
-        <xsl:variable name="nr">
-            <xsl:choose>
-                <xsl:when test="substring($r, string-length($r) - 1, string-length($r)) = 'Id'">
-                    <xsl:value-of select="concat(substring($r, 0, string-length($r) - 1), 'ID')"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$r"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="t" select="/xs:schema/xs:element[@name = $r]/@type"/>
-        <xsl:variable name="typ">
-            <xsl:choose>
-                <xsl:when test="@maxOccurs">
-                    <xsl:text>[]</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="ptr">
-            <xsl:choose>
-                <xsl:when test="@maxOccurs > 1">
-                    <xsl:text/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text>*</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="dt">
-            <xsl:choose>
-                <xsl:when test="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
-                    <xsl:value-of select="concat($typ, $ptr, $r)"/>
-                    <!--<xsl:value-of select="$r"/>-->
-                </xsl:when>
-                <xsl:when test="@maxOccurs > 1">
-                    <xsl:text>[]string</xsl:text>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:text>string</xsl:text>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:variable name="rspcs">
-            <xsl:call-template name="mkspc">
-                <xsl:with-param name="spc" select="number($tab) - string-length($r)"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:variable name="vspcs">
-            <xsl:call-template name="mkspc">
-                <xsl:with-param name="spc" select="number($tab) - string-length($dt)"/>
-            </xsl:call-template>
-        </xsl:variable>
-        <xsl:value-of select="concat($in, $in, $nr, $rspcs, $dt, $vspcs, $bq, 'xml:', $qt, @ref, $cm, $omitempty, $qt, ' ', $json, $qt, @ref, $typ, $cm, $omitempty, $qt, $bq, $cr)"/>
+        <xsl:choose>
+            <xsl:when test="$t = 'SpdxDocumentType' and $n != 'SpdxDocument'"/>
+            <xsl:when test="$t = 'RelationshipType' and $n != 'Relationship'"/>
+            <xsl:when test="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
+                <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
+                <xsl:variable name="bn" select="substring-before($b, 'Type')"/>
+                <xsl:value-of select="concat('//', $n, 'Type', ' ... ', substring-before(xs:annotation/xs:documentation, '.'), $cr)"/>
+                <xsl:value-of select="concat('type ', $n, 'Type', ' struct ', $lb, $cr)"/>
+                <xsl:if test="@name = $rootname">
+                    <xsl:value-of
+                        select="concat($in, $in, 'AttrXmlnsXsi', $att1spc, 'string', $strspc, $bq, 'xml:', $qt, 'xmlns:xsi,attr', $qt, $json, $qt, 'AttrXmlnsXsi', $cm, $omitempty, $qt, $bq, $cr)"/>
+                    <xsl:value-of select="concat($in, $in, 'AttrXmlns', $att2spc, 'string', $strspc, $bq, 'xml:', $qt, 'xmlns,attr', $qt, $json, $qt, 'AttrXmlns', $cm, $omitempty, $qt, $bq, $cr)"/>
+                </xsl:if>
+                <!-- <xsl:if test="$b">
+                    <xsl:value-of select="concat($in, $in, $bn, $att1spc,'*',$b, $xspcs, $bq, 'xml:', $qt, $bn, $cm, $omitempty, $qt, ' ', $json, $qt, $bn, $cm, $omitempty, $qt, $bq, $cr)"/>
+                </xsl:if>-->
+                <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar"/>
+                <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]" mode="makevar"/>
+                <xsl:value-of select="concat($in, $in, 'XMLName', $xspcs, 'xml.Name', $tspcs, $bq, 'xml:', $qt, $n,'Type', $cm, $omitempty, $qt, ' ', $json, $qt, $n,'Type', $cm, $omitempty, $qt, $bq, $cr)"/>
+                <xsl:value-of select="concat($rb, $cr)"/>
+            </xsl:when>
+        </xsl:choose>
     </xsl:template>
 
     <xsl:template match="*">
         <xsl:apply-templates select="*"/>
     </xsl:template>
+
     <xsl:template match="*" mode="def">
         <xsl:apply-templates select="*" mode="def"/>
     </xsl:template>
+
     <xsl:template match="text()"/>
 
     <xsl:template name="mkspc">

@@ -96,14 +96,29 @@
                         <xsl:with-param name="type" select="'Pointer'"/>
                     </xsl:apply-templates>
                 </xsl:when>
+                <xsl:when test="$n='Member'">
+                    <xsl:apply-templates select="." mode="element">
+                        <xsl:with-param name="type" select="'AnyLicenseInfo'"/>
+                    </xsl:apply-templates>
+                </xsl:when>
                 <xsl:when test="@domain">
                     <xsl:apply-templates select="." mode="element">
                         <xsl:with-param name="type" select="@domain"/>
                     </xsl:apply-templates>
                 </xsl:when>
+                <xsl:when test="@range">
+                    <xsl:apply-templates select="." mode="element">
+                        <xsl:with-param name="type" select="@onclass"/>
+                    </xsl:apply-templates>
+                </xsl:when>
+                <xsl:when test="@onclass">
+                    <xsl:apply-templates select="." mode="element">
+                        <xsl:with-param name="type" select="@onclass"/>
+                    </xsl:apply-templates>
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="." mode="element">
-                        <xsl:with-param name="type" select="@range"/>
+                        <xsl:with-param name="type" select="concat($n,'Type')"/>
                     </xsl:apply-templates>
                 </xsl:otherwise>
             </xsl:choose>
