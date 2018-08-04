@@ -1,4 +1,4 @@
-  <License xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="spdx:xsd::1.0">
+<License xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="spdx:xsd::1.0" xsi:schemaLocation="spdx:xsd::1.0  ../xsd/spdx-license.xsd">
       <LicenseID>Test string one</LicenseID>
       <Comment>Test string one</Comment>
       <SeeAlso>http://anyuri.org</SeeAlso>
