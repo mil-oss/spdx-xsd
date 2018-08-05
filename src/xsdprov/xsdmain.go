@@ -22,37 +22,6 @@ var reflink string
 var testlink string
 var port string
 
-//LicenceDatastruct ...
-var LicenceDatastruct interface{}
-
-//SPDXDocDatastruct ...
-var SPDXDocDatastruct interface{}
-
-//Setup ...
-func Setup(resrces map[string]string, dirs map[string]string) {
-	cfg := getConfig()
-	dbloc = "/tmp/" + cfg.Project
-	temppath = "/tmp/IEPD/iepd"
-	name = cfg.Project
-	reflink = cfg.Reflink
-	testlink = cfg.Testlink
-	port = cfg.Port
-	resources = resrces
-	resourcedirs = dirs
-	tpath = temppath + "/"
-	err = os.MkdirAll(dbloc+"/db", 0777)
-	if err != nil {
-		return
-	}
-	db, err := DbSetup(dbloc)
-	check(err)
-	e := TempDir(db)
-	check(e)
-	DirSetup()
-	BuildIep()
-	StartWeb(temppath)
-}
-
 //TempDir ...
 func TempDir(db *bolt.DB) (err error) {
 	log.Println("TempDir ")

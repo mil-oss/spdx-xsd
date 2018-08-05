@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 )
 
-const (
-	cfgpath string = "config/spdx.json"
+var (
+	provreport = map[int64]ProvEntry{}
 )
 
 // Cfg ...
@@ -18,7 +18,8 @@ type Cfg struct {
 	Port     string `json:"port,omitempty"`
 }
 
-func getConfig() Cfg {
+//GetConfig ...
+func GetConfig(cfgpath string) Cfg {
 	jf, err := ioutil.ReadFile(cfgpath)
 	if err != nil {
 		panic(err)

@@ -42,7 +42,6 @@ func StartWeb(tmppath string) {
 	logger.Println("Starting HTTP Server. .. ")
 	router := http.NewServeMux()
 	router.Handle("/", index())
-	router.Handle("/update", update())
 	router.Handle("/file/", getResource())
 	router.Handle("/iepd/", getResource())
 	router.Handle("/dload", dload())
@@ -100,24 +99,7 @@ func index() http.Handler {
 		//fmt.Fprintln(w, temppath)
 	})
 }
-func update() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if atomic.LoadInt32(&healthy) == 1 {
-			prov, errs, err := BuildIep()
-			if errs != nil {
-				HandleValidationErrors(&w, "Validation Errors", errs)
-				return
-			}
-			pr, err := json.Marshal(prov)
-			if err != nil {
-				HandleError(&w, 500, "Internal Server Error", "Build Error", err)
-				return
-			}
-			HandleSuccess(&w, Success{Status: true, Content: fmt.Sprint(pr)})
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-	})
-}
+
 func getResource() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
@@ -135,7 +117,6 @@ func getResource() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-
 func verify() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
@@ -206,7 +187,6 @@ func transform() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-
 func dload() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")

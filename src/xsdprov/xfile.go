@@ -132,7 +132,9 @@ func mkTempDir(dname string) string {
 	fmt.Println("Temp dir created:", tempDirPath)
 	return tempDirPath
 }
-func writeFile(fname string, data []byte) error {
+
+// WriteFile ...
+func WriteFile(fname string, data []byte) error {
 	err := ioutil.WriteFile(fname, data, 0666)
 	if err != nil {
 		log.Fatal(err)
@@ -151,12 +153,14 @@ func getDigests(fileslist map[string]string, dir string, algo string) map[string
 		var path = dir + res
 		//log.Println(path)
 		if fileExists(path) {
-			digests[r] = getHash(path, algo)
+			digests[r] = GetHash(path, algo)
 		}
 	}
 	return digests
 }
-func wgetFile(fpath string, urlstr string) error {
+
+// WgetFile ...
+func WgetFile(fpath string, urlstr string) error {
 	log.Println("Wget Save To: " + fpath)
 	// Create output dir
 	p := filepath.Dir(fpath)
@@ -196,7 +200,9 @@ func hashFile(fname string, algo string) string {
 	}
 	return "Error"
 }
-func getHash(fname string, algo string) string {
+
+//GetHash ...
+func GetHash(fname string, algo string) string {
 	file, err := os.OpenFile(fname, os.O_RDONLY, 0666)
 	if err != nil {
 		log.Fatal(err)
@@ -252,7 +258,9 @@ func ddgzip(dir string, dest string) {
 		fmt.Println(err)
 	}
 }
-func compress(dir string, dest string) error {
+
+//Compress ...
+func Compress(dir string, dest string) error {
 	log.Println("dir " + dir)
 	log.Println("dest " + dest)
 	p := filepath.Dir(dest)

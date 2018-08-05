@@ -15,7 +15,8 @@ func init() {
 	resdigests = getDigests(resources, tpath, "Sha256")
 }
 
-func readStructXML(filepath string, xsdstruct interface{}) interface{} {
+// ReadStructXML ...
+func ReadStructXML(filepath string, xsdstruct interface{}) interface{} {
 	xf, ferr := ioutil.ReadFile(filepath)
 	check(ferr)
 	var strct = xsdstruct
@@ -24,7 +25,8 @@ func readStructXML(filepath string, xsdstruct interface{}) interface{} {
 	return strct
 }
 
-func writeStructXML(filepath string, xsdstruct interface{}) string {
+// WriteStructXML ...
+func WriteStructXML(filepath string, xsdstruct interface{}) string {
 	f, err := os.Create(filepath)
 	check(err)
 	defer f.Close()
@@ -83,7 +85,8 @@ func TransformXML(transform TransformData) ([]byte, error) {
 	return resultstring, err
 }
 
-func doTransform(xslpath string, xmlpath string) ([]byte, error) {
+// DoTransform ...
+func DoTransform(xslpath string, xmlpath string) ([]byte, error) {
 	//log.Println("xslpath: " + xslpath)
 	//log.Println("xmlpath: " + xmlpath)
 	cmd := exec.Cmd{
@@ -96,7 +99,8 @@ func doTransform(xslpath string, xmlpath string) ([]byte, error) {
 	return resultstring, err
 }
 
-func doTransformParam(xslpath string, xmlpath string, testdata string) ([]byte, error) {
+// DoTransformParam ...
+func DoTransformParam(xslpath string, xmlpath string, testdata string) ([]byte, error) {
 	//log.Println("xslpath: " + xslpath)
 	//log.Println("xmlpath: " + xmlpath)
 	cmd := exec.Cmd{
