@@ -56,7 +56,7 @@ func generateResources() (err error) {
 	xsdprov.Provreport[time.Now().UnixNano()], err = xsdprov.GenerateResource(getemppaths("go-gen-doc.xsl", "spdx-doc.xsd", "spdx-doc-struct.go"))
 	check(err)
 	//spdx-doc_test.go - Golang test iep.go
-	xsdprov.Provreport[time.Now().UnixNano()], err = xsdprov.GenerateResource(getemppaths("go-gen-doc-test.xsl", "spdx-doc.xsd", "spdx-doc.go"))
+	xsdprov.Provreport[time.Now().UnixNano()], err = xsdprov.GenerateResource(getemppaths("go-gen-doc-test.xsl", "spdx-doc.xsd", "spdx-doc_test.go"))
 	check(err)
 	//Marshal instance
 	xsdprov.Provreport[time.Now().UnixNano()] = xsdprov.MarshalXML(temppath+Resources["spdx-doc-test-instance.xml"], Resources["spdx-doc-test-instance-golang.xml"], SPDXLicenseDatastruct)

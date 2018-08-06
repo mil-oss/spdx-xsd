@@ -43,7 +43,7 @@ func InitXSDProv(rsrcs map[string]string, rsrcdirs map[string]string, config str
 		return
 	}
 	DirSetup()
-	CopyDirs(temppath, resourcedirs)
+	//CopyDirs(temppath, resourcedirs)
 	db, err := DbSetup(dbloc + "/spdx-lic.db")
 	check(err)
 	// InitTempDir ...
@@ -69,6 +69,6 @@ func DirSetup() (e error) {
 		p := filepath.Dir(temppath + rp)
 		os.MkdirAll(p, os.ModePerm)
 	}
-	//CopyDirs(temppath, resourcedirs)
+	CopyDirs(temppath, resourcedirs)
 	return
 }
