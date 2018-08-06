@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<License xmlns="spdx:xsd::1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:spdx="http://spdx.org/rdf/terms#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
+   <LicenseID>psfrag</LicenseID>
+   <Comment/>
+   <SeeAlso>https://fedoraproject.org/wiki/Licensing/psfrag</SeeAlso>
+   <Name>psfrag License</Name>
+   <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+   <IsOsiApproved>false</IsOsiApproved>
+   <IsFsfLibre>false</IsFsfLibre>
+   <StandardLicenseHeader/>
+   <LicenseText>psfrag.dtx
+
+Copyright (C) 1996 Craig Barratt, Michael C. Grant, and David Carlisle.
+
+All rights are reserved.
+
+This system is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Don't come complaining to us if you modify this file and it doesn't work! If this file is modified by anyone but the authors, those changes and their authors must be explicitly stated HERE.</LicenseText>
+   <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; psfrag.dtx&lt;&lt;endOptional&gt;&gt;
+
+Copyright (C) 1996 Craig Barratt, Michael C. Grant, and David Carlisle.
+
+All rights are reserved.
+
+This system is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. Don't come complaining to us if you modify this file and it doesn't work! If this file is modified by anyone but the authors, those changes and their authors must be explicitly stated HERE.</StandardLicenseTemplate>
+</License>

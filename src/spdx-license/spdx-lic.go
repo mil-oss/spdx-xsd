@@ -13,7 +13,9 @@ var (
 
 func main() {
 	SPDXLicenseDatastruct = NewLicense()
-	SetupSPDXLicense(Resources, Resdirectories)
+	xsdprov.InitXSDProv(Resources, Resdirectories, "config/spdx-doc-cfg.json")
+	BuildLicenseIep()
+	xsdprov.StartWeb()
 }
 
 // Resources ...

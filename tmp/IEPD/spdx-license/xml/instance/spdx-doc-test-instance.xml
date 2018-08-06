@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="spdx:xsd::1.0" xsi:schemaLocation="spdx:xsd::1.0  ../xsd/spdx-doc.xsd">
+  <Annotation>
+    <Date>2018-04-12T13:20:00</Date>
+    <AnnotationTypeCode>Other</AnnotationTypeCode>
+    <Comment>Test string one</Comment>
+    <Annotator>Test string one</Annotator>
+  </Annotation>
+  <Name>Test string one</Name>
+  <Comment>Test string one</Comment>
+  <CreationInfo>
+    <LicenseListVersion>Test string one</LicenseListVersion>
+    <Created>2018-04-12T13:20:00</Created>
+    <Comment>Test string one</Comment>
+    <Creator>Test string one</Creator>
+  </CreationInfo>
+  <SpecVersion>Test string one</SpecVersion>
+  <DataLicense>Test string one</DataLicense>
+</SpdxDocument>

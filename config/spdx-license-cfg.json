@@ -4,5 +4,7 @@
     "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/spdx-test-data.xml",
     "license-list":"https://raw.githubusercontent.com/spdx/license-list-data/master/rdfxml/licenses.rdf",
     "homeurl":"http://localhost",
-    "port":":8383"
+    "port":":8383",
+    "dbloc":"tmp/IEPD/spdx-license/db",
+    "temppath":"tmp/IEPD/spdx-license/"
 }

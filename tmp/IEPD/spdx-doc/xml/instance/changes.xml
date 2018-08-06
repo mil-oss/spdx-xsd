@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpdxChanges>
+    <Node rdf="http://spdx.org/rdf/terms#ReferenceType" xmlname="ReferenceID" />
+    <Node rdf="http://spdx.org/rdf/terms#referenceType" xmlname="ReferenceID" />
+    <Node rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo" xmlname="SimpleLicensingInfo" />
+    
+</SpdxChanges>
