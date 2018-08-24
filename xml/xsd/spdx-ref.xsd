@@ -22,31 +22,6 @@
    <xs:annotation>
       <xs:documentation>This specification describes the SPDX® language, defined as a dictionary of named properties and classes using W3C's RDF Technology. SPDX® is a designed to allow the exchange of data about software packages. This information includes general information about the package, licensing information about the package as a whole, a manifest of files contained in the package and licensing information related to the contained files. Known issues: - File fileType cardinality should be 0 or more instead of required one.</xs:documentation>
    </xs:annotation>
-   <xs:complexType name="LicenseType">
-      <xs:annotation>
-         <xs:documentation>A data type for License type</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="License"
-                         xmlname="License"
-                         comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
-                         rdf="http://spdx.org/rdf/terms#License"
-                         subclassof="SimpleLicensingInfo"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:complexContent>
-         <xs:extension base="SimpleLicensingInfoType">
-            <xs:sequence>
-               <xs:element ref="IsDeprecatedLicenseID" minOccurs="0"/>
-               <xs:element ref="IsOsiApproved" minOccurs="1"/>
-               <xs:element ref="IsFsfLibre" minOccurs="0"/>
-               <xs:element ref="StandardLicenseHeader" minOccurs="0"/>
-               <xs:element ref="LicenseText" minOccurs="1"/>
-               <xs:element ref="StandardLicenseTemplate" minOccurs="1"/>
-               <xs:element ref="LicenseAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
-            </xs:sequence>
-         </xs:extension>
-      </xs:complexContent>
-   </xs:complexType>
    <xs:simpleType name="AlgorithmCodeSimpleType">
       <xs:annotation>
          <xs:documentation>A data type for Algorithm properties</xs:documentation>
@@ -56,25 +31,25 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Md5">
+         <xs:enumeration value="checksumAlgorithmMd5">
             <xs:annotation>
-               <xs:documentation>Indicates the algorithm used was MD5</xs:documentation>
+               <xs:documentation>Algorithm</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Sha1">
+         <xs:enumeration value="checksumAlgorithmSha1">
             <xs:annotation>
-               <xs:documentation>Indicates the algorithm used was SHA-1</xs:documentation>
+               <xs:documentation>Algorithm</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Sha256">
+         <xs:enumeration value="checksumAlgorithmSha256">
             <xs:annotation>
-               <xs:documentation>Indicates the algorithm used was SHA256</xs:documentation>
+               <xs:documentation>Algorithm</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
                </xs:appinfo>
@@ -91,17 +66,17 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Other">
+         <xs:enumeration value="annotationTypeOther">
             <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
+               <xs:documentation>Annotation Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#annotationType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Review">
+         <xs:enumeration value="annotationTypeReview">
             <xs:annotation>
-               <xs:documentation>A Review represents an audit and signoff by an individual, organization or tool on the information for an SpdxElement.</xs:documentation>
+               <xs:documentation>Annotation Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#annotationType"/>
                </xs:appinfo>
@@ -118,17 +93,17 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Noassertion">
+         <xs:enumeration value="noassertion">
             <xs:annotation>
-               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:documentation>Copyright Text</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#copyrightText"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="None">
+         <xs:enumeration value="none">
             <xs:annotation>
-               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:documentation>Copyright Text</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#copyrightText"/>
                </xs:appinfo>
@@ -145,17 +120,17 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Noassertion">
+         <xs:enumeration value="noassertion">
             <xs:annotation>
-               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:documentation>Download Location</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#downloadLocation"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="None">
+         <xs:enumeration value="none">
             <xs:annotation>
-               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:documentation>Download Location</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#downloadLocation"/>
                </xs:appinfo>
@@ -171,89 +146,89 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Application">
+         <xs:enumeration value="fileTypeApplication">
             <xs:annotation>
-               <xs:documentation>The file is associated with a specific application type (MIME type of application/* )</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Archive">
+         <xs:enumeration value="fileTypeArchive">
             <xs:annotation>
-               <xs:documentation>Indicates the file is an archive file.</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Audio">
+         <xs:enumeration value="fileTypeAudio">
             <xs:annotation>
-               <xs:documentation>The file is associated with an audio file (MIME type of audio/* , ie. .mp3 ); IMAGE if the file is assoicated with an picture image file (MIME type of image/*, ie. .jpg, .gif )</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Binary">
+         <xs:enumeration value="fileTypeBinary">
             <xs:annotation>
-               <xs:documentation>Indicates the file is not a text file. spdx:filetype_archive is preferred for archive files even though they are binary.</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Documentation">
+         <xs:enumeration value="fileTypeDocumentation">
             <xs:annotation>
-               <xs:documentation>Website containing the documentation related to the repository identifier</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Image">
+         <xs:enumeration value="fileTypeImage">
             <xs:annotation>
-               <xs:documentation>The file is assoicated with an picture image file (MIME type of image/*, ie. .jpg, .gif ).</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Other">
+         <xs:enumeration value="fileTypeOther">
             <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Source">
+         <xs:enumeration value="fileTypeSource">
             <xs:annotation>
-               <xs:documentation>Indicates the file is a source code file.</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Spdx">
+         <xs:enumeration value="fileTypeSpdx">
             <xs:annotation>
-               <xs:documentation>The file is an SPDX document.</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Text">
+         <xs:enumeration value="fileTypeText">
             <xs:annotation>
-               <xs:documentation>The file is human readable text file (MIME type of text/*).</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Video">
+         <xs:enumeration value="fileTypeVideo">
             <xs:annotation>
-               <xs:documentation>The file is associated with a video file type (MIME type of video/*).</xs:documentation>
+               <xs:documentation>File Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#fileType"/>
                </xs:appinfo>
@@ -270,17 +245,17 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Noassertion">
+         <xs:enumeration value="noassertion">
             <xs:annotation>
-               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:documentation>License Concluded</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#licenseConcluded"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="None">
+         <xs:enumeration value="none">
             <xs:annotation>
-               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:documentation>License Concluded</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#licenseConcluded"/>
                </xs:appinfo>
@@ -297,17 +272,17 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Noassertion">
+         <xs:enumeration value="noassertion">
             <xs:annotation>
-               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:documentation>License Declared</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#licenseDeclared"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="None">
+         <xs:enumeration value="none">
             <xs:annotation>
-               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:documentation>License Declared</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#licenseDeclared"/>
                </xs:appinfo>
@@ -324,17 +299,17 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Noassertion">
+         <xs:enumeration value="noassertion">
             <xs:annotation>
-               <xs:documentation>Indicates that the preparer of the SPDX document is not making any assertion regarding the value of this field.</xs:documentation>
+               <xs:documentation>License Info From Files</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#licenseInfoFromFiles"/>
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="None">
+         <xs:enumeration value="none">
             <xs:annotation>
-               <xs:documentation>When this value is used as the object of a property it indicates that the preparer of the SpdxDocument believes that there is no value for the property. This value should only be used if there is sufficient evidence to support this assertion.</xs:documentation>
+               <xs:documentation>License Info From Files</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#licenseInfoFromFiles"/>
                </xs:appinfo>
@@ -351,15 +326,7 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:restriction base="xs:string">
-         <xs:enumeration value="Other">
-            <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#referenceCategory"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="PackageManager">
+         <xs:enumeration value="referenceCategoryOther">
             <xs:annotation>
                <xs:documentation>Reference Category</xs:documentation>
                <xs:appinfo>
@@ -367,7 +334,15 @@
                </xs:appinfo>
             </xs:annotation>
          </xs:enumeration>
-         <xs:enumeration value="Security">
+         <xs:enumeration value="referenceCategoryPackageManager">
+            <xs:annotation>
+               <xs:documentation>Reference Category</xs:documentation>
+               <xs:appinfo>
+                  <Enum rdf="http://spdx.org/rdf/terms#referenceCategory"/>
+               </xs:appinfo>
+            </xs:annotation>
+         </xs:enumeration>
+         <xs:enumeration value="referenceCategorySecurity">
             <xs:annotation>
                <xs:documentation>Reference Category</xs:documentation>
                <xs:appinfo>
@@ -388,7 +363,7 @@
       <xs:restriction base="xs:string">
          <xs:enumeration value="Amendment">
             <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A amends the SPDX information in SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -396,7 +371,7 @@
          </xs:enumeration>
          <xs:enumeration value="AncestorOf">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_ancestorOf expresses that an SPDXElement is an ancestor of (same lineage but pre-dates) the relatedSPDXElement. For example, an upstream File is an ancestor of a modified downstream File</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -404,7 +379,7 @@
          </xs:enumeration>
          <xs:enumeration value="BuildToolOf">
             <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A is used to to build SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -412,7 +387,7 @@
          </xs:enumeration>
          <xs:enumeration value="ContainedBy">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_containedBy expresses that an SPDXElement is contained by the relatedSPDXElement. For example, a File contained by a Package.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -420,7 +395,7 @@
          </xs:enumeration>
          <xs:enumeration value="Contains">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_contains expresses that an SPDXElement contains the relatedSPDXElement. For example, a Package contains a File. (relationshipType_contains introduced in SPDX 2.0 deprecates property 'hasFile' from SPDX 1.2)</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -428,7 +403,7 @@
          </xs:enumeration>
          <xs:enumeration value="CopyOf">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_copyOf expresses that the SPDXElement is an exact copy of the relatedSDPXElement. For example, a downstream distribution of a binary library which was copied from the upstream package.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -436,7 +411,7 @@
          </xs:enumeration>
          <xs:enumeration value="DataFileOf">
             <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A is a data file used in SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -444,7 +419,7 @@
          </xs:enumeration>
          <xs:enumeration value="DescendantOf">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_descendantOf expresses that an SPDXElement is a descendant of (same lineage but post-dates) the relatedSPDXElement. For example, an downstream File that was modified is a descendant of an upstream File</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -452,7 +427,7 @@
          </xs:enumeration>
          <xs:enumeration value="DescribedBy">
             <xs:annotation>
-               <xs:documentation>Is to be used an SPDXRef-A is described by SPDXRef-Document.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -460,7 +435,7 @@
          </xs:enumeration>
          <xs:enumeration value="Describes">
             <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-DOCUMENT describes SPDXRef-A.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -468,7 +443,7 @@
          </xs:enumeration>
          <xs:enumeration value="DistributionArtifact">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_distributionArtifact expresses that distributing the SPDXElement requires that the relatedSPDXElement also be distributed. For example, distributing a binary File may require that a source tarball (another File) be made available with the distribuiton.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -484,7 +459,7 @@
          </xs:enumeration>
          <xs:enumeration value="DynamicLink">
             <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A dynamically links to SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -492,7 +467,7 @@
          </xs:enumeration>
          <xs:enumeration value="ExpandedFromArchive">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_expandedFromArchive expresses that the SPDXElement is a file which was epanded from a relatedSPDXElement file. For example, if there is an archive file xyz.tar.gz containing a file foo.c the archive file was expanded in a directory arch/xyz, the file arch/xyz/foo.c would have a relationshipType_expandedFromArchive with the file xyz.tar.gz.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -500,7 +475,7 @@
          </xs:enumeration>
          <xs:enumeration value="FileAdded">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_fileAdded expresses that the SPDXElement is a file which has been added to the relatedSPDXElement package. For example, a package (the relatedSPDXElement) has been patched to remove a file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -508,7 +483,7 @@
          </xs:enumeration>
          <xs:enumeration value="FileDeleted">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_fileDeleted expresses that the SPDXElement is a package where the relatedSPDXElement file has been removed. For example, a package has been patched to remove a file a file (the relatedSPDXElement resulting in the patched package (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -516,7 +491,7 @@
          </xs:enumeration>
          <xs:enumeration value="FileModified">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_fileModified expresses that the SPDXElement is a file which is a modified version of the relatedSPDXElement file. For example, a file (the SPDXElement) has been patched to modify the contents of the original file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -524,7 +499,7 @@
          </xs:enumeration>
          <xs:enumeration value="GeneratedFrom">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_generatedFrom expresses that an SPDXElement was generated from the relatedSPDXElement. For example, a binary File might have been generated from a source File.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -532,7 +507,7 @@
          </xs:enumeration>
          <xs:enumeration value="Generates">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_generates expresses that an SPDXElement generates the relatedSPDXElement. For example, a source File generates a binary File.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -540,7 +515,7 @@
          </xs:enumeration>
          <xs:enumeration value="HasPrerequisite">
             <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A has as a prerequisite SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -548,7 +523,7 @@
          </xs:enumeration>
          <xs:enumeration value="MetafileOf">
             <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A is a metafile of SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -556,7 +531,7 @@
          </xs:enumeration>
          <xs:enumeration value="OptionalComponentOf">
             <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A is an optional component of SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -564,7 +539,7 @@
          </xs:enumeration>
          <xs:enumeration value="Other">
             <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -572,7 +547,7 @@
          </xs:enumeration>
          <xs:enumeration value="PackageOf">
             <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A is used as a package as part of SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -580,7 +555,7 @@
          </xs:enumeration>
          <xs:enumeration value="PatchApplied">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_patchApplied expresses that the SPDXElement is a 'patchfile' that was applied and produced the relatedSPDXElement. For example, a .diff File relates to a specific file where the diff was applied.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -588,7 +563,7 @@
          </xs:enumeration>
          <xs:enumeration value="PatchFor">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_patchFor expresses that the SPDXElement is a 'patchfile' that is designed to patch (apply modifications to) the relatedSPDXElement. For example, relationship from a .diff File to a Package it is designed to patch.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -596,7 +571,7 @@
          </xs:enumeration>
          <xs:enumeration value="PrerequisiteFor">
             <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A is a prerequisite for SPDXRef-B</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -604,7 +579,7 @@
          </xs:enumeration>
          <xs:enumeration value="StaticLink">
             <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A statically links to SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -612,7 +587,7 @@
          </xs:enumeration>
          <xs:enumeration value="TestcaseOf">
             <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A is a test case used in testing SPDXRef-B.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -620,7 +595,7 @@
          </xs:enumeration>
          <xs:enumeration value="VariantOf">
             <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_variantOf expresses that an SPDXElement is a variant of the relatedSPDXElement, but it is not clear which came first. For example, if the content of two Files differs by some edit, but there is no way to tell which came first (no reliable date information), then one File is a variant of the other File.</xs:documentation>
+               <xs:documentation>Relationship Type</xs:documentation>
                <xs:appinfo>
                   <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
                </xs:appinfo>
@@ -674,10 +649,10 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="Date" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="AnnotationTypeCode"/>
-               <xs:element ref="Comment" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="Annotator" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="date" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="annotationTypeCode"/>
+               <xs:element ref="comment" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="annotator" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="AnnotationAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -771,8 +746,8 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="ChecksumValue" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="AlgorithmCode"/>
+               <xs:element ref="checksumValue" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="algorithmCode"/>
                <xs:element ref="ChecksumAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
          </xs:extension>
@@ -847,7 +822,7 @@
       <xs:complexContent>
          <xs:extension base="AnyLicenseInfoType">
             <xs:sequence>
-               <xs:element ref="Member" minOccurs="2" maxOccurs="unbounded"/>
+               <xs:element ref="member" minOccurs="2" maxOccurs="unbounded"/>
                <xs:element ref="ConjunctiveLicenseSetAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -955,10 +930,10 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="LicenseListVersion" minOccurs="0"/>
-               <xs:element ref="Created" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="Comment" minOccurs="0"/>
-               <xs:element ref="Creator" minOccurs="1"/>
+               <xs:element ref="licenseListVersion" minOccurs="0"/>
+               <xs:element ref="created" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="comment" minOccurs="0"/>
+               <xs:element ref="creator" minOccurs="0" maxOccurs="10"/>
                <xs:element ref="CreationInfoAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1034,7 +1009,7 @@
       <xs:complexContent>
          <xs:extension base="AnyLicenseInfoType">
             <xs:sequence>
-               <xs:element ref="Member" minOccurs="2" maxOccurs="unbounded"/>
+               <xs:element ref="member" minOccurs="2" maxOccurs="unbounded"/>
                <xs:element ref="DisjunctiveLicenseSetAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1139,9 +1114,9 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="Checksum" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="ExternalDocumentID" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="SpdxDocument" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="checksum" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="externalDocumentID" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="spdxDocumentNamespace"/>
                <xs:element ref="ExternalDocumentRefAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1162,10 +1137,10 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="Comment" maxOccurs="1"/>
-               <xs:element ref="ReferenceLocator" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="ReferenceID" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="ReferenceCategoryCode"/>
+               <xs:element ref="comment" maxOccurs="1"/>
+               <xs:element ref="referenceLocator" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="referenceID" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="referenceCategoryCode"/>
                <xs:element ref="ExternalRefAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1204,7 +1179,7 @@
       <xs:complexContent>
          <xs:extension base="SimpleLicensingInfoType">
             <xs:sequence>
-               <xs:element ref="ExtractedText" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="extractedText" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="ExtractedLicenseInfoAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1282,11 +1257,11 @@
       <xs:complexContent>
          <xs:extension base="SpdxItemType">
             <xs:sequence>
-               <xs:element ref="NoticeText" maxOccurs="1"/>
-               <xs:element ref="FileContributor" minOccurs="0"/>
-               <xs:element ref="FileName" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="FileTypeCode"/>
-               <xs:element ref="Checksum" minOccurs="1"/>
+               <xs:element ref="noticeText" maxOccurs="1"/>
+               <xs:element ref="fileContributor" minOccurs="0"/>
+               <xs:element ref="fileName" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="fileTypeCode"/>
+               <xs:element ref="checksum" minOccurs="1"/>
                <xs:element ref="FileAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
          </xs:extension>
@@ -1423,6 +1398,24 @@
          </xs:extension>
       </xs:simpleContent>
    </xs:complexType>
+   <xs:complexType name="LicenseConcludedType">
+      <xs:annotation>
+         <xs:documentation>A data type for LicenseConcluded properties</xs:documentation>
+         <xs:appinfo>
+            <ComplexType xmlns=""
+                         name="LicenseConcludedType"
+                         rdf="http://spdx.org/rdf/terms#licenseConcluded"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="structures:ObjectType">
+            <xs:sequence>
+               <xs:element ref="licenseID" minOccurs="0"/>
+               <xs:element ref="licenseConcludedCode" minOccurs="0"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
    <xs:complexType name="LicenseDeclaredCodeType">
       <xs:annotation>
          <xs:documentation>A data type for LicenseDeclared properties</xs:documentation>
@@ -1486,12 +1479,12 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="LicenseExceptionText" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="Comment" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="Example" maxOccurs="1"/>
-               <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="SeeAlso" minOccurs="0" maxOccurs="unbounded"/>
-               <xs:element ref="LicenseExceptionID" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="licenseExceptionText" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="comment" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="example" maxOccurs="1"/>
+               <xs:element ref="name" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="seeAlso" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="licenseExceptionID" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="LicenseExceptionAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1566,6 +1559,29 @@
             <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
          </xs:extension>
       </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseType">
+      <xs:annotation>
+         <xs:documentation>A data type for License type</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="License"
+                         xmlname="License"
+                         comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
+                         rdf="http://spdx.org/rdf/terms#License"
+                         subclassof="SimpleLicensingInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="SimpleLicensingInfoType">
+            <xs:sequence>
+               <xs:element ref="isOsiApproved" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="standardLicenseHeader" minOccurs="0"/>
+               <xs:element ref="licenseText" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="standardLicenseTemplate" maxOccurs="1"/>
+               <xs:element ref="LicenseAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
    </xs:complexType>
    <xs:complexType name="LineCharPointerType">
       <xs:annotation>
@@ -1733,7 +1749,7 @@
       <xs:complexContent>
          <xs:extension base="AnyLicenseInfoType">
             <xs:sequence>
-               <xs:element ref="Member" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="member" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="OrLaterOperatorAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1809,20 +1825,20 @@
       <xs:complexContent>
          <xs:extension base="SpdxItemType">
             <xs:sequence>
-               <xs:element ref="ExternalRef" minOccurs="0"/>
-               <xs:element ref="PackageFileName" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="FilesAnalyzed" maxOccurs="1"/>
-               <xs:element ref="Description" maxOccurs="1"/>
-               <xs:element ref="Homepage" maxOccurs="1"/>
-               <xs:element ref="Originator" maxOccurs="1"/>
-               <xs:element ref="DownloadLocation" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="SourceInfo" maxOccurs="1"/>
-               <xs:element ref="Supplier" maxOccurs="1"/>
-               <xs:element ref="PackageVerificationCode" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="LicenseDeclaredCode"/>
-               <xs:element ref="VersionInfo" maxOccurs="1"/>
-               <xs:element ref="Summary" maxOccurs="1"/>
-               <xs:element ref="Checksum" maxOccurs="1"/>
+               <xs:element ref="externalRef" minOccurs="0"/>
+               <xs:element ref="packageFileName" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="filesAnalyzed" maxOccurs="1"/>
+               <xs:element ref="description" maxOccurs="1"/>
+               <xs:element ref="homepage" maxOccurs="1"/>
+               <xs:element ref="originator" maxOccurs="1"/>
+               <xs:element ref="downloadLocation" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="sourceInfo" maxOccurs="1"/>
+               <xs:element ref="supplier" maxOccurs="1"/>
+               <xs:element ref="packageVerificationCode" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="licenseDeclaredCode"/>
+               <xs:element ref="versionInfo" maxOccurs="1"/>
+               <xs:element ref="summary" maxOccurs="1"/>
+               <xs:element ref="checksum" maxOccurs="1"/>
                <xs:element ref="PackageAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
          </xs:extension>
@@ -1841,8 +1857,8 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="PackageVerificationCodeValue" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="VerificationCodeExcludedFile" minOccurs="0"/>
+               <xs:element ref="packageVerificationCodeValue" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="verificationCodeExcludedFile" minOccurs="0"/>
                <xs:element ref="PackageVerificationCodeAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1931,9 +1947,9 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="ExternalReferenceSite" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="ContextualExample" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="Documentation" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="externalReferenceSite" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="contextualExample" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="documentation" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="ReferenceIDAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -1989,9 +2005,9 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="RelationshipTypeCode"/>
-               <xs:element ref="Comment" maxOccurs="1"/>
-               <xs:element ref="RelatedSpdxElement" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="relationshipTypeCode"/>
+               <xs:element ref="comment" maxOccurs="1"/>
+               <xs:element ref="relatedSpdxElement" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="RelationshipAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -2043,10 +2059,10 @@
       <xs:complexContent>
          <xs:extension base="AnyLicenseInfoType">
             <xs:sequence>
-               <xs:element ref="LicenseID" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="Comment" maxOccurs="1"/>
-               <xs:element ref="SeeAlso" minOccurs="0" maxOccurs="unbounded"/>
-               <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="licenseID" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="comment" maxOccurs="1"/>
+               <xs:element ref="seeAlso" minOccurs="0" maxOccurs="unbounded"/>
+               <xs:element ref="name" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="SimpleLicensingInfoAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -2106,8 +2122,8 @@
       <xs:complexContent>
          <xs:extension base="SpdxItemType">
             <xs:sequence>
-               <xs:element ref="SnippetFromFile" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="Range" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="snippetFromFile" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="range" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="SnippetAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
          </xs:extension>
@@ -2145,13 +2161,13 @@
       <xs:complexContent>
          <xs:extension base="SpdxElementType">
             <xs:sequence>
-               <xs:element ref="DescribesPackage" minOccurs="0"/>
-               <xs:element ref="DescribesFile" minOccurs="0"/>
-               <xs:element ref="HasExtractedLicensingInfo" minOccurs="0"/>
-               <xs:element ref="CreationInfo" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="SpecVersion" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="ExternalDocumentRef" minOccurs="0"/>
-               <xs:element ref="DataLicense"/>
+               <xs:element ref="describesPackage" minOccurs="0"/>
+               <xs:element ref="describesFile" minOccurs="0"/>
+               <xs:element ref="hasExtractedLicensingInfo" minOccurs="0"/>
+               <xs:element ref="creationInfo" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="specVersion" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="externalDocumentRef" minOccurs="0"/>
+               <xs:element ref="dataLicense"/>
                <xs:element ref="SpdxDocumentAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -2173,10 +2189,10 @@
       <xs:complexContent>
          <xs:extension base="structures:ObjectType">
             <xs:sequence>
-               <xs:element ref="Annotation" minOccurs="0"/>
-               <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="Comment" maxOccurs="1"/>
-               <xs:element ref="Relationship" minOccurs="0"/>
+               <xs:element ref="annotation" minOccurs="0"/>
+               <xs:element ref="name" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="comment" minOccurs="0" maxOccurs="1"/>
+               <xs:element ref="relationship" minOccurs="0" maxOccurs="10"/>
                <xs:element ref="SpdxElementAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -2198,10 +2214,10 @@
       <xs:complexContent>
          <xs:extension base="SpdxElementType">
             <xs:sequence>
-               <xs:element ref="LicenseConcludedCode"/>
-               <xs:element ref="CopyrightText" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="LicenseInfoFromFiles" minOccurs="1"/>
-               <xs:element ref="LicenseComments" maxOccurs="1"/>
+               <xs:element ref="licenseConcluded"/>
+               <xs:element ref="copyrightText" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="licenseInfoFromFiles" minOccurs="1"/>
+               <xs:element ref="licenseComments" maxOccurs="1"/>
                <xs:element ref="SpdxItemAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
             </xs:sequence>
          </xs:extension>
@@ -2367,8 +2383,8 @@
       <xs:complexContent>
          <xs:extension base="AnyLicenseInfoType">
             <xs:sequence>
-               <xs:element ref="Member" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="LicenseException" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="member" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="licenseException" minOccurs="1" maxOccurs="1"/>
                <xs:element ref="WithExceptionOperatorAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>
@@ -2376,7 +2392,7 @@
          </xs:extension>
       </xs:complexContent>
    </xs:complexType>
-   <xs:element name="AlgorithmCode" type="AlgorithmCodeType" nillable="true">
+   <xs:element name="algorithmCode" type="AlgorithmCodeType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Algorithm properties</xs:documentation>
          <xs:appinfo>
@@ -2384,7 +2400,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Annotation" type="AnnotationType" nillable="true">
+   <xs:element name="annotation" type="AnnotationType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Annotation</xs:documentation>
          <xs:appinfo>
@@ -2404,7 +2420,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="AnnotationDate" type="AnnotationDateType" nillable="true">
+   <xs:element name="annotationDate" type="AnnotationDateType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Identify when the comment was made. This is to be specified according to the combined date and time in the UTC format, as specified in the ISO 8601 standard.</xs:documentation>
          <xs:appinfo>
@@ -2417,7 +2433,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="AnnotationTypeCode"
+   <xs:element name="annotationTypeCode"
                type="AnnotationTypeCodeType"
                nillable="true">
       <xs:annotation>
@@ -2428,7 +2444,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Annotator" type="AnnotatorType" nillable="true">
+   <xs:element name="annotator" type="AnnotatorType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
          <xs:appinfo>
@@ -2440,7 +2456,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="AnyLicenseInfo" type="AnyLicenseInfoType" nillable="true">
+   <xs:element name="anyLicenseInfo" type="AnyLicenseInfoType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for AnyLicenseInfo</xs:documentation>
          <xs:appinfo>
@@ -2460,7 +2476,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ByteOffsetPointer"
+   <xs:element name="byteOffsetPointer"
                type="ByteOffsetPointerType"
                nillable="true">
       <xs:annotation>
@@ -2482,7 +2498,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Checksum" type="ChecksumType" nillable="true">
+   <xs:element name="checksum" type="ChecksumType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Checksum</xs:documentation>
          <xs:appinfo>
@@ -2501,7 +2517,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ChecksumValue" type="ChecksumValueType" nillable="true">
+   <xs:element name="checksumValue" type="ChecksumValueType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
          <xs:appinfo>
@@ -2514,7 +2530,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Comment" type="CommentType" nillable="true">
+   <xs:element name="comment" type="CommentType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Comment</xs:documentation>
          <xs:appinfo>
@@ -2525,7 +2541,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="CompoundPointer" type="CompoundPointerType" nillable="true">
+   <xs:element name="compoundPointer" type="CompoundPointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for CompoundPointer</xs:documentation>
          <xs:appinfo>
@@ -2545,7 +2561,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ConjunctiveLicenseSet"
+   <xs:element name="conjunctiveLicenseSet"
                type="ConjunctiveLicenseSetType"
                nillable="true">
       <xs:annotation>
@@ -2567,7 +2583,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Container" type="ContainerType" nillable="true">
+   <xs:element name="container" type="ContainerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Container</xs:documentation>
          <xs:appinfo>
@@ -2586,7 +2602,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ContextualExample"
+   <xs:element name="contextualExample"
                type="ContextualExampleType"
                nillable="true">
       <xs:annotation>
@@ -2600,7 +2616,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="CopyrightText" type="CopyrightTextType" nillable="true">
+   <xs:element name="copyrightText" type="CopyrightTextType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The text of copyright declarations recited in the Package or File.</xs:documentation>
          <xs:appinfo>
@@ -2612,7 +2628,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="CopyrightTextCode"
+   <xs:element name="copyrightTextCode"
                type="CopyrightTextCodeType"
                nillable="true">
       <xs:annotation>
@@ -2622,7 +2638,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Created" type="CreatedType" nillable="true">
+   <xs:element name="created" type="CreatedType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
          <xs:appinfo>
@@ -2636,7 +2652,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="CreationInfo" type="CreationInfoType" nillable="true">
+   <xs:element name="creationInfo" type="CreationInfoType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for CreationInfo</xs:documentation>
          <xs:appinfo>
@@ -2655,7 +2671,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Creator" type="CreatorType" nillable="true">
+   <xs:element name="creator" type="CreatorType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
          <xs:appinfo>
@@ -2668,7 +2684,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="DataLicense" type="LicenseIDType" nillable="true">
+   <xs:element name="dataLicense" type="LicenseIDType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files.</xs:documentation>
          <xs:appinfo>
@@ -2681,7 +2697,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Date" type="DateType" nillable="true">
+   <xs:element name="date" type="DateType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for A date-time stamp.</xs:documentation>
          <xs:appinfo>
@@ -2694,7 +2710,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="DescribesFile" type="SpdxDocumentType" nillable="true">
+   <xs:element name="describesFile" type="FileType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for The describesFile property relates an SpdxDocument to the file which it describes.</xs:documentation>
          <xs:appinfo>
@@ -2707,7 +2723,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="DescribesPackage" type="SpdxDocumentType" nillable="true">
+   <xs:element name="describesPackage" type="PackageType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for The describesPackage property relates an SpdxDocument to the package which it describes.</xs:documentation>
          <xs:appinfo>
@@ -2720,7 +2736,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Description" type="DescriptionType" nillable="true">
+   <xs:element name="description" type="DescriptionType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Provides a detailed description of the package.</xs:documentation>
          <xs:appinfo>
@@ -2733,7 +2749,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="DisjunctiveLicenseSet"
+   <xs:element name="disjunctiveLicenseSet"
                type="DisjunctiveLicenseSetType"
                nillable="true">
       <xs:annotation>
@@ -2755,7 +2771,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Documentation" type="DocumentationType" nillable="true">
+   <xs:element name="documentation" type="DocumentationType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Website containing the documentation related to the repository identifier</xs:documentation>
          <xs:appinfo>
@@ -2767,7 +2783,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="DownloadLocation" type="DownloadLocationType" nillable="true">
+   <xs:element name="downloadLocation" type="DownloadLocationType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively.</xs:documentation>
          <xs:appinfo>
@@ -2779,7 +2795,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="DownloadLocationCode"
+   <xs:element name="downloadLocationCode"
                type="DownloadLocationCodeType"
                nillable="true">
       <xs:annotation>
@@ -2790,7 +2806,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="EndPointer" type="PointerType" nillable="true">
+   <xs:element name="endPointer" type="PointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Pointer to the end point of the range.</xs:documentation>
          <xs:appinfo>
@@ -2803,7 +2819,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Example" type="ExampleType" nillable="true">
+   <xs:element name="example" type="ExampleType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Text for examples in describing an SPDX element.</xs:documentation>
          <xs:appinfo>
@@ -2816,7 +2832,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ExternalDocumentID"
+   <xs:element name="externalDocumentID"
                type="ExternalDocumentIDType"
                nillable="true">
       <xs:annotation>
@@ -2831,7 +2847,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ExternalDocumentRef"
+   <xs:element name="externalDocumentRef"
                type="ExternalDocumentRefType"
                nillable="true">
       <xs:annotation>
@@ -2852,7 +2868,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ExternalRef" type="ExternalRefType" nillable="true">
+   <xs:element name="externalRef" type="ExternalRefType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for ExternalRef</xs:documentation>
          <xs:appinfo>
@@ -2871,7 +2887,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ExternalReferenceSite"
+   <xs:element name="externalReferenceSite"
                type="ExternalReferenceSiteType"
                nillable="true">
       <xs:annotation>
@@ -2885,7 +2901,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ExtractedLicenseInfo"
+   <xs:element name="extractedLicenseInfo"
                type="ExtractedLicenseInfoType"
                nillable="true">
       <xs:annotation>
@@ -2907,7 +2923,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ExtractedText" type="ExtractedTextType" nillable="true">
+   <xs:element name="extractedText" type="ExtractedTextType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Verbatim license or licensing notice text that was discovered.</xs:documentation>
          <xs:appinfo>
@@ -2920,7 +2936,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="File" type="FileType" nillable="true">
+   <xs:element name="file" type="FileType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for File</xs:documentation>
          <xs:appinfo>
@@ -2941,7 +2957,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="FileContributor" type="FileContributorType" nillable="true">
+   <xs:element name="fileContributor" type="FileContributorType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for This field provides a place for the SPDX file creator to record file contributors. Contributors could include names of copyright holders and/or authors who may not be copyright holders yet contributed to the file content.</xs:documentation>
          <xs:appinfo>
@@ -2954,7 +2970,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="FileName" type="FileNameType" nillable="true">
+   <xs:element name="fileName" type="FileNameType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The name of the file relative to the root of the package.</xs:documentation>
          <xs:appinfo>
@@ -2968,15 +2984,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="FileTypeCode" type="FileTypeCodeType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for FileType properties</xs:documentation>
-         <xs:appinfo>
-            <Element name="FileTypeCode" rdf="http://spdx.org/rdf/terms#fileType"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="FilesAnalyzed" type="FilesAnalyzedType" nillable="true">
+   <xs:element name="filesAnalyzed" type="FilesAnalyzedType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Indicates whether the file content of this package has been available for or subjected to analysis when creating the SPDX document. If “false” indicates packages that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files.</xs:documentation>
          <xs:appinfo>
@@ -2988,7 +2996,15 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="HasExtractedLicensingInfo"
+   <xs:element name="fileTypeCode" type="FileTypeCodeType" nillable="true">
+      <xs:annotation>
+         <xs:documentation>A data item for FileType properties</xs:documentation>
+         <xs:appinfo>
+            <Element name="FileTypeCode" rdf="http://spdx.org/rdf/terms#fileType"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="hasExtractedLicensingInfo"
                type="SpdxDocumentType"
                nillable="true">
       <xs:annotation>
@@ -3002,7 +3018,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="HasFile" type="PackageType" nillable="true">
+   <xs:element name="hasFile" type="PackageType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Indicates that a particular file belongs to a package.</xs:documentation>
          <xs:appinfo>
@@ -3015,7 +3031,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Homepage" type="HomepageType" nillable="true">
+   <xs:element name="homepage" type="HomepageType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Homepage</xs:documentation>
          <xs:appinfo>
@@ -3027,7 +3043,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="IsDeprecatedLicenseID"
+   <xs:element name="isDeprecatedLicenseID"
                type="IsDeprecatedLicenseIDType"
                nillable="true">
       <xs:annotation>
@@ -3041,7 +3057,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="IsFsfLibre" type="IsFsfLibreType" nillable="true">
+   <xs:element name="isFsfLibre" type="IsFsfLibreType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item to indicate if the license is FSF Libre.</xs:documentation>
          <xs:appinfo>
@@ -3053,7 +3069,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="IsOsiApproved" type="IsOsiApprovedType" nillable="true">
+   <xs:element name="isOsiApproved" type="IsOsiApprovedType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Indicates if the OSI has approved the license.</xs:documentation>
          <xs:appinfo>
@@ -3066,7 +3082,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="License" type="LicenseType" nillable="true">
+   <xs:element name="license" type="LicenseType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for License</xs:documentation>
          <xs:appinfo>
@@ -3086,7 +3102,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseComments" type="LicenseCommentsType" nillable="true">
+   <xs:element name="licenseComments" type="LicenseCommentsType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for he licenseComments property allows the preparer of the SPDX document to describe why the licensing in spdx:licenseConcluded was chosen.</xs:documentation>
          <xs:appinfo>
@@ -3099,7 +3115,20 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseConcludedCode"
+   <xs:element name="licenseConcluded" type="LicenseConcludedType" nillable="true">
+      <xs:annotation>
+         <xs:documentation>A data item for The licensing that the preparer of this SPDX document has concluded, based on the evidence, actually applies to the package.</xs:documentation>
+         <xs:appinfo>
+            <Element name="licenseConcluded"
+                     xmlname="LicenseConcluded"
+                     comment="The licensing that the preparer of this SPDX document has concluded, based on the evidence, actually applies to the package."
+                     rdf="http://spdx.org/rdf/terms#licenseConcluded"
+                     domain="SpdxItem"
+                     type="FunctionalProperty"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="licenseConcludedCode"
                type="LicenseConcludedCodeType"
                nillable="true">
       <xs:annotation>
@@ -3110,7 +3139,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseDeclared" type="SpdxItemType" nillable="true">
+   <xs:element name="licenseDeclared" type="SpdxItemType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for The licensing that the creators of the software in the package, or the packager, have declared. Declarations by the original software creator should be preferred, if they exist.</xs:documentation>
          <xs:appinfo>
@@ -3123,7 +3152,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseDeclaredCode"
+   <xs:element name="licenseDeclaredCode"
                type="LicenseDeclaredCodeType"
                nillable="true">
       <xs:annotation>
@@ -3134,7 +3163,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseException" type="LicenseExceptionType" nillable="true">
+   <xs:element name="licenseException" type="LicenseExceptionType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for LicenseException</xs:documentation>
          <xs:appinfo>
@@ -3153,7 +3182,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseExceptionID"
+   <xs:element name="licenseExceptionID"
                type="LicenseExceptionIDType"
                nillable="true">
       <xs:annotation>
@@ -3168,7 +3197,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseExceptionText"
+   <xs:element name="licenseExceptionText"
                type="LicenseExceptionTextType"
                nillable="true">
       <xs:annotation>
@@ -3183,7 +3212,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseID" type="LicenseIDType" nillable="true">
+   <xs:element name="licenseID" type="LicenseIDType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form "LicenseRef-"[idString] where [idString] is a unique string containing letters, numbers, ".", "-" or "+".</xs:documentation>
          <xs:appinfo>
@@ -3196,7 +3225,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseInfoFromFiles" type="PackageType" nillable="true">
+   <xs:element name="licenseInfoFromFiles" type="FileType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for The licensing information that was discovered directly within the package. There will be an instance of this property for each distinct value of alllicenseInfoInFile properties of all files contained in the package.</xs:documentation>
          <xs:appinfo>
@@ -3208,7 +3237,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseInfoFromFilesCode"
+   <xs:element name="licenseInfoFromFilesCode"
                type="LicenseInfoFromFilesCodeType"
                nillable="true">
       <xs:annotation>
@@ -3219,7 +3248,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseListVersion"
+   <xs:element name="licenseListVersion"
                type="LicenseListVersionType"
                nillable="true">
       <xs:annotation>
@@ -3234,7 +3263,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LicenseText" type="LicenseTextType" nillable="true">
+   <xs:element name="licenseText" type="LicenseTextType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Full text of the license.</xs:documentation>
          <xs:appinfo>
@@ -3247,7 +3276,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LineCharPointer" type="LineCharPointerType" nillable="true">
+   <xs:element name="lineCharPointer" type="LineCharPointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for LineCharPointer</xs:documentation>
          <xs:appinfo>
@@ -3267,7 +3296,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LineNumber" type="LineNumberType" nillable="true">
+   <xs:element name="lineNumber" type="LineNumberType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Line number within the reference starting at one.</xs:documentation>
          <xs:appinfo>
@@ -3280,7 +3309,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ListedLicense" type="ListedLicenseType" nillable="true">
+   <xs:element name="listedLicense" type="ListedLicenseType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for ListedLicense</xs:documentation>
          <xs:appinfo>
@@ -3300,7 +3329,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="LocatorFormat" type="LocatorFormatType" nillable="true">
+   <xs:element name="locatorFormat" type="LocatorFormatType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Regular expression for the format of the external repository identifier</xs:documentation>
          <xs:appinfo>
@@ -3312,7 +3341,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Member" type="AnyLicenseInfoType" nillable="true">
+   <xs:element name="member" type="SimpleLicensingInfoType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for A license, or other licensing information, that is a member of the subject license set.</xs:documentation>
          <xs:appinfo>
@@ -3324,7 +3353,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Name" type="NameType" nillable="true">
+   <xs:element name="name" type="NameType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
          <xs:appinfo>
@@ -3337,7 +3366,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="NoticeText" type="NoticeTextType" nillable="true">
+   <xs:element name="noticeText" type="NoticeTextType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for This field provides a place for the SPDX file creator to record potential legal notices found in the file. This may or may not include copyright statements.</xs:documentation>
          <xs:appinfo>
@@ -3350,7 +3379,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Offset" type="OffsetType" nillable="true">
+   <xs:element name="offset" type="OffsetType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Offset from the start of the reference.</xs:documentation>
          <xs:appinfo>
@@ -3363,7 +3392,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="OffsetPointer" type="OffsetPointerType" nillable="true">
+   <xs:element name="offsetPointer" type="OffsetPointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for OffsetPointer</xs:documentation>
          <xs:appinfo>
@@ -3383,7 +3412,19 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="OrLaterOperator" type="OrLaterOperatorType" nillable="true">
+   <xs:element name="originator" type="OriginatorType" nillable="true">
+      <xs:annotation>
+         <xs:documentation>A data type for The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+         <xs:appinfo>
+            <Element name="originator"
+                     xmlname="Originator"
+                     comment="The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax."
+                     rdf="http://spdx.org/rdf/terms#originator"
+                     range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="orLaterOperator" type="OrLaterOperatorType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for OrLaterOperator</xs:documentation>
          <xs:appinfo>
@@ -3403,19 +3444,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Originator" type="OriginatorType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax.</xs:documentation>
-         <xs:appinfo>
-            <Element name="originator"
-                     xmlname="Originator"
-                     comment="The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax."
-                     rdf="http://spdx.org/rdf/terms#originator"
-                     range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="Package" type="PackageType" nillable="true">
+   <xs:element name="package" type="PackageType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Package</xs:documentation>
          <xs:appinfo>
@@ -3435,7 +3464,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="PackageFileName" type="PackageFileNameType" nillable="true">
+   <xs:element name="packageFileName" type="PackageFileNameType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The base name of the package file name. For example, zlib-1.2.5.tar.gz.</xs:documentation>
          <xs:appinfo>
@@ -3448,7 +3477,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="PackageName" type="PackageNameType" nillable="true">
+   <xs:element name="packageName" type="PackageNameType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Identify the full name of the package as given by Package Originator.</xs:documentation>
          <xs:appinfo>
@@ -3462,7 +3491,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="PackageVerificationCode"
+   <xs:element name="packageVerificationCode"
                type="PackageVerificationCodeType"
                nillable="true">
       <xs:annotation>
@@ -3483,7 +3512,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="PackageVerificationCodeValue"
+   <xs:element name="packageVerificationCodeValue"
                type="PackageVerificationCodeValueType"
                nillable="true">
       <xs:annotation>
@@ -3498,7 +3527,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Pointer" type="PointerType" nillable="true">
+   <xs:element name="pointer" type="PointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Pointer</xs:documentation>
          <xs:appinfo>
@@ -3517,7 +3546,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Project" type="ProjectType" nillable="true">
+   <xs:element name="project" type="ProjectType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Project</xs:documentation>
          <xs:appinfo>
@@ -3536,7 +3565,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Range" type="SnippetType" nillable="true">
+   <xs:element name="range" type="SnippetType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for This field defines the byte range in the original host file (in X.2) that the snippet information applies to</xs:documentation>
          <xs:appinfo>
@@ -3549,7 +3578,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Reference" type="PointerType" nillable="true">
+   <xs:element name="reference" type="PointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Scope within which a single pointer operates.</xs:documentation>
          <xs:appinfo>
@@ -3561,7 +3590,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ReferenceCategoryCode"
+   <xs:element name="referenceCategoryCode"
                type="ReferenceCategoryCodeType"
                nillable="true">
       <xs:annotation>
@@ -3572,7 +3601,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ReferenceID" type="ReferenceIDType" nillable="true">
+   <xs:element name="referenceID" type="ReferenceIDType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for ReferenceID</xs:documentation>
          <xs:appinfo>
@@ -3591,7 +3620,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="ReferenceLocator" type="ReferenceLocatorType" nillable="true">
+   <xs:element name="referenceLocator" type="ReferenceLocatorType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The unique string with no spaces necessary to access the package-specific information, metadata, or content within the target location. The format of the locator is subject to constraints defined by the &lt;type&gt;.</xs:documentation>
          <xs:appinfo>
@@ -3603,7 +3632,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="RelatedSpdxElement" type="RelationshipType" nillable="true">
+   <xs:element name="relatedSpdxElement" type="SpdxElementType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for A related SpdxElement.</xs:documentation>
          <xs:appinfo>
@@ -3616,7 +3645,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Relationship" type="RelationshipType" nillable="true">
+   <xs:element name="relationship" type="RelationshipType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Relationship</xs:documentation>
          <xs:appinfo>
@@ -3636,7 +3665,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="RelationshipTypeCode"
+   <xs:element name="relationshipTypeCode"
                type="RelationshipTypeCodeType"
                nillable="true">
       <xs:annotation>
@@ -3647,7 +3676,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SeeAlso" type="SeeAlsoType" nillable="true">
+   <xs:element name="seeAlso" type="SeeAlsoType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource.</xs:documentation>
          <xs:appinfo>
@@ -3658,7 +3687,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SimpleLicensingInfo"
+   <xs:element name="simpleLicensingInfo"
                type="SimpleLicensingInfoType"
                nillable="true">
       <xs:annotation>
@@ -3680,7 +3709,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SinglePointer" type="SinglePointerType" nillable="true">
+   <xs:element name="singlePointer" type="SinglePointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for SinglePointer</xs:documentation>
          <xs:appinfo>
@@ -3700,7 +3729,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Snippet" type="SnippetType" nillable="true">
+   <xs:element name="snippet" type="SnippetType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Snippet</xs:documentation>
          <xs:appinfo>
@@ -3720,7 +3749,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SnippetFromFile" type="SnippetType" nillable="true">
+   <xs:element name="snippetFromFile" type="SnippetType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for File containing the SPDX element (e.g. the file contaning a snippet).</xs:documentation>
          <xs:appinfo>
@@ -3733,7 +3762,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SnippetName" type="SnippetNameType" nillable="true">
+   <xs:element name="snippetName" type="SnippetNameType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item to name a specific snippet in a human convenient manner</xs:documentation>
          <xs:appinfo>
@@ -3745,7 +3774,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SourceInfo" type="SourceInfoType" nillable="true">
+   <xs:element name="sourceInfo" type="SourceInfoType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Allows the producer(s) of the SPDX document to describe how the package was acquired and/or changed from the original source.</xs:documentation>
          <xs:appinfo>
@@ -3758,7 +3787,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SpdxDocument" type="SpdxDocumentType" nillable="true">
+   <xs:element name="spdxDocument" type="SpdxDocumentType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for SpdxDocument</xs:documentation>
          <xs:appinfo>
@@ -3778,7 +3807,22 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SpdxElement" type="SpdxElementType" nillable="true">
+   <xs:element name="spdxDocumentNamespace"
+               type="ExternalDocumentIDType"
+               nillable="true">
+      <xs:annotation>
+         <xs:documentation>A data type for spdxDocumentNamespace is a WC3 URN which uniquely identifies an external document within this document.</xs:documentation>
+         <xs:appinfo>
+            <Element xmlns=""
+                     name="externalDocumentId"
+                     xmlname="ExternalDocumentID"
+                     comment="externalDocumentId is a WC3 URN which uniquely identifies an external document within this document."
+                     domain="ExternalDocumentRef"
+                     range="String"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="spdxElement" type="SpdxElementType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for SpdxElement</xs:documentation>
          <xs:appinfo>
@@ -3798,7 +3842,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SpdxItem" type="SpdxItemType" nillable="true">
+   <xs:element name="spdxItem" type="SpdxItemType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for SpdxItem</xs:documentation>
          <xs:appinfo>
@@ -3818,7 +3862,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="SpecVersion" type="SpecVersionType" nillable="true">
+   <xs:element name="specVersion" type="SpecVersionType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
          <xs:appinfo>
@@ -3831,7 +3875,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="StandardLicenseHeader"
+   <xs:element name="standardLicenseHeader"
                type="StandardLicenseHeaderType"
                nillable="true">
       <xs:annotation>
@@ -3846,7 +3890,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="StandardLicenseTemplate"
+   <xs:element name="standardLicenseTemplate"
                type="StandardLicenseTemplateType"
                nillable="true">
       <xs:annotation>
@@ -3861,7 +3905,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="StartEndPointer" type="StartEndPointerType" nillable="true">
+   <xs:element name="startEndPointer" type="StartEndPointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for StartEndPointer</xs:documentation>
          <xs:appinfo>
@@ -3881,7 +3925,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="StartPointer" type="PointerType" nillable="true">
+   <xs:element name="startPointer" type="PointerType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data item for Pointer to the start point of the range in a compound pointer.</xs:documentation>
          <xs:appinfo>
@@ -3894,7 +3938,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Summary" type="SummaryType" nillable="true">
+   <xs:element name="summary" type="SummaryType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Provides a short description of the package.</xs:documentation>
          <xs:appinfo>
@@ -3907,7 +3951,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="Supplier" type="SupplierType" nillable="true">
+   <xs:element name="supplier" type="SupplierType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax.</xs:documentation>
          <xs:appinfo>
@@ -3919,7 +3963,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="VerificationCodeExcludedFile"
+   <xs:element name="verificationCodeExcludedFile"
                type="VerificationCodeExcludedFileType"
                nillable="true">
       <xs:annotation>
@@ -3934,7 +3978,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="VersionInfo" type="VersionInfoType" nillable="true">
+   <xs:element name="versionInfo" type="VersionInfoType" nillable="true">
       <xs:annotation>
          <xs:documentation>A data type for Provides an indication of the version of the package that is described by this SpdxDocument.</xs:documentation>
          <xs:appinfo>
@@ -3947,7 +3991,7 @@
          </xs:appinfo>
       </xs:annotation>
    </xs:element>
-   <xs:element name="WithExceptionOperator"
+   <xs:element name="withExceptionOperator"
                type="WithExceptionOperatorType"
                nillable="true">
       <xs:annotation>

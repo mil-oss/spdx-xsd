@@ -289,6 +289,11 @@
         <xsl:variable name="n">
             <xsl:apply-templates select="@rdf:about" mode="xmlname"/>
         </xsl:variable>
+        <xsl:variable name="lcn">
+            <xsl:call-template name="LCaseWord">
+                <xsl:with-param name="text" select="$n"/>
+            </xsl:call-template>
+        </xsl:variable>
         <xsl:variable name="t">
             <xsl:choose>
                 <xsl:when test="contains(*/@rdf:resource[0], 'string')">
@@ -311,7 +316,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xs:element name="{$n}" type="{$t}">
+        <xs:element name="{$lcn}" type="{$t}">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:value-of select="rdfs:comment"/>
@@ -323,6 +328,11 @@
     <xsl:template match="*" mode="object">
         <xsl:variable name="n">
             <xsl:apply-templates select="@rdf:about" mode="xmlname"/>
+        </xsl:variable>
+        <xsl:variable name="lcn">
+            <xsl:call-template name="LCaseWord">
+                <xsl:with-param name="text" select="$n"/>
+            </xsl:call-template>
         </xsl:variable>
         <xsl:choose>
             <xsl:when test="rdfs:range/owl:Class"/>
@@ -350,7 +360,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xs:element name="{$n}" type="{$t}">
+        <xs:element name="{$lcn}" type="{$t}">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:value-of select="rdfs:comment"/>
@@ -359,10 +369,10 @@
         </xs:element>
     </xsl:template>
 
-    <xsl:template name="CapWord">
+    <xsl:template name="UCaseWord">
         <xsl:param name="text"/>
         <xsl:variable name="w">
-            <xsl:value-of select="translate(substring($text, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
+            <xsl:value-of select="translate(substring($text, 1, 1), 'abcdefghijklmnopqrstuvwxyz','ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
             <xsl:value-of select="substring($text, 2, string-length($text) - 1)"/>
         </xsl:variable>
         <xsl:choose>
@@ -399,7 +409,6 @@
         </xsl:choose>
     </xsl:template>
 
-
     <xsl:template match="@*" mode="xmlname">
         <xsl:variable name="n">
             <xsl:choose>
@@ -408,14 +417,14 @@
                     <xsl:text>SimpleLicensingInfo</xsl:text>
                 </xsl:when>
                 <xsl:when test="contains(., '#')">
-                    <xsl:call-template name="CapWord">
+                    <xsl:call-template name="UCaseWord">
                         <xsl:with-param name="text">
                             <xsl:value-of select="substring-after(., '#')"/>
                         </xsl:with-param>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:when test="contains(., 'xsd;')">
-                    <xsl:call-template name="CapWord">
+                    <xsl:call-template name="UCaseWord">
                         <xsl:with-param name="text">
                             <xsl:value-of select="substring-after(., 'xsd;')"/>
                         </xsl:with-param>
@@ -431,12 +440,12 @@
         <xsl:choose>
             <xsl:when test="contains($n, '_')">
                 <xsl:variable name="pre">
-                    <!-- <xsl:call-template name="CapWord">
+                    <xsl:call-template name="UCaseWord">
                         <xsl:with-param name="text" select="substring-before($n, '_')"/>
-                    </xsl:call-template>-->
+                    </xsl:call-template>
                 </xsl:variable>
                 <xsl:variable name="suf">
-                    <xsl:call-template name="CapWord">
+                    <xsl:call-template name="UCaseWord">
                         <xsl:with-param name="text" select="substring-after($n, '_')"/>
                     </xsl:call-template>
                 </xsl:variable>
