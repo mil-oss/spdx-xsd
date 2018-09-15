@@ -85,7 +85,7 @@
            domain="SpdxDocument"
            range="CreationInfo"/>
    <Object name="dataLicense"
-           xmlname="DataLicense"
+           xmlname="DataLicenseText"
            comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files."
            rdf="http://spdx.org/rdf/terms#dataLicense"
            domain="SpdxDocument"
@@ -93,7 +93,7 @@
       <Restriction rdf="http://spdx.org/rdf/terms#dataLicense"
                    onproperty="DataLicense"
                    hasvalue="CC0-1.0"
-                   xmlname="DataLicense"/>
+                   xmlname="DataLicenseText"/>
    </Object>
    <Object name="describesFile"
            xmlname="DescribesFile"
@@ -108,7 +108,7 @@
            domain="SpdxDocument"
            range="Package"/>
    <Object name="downloadLocation"
-           xmlname="DownloadLocation"
+           xmlname="DownloadLocationURI"
            comment="The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively."
            rdf="http://spdx.org/rdf/terms#downloadLocation"
            domain="PackageSpdxDocument">
@@ -117,11 +117,11 @@
             <Restriction rdf="http://spdx.org/rdf/terms#downloadLocation"
                          onproperty="DownloadLocation"
                          hasvalue="Noassertion"
-                         xmlname="DownloadLocation"/>
+                         xmlname="DownloadLocationURI"/>
             <Restriction rdf="http://spdx.org/rdf/terms#downloadLocation"
                          onproperty="DownloadLocation"
                          hasvalue="None"
-                         xmlname="DownloadLocation"/>
+                         xmlname="DownloadLocationURI"/>
          </Union>
       </Class>
    </Object>
@@ -228,14 +228,14 @@
            rdf="http://spdx.org/rdf/terms#member"
            range="AnyLicenseInfo"/>
    <Object name="originator"
-           xmlname="Originator"
+           xmlname="OriginatorText"
            comment="The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax."
            rdf="http://spdx.org/rdf/terms#originator"
            domain="Package">
       <Restriction rdf="http://spdx.org/rdf/terms#originator"
                    onproperty="Originator"
                    hasvalue="None"
-                   xmlname="Originator"/>
+                   xmlname="OriginatorText"/>
    </Object>
    <Object name="packageVerificationCode"
            xmlname="PackageVerificationCode"
@@ -367,14 +367,14 @@
            rdf="http://spdx.org/rdf/terms#spdxDocument"
            range="SpdxDocument"/>
    <Object name="supplier"
-           xmlname="Supplier"
+           xmlname="SupplierText"
            comment="The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax."
            rdf="http://spdx.org/rdf/terms#supplier"
            domain="Package">
       <Restriction rdf="http://spdx.org/rdf/terms#supplier"
                    onproperty="Supplier"
                    hasvalue="None"
-                   xmlname="Supplier"/>
+                   xmlname="SupplierText"/>
    </Object>
    <Object name="usedBy"
            xmlname="UsedBy"
@@ -409,179 +409,210 @@
            range="SinglePointer"/>
    <Datatype name="annotationDate"
              xmlname="AnnotationDate"
+             typename="AnnotationDate"
              comment="Identify when the comment was made. This is to be specified according to the combined date and time in the UTC format, as specified in the ISO 8601 standard."
              rdf="http://spdx.org/rdf/terms#annotationDate"
              domain="Annotation"
              subpropertyof="Date"/>
    <Datatype name="annotator"
-             xmlname="Annotator"
+             xmlname="AnnotatorText"
+             typename="Annotator"
              comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document."
              rdf="http://spdx.org/rdf/terms#annotator"
              range="String"/>
    <Datatype name="checksumValue"
              xmlname="ChecksumValue"
+             typename="ChecksumValue"
              comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm."
              rdf="http://spdx.org/rdf/terms#checksumValue"
              domain="Checksum"
              range="HexBinary"/>
    <Datatype name="contextualExample"
-             xmlname="ContextualExample"
+             xmlname="ContextualExampleText"
+             typename="ContextualExample"
              comment="Example for use of the external repository identifier"
              rdf="http://spdx.org/rdf/terms#contextualExample"
              range="String"/>
    <Datatype name="copyrightText"
              xmlname="CopyrightText"
+             typename="CopyrightText"
              comment="The text of copyright declarations recited in the Package or File."
              rdf="http://spdx.org/rdf/terms#copyrightText"
              range="Literal"/>
    <Datatype name="created"
-             xmlname="Created"
+             xmlname="CreatedDateTime"
+             typename="Created"
              comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator."
              rdf="http://spdx.org/rdf/terms#created"
              domain="CreationInfo"
              range="DateTime"
              subpropertyof="Date"/>
    <Datatype name="creator"
-             xmlname="Creator"
+             xmlname="CreatorText"
+             typename="Creator"
              comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax."
              rdf="http://spdx.org/rdf/terms#creator"
              domain="CreationInfo"
              range="String"/>
    <Datatype name="date"
              xmlname="Date"
+             typename="Date"
              comment="A date-time stamp."
              rdf="http://spdx.org/rdf/terms#date"
              domain="AnnotationCreationInfo"
              range="DateTime"/>
    <Datatype name="description"
-             xmlname="Description"
+             xmlname="DescriptionText"
+             typename="Description"
              comment="Provides a detailed description of the package."
              rdf="http://spdx.org/rdf/terms#description"
              domain="Package"
              range="String"/>
    <Datatype name="documentation"
-             xmlname="Documentation"
+             xmlname="DocumentationURI"
+             typename="Documentation"
              comment="Website containing the documentation related to the repository identifier"
              rdf="http://spdx.org/rdf/terms#documentation"
              range="AnyURI"/>
    <Datatype name="downloadLocation"
-             xmlname="DownloadLocation"
+             xmlname="DownloadLocationURI"
+             typename="DownloadLocation"
              comment="The URI at which this package is available for download. Private (i.e., not publicly reachable) URIs are acceptable as values of this property. The values http://spdx.org/rdf/terms#none and http://spdx.org/rdf/terms#noassertion may be used to specify that the package is not downloadable or that no attempt was made to determine its download location, respectively."
              rdf="http://spdx.org/rdf/terms#downloadLocation"
              range="AnyURI"/>
    <Datatype name="example"
-             xmlname="Example"
+             xmlname="ExampleText"
+             typename="Example"
              comment="Text for examples in describing an SPDX element."
              rdf="http://spdx.org/rdf/terms#example"
              domain="LicenseException"
              range="String"/>
    <Datatype name="externalDocumentId"
              xmlname="ExternalDocumentID"
+             typename="ExternalDocumentID"
              comment="externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document."
              rdf="http://spdx.org/rdf/terms#externalDocumentId"
              domain="ExternalDocumentRef"
              range="String"/>
    <Datatype name="externalReferenceSite"
-             xmlname="ExternalReferenceSite"
+             xmlname="ExternalReferenceSiteURI"
+             typename="ExternalReferenceSite"
              comment="Website for the maintainers of the external reference site"
              rdf="http://spdx.org/rdf/terms#externalReferenceSite"
              range="AnyURI"/>
    <Datatype name="extractedText"
              xmlname="ExtractedText"
+             typename="ExtractedText"
              comment="Verbatim license or licensing notice text that was discovered."
              rdf="http://spdx.org/rdf/terms#extractedText"
              domain="ExtractedLicenseInfo"
              range="String"/>
    <Datatype name="fileContributor"
-             xmlname="FileContributor"
+             xmlname="FileContributorText"
+             typename="FileContributor"
              comment="This field provides a place for the SPDX file creator to record file contributors. Contributors could include names of copyright holders and/or authors who may not be copyright holders yet contributed to the file content."
              rdf="http://spdx.org/rdf/terms#fileContributor"
              domain="File"
              range="String"/>
    <Datatype name="fileName"
              xmlname="FileName"
+             typename="FileName"
              comment="The name of the file relative to the root of the package."
              rdf="http://spdx.org/rdf/terms#fileName"
              domain="File"
              range="String"
              subpropertyof="Name"/>
    <Datatype name="filesAnalyzed"
-             xmlname="FilesAnalyzed"
+             xmlname="FilesAnalyzedIndicator"
+             typename="FilesAnalyzed"
              comment="Indicates whether the file content of this package has been available for or subjected to analysis when creating the SPDX document. If “false” indicates packages that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files."
              rdf="http://spdx.org/rdf/terms#filesAnalyzed"
              range="Boolean"/>
    <Datatype name="isOsiApproved"
-             xmlname="IsOsiApproved"
+             xmlname="IsOsiApprovedIndicator"
+             typename="IsOsiApproved"
              comment="Indicates if the OSI has approved the license."
              rdf="http://spdx.org/rdf/terms#isOsiApproved"
              domain="License"
              range="Boolean"/>
    <Datatype name="licenseComments"
-             xmlname="LicenseComments"
+             xmlname="LicenseCommentsText"
+             typename="LicenseComments"
              comment="he licenseComments property allows the preparer of the SPDX document to describe why the licensing in spdx:licenseConcluded was chosen."
              rdf="http://spdx.org/rdf/terms#licenseComments"
              domain="SpdxItem"
              range="String"/>
    <Datatype name="licenseExceptionId"
              xmlname="LicenseExceptionID"
+             typename="LicenseExceptionID"
              comment="short form license exception identifier in Appendix I.2 of the SPDX specification."
              rdf="http://spdx.org/rdf/terms#licenseExceptionId"
              domain="LicenseException"
              range="String"/>
    <Datatype name="licenseExceptionText"
              xmlname="LicenseExceptionText"
+             typename="LicenseExceptionText"
              comment="Full text of the license exception."
              rdf="http://spdx.org/rdf/terms#licenseExceptionText"
              domain="LicenseException"
              range="String"/>
    <Datatype name="licenseId"
              xmlname="LicenseID"
+             typename="LicenseID"
              comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &#34;LicenseRef-&#34;[idString] where [idString] is a unique string containing letters, numbers, &#34;.&#34;, &#34;-&#34; or &#34;+&#34;."
              rdf="http://spdx.org/rdf/terms#licenseId"
              domain="SimpleLicensingInfo"
              range="String"/>
    <Datatype name="licenseListVersion"
-             xmlname="LicenseListVersion"
+             xmlname="LicenseListVersionText"
+             typename="LicenseListVersion"
              comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created."
              rdf="http://spdx.org/rdf/terms#licenseListVersion"
              domain="CreationInfo"
              range="String"/>
    <Datatype name="licenseText"
              xmlname="LicenseText"
+             typename="LicenseText"
              comment="Full text of the license."
              rdf="http://spdx.org/rdf/terms#licenseText"
              domain="License"
              range="String"/>
    <Datatype name="locatorFormat"
-             xmlname="LocatorFormat"
+             xmlname="LocatorFormatText"
+             typename="LocatorFormat"
              comment="Regular expression for the format of the external repository identifier"
              rdf="http://spdx.org/rdf/terms#locatorFormat"
              range="String"/>
    <Datatype name="name"
              xmlname="Name"
+             typename="Name"
              comment="The full human readable name of the item. This should include version information when applicable."
              rdf="http://spdx.org/rdf/terms#name"
              domain="SpdxElement"
              range="String"/>
    <Datatype name="noticeText"
              xmlname="NoticeText"
+             typename="NoticeText"
              comment="This field provides a place for the SPDX file creator to record potential legal notices found in the file. This may or may not include copyright statements."
              rdf="http://spdx.org/rdf/terms#noticeText"
              domain="File"
              range="String"/>
    <Datatype name="originator"
-             xmlname="Originator"
+             xmlname="OriginatorText"
+             typename="Originator"
              comment="The name and, optionally, contact information of the person or organization that originally created the package. Values of this property must conform to the agent and tool syntax."
              rdf="http://spdx.org/rdf/terms#originator"
              range="String"/>
    <Datatype name="packageFileName"
              xmlname="PackageFileName"
+             typename="PackageFileName"
              comment="The base name of the package file name. For example, zlib-1.2.5.tar.gz."
              rdf="http://spdx.org/rdf/terms#packageFileName"
              domain="Package"
              range="String"/>
    <Datatype name="packageName"
              xmlname="PackageName"
+             typename="PackageName"
              comment="Identify the full name of the package as given by Package Originator."
              rdf="http://spdx.org/rdf/terms#packageName"
              domain="Package"
@@ -589,88 +620,104 @@
              subpropertyof="Name"/>
    <Datatype name="packageVerificationCodeValue"
              xmlname="PackageVerificationCodeValue"
+             typename="PackageVerificationCodeValue"
              comment="The actual package verification code as a hex encoded value."
              rdf="http://spdx.org/rdf/terms#packageVerificationCodeValue"
              domain="PackageVerificationCode"
              range="HexBinary"/>
    <Datatype name="referenceLocator"
-             xmlname="ReferenceLocator"
+             xmlname="ReferenceLocatorText"
+             typename="ReferenceLocator"
              comment="The unique string with no spaces necessary to access the package-specific information, metadata, or content within the target location. The format of the locator is subject to constraints defined by the &lt;type&gt;."
              rdf="http://spdx.org/rdf/terms#referenceLocator"
              range="String"/>
    <Datatype name="snippetName"
              xmlname="SnippetName"
+             typename="SnippetName"
              comment="Identify a specific snippet in a human convenient manner."
              rdf="http://spdx.org/rdf/terms#snippetName"
              subpropertyof="Name"/>
    <Datatype name="sourceInfo"
-             xmlname="SourceInfo"
+             xmlname="SourceInfoText"
+             typename="SourceInfo"
              comment="Allows the producer(s) of the SPDX document to describe how the package was acquired and/or changed from the original source."
              rdf="http://spdx.org/rdf/terms#sourceInfo"
              domain="Package"
              range="String"/>
    <Datatype name="specVersion"
-             xmlname="SpecVersion"
+             xmlname="SpecVersionText"
+             typename="SpecVersion"
              comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes."
              rdf="http://spdx.org/rdf/terms#specVersion"
              domain="SpdxDocument"
              range="String"/>
    <Datatype name="standardLicenseHeader"
-             xmlname="StandardLicenseHeader"
+             xmlname="StandardLicenseHeaderText"
+             typename="StandardLicenseHeader"
              comment="License author's preferred text to indicated that a file is covered by the license."
              rdf="http://spdx.org/rdf/terms#standardLicenseHeader"
              domain="License"
              range="String"/>
    <Datatype name="standardLicenseTemplate"
-             xmlname="StandardLicenseTemplate"
+             xmlname="StandardLicenseTemplateText"
+             typename="StandardLicenseTemplate"
              comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information."
              rdf="http://spdx.org/rdf/terms#standardLicenseTemplate"
              domain="License"
              range="String"/>
    <Datatype name="summary"
-             xmlname="Summary"
+             xmlname="SummaryText"
+             typename="Summary"
              comment="Provides a short description of the package."
              rdf="http://spdx.org/rdf/terms#summary"
              domain="Package"
              range="String"/>
    <Datatype name="supplier"
-             xmlname="Supplier"
+             xmlname="SupplierText"
+             typename="Supplier"
              comment="The name and, optionally, contact information of the person or organization who was the immediate supplier of this package to the recipient. The supplier may be different than originator when the software has been repackaged. Values of this property must conform to the agent and tool syntax."
              rdf="http://spdx.org/rdf/terms#supplier"
              range="String"/>
    <Datatype name="verificationCodeExcludedFile"
-             xmlname="VerificationCodeExcludedFile"
+             xmlname="VerificationCodeExcludedFileText"
+             typename="VerificationCodeExcludedFile"
              comment="A file that was excluded when calculating the package verification code. This is usually a file containing SPDX data regarding the package. If a package contains more than one SPDX file all SPDX files must be excluded from the package verification code. If this is not done it would be impossible to correctly calculate the verification codes in both files."
              rdf="http://spdx.org/rdf/terms#verificationCodeExcludedFile"
              domain="PackageVerificationCode"
              range="String"/>
    <Datatype name="versionInfo"
-             xmlname="VersionInfo"
+             xmlname="VersionInfoText"
+             typename="VersionInfo"
              comment="Provides an indication of the version of the package that is described by this SpdxDocument."
              rdf="http://spdx.org/rdf/terms#versionInfo"
              domain="Package"
              range="String"/>
    <Datatype name="homepage"
-             xmlname="Homepage"
+             xmlname="HomepageURI"
+             typename="Homepage"
              comment=""
              rdf="http://usefulinc.com/ns/doap#homepage"
              range="AnyURI"/>
    <Datatype name="comment"
-             xmlname="Comment"
+             xmlname="CommentText"
+             typename="Comment"
              comment=""
              rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
    <Datatype name="seeAlso"
-             xmlname="SeeAlso"
+             xmlname="SeeAlsoURI"
+             typename="SeeAlso"
              comment="rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource."
              rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
    <Datatype name="lineNumber"
-             xmlname="LineNumber"
+             xmlname="LineNumberNumeric"
+             typename="LineNumber"
              comment="Line number within the reference starting at one."
              rdf="http://www.w3.org/2009/pointers#lineNumber"
              domain="LineCharPointer"
              range="PositiveInteger"/>
    <Datatype name="offset"
-             xmlname="Offset"
+             xmlname="OffsetNumeric"
+             typename="Offset"
              comment="Offset from the start of the reference."
              rdf="http://www.w3.org/2009/pointers#offset"
              domain="OffsetPointer"
@@ -709,7 +756,7 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Comment"/>
+                      xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#annotator"
@@ -717,7 +764,7 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Annotator"/>
+                      xmlname="AnnotatorText"/>
       </SubClass>
    </Class>
    <Class name="AnyLicenseInfo"
@@ -783,7 +830,7 @@
                       onproperty="LicenseListVersion"
                       minOccurs="0"
                       ondatarange="string"
-                      xmlname="LicenseListVersion"/>
+                      xmlname="LicenseListVersionText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#created"
@@ -791,21 +838,21 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="dateTimeStamp"
-                      xmlname="Created"/>
+                      xmlname="CreatedDateTime"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#comment"
                       onproperty="Comment"
                       minOccurs="0"
                       ondatarange="string"
-                      xmlname="Comment"/>
+                      xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#creator"
                       onproperty="Creator"
                       minOccurs="1"
                       ondatarange="string"
-                      xmlname="Creator"/>
+                      xmlname="CreatorText"/>
       </SubClass>
    </Class>
    <Class name="DisjunctiveLicenseSet"
@@ -864,7 +911,7 @@
                       onproperty="Comment"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Comment"/>
+                      xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#referenceLocator"
@@ -872,11 +919,11 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="ReferenceLocator"/>
+                      xmlname="ReferenceLocatorText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#referenceType"
-                      onproperty="ReferenceID"
+                      onproperty="ReferenceType"
                       onclass="ReferenceID"
                       minOccurs="1"
                       maxOccurs="1"
@@ -936,7 +983,7 @@
                       onproperty="FileContributor"
                       minOccurs="0"
                       ondatarange="string"
-                      xmlname="FileContributor"/>
+                      xmlname="FileContributorText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#artifactOf"
@@ -1024,14 +1071,14 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="boolean"
-                      xmlname="IsOsiApproved"/>
+                      xmlname="IsOsiApprovedIndicator"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#standardLicenseHeader"
                       onproperty="StandardLicenseHeader"
                       minOccurs="0"
                       ondatarange="string"
-                      xmlname="StandardLicenseHeader"/>
+                      xmlname="StandardLicenseHeaderText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#licenseText"
@@ -1046,7 +1093,7 @@
                       onproperty="StandardLicenseTemplate"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="StandardLicenseTemplate"/>
+                      xmlname="StandardLicenseTemplateText"/>
       </SubClass>
    </Class>
    <Class name="LicenseException"
@@ -1067,14 +1114,14 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Comment"/>
+                      xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#example"
                       onproperty="Example"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Example"/>
+                      xmlname="ExampleText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#name"
@@ -1089,7 +1136,7 @@
                       onproperty="SeeAlso"
                       minOccurs="0"
                       ondatarange="anyURI"
-                      xmlname="SeeAlso"/>
+                      xmlname="SeeAlsoURI"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#licenseExceptionId"
@@ -1149,28 +1196,28 @@
                       onproperty="FilesAnalyzed"
                       maxOccurs="1"
                       ondatarange="boolean"
-                      xmlname="FilesAnalyzed"/>
+                      xmlname="FilesAnalyzedIndicator"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#description"
                       onproperty="Description"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Description"/>
+                      xmlname="DescriptionText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://usefulinc.com/ns/doap#homepage"
                       onproperty="Homepage"
                       maxOccurs="1"
                       ondatarange="anyURI"
-                      xmlname="Homepage"/>
+                      xmlname="HomepageURI"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#originator"
                       onproperty="Originator"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Originator"/>
+                      xmlname="OriginatorText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#downloadLocation"
@@ -1178,21 +1225,21 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="DownloadLocation"/>
+                      xmlname="DownloadLocationURI"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#sourceInfo"
                       onproperty="SourceInfo"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="SourceInfo"/>
+                      xmlname="SourceInfoText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#supplier"
                       onproperty="Supplier"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Supplier"/>
+                      xmlname="SupplierText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#packageVerificationCode"
@@ -1227,14 +1274,14 @@
                       onproperty="VersionInfo"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="VersionInfo"/>
+                      xmlname="VersionInfoText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#summary"
                       onproperty="Summary"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Summary"/>
+                      xmlname="SummaryText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#checksum"
@@ -1261,7 +1308,7 @@
                       onproperty="VerificationCodeExcludedFile"
                       minOccurs="0"
                       ondatarange="string"
-                      xmlname="VerificationCodeExcludedFile"/>
+                      xmlname="VerificationCodeExcludedFileText"/>
       </SubClass>
    </Class>
    <Class name="ReferenceType"
@@ -1274,7 +1321,7 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="anyURI"
-                      xmlname="ExternalReferenceSite"/>
+                      xmlname="ExternalReferenceSiteURI"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#contextualExample"
@@ -1282,7 +1329,7 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="anyURI"
-                      xmlname="ContextualExample"/>
+                      xmlname="ContextualExampleText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#documentation"
@@ -1290,7 +1337,7 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Documentation"/>
+                      xmlname="DocumentationURI"/>
       </SubClass>
    </Class>
    <Class name="Relationship"
@@ -1426,7 +1473,7 @@
                       onproperty="Comment"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Comment"/>
+                      xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#relatedSpdxElement"
@@ -1457,14 +1504,14 @@
                       onproperty="Comment"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Comment"/>
+                      xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"
                       onproperty="SeeAlso"
                       minOccurs="0"
                       ondatarange="anyURI"
-                      xmlname="SeeAlso"/>
+                      xmlname="SeeAlsoURI"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#name"
@@ -1539,7 +1586,7 @@
                       minOccurs="1"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="SpecVersion"/>
+                      xmlname="SpecVersionText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#externalDocumentRef"
@@ -1552,7 +1599,7 @@
          <Restriction rdf="http://spdx.org/rdf/terms#dataLicense"
                       onproperty="DataLicense"
                       hasvalue="CC0-1.0"
-                      xmlname="DataLicense"/>
+                      xmlname="DataLicenseText"/>
       </SubClass>
    </Class>
    <Class name="SpdxElement"
@@ -1581,7 +1628,7 @@
                       onproperty="Comment"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="Comment"/>
+                      xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#relationship"
@@ -1637,7 +1684,7 @@
                       onproperty="LicenseComments"
                       maxOccurs="1"
                       ondatarange="string"
-                      xmlname="LicenseComments"/>
+                      xmlname="LicenseCommentsText"/>
       </SubClass>
    </Class>
    <Class name="WithExceptionOperator"

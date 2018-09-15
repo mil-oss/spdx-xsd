@@ -64,12 +64,15 @@
         <xsl:variable name="xn">
             <xsl:apply-templates select="@rdf:about" mode="getname"/>
         </xsl:variable>
+        <xsl:variable name="tn">
+            <xsl:apply-templates select="@rdf:about" mode="typename"/>
+        </xsl:variable>
         <xsl:variable name="c">
             <xsl:apply-templates select="@rdf:about" mode="getcomment">
                 <xsl:with-param name="comment" select="rdfs:comment"/>
             </xsl:apply-templates>
         </xsl:variable>
-        <Datatype name="{$n}" xmlname="{$xn}" comment="{$c}" rdf="{@rdf:about}">
+        <Datatype name="{$n}" xmlname="{$xn}" typename="{$tn}" comment="{$c}" rdf="{@rdf:about}">
             <xsl:if test="rdfs:domain/@rdf:resource">
                 <xsl:attribute name="domain">
                     <xsl:apply-templates select="rdfs:domain/@rdf:resource" mode="getname"/>
@@ -192,7 +195,7 @@
 
     <xsl:template match="owl:onProperty" mode="att">
         <xsl:attribute name="onproperty">
-            <xsl:apply-templates select="@rdf:resource" mode="getname"/>
+            <xsl:apply-templates select="@rdf:resource" mode="typename"/>
         </xsl:attribute>
     </xsl:template>
 
@@ -385,6 +388,10 @@
                 <xsl:apply-templates select="." mode="xmlname"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="@*" mode="typename">
+        <xsl:apply-templates select="." mode="xmlname"/>
     </xsl:template>
 
     <xsl:template match="@*" mode="getcomment">

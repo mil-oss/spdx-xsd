@@ -1,21 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:spd="spdx:xsd::1.0/ref" xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" exclude-result-prefixes="xs owl rdf ns rdfs" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" version="2.0">
-    <xsl:output method="xml" indent="yes"/>
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" version="2.0">
+    <xsl:output method="xml" indent="yes" exclude-result-prefixes="xs owl rdf ns rdfs"/>
     <xsl:include href="identity.xsl"/>
     <xsl:include href="spdx_map.xsl"/>
-
     <xsl:variable name="spdxMap">
         <xsl:call-template name="mapSpdx">
             <xsl:with-param name="rdfData" select="document('../../resources/SPDX.rdf')"/>
         </xsl:call-template>
     </xsl:variable>
-
     <xsl:variable name="xsdOut" select="'../xsd/spdx-ref.xsd'"/>
     <xsl:variable name="xmlOut" select="'../instance/spdx-map.xml'"/>
-
     <xsl:variable name="Enumerations">
         <xsl:variable name="all">
             <xsl:apply-templates select="$spdxMap/SPDX//Class/Union[Restriction/@hasvalue]" mode="enum"/>
@@ -50,14 +45,13 @@
             </xsl:choose>
         </xsl:for-each>
     </xsl:variable>
-
     <xsl:variable name="Objects">
         <xsl:for-each select="$spdxMap/SPDX/Object">
             <xsl:variable name="n" select="@xmlname"/>
             <xsl:variable name="r" select="@rdf"/>
             <xsl:choose>
-                <xsl:when test="$r='http://www.w3.org/2000/01/rdf-schema#member'"/>
-                <xsl:when test="$n='LicenseInfoFromFiles'">
+                <xsl:when test="$r = 'http://www.w3.org/2000/01/rdf-schema#member'"/>
+                <xsl:when test="$n = 'LicenseInfoFromFiles'">
                     <xsl:apply-templates select="." mode="element">
                         <xsl:with-param name="type" select="'Package'"/>
                     </xsl:apply-templates>
@@ -96,7 +90,7 @@
                         <xsl:with-param name="type" select="'Pointer'"/>
                     </xsl:apply-templates>
                 </xsl:when>
-                <xsl:when test="$n='Member'">
+                <xsl:when test="$n = 'Member'">
                     <xsl:apply-templates select="." mode="element">
                         <xsl:with-param name="type" select="'AnyLicenseInfo'"/>
                     </xsl:apply-templates>
@@ -118,35 +112,34 @@
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:apply-templates select="." mode="element">
-                        <xsl:with-param name="type" select="concat($n,'Type')"/>
+                        <xsl:with-param name="type" select="concat($n, 'Type')"/>
                     </xsl:apply-templates>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:for-each>
     </xsl:variable>
-
     <xsl:variable name="Datatypes">
         <xsl:apply-templates select="$spdxMap/SPDX//Datatype" mode="dt"/>
     </xsl:variable>
-
     <xsl:variable name="Classes">
         <xsl:apply-templates select="$spdxMap/SPDX//Class"/>
     </xsl:variable>
-
     <xsl:variable name="FsfLibre">
-        <xs:element name="IsFsfLibre" type="IsFsfLibreType" nillable="true">
+        <xs:element name="IsFsfLibreIndicator" type="IsFsfLibreType" nillable="true">
             <xs:annotation>
-                <xs:documentation>A data item to indicate if the license is FSF Libre.</xs:documentation>
+                <xs:documentation>True if the license is is FSF Libre; false if not.</xs:documentation>
                 <xs:appinfo>
-                    <Element name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean" xmlns="spdx:xsd::1.0"/>
+                    <Element name="IsFsfLibre" comment="True if the license is is FSF Libre; false if not." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean"
+                        xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
         <xs:complexType name="IsFsfLibreType">
             <xs:annotation>
-                <xs:documentation>A data type to indicate if the license is is FSF Libre.</xs:documentation>
+                <xs:documentation>A data type for an indicator that the license is is FSF Libre.</xs:documentation>
                 <xs:appinfo>
-                    <ComplexType name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean" xmlns="spdx:xsd::1.0"/>
+                    <ComplexType name="IsFsfLibre" comment="True if the license is is FSF Libre; false if not." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean" xmlns="spdx:xsd::1.0"
+                    />
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleContent>
@@ -156,14 +149,13 @@
             </xs:simpleContent>
         </xs:complexType>
     </xsl:variable>
-
     <xsl:variable name="IsDeprecatedLicenseId">
         <xs:element name="IsDeprecatedLicenseID" type="IsDeprecatedLicenseIDType" nillable="true">
             <xs:annotation>
                 <xs:documentation>A data item that indicates if the license id is Deprecated.</xs:documentation>
                 <xs:appinfo>
-                    <Element name="IsDeprecatedLicenseID" comment="Indicates if the license id is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License"
-                        range="Boolean" xmlns="spdx:xsd::1.0"/>
+                    <Element name="IsDeprecatedLicenseID" comment="Indicates if the license id is Deprecated." rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId" domain="License" range="Boolean"
+                        xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
@@ -182,55 +174,96 @@
             </xs:simpleContent>
         </xs:complexType>
     </xsl:variable>
-
+    <xsl:variable name="SEvARef">
+        <xsl:apply-templates select="document('../xsd/ext/seva/xml/xsd/ref.xsd')/xs:schema/*" mode="copyseva"/>
+    </xsl:variable>
+   
+    <xsl:template match="*:Element" mode="copyseva">
+        <Element xmlns="spdx:xsd::1.0">
+            <xsl:apply-templates select="@*" mode="copyseva"/>
+        </Element>
+    </xsl:template>
+    <xsl:template match="*:ComplexType" mode="copyseva">
+        <ComplexType xmlns="spdx:xsd::1.0">
+            <xsl:apply-templates select="@*" mode="copyseva"/>
+        </ComplexType>
+    </xsl:template>
+    <xsl:template match="*:SimpleType" mode="copyseva">
+        <SimpleType xmlns="spdx:xsd::1.0">
+            <xsl:apply-templates select="@*" mode="copyseva"/>
+        </SimpleType>
+    </xsl:template>
+    <xsl:template match="*" mode="copyseva">
+        <xsl:copy inherit-namespaces="no">
+            <xsl:apply-templates select="@*" mode="copyseva"/>
+            <xsl:apply-templates select="text()" mode="copyseva"/>
+            <xsl:apply-templates select="*" mode="copyseva"/>
+        </xsl:copy>
+    </xsl:template>
+    <xsl:template match="@*" mode="copyseva">
+        <xsl:copy-of select="."/>
+    </xsl:template>
+    <xsl:template match="text()" mode="copyseva">
+        <xsl:value-of select="normalize-space(.)"/>
+    </xsl:template>
+    <xsl:template match="xs:complexType[@name = 'FileType']" mode="copyseva"/>
+    <xsl:template match="xs:complexType[@name = 'FileNameType']" mode="copyseva"/>
+    <xsl:template match="xs:element[@name = 'SummaryText']" mode="copyseva"/>
+    <xsl:template match="xs:element[@name = 'Name']" mode="copyseva"/>
     <xsl:variable name="LicenseCtype">
         <xs:complexType name="LicenseType">
             <xs:annotation>
                 <xs:documentation>A data type for License type</xs:documentation>
                 <xs:appinfo>
-                    <ComplexType name="License"
-                        xmlname="License"
+                    <ComplexType name="License" xmlname="License"
                         comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
-                        rdf="http://spdx.org/rdf/terms#License"
-                        subclassof="SimpleLicensingInfo" xmlns="spdx:xsd::1.0"/>
+                        rdf="http://spdx.org/rdf/terms#License" subclassof="SimpleLicensingInfo" xmlns="spdx:xsd::1.0"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:complexContent>
                 <xs:extension base="SimpleLicensingInfoType">
                     <xs:sequence>
                         <xs:element ref="IsDeprecatedLicenseID" minOccurs="0"/>
-                        <xs:element ref="IsOsiApproved" minOccurs="1"/>
-                        <xs:element ref="IsFsfLibre" minOccurs="0"/>
-                        <xs:element ref="StandardLicenseHeader" minOccurs="0"/>
+                        <xs:element ref="IsOsiApprovedIndicator" minOccurs="1"/>
+                        <xs:element ref="IsFsfLibreIndicator" minOccurs="0"/>
+                        <xs:element ref="StandardLicenseHeaderText" minOccurs="0"/>
                         <xs:element ref="LicenseText" minOccurs="1"/>
-                        <xs:element ref="StandardLicenseTemplate" minOccurs="1"/>
+                        <xs:element ref="StandardLicenseTemplateText" minOccurs="1"/>
                         <xs:element ref="LicenseAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
         </xs:complexType>
     </xsl:variable>
-
     <xsl:template name="main">
         <xsl:result-document href="{$xsdOut}">
-            <xs:schema xmlns="spdx:xsd::1.0" 
-                xmlns:spd="spdx:xsd::1.0/ref" 
-                xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" 
+            <xs:schema xmlns="spdx:xsd::1.0"
+                xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
                 xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/" 
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+                xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
+                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xmlns:niem-xs="http://release.niem.gov/niem/proxy/xsd/4.0/"
-                xmlns:structures="http://release.niem.gov/niem/structures/4.0/" 
-                xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/" 
-                attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1"
-                xsi:schemaLocation="http://release.niem.gov/niem/appinfo/4.0/ niem/utility/appinfo/4.0/appinfo.xsd http://release.niem.gov/niem/conformanceTargets/3.0/ ext/niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
+                xmlns:structures="http://release.niem.gov/niem/structures/4.0/"
+                xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/"
+                xmlns:owl="http://www.w3.org/2002/07/owl#"
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+                attributeFormDefault="unqualified"
+                elementFormDefault="qualified"
+                targetNamespace="spdx:xsd::1.0"
+                version="1"
+                xsi:schemaLocation="http://release.niem.gov/niem/conformanceTargets/3.0/ ext/niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
                 ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/#ReferenceSchemaDocument">
-                <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd" namespace="http://release.niem.gov/niem/structures/4.0/"/>
-                <xs:import schemaLocation="ext/niem/utility/appinfo/4.0/appinfo.xsd" namespace="http://release.niem.gov/niem/appinfo/4.0/"/>
-                <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd" namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
+                <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd"
+                    namespace="http://release.niem.gov/niem/structures/4.0/"/>
+                <xs:import schemaLocation="ext/niem/utility/appinfo/4.0/appinfo.xsd"
+                    namespace="http://release.niem.gov/niem/appinfo/4.0/"/>
+                <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd"
+                    namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
                 <xsl:apply-templates select="$spdxMap/SPDX/Ontology" mode="annot"/>
-                <xsl:copy-of select="$LicenseCtype" copy-namespaces="no"/>
                 <xsl:variable name="allnodes">
+                    <xsl:copy-of select="$LicenseCtype" copy-namespaces="no"/>
+                    <xsl:copy-of select="$SEvARef" copy-namespaces="no"/>
                     <xsl:copy-of select="$FsfLibre" copy-namespaces="no"/>
                     <xsl:copy-of select="$IsDeprecatedLicenseId" copy-namespaces="no"/>
                     <xsl:copy-of select="$Enumerations" copy-namespaces="no"/>
@@ -256,61 +289,59 @@
             <xsl:copy-of select="$spdxMap" copy-namespaces="no"/>
         </xsl:result-document>
     </xsl:template>
-
     <xsl:template match="Ontology" mode="annot">
         <xs:annotation>
             <xs:documentation>
                 <xsl:value-of select="@comment"/>
             </xs:documentation>
-           <!--  <xs:appinfo>
+            <!--  <xs:appinfo>
                 <xsl:element name="{name()}">
                     <xsl:apply-templates select="@*" mode="identity"/>
                 </xsl:element>
             </xs:appinfo> -->
         </xs:annotation>
     </xsl:template>
-
     <xsl:template match="SPDX/Class">
         <xsl:variable name="base">
             <xsl:choose>
-                <xsl:when test="@subclassof='Thing'">
+                <xsl:when test="@subclassof = 'Thing'">
                     <xsl:text>structures:ObjectType</xsl:text>
                 </xsl:when>
-                <xsl:when test="SubClass[1]/@name='Thing'">
+                <xsl:when test="SubClass[1]/@name = 'Thing'">
                     <xsl:text>structures:ObjectType</xsl:text>
                 </xsl:when>
                 <xsl:when test="@subclassof">
-                    <xsl:value-of select="concat(@subclassof[1],'Type')"/>
+                    <xsl:value-of select="concat(@subclassof[1], 'Type')"/>
                 </xsl:when>
                 <xsl:when test="SubClass[1]/@name">
-                    <xsl:value-of select="concat(SubClass[1]/@name,'Type')"/>
+                    <xsl:value-of select="concat(SubClass[1]/@name, 'Type')"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:text>structures:ObjectType</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:if test="@xmlname!='License'">
-        <xs:complexType name="{concat(@xmlname,'Type')}">
-            <xs:annotation>
-                <xs:documentation>
-                    <xsl:value-of select="concat('A data type for ', @xmlname, ' type')"/>
-                </xs:documentation>
-                <xs:appinfo>
-                    <xsl:element name="ComplexType" xmlns="spdx:xsd::1.0">
-                        <xsl:apply-templates select="@*" mode="identity"/>
-                    </xsl:element>
-                </xs:appinfo>
-            </xs:annotation>
-            <xs:complexContent>
-                <xs:extension base="{$base}">
-                    <xs:sequence>
-                        <xsl:apply-templates select="SubClass" mode="sclass"/>
-                        <xs:element ref="{concat(@xmlname,'AugmentationPoint')}" minOccurs="0" maxOccurs="unbounded"/>
-                    </xs:sequence>
-                </xs:extension>
-            </xs:complexContent>
-        </xs:complexType>
+        <xsl:if test="@xmlname != 'License'">
+            <xs:complexType name="{concat(@xmlname,'Type')}">
+                <xs:annotation>
+                    <xs:documentation>
+                        <xsl:value-of select="concat('A data type for ', @xmlname, ' type')"/>
+                    </xs:documentation>
+                    <xs:appinfo>
+                        <xsl:element name="ComplexType" xmlns="spdx:xsd::1.0">
+                            <xsl:apply-templates select="@*" mode="identity"/>
+                        </xsl:element>
+                    </xs:appinfo>
+                </xs:annotation>
+                <xs:complexContent>
+                    <xs:extension base="{$base}">
+                        <xs:sequence>
+                            <xsl:apply-templates select="SubClass" mode="sclass"/>
+                            <xs:element ref="{concat(@xmlname,'AugmentationPoint')}" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
         </xsl:if>
         <xs:element name="{concat(@xmlname,'AugmentationPoint')}" abstract="true">
             <xs:annotation>
@@ -335,7 +366,6 @@
             </xs:annotation>
         </xs:element>
     </xsl:template>
-
     <xsl:template match="SubClass" mode="sclass">
         <xsl:choose>
             <xsl:when test="@xmlname = 'Thing'"/>
@@ -343,13 +373,12 @@
             <xsl:when test="Class/Union/Restriction">
                 <xs:element ref="{concat(Class/Union/Restriction[1]/@onproperty,'Code')}"/>
             </xsl:when>
-            <xsl:when test="Restriction/@xmlname='ArtifactOf'"/>
+            <xsl:when test="Restriction/@xmlname = 'ArtifactOf'"/>
             <xsl:otherwise>
                 <xsl:apply-templates select="*" mode="sclass"/>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
     <xsl:template match="*/Class/Union" mode="enum">
         <xsl:variable name="prop">
             <xsl:value-of select="Restriction[1]/@onproperty"/>
@@ -393,15 +422,14 @@
             </xs:annotation>
         </xs:element>
     </xsl:template>
-
     <xsl:template match="Restriction" mode="enum">
         <xsl:variable name="v" select="@hasvalue"/>
         <xs:enumeration value="{$v}">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:choose>
-                        <xsl:when test="//*[@xmlname = $v][string-length(@comment)&gt;0]">
-                            <xsl:value-of select="//*[@xmlname = $v][string-length(@comment)&gt;0][1]/@comment"/>
+                        <xsl:when test="//*[@xmlname = $v][string-length(@comment) &gt; 0]">
+                            <xsl:value-of select="//*[@xmlname = $v][string-length(@comment) &gt; 0][1]/@comment"/>
                         </xsl:when>
                         <xsl:otherwise>
                             <xsl:call-template name="breakIntoWords">
@@ -416,11 +444,10 @@
             </xs:annotation>
         </xs:enumeration>
     </xsl:template>
-
-    <xsl:template match="Restriction" mode="sclass">    
+    <xsl:template match="Restriction" mode="sclass">
         <xsl:choose>
-            <xsl:when test="@xmlname='ArtifactOf'"/>
-            <xsl:when test="@xmlname='SeeAlso'">
+            <xsl:when test="@xmlname = 'ArtifactOf'"/>
+            <xsl:when test="@xmlname = 'SeeAlso'">
                 <xs:element ref="{@xmlname}" minOccurs="0" maxOccurs="unbounded"/>
             </xsl:when>
             <xsl:when test="@xmlname">
@@ -443,11 +470,9 @@
             </xsl:when>
         </xsl:choose>
     </xsl:template>
-    
     <xsl:template match="Description">
         <xs:element ref="{@name}"/>
     </xsl:template>
-
     <xsl:template match="SPDX/Datatype" mode="dt">
         <xsl:variable name="base">
             <xsl:choose>
@@ -487,12 +512,18 @@
                 <xsl:when test="@subpropertyof = 'LicenseInfoFromFiles'">
                     <xsl:text>PackageType</xsl:text>
                 </xsl:when>
+                <xsl:when test="@xmlname = 'SeeAlsoURI'">
+                    <xsl:text>xs:anyURI</xsl:text>
+                </xsl:when>
+                <xsl:when test="@xmlname = 'CommentText'">
+                    <xsl:text>xs:string</xsl:text>
+                </xsl:when>
                 <xsl:otherwise>
-                    <xsl:text>structures:Object</xsl:text>
+                    <xsl:text>structures:ObjectType</xsl:text>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xs:complexType name="{concat(@xmlname,'Type')}">
+        <xs:complexType name="{concat(@typename,'Type')}">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:choose>
@@ -519,12 +550,19 @@
                 </xs:extension>
             </xs:simpleContent>
         </xs:complexType>
-        <xs:element name="{@xmlname}" type="{concat(@xmlname,'Type')}" nillable="true">
+        <xsl:variable name="r" select="@rdf"/>
+        <xs:element name="{@xmlname}" type="{concat(@typename,'Type')}" nillable="true">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:choose>
                         <xsl:when test="@xmlname = 'SnippetName'">
                             <xsl:text>A data item to name a specific snippet in a human convenient manner</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="$changes/*[@rdf = $r]/@comment">
+                            <xsl:value-of select="$changes/*[@rdf = $r]/@comment"/>
+                        </xsl:when>
+                        <xsl:when test="string-length(@comment) &gt; 0">
+                            <xsl:value-of select="concat('A data type for ', @comment)"/>
                         </xsl:when>
                         <xsl:when test="string-length(@comment) &gt; 0">
                             <xsl:value-of select="concat('A data type for ', @comment)"/>
@@ -542,9 +580,8 @@
             </xs:annotation>
         </xs:element>
     </xsl:template>
-
     <xsl:template match="*" mode="ctype">
-        <xs:complexType name="{concat(@xmlname,'Type')}">
+        <xs:complexType name="{concat(@typename,'Type')}">
             <xs:annotation>
                 <xs:documentation>
                     <xsl:value-of select="concat('A data type for ', @comment)"/>
@@ -562,7 +599,6 @@
             </xs:simpleContent>
         </xs:complexType>
     </xsl:template>
-
     <xsl:template match="*" mode="element">
         <xsl:param name="type"/>
         <xs:element name="{@xmlname}" type="{concat($type,'Type')}" nillable="true">
@@ -578,11 +614,13 @@
             </xs:annotation>
         </xs:element>
     </xsl:template>
-
+    <!--<xsl:template match="@comment" mode="identity">
+        <xsl:if test="string-length(.)&gt;0">
+            <xsl:copy-of select="." copy-namespaces="no"/>
+        </xsl:if>
+    </xsl:template>-->
     <xsl:template match="SPDX/NamedIndividual"/>
-
     <xsl:template match="SPDX/Ontology"/>
-
     <xsl:template name="breakIntoWords">
         <xsl:param name="string"/>
         <xsl:choose>
@@ -597,7 +635,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
     <xsl:template name="breakIntoWordsHelper">
         <xsl:param name="string" select="''"/>
         <xsl:param name="token" select="''"/>
@@ -622,7 +659,6 @@
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
-
     <xsl:template name="deDupList">
         <xsl:param name="list"/>
         <xsl:for-each select="$list/*">
@@ -639,5 +675,4 @@
             </xsl:choose>
         </xsl:for-each>
     </xsl:template>
-
 </xsl:stylesheet>
