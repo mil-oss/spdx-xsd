@@ -1,0 +1,48 @@
+{"License": {
+    "name": "License",
+    "attributes": {"xsi:schemaLocation": "spdx:xsd::1.0  ../xsd/spdx-license.xsd"},
+    "IsDeprecatedLicenseId": {
+        "name": "IsDeprecatedLicenseId",
+        "value": "true"
+    },
+    "StandardLicenseHeader": {
+        "name": "StandardLicenseHeader",
+        "value": "Test string one"
+    },
+    "StandardLicenseTemplate": {
+        "name": "StandardLicenseTemplate",
+        "value": "Test string one"
+    },
+    "LicenseText": {
+        "name": "LicenseText",
+        "value": "Test string one"
+    },
+    "IsOsiApproved": {
+        "name": "IsOsiApproved",
+        "value": "true"
+    },
+    "IsFsfLibre": {
+        "name": "IsFsfLibre",
+        "value": "true"
+    },
+    "LicenseId": {
+        "name": "LicenseId",
+        "value": "Test string one"
+    },
+    "Name": {
+        "name": "Name",
+        "value": "Test string one"
+    },
+    "SeeAlso": {
+        "name": "SeeAlso",
+        "value": "http://anyuri.org"
+    },
+    "SeeAlso1": {
+        "name": "SeeAlso",
+        "value": "http://anyuri.org"
+    },
+    "Comment": {
+        "name": "Comment",
+        "value": "Test string one"
+    }
+}}

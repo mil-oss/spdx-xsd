@@ -1,0 +1,9 @@
+{
+    "project":"spdx-doc",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-ref.xsd",
+    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/spdx-test-data.xml",
+    "homeurl":"http://localhost",
+    "port":":8181",
+    "dbloc":"tmp/IEPD/spdx-doc/db",
+    "temppath":"tmp/IEPD/spdx-doc/"
+}

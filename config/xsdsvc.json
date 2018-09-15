@@ -1,9 +1,0 @@
-{
-    "project":"spdx",
-    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-ref.xsd",
-    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/test_data.xml",
-    "license-list":"https://raw.githubusercontent.com/spdx/license-list-data/master/rdfxml/licenses.rdf",
-    "homeurl":"https://spdx.specchain.org",
-    "redirect":"",
-    "port":":8080"
-}

@@ -1,7 +1,9 @@
 report.html
 .DS_Store
+*.xpr
 bin/
 pkg/
+/pkg/linux_amd64
 src/github.com/
 src/golang.org/
 src/gopkg.in/

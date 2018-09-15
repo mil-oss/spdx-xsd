@@ -1,0 +1,16 @@
+{
+    "project":"spdx-license",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-ref.xsd",
+    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/spdx-test-data.xml",
+    "license-list":"https://raw.githubusercontent.com/spdx/license-list-data/master/rdfxml/licenses.rdf",
+<<<<<<< HEAD:config/xsdsvc.json
+    "homeurl":"https://spdx.specchain.org",
+    "redirect":"",
+    "port":":8080"
+=======
+    "homeurl":"http://localhost",
+    "port":":8383",
+    "dbloc":"tmp/IEPD/spdx-license/db",
+    "temppath":"tmp/IEPD/spdx-license/"
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545:config/spdx-license-cfg.json
+}

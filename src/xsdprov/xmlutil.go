@@ -11,11 +11,16 @@ import (
 	xsd "github.com/lestrrat/go-libxml2/xsd"
 )
 
+<<<<<<< HEAD
 func init() {
 	resdigests = getDigests(resources, Tpath, "Sha256")
 }
 
 func readStructXML(filepath string, xsdstruct interface{}) interface{} {
+=======
+// ReadStructXML ...
+func ReadStructXML(filepath string, xsdstruct interface{}) interface{} {
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	xf, ferr := ioutil.ReadFile(filepath)
 	check(ferr)
 	var strct = xsdstruct
@@ -24,7 +29,8 @@ func readStructXML(filepath string, xsdstruct interface{}) interface{} {
 	return strct
 }
 
-func writeStructXML(filepath string, xsdstruct interface{}) string {
+// WriteStructXML ...
+func WriteStructXML(filepath string, xsdstruct interface{}) string {
 	f, err := os.Create(filepath)
 	check(err)
 	defer f.Close()
@@ -38,7 +44,11 @@ func writeStructXML(filepath string, xsdstruct interface{}) string {
 
 // Verify ... verify hash digest against known original
 func Verify(verifydata VerifyData) bool {
+<<<<<<< HEAD
 	resdigests = getDigests(resources, Tpath, "Sha256")
+=======
+	resdigests = getDigests(resources, temppath, "Sha256")
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	//log.Println("Verify")
 	log.Println("verifydata.ID " + verifydata.ID)
 	log.Println("verifydata.Digest " + verifydata.Digest)
@@ -55,7 +65,11 @@ func ValidateXML(validationdata ValidationData) (bool, []error) {
 	log.Println("ValidateXML")
 	log.Println("xml: " + validationdata.XMLName)
 	log.Println("xsd: " + validationdata.XSDName)
+<<<<<<< HEAD
 	var xsddoc, derr = xsd.ParseFromFile(Tpath + resources[validationdata.XSDName])
+=======
+	var xsddoc, derr = xsd.ParseFromFile(temppath + resources[validationdata.XSDName])
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	check(derr)
 	//ioutil.ReadFile(validationdata.XMLPath)
 	doc, err := libxml2.ParseString(validationdata.XMLString)
@@ -83,7 +97,8 @@ func TransformXML(transform TransformData) ([]byte, error) {
 	return resultstring, err
 }
 
-func doTransform(xslpath string, xmlpath string) ([]byte, error) {
+// DoTransform ...
+func DoTransform(xslpath string, xmlpath string) ([]byte, error) {
 	//log.Println("xslpath: " + xslpath)
 	//log.Println("xmlpath: " + xmlpath)
 	cmd := exec.Cmd{
@@ -96,7 +111,8 @@ func doTransform(xslpath string, xmlpath string) ([]byte, error) {
 	return resultstring, err
 }
 
-func doTransformParam(xslpath string, xmlpath string, testdata string) ([]byte, error) {
+// DoTransformParam ...
+func DoTransformParam(xslpath string, xmlpath string, testdata string) ([]byte, error) {
 	//log.Println("xslpath: " + xslpath)
 	//log.Println("xmlpath: " + xmlpath)
 	cmd := exec.Cmd{

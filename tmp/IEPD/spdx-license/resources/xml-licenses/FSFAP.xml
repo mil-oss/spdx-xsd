@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<License xmlns="spdx:xsd::1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:spdx="http://spdx.org/rdf/terms#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
+   <LicenseID>FSFAP</LicenseID>
+   <Comment/>
+   <SeeAlso>http://www.gnu.org/prep/maintain/html_node/License-Notices-for-Other-Files.html</SeeAlso>
+   <Name>FSF All Permissive License</Name>
+   <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+   <IsOsiApproved>false</IsOsiApproved>
+   <IsFsfLibre>true</IsFsfLibre>
+   <StandardLicenseHeader/>
+   <LicenseText>Copying and distribution of this file, with or without modification, are permitted in any medium without royalty provided the copyright notice and this notice are preserved. This file is offered as-is, without any warranty.</LicenseText>
+   <StandardLicenseTemplate>Copying and distribution of this file, with or without modification, are permitted in any medium without royalty provided the copyright notice and this notice are preserved. This file is offered as-is, without any warranty.</StandardLicenseTemplate>
+</License>

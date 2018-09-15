@@ -11,28 +11,47 @@ import (
 	"unicode"
 )
 
-var (
-	testinstance string
-	iepderr      error
-	valerr       []error
-	provreport   = map[int64]ProvEntry{}
-)
-
-//BuildIep ... Generate XML, Code and Test Artifacts
-func BuildIep() (map[int64]ProvEntry, []error, error) {
-	log.Println("BuildIep")
-	log.Println("reflink " + reflink)
-	getSourceResources()
-	generateResources()
-	validateResources()
-	resrcJSON()
-	provenanceRpt()
-	zipIEPD()
-	return provreport, valerr, iepderr
+// GetSourceResources ...
+func GetSourceResources(refpath string, testdatapath string) {
+	log.Println("getSourceResources")
+	//Compare local copy of Ref XSD to Authoritative copy on GitHub
+	var snr = refpath
+	log.Println(resources[snr])
+	tempfiles[snr] = temppath + resources[snr]
+	log.Println(tempfiles[snr])
+	pe := LoadRemote(snr, tempfiles[snr], reflink)
+	Provreport[time.Now().UnixNano()] = pe
+	ped := CheckDigest(resources[snr], pe.Digest, tempdigests[snr])
+	Provreport[time.Now().UnixNano()] = ped
+	if ped.Status == "Fail" {
+		CopyFile(temppath+resources[snr], resources[snr])
+		pcp := LoadRemote(snr, tempfiles[snr], reflink)
+		pcp.Message = "Resource Updated"
+		Provreport[time.Now().UnixNano()] = pcp
+	}
+	//Test Data
+	var tdx = testdatapath
+	tempfiles[tdx] = temppath + resources[tdx]
+	pex := LoadRemote(tdx, tempfiles[tdx], testlink)
+	Provreport[time.Now().UnixNano()] = pex
+	pedx := CheckDigest(resources[tdx], pex.Digest, tempdigests[tdx])
+	Provreport[time.Now().UnixNano()] = pedx
+	if pedx.Status == "Fail" {
+		CopyFile(temppath+resources[tdx], resources[tdx])
+		tcp := LoadRemote(tdx, tempfiles[tdx], testlink)
+		tcp.Message = "Resource Updated"
+		Provreport[time.Now().UnixNano()] = tcp
+	}
+	tempfiles[tdx] = temppath + resources[tdx]
 }
 
+<<<<<<< HEAD
 func zipIEPD() {
 	cerr := compress(Tpath, "/tmp/IEPD/"+name+".zip")
+=======
+func zipIEPD(path string) {
+	cerr := Compress(path, "/tmp/IEPD/"+name+".zip")
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	check(cerr)
 }
 
@@ -45,25 +64,37 @@ func provEntry(entrytype string, fpath string) ProvEntry {
 	return pe
 }
 
-func resrcJSON() []byte {
+//ResrcJSON ...
+func ResrcJSON(path string) []byte {
 	rs, ferr := json.Marshal(resources)
 	check(ferr)
+<<<<<<< HEAD
 	wferr := writeFile(resources["resources.json"], rs)
 	check(wferr)
 	rsferr := writeFile(Tpath+resources["resources.json"], rs)
+=======
+	rsferr := WriteFile(path, rs)
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	check(rsferr)
 	return rs
 }
 
-func provenanceRpt() []byte {
-	pr, err := json.Marshal(provreport)
+//ProvenanceRpt ...
+func ProvenanceRpt() []byte {
+	log.Println("ProvenanceRpt " + temppath + resources["provenance-report.json"])
+	pr, err := json.Marshal(Provreport)
 	check(err)
+<<<<<<< HEAD
 	log.Println(Tpath + resources["provenance_report.json"])
 	ferr := writeFile(Tpath+resources["provenance_report.json"], pr)
+=======
+	ferr := WriteFile(temppath+resources["provenance-report.json"], pr)
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	check(ferr)
 	return pr
 }
 
+<<<<<<< HEAD
 func getSourceResources() {
 	log.Println("getSourceResources")
 	//Compare local copy of Ref XSD to Authoritative copy on GitHub
@@ -150,13 +181,27 @@ func GenerateResource(xslname string, xmlname string, resultname string) (ProvEn
 	log.Println("GenerateResource: " + resultname + "  XML Doc " + xmlname)
 	pe := provEntry("GenerateResource", Tpath+resources[resultname])
 	xslpath, xmlpath, resulTpath := getPaths(xslname, xmlname, resultname)
+=======
+//GenerateResource ... generate IepXsd using XSLT
+func GenerateResource(xslpath string, xmlpath string, resultpath string) (ProvEntry, error) {
+	log.Println("GenerateResource: " + resultpath + "  from " + xmlpath + "  with " + xslpath)
+	var resultname = filepath.Base(resultpath)
+	pe := provEntry("GenerateResource", resultname)
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	pe.XslPath = xslpath
-	doc, err := doTransform(xslpath, xmlpath)
+	doc, err := DoTransform(xslpath, xmlpath)
 	check(err)
+<<<<<<< HEAD
 	ferr := writeFile(resulTpath, doc)
 	check(ferr)
 	tempdigests[resultname] = spaceMap(GetHash(resulTpath, "Sha256"))
 	tempfiles[resultname] = resulTpath
+=======
+	ferr := WriteFile(resultpath, doc)
+	check(ferr)
+	tempdigests[resultname] = spaceMap(GetHash(resultpath, "Sha256"))
+	tempfiles[resultname] = resultpath
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	pe.Digest = tempdigests[resultname]
 	pe.Status = "Pass"
 	if err != nil {
@@ -166,17 +211,31 @@ func GenerateResource(xslname string, xmlname string, resultname string) (ProvEn
 }
 
 //GenerateResourceParam ... generate IepXsd using XSLT
+<<<<<<< HEAD
 func GenerateResourceParam(xslname string, xmlname string, resultname string, testd string) ProvEntry {
 	log.Println("GenerateResourceParam: " + resultname + "  XML Doc " + xmlname)
 	pe := provEntry("GenerateResource", Tpath+resources[resultname])
 	xslpath, xmlpath, resulTpath := getPaths(xslname, xmlname, resultname)
+=======
+func GenerateResourceParam(xslpath string, xmlpath string, resultpath string, paramstr string) ProvEntry {
+	log.Println("GenerateResourceParam: " + resultpath + "  from " + xmlpath)
+	var resultname = filepath.Base(resultpath)
+	pe := provEntry("GenerateResource", resultname)
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	pe.XslPath = xslpath
-	doc, err := doTransformParam(xslpath, xmlpath, testd)
+	doc, err := DoTransformParam(xslpath, xmlpath, paramstr)
 	check(err)
+<<<<<<< HEAD
 	ferr := writeFile(resulTpath, doc)
 	check(ferr)
 	tempdigests[resultname] = spaceMap(GetHash(resulTpath, "Sha256"))
 	tempfiles[resultname] = resulTpath
+=======
+	ferr := WriteFile(resultpath, doc)
+	check(ferr)
+	tempdigests[resultname] = spaceMap(GetHash(resultpath, "Sha256"))
+	tempfiles[resultname] = resultpath
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	pe.Digest = tempdigests[resultname]
 	pe.Status = "Pass"
 	if err != nil {
@@ -185,6 +244,7 @@ func GenerateResourceParam(xslname string, xmlname string, resultname string, te
 	return pe
 }
 
+<<<<<<< HEAD
 func getPaths(xslname string, xmlname string, resultname string) (string, string, string) {
 	var xslpath = Tpath + resources[xslname]
 	var xmlpath = Tpath + resources[xmlname]
@@ -210,13 +270,29 @@ func MarshalXML(srcpath string, desTpath string) ProvEntry {
 	pe := provEntry("Marshal Data", tempfiles[ft])
 	pe.Status = "Pass"
 	pe.Digest = spaceMap(GetHash(tempfiles[ft], "Sha256"))
+=======
+//MarshalXML ...
+func MarshalXML(srcpath string, destpath string, dstruct interface{}) ProvEntry {
+	log.Println("MarshalXML: " + srcpath + "  to " + destpath)
+	var s = ReadStructXML(srcpath, dstruct)
+	var name = filepath.Base(destpath)
+	WriteStructXML(destpath, s)
+	pe := provEntry("Marshal Data", name)
+	pe.Status = "Pass"
+	pe.Digest = spaceMap(GetHash(destpath, "Sha256"))
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	return pe
 }
 
 //ValidateFile ... validate XML using XSD
 func ValidateFile(xmlname string, xsdname string) (pe ProvEntry, errs []error, err error) {
+<<<<<<< HEAD
 	var xsdpath = Tpath + resources[xsdname]
 	var xmlpath = Tpath + resources[xmlname]
+=======
+	var xsdpath = temppath + resources[xsdname]
+	var xmlpath = temppath + resources[xmlname]
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	if val, ok := tempfiles[xsdname]; ok {
 		xsdpath = val
 	}
@@ -233,7 +309,7 @@ func ValidateFile(xmlname string, xsdname string) (pe ProvEntry, errs []error, e
 		pe.Status = "Fail"
 		pe.Valid = false
 		pe.Errors = jsonList(errs)
-		return pe, valerr, iepderr
+		return pe, errs, err
 	}
 	pe.Valid = true
 	pe.Status = "Pass"
@@ -257,19 +333,24 @@ func spaceMap(str string) string {
 	}, str)
 }
 
-func loadRemote(name string, path string, link string) ProvEntry {
-	var refpath = path + resources[name]
-	pe := provEntry("Load Remote Match", refpath)
-	err = wgetFile(refpath, link)
+// LoadRemote ...
+func LoadRemote(name string, path string, link string) ProvEntry {
+	pe := provEntry("Load Remote Match", path)
+	var err = WgetFile(path, link)
 	check(err)
 	pe.Status = "Pass"
 	pe.Message = "Loaded Remote Resource"
+<<<<<<< HEAD
 	tempdigests[name] = spaceMap(GetHash(refpath, "Sha256"))
+=======
+	tempdigests[name] = spaceMap(GetHash(path, "Sha256"))
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	pe.Digest = tempdigests[name]
 	return pe
 }
 
-func checkDigest(fpath string, auth string, test string) ProvEntry {
+// CheckDigest ...
+func CheckDigest(fpath string, auth string, test string) ProvEntry {
 	pe := provEntry("Authenticity Check", fpath)
 	pe.Status = "Pass"
 	pe.Digest = test
@@ -286,7 +367,6 @@ func check(e error) error {
 	if e != nil {
 		fmt.Printf("error: %v\n", e)
 	}
-	iepderr = e
 	return e
 }
 
@@ -294,6 +374,5 @@ func checka(e []error) []error {
 	if e != nil {
 		fmt.Printf("error: %v\n", e)
 	}
-	valerr = e
 	return e
 }

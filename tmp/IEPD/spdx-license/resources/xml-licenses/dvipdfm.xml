@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<License xmlns="spdx:xsd::1.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:spdx="http://spdx.org/rdf/terms#"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xsi:schemaLocation="spdx:xsd::1.0 ../../xml/xsd/spdx-ref.xsd">
+   <LicenseID>dvipdfm</LicenseID>
+   <Comment/>
+   <SeeAlso>https://fedoraproject.org/wiki/Licensing/dvipdfm</SeeAlso>
+   <Name>dvipdfm License</Name>
+   <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+   <IsOsiApproved>false</IsOsiApproved>
+   <IsFsfLibre>false</IsFsfLibre>
+   <StandardLicenseHeader/>
+   <LicenseText>A modified version of this file may be distributed, but it should be distributed with a *different* name. Changed files must be distributed *together with a complete and unchanged* distribution of these files.</LicenseText>
+   <StandardLicenseTemplate>A modified version of this file may be distributed, but it should be distributed with a *different* name. Changed files must be distributed *together with a complete and unchanged* distribution of these files.</StandardLicenseTemplate>
+</License>

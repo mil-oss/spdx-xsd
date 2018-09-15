@@ -27,10 +27,11 @@ var (
 	listenAddr string
 	healthy    int32
 	xsdstruct  interface{}
+	project    string
 )
 
 //StartWeb .. simple web server
-func StartWeb(tmppath string) {
+func StartWeb() {
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
@@ -41,7 +42,6 @@ func StartWeb(tmppath string) {
 	logger.Println("Starting HTTP Server. .. ")
 	router := http.NewServeMux()
 	router.Handle("/", index())
-	router.Handle("/update", update())
 	router.Handle("/file/", getResource())
 	router.Handle("/license/", getLicense())
 	router.Handle("/iepd/", getResource())
@@ -91,6 +91,7 @@ func index() http.Handler {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
+<<<<<<< HEAD
 		if cfg.Redirect != "" {
 			http.Redirect(w, r, cfg.Redirect, 301)
 		} else {
@@ -101,29 +102,26 @@ func index() http.Handler {
 			fmt.Fprintln(w, "SPDX-XSD 1.0")
 			//fmt.Fprintln(w, temppath)
 		}
+=======
+		//http.Redirect(w, r, "https://sevaxsd.specchain.org", 301)
+		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintln(w, name)
+		//fmt.Fprintln(w, temppath)
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	})
 }
-func update() http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if atomic.LoadInt32(&healthy) == 1 {
-			prov, errs, err := BuildIep()
-			if errs != nil {
-				HandleValidationErrors(&w, "Validation Errors", errs)
-				return
-			}
-			pr, err := json.Marshal(prov)
-			if err != nil {
-				HandleError(&w, 500, "Internal Server Error", "Build Error", err)
-				return
-			}
-			HandleSuccess(&w, Success{Status: true, Content: fmt.Sprint(pr)})
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-	})
-}
+
 func getResource() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
+<<<<<<< HEAD
+=======
+			var p = filepath.Base(r.URL.Path)
+			f, err := ioutil.ReadFile(temppath + resources[p])
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 			check(err)
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -140,6 +138,7 @@ func getResource() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
+<<<<<<< HEAD
 func getLicense() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
@@ -159,6 +158,8 @@ func getLicense() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
+=======
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 func verify() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
