@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
-<xs:schema xmlns="spdx:xsd::1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spd="spdx:xsd::1.0/ref" xmlns:exsl="http://exslt.org/common" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1">
+<xs:schema xmlns="spdx:xsd::1.0" 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xmlns:spd="spdx:xsd::1.0/ref" 
+  xmlns:exsl="http://exslt.org/common" 
+  attributeFormDefault="unqualified" 
+  elementFormDefault="qualified" 
+  targetNamespace="spdx:xsd::1.0" version="1">
   <xs:complexType name="LicenseType">
     <xs:annotation>
       <xs:documentation>A data type for License type</xs:documentation>

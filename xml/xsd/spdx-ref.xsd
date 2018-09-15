@@ -17,8 +17,7 @@
               namespace="http://release.niem.gov/niem/structures/4.0/"/>
    <xs:import schemaLocation="ext/niem/utility/appinfo/4.0/appinfo.xsd"
               namespace="http://release.niem.gov/niem/appinfo/4.0/"/>
-   <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd"
-              namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
+   <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd" namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
    <xs:annotation>
       <xs:documentation>This specification describes the SPDX® language, defined as a dictionary of named properties and classes using W3C's RDF Technology. SPDX® is a designed to allow the exchange of data about software packages. This information includes general information about the package, licensing information about the package as a whole, a manifest of files contained in the package and licensing information related to the contained files. Known issues: - File fileType cardinality should be 0 or more instead of required one.</xs:documentation>
    </xs:annotation>
