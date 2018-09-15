@@ -1,12 +1,5 @@
 <?xml version="1.0"?>
-<xs:schema xmlns="spdx:xsd::1.0" 
-  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-  xmlns:spd="spdx:xsd::1.0/ref" 
-  xmlns:exsl="http://exslt.org/common" 
-  attributeFormDefault="unqualified" 
-  elementFormDefault="qualified" 
-  targetNamespace="spdx:xsd::1.0" version="1">
+<xs:schema xmlns="spdx:xsd::1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:spd="spdx:xsd::1.0/ref" xmlns:exsl="http://exslt.org/common" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1">
   <xs:complexType name="LicenseType">
     <xs:annotation>
       <xs:documentation>A data type for License type</xs:documentation>
@@ -18,11 +11,11 @@
       <xs:extension base="SimpleLicensingInfoType">
         <xs:sequence>
           <xs:element ref="IsDeprecatedLicenseID" minOccurs="0"/>
-          <xs:element ref="IsOsiApproved" minOccurs="1"/>
-          <xs:element ref="IsFsfLibre" minOccurs="0"/>
-          <xs:element ref="StandardLicenseHeader" minOccurs="0"/>
+          <xs:element ref="IsOsiApprovedIndicator" minOccurs="1"/>
+          <xs:element ref="IsFsfLibreIndicator" minOccurs="0"/>
+          <xs:element ref="StandardLicenseHeaderText" minOccurs="0"/>
           <xs:element ref="LicenseText" minOccurs="1"/>
-          <xs:element ref="StandardLicenseTemplate" minOccurs="1"/>
+          <xs:element ref="StandardLicenseTemplateText" minOccurs="1"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -38,9 +31,9 @@
   </xs:complexType>
   <xs:complexType name="CommentType">
     <xs:annotation>
-      <xs:documentation>A data type for Comment</xs:documentation>
+      <xs:documentation>A data type for CommentText</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="comment" xmlname="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+        <ComplexType name="comment" xmlname="CommentText" typename="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -60,9 +53,9 @@
   </xs:complexType>
   <xs:complexType name="IsFsfLibreType">
     <xs:annotation>
-      <xs:documentation>A data type to indicate if the license is is FSF Libre.</xs:documentation>
+      <xs:documentation>A data type for an indicator that the license is is FSF Libre.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean"/>
+        <ComplexType name="IsFsfLibre" comment="True if the license is is FSF Libre; false if not." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -73,7 +66,7 @@
     <xs:annotation>
       <xs:documentation>A data type for Indicates if the OSI has approved the license.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="isOsiApproved" xmlname="IsOsiApproved" comment="Indicates if the OSI has approved the license." rdf="http://spdx.org/rdf/terms#isOsiApproved" domain="License" range="Boolean"/>
+        <ComplexType name="isOsiApproved" xmlname="IsOsiApprovedIndicator" typename="IsOsiApproved" comment="Indicates if the OSI has approved the license." rdf="http://spdx.org/rdf/terms#isOsiApproved" domain="License" range="Boolean"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -84,7 +77,7 @@
     <xs:annotation>
       <xs:documentation>A data type for A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form "LicenseRef-"[idString] where [idString] is a unique string containing letters, numbers, ".", "-" or "+".</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="licenseId" xmlname="LicenseID" comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &quot;LicenseRef-&quot;[idString] where [idString] is a unique string containing letters, numbers, &quot;.&quot;, &quot;-&quot; or &quot;+&quot;." rdf="http://spdx.org/rdf/terms#licenseId" domain="SimpleLicensingInfo" range="String"/>
+        <ComplexType name="licenseId" xmlname="LicenseID" typename="LicenseID" comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &quot;LicenseRef-&quot;[idString] where [idString] is a unique string containing letters, numbers, &quot;.&quot;, &quot;-&quot; or &quot;+&quot;." rdf="http://spdx.org/rdf/terms#licenseId" domain="SimpleLicensingInfo" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -95,7 +88,7 @@
     <xs:annotation>
       <xs:documentation>A data type for Full text of the license.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="licenseText" xmlname="LicenseText" comment="Full text of the license." rdf="http://spdx.org/rdf/terms#licenseText" domain="License" range="String"/>
+        <ComplexType name="licenseText" xmlname="LicenseText" typename="LicenseText" comment="Full text of the license." rdf="http://spdx.org/rdf/terms#licenseText" domain="License" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -106,7 +99,7 @@
     <xs:annotation>
       <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="name" xmlname="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
+        <ComplexType name="name" xmlname="Name" typename="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -117,7 +110,7 @@
     <xs:annotation>
       <xs:documentation>A data type for rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="seeAlso" xmlname="SeeAlso" comment="rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource." rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+        <ComplexType name="seeAlso" xmlname="SeeAlsoURI" typename="SeeAlso" comment="rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource." rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -135,8 +128,8 @@
       <xs:extension base="AnyLicenseInfoType">
         <xs:sequence>
           <xs:element ref="LicenseID" minOccurs="1" maxOccurs="1"/>
-          <xs:element ref="Comment" maxOccurs="1"/>
-          <xs:element ref="SeeAlso" minOccurs="0" maxOccurs="unbounded"/>
+          <xs:element ref="CommentText" maxOccurs="1"/>
+          <xs:element ref="SeeAlsoURI" minOccurs="0"/>
           <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
         </xs:sequence>
       </xs:extension>
@@ -146,7 +139,7 @@
     <xs:annotation>
       <xs:documentation>A data type for License author's preferred text to indicated that a file is covered by the license.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="standardLicenseHeader" xmlname="StandardLicenseHeader" comment="License author's preferred text to indicated that a file is covered by the license." rdf="http://spdx.org/rdf/terms#standardLicenseHeader" domain="License" range="String"/>
+        <ComplexType name="standardLicenseHeader" xmlname="StandardLicenseHeaderText" typename="StandardLicenseHeader" comment="License author's preferred text to indicated that a file is covered by the license." rdf="http://spdx.org/rdf/terms#standardLicenseHeader" domain="License" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -157,18 +150,18 @@
     <xs:annotation>
       <xs:documentation>A data type for License template which describes sections of the license which can be varied. See License Template section of the specification for format information.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="standardLicenseTemplate" xmlname="StandardLicenseTemplate" comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information." rdf="http://spdx.org/rdf/terms#standardLicenseTemplate" domain="License" range="String"/>
+        <ComplexType name="standardLicenseTemplate" xmlname="StandardLicenseTemplateText" typename="StandardLicenseTemplate" comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information." rdf="http://spdx.org/rdf/terms#standardLicenseTemplate" domain="License" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
       <xs:extension base="xs:string"/>
     </xs:simpleContent>
   </xs:complexType>
-  <xs:element name="Comment" type="CommentType" nillable="true">
+  <xs:element name="CommentText" type="CommentType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A data type for Comment</xs:documentation>
+      <xs:documentation>A data type for CommentText</xs:documentation>
       <xs:appinfo>
-        <Element name="comment" xmlname="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+        <Element name="comment" xmlname="CommentText" typename="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -180,19 +173,19 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="IsFsfLibre" type="IsFsfLibreType" nillable="true">
+  <xs:element name="IsFsfLibreIndicator" type="IsFsfLibreType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A data item to indicate if the license is FSF Libre.</xs:documentation>
+      <xs:documentation>True if the license is is FSF Libre; false if not.</xs:documentation>
       <xs:appinfo>
-        <Element name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean"/>
+        <Element name="IsFsfLibre" comment="True if the license is is FSF Libre; false if not." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="IsOsiApproved" type="IsOsiApprovedType" nillable="true">
+  <xs:element name="IsOsiApprovedIndicator" type="IsOsiApprovedType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A data type for Indicates if the OSI has approved the license.</xs:documentation>
+      <xs:documentation>True if the license is is OSI Approved; false if not.</xs:documentation>
       <xs:appinfo>
-        <Element name="isOsiApproved" xmlname="IsOsiApproved" comment="Indicates if the OSI has approved the license." rdf="http://spdx.org/rdf/terms#isOsiApproved" domain="License" range="Boolean"/>
+        <Element name="isOsiApproved" xmlname="IsOsiApprovedIndicator" typename="IsOsiApproved" comment="Indicates if the OSI has approved the license." rdf="http://spdx.org/rdf/terms#isOsiApproved" domain="License" range="Boolean"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -208,7 +201,7 @@
     <xs:annotation>
       <xs:documentation>A data type for A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form "LicenseRef-"[idString] where [idString] is a unique string containing letters, numbers, ".", "-" or "+".</xs:documentation>
       <xs:appinfo>
-        <Element name="licenseId" xmlname="LicenseID" comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &quot;LicenseRef-&quot;[idString] where [idString] is a unique string containing letters, numbers, &quot;.&quot;, &quot;-&quot; or &quot;+&quot;." rdf="http://spdx.org/rdf/terms#licenseId" domain="SimpleLicensingInfo" range="String"/>
+        <Element name="licenseId" xmlname="LicenseID" typename="LicenseID" comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &quot;LicenseRef-&quot;[idString] where [idString] is a unique string containing letters, numbers, &quot;.&quot;, &quot;-&quot; or &quot;+&quot;." rdf="http://spdx.org/rdf/terms#licenseId" domain="SimpleLicensingInfo" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -216,7 +209,7 @@
     <xs:annotation>
       <xs:documentation>A data type for Full text of the license.</xs:documentation>
       <xs:appinfo>
-        <Element name="licenseText" xmlname="LicenseText" comment="Full text of the license." rdf="http://spdx.org/rdf/terms#licenseText" domain="License" range="String"/>
+        <Element name="licenseText" xmlname="LicenseText" typename="LicenseText" comment="Full text of the license." rdf="http://spdx.org/rdf/terms#licenseText" domain="License" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -224,31 +217,31 @@
     <xs:annotation>
       <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
       <xs:appinfo>
-        <Element name="name" xmlname="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
+        <Element name="name" xmlname="Name" typename="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SeeAlso" type="SeeAlsoType" nillable="true">
+  <xs:element name="SeeAlsoURI" type="SeeAlsoType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource.</xs:documentation>
       <xs:appinfo>
-        <Element name="seeAlso" xmlname="SeeAlso" comment="rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource." rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
+        <Element name="seeAlso" xmlname="SeeAlsoURI" typename="SeeAlso" comment="rdfs:seeAlso is an instance of rdf:Property that is used to indicate a resource that might provide additional information about the subject resource." rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="StandardLicenseHeader" type="StandardLicenseHeaderType" nillable="true">
+  <xs:element name="StandardLicenseHeaderText" type="StandardLicenseHeaderType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for License author's preferred text to indicated that a file is covered by the license.</xs:documentation>
       <xs:appinfo>
-        <Element name="standardLicenseHeader" xmlname="StandardLicenseHeader" comment="License author's preferred text to indicated that a file is covered by the license." rdf="http://spdx.org/rdf/terms#standardLicenseHeader" domain="License" range="String"/>
+        <Element name="standardLicenseHeader" xmlname="StandardLicenseHeaderText" typename="StandardLicenseHeader" comment="License author's preferred text to indicated that a file is covered by the license." rdf="http://spdx.org/rdf/terms#standardLicenseHeader" domain="License" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="StandardLicenseTemplate" type="StandardLicenseTemplateType" nillable="true">
+  <xs:element name="StandardLicenseTemplateText" type="StandardLicenseTemplateType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for License template which describes sections of the license which can be varied. See License Template section of the specification for format information.</xs:documentation>
       <xs:appinfo>
-        <Element name="standardLicenseTemplate" xmlname="StandardLicenseTemplate" comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information." rdf="http://spdx.org/rdf/terms#standardLicenseTemplate" domain="License" range="String"/>
+        <Element name="standardLicenseTemplate" xmlname="StandardLicenseTemplateText" typename="StandardLicenseTemplate" comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information." rdf="http://spdx.org/rdf/terms#standardLicenseTemplate" domain="License" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>

@@ -14,9 +14,9 @@
           <xs:element ref="DescribesFile" minOccurs="0"/>
           <xs:element ref="HasExtractedLicensingInfo" minOccurs="0"/>
           <xs:element ref="CreationInfo" minOccurs="1" maxOccurs="1"/>
-          <xs:element ref="SpecVersion" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="SpecVersionText" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="ExternalDocumentRef" minOccurs="0"/>
-          <xs:element ref="DataLicense"/>
+          <xs:element ref="DataLicenseText"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -179,7 +179,7 @@
       </xs:enumeration>
       <xs:enumeration value="Documentation">
         <xs:annotation>
-          <xs:documentation>Website containing the documentation related to the repository identifier</xs:documentation>
+          <xs:documentation>The file serves as documentation.</xs:documentation>
           <xs:appinfo>
             <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
           </xs:appinfo>
@@ -352,8 +352,8 @@
     <xs:sequence>
       <xs:element ref="Date" minOccurs="1" maxOccurs="1"/>
       <xs:element ref="AnnotationTypeCode"/>
-      <xs:element ref="Comment" minOccurs="1" maxOccurs="1"/>
-      <xs:element ref="Annotator" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="CommentText" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="AnnotatorText" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="AnnotationTypeCodeType">
@@ -371,7 +371,7 @@
     <xs:annotation>
       <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="annotator" xmlname="Annotator" comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document." rdf="http://spdx.org/rdf/terms#annotator" range="String"/>
+        <ComplexType name="annotator" xmlname="AnnotatorText" typename="Annotator" comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document." rdf="http://spdx.org/rdf/terms#annotator" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -394,7 +394,7 @@
     <xs:annotation>
       <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="checksumValue" xmlname="ChecksumValue" comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm." rdf="http://spdx.org/rdf/terms#checksumValue" domain="Checksum" range="HexBinary"/>
+        <ComplexType name="checksumValue" xmlname="ChecksumValue" typename="ChecksumValue" comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm." rdf="http://spdx.org/rdf/terms#checksumValue" domain="Checksum" range="HexBinary"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -403,9 +403,9 @@
   </xs:complexType>
   <xs:complexType name="CommentType">
     <xs:annotation>
-      <xs:documentation>A data type for Comment</xs:documentation>
+      <xs:documentation>A data type for CommentText</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="comment" xmlname="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+        <ComplexType name="comment" xmlname="CommentText" typename="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -416,7 +416,7 @@
     <xs:annotation>
       <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="created" xmlname="Created" comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator." rdf="http://spdx.org/rdf/terms#created" domain="CreationInfo" range="DateTime" subpropertyof="Date"/>
+        <ComplexType name="created" xmlname="CreatedDateTime" typename="Created" comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator." rdf="http://spdx.org/rdf/terms#created" domain="CreationInfo" range="DateTime" subpropertyof="Date"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -431,17 +431,17 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
-      <xs:element ref="LicenseListVersion" minOccurs="0"/>
-      <xs:element ref="Created" minOccurs="1" maxOccurs="1"/>
-      <xs:element ref="Comment" minOccurs="0"/>
-      <xs:element ref="Creator" minOccurs="1"/>
+      <xs:element ref="LicenseListVersionText" minOccurs="0"/>
+      <xs:element ref="CreatedDateTime" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="CommentText" minOccurs="0"/>
+      <xs:element ref="CreatorText" minOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="CreatorType">
     <xs:annotation>
       <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="creator" xmlname="Creator" comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax." rdf="http://spdx.org/rdf/terms#creator" domain="CreationInfo" range="String"/>
+        <ComplexType name="creator" xmlname="CreatorText" typename="Creator" comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax." rdf="http://spdx.org/rdf/terms#creator" domain="CreationInfo" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -452,7 +452,7 @@
     <xs:annotation>
       <xs:documentation>A data type for A date-time stamp.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="date" xmlname="Date" comment="A date-time stamp." rdf="http://spdx.org/rdf/terms#date" domain="AnnotationCreationInfo" range="DateTime"/>
+        <ComplexType name="date" xmlname="Date" typename="Date" comment="A date-time stamp." rdf="http://spdx.org/rdf/terms#date" domain="AnnotationCreationInfo" range="DateTime"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -463,7 +463,7 @@
     <xs:annotation>
       <xs:documentation>A data type for externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="externalDocumentId" xmlname="ExternalDocumentID" comment="externalDocumentId is a string containing letters, numbers, &#x201C;.&#x201D;, &#x201C;-&#x201D; or &#x201C;+&#x201D; which uniquely identifies an external document within this document." rdf="http://spdx.org/rdf/terms#externalDocumentId" domain="ExternalDocumentRef" range="String"/>
+        <ComplexType name="externalDocumentId" xmlname="ExternalDocumentID" typename="ExternalDocumentID" comment="externalDocumentId is a string containing letters, numbers, &#x201C;.&#x201D;, &#x201C;-&#x201D; or &#x201C;+&#x201D; which uniquely identifies an external document within this document." rdf="http://spdx.org/rdf/terms#externalDocumentId" domain="ExternalDocumentRef" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -483,22 +483,11 @@
       <xs:element ref="SpdxDocument" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="LicenseIDType">
-    <xs:annotation>
-      <xs:documentation>A data type for A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form "LicenseRef-"[idString] where [idString] is a unique string containing letters, numbers, ".", "-" or "+".</xs:documentation>
-      <xs:appinfo>
-        <ComplexType name="licenseId" xmlname="LicenseID" comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &quot;LicenseRef-&quot;[idString] where [idString] is a unique string containing letters, numbers, &quot;.&quot;, &quot;-&quot; or &quot;+&quot;." rdf="http://spdx.org/rdf/terms#licenseId" domain="SimpleLicensingInfo" range="String"/>
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:simpleContent>
-      <xs:extension base="xs:string"/>
-    </xs:simpleContent>
-  </xs:complexType>
   <xs:complexType name="LicenseListVersionType">
     <xs:annotation>
       <xs:documentation>A data type for An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="licenseListVersion" xmlname="LicenseListVersion" comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created." rdf="http://spdx.org/rdf/terms#licenseListVersion" domain="CreationInfo" range="String"/>
+        <ComplexType name="licenseListVersion" xmlname="LicenseListVersionText" typename="LicenseListVersion" comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created." rdf="http://spdx.org/rdf/terms#licenseListVersion" domain="CreationInfo" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -509,7 +498,7 @@
     <xs:annotation>
       <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="name" xmlname="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
+        <ComplexType name="name" xmlname="Name" typename="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -525,7 +514,7 @@
     </xs:annotation>
     <xs:sequence>
       <xs:element ref="RelationshipTypeCode"/>
-      <xs:element ref="Comment" maxOccurs="1"/>
+      <xs:element ref="CommentText" maxOccurs="1"/>
       <xs:element ref="RelatedSpdxElement" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
@@ -550,7 +539,7 @@
     <xs:sequence>
       <xs:element ref="Annotation" minOccurs="0"/>
       <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
-      <xs:element ref="Comment" maxOccurs="1"/>
+      <xs:element ref="CommentText" maxOccurs="1"/>
       <xs:element ref="Relationship" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
@@ -558,7 +547,7 @@
     <xs:annotation>
       <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
       <xs:appinfo>
-        <ComplexType name="specVersion" xmlname="SpecVersion" comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes." rdf="http://spdx.org/rdf/terms#specVersion" domain="SpdxDocument" range="String"/>
+        <ComplexType name="specVersion" xmlname="SpecVersionText" typename="SpecVersion" comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes." rdf="http://spdx.org/rdf/terms#specVersion" domain="SpdxDocument" range="String"/>
       </xs:appinfo>
     </xs:annotation>
     <xs:simpleContent>
@@ -589,11 +578,11 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Annotator" type="AnnotatorType" nillable="true">
+  <xs:element name="AnnotatorText" type="AnnotatorType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
       <xs:appinfo>
-        <Element name="annotator" xmlname="Annotator" comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document." rdf="http://spdx.org/rdf/terms#annotator" range="String"/>
+        <Element name="annotator" xmlname="AnnotatorText" typename="Annotator" comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document." rdf="http://spdx.org/rdf/terms#annotator" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -609,23 +598,23 @@
     <xs:annotation>
       <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
       <xs:appinfo>
-        <Element name="checksumValue" xmlname="ChecksumValue" comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm." rdf="http://spdx.org/rdf/terms#checksumValue" domain="Checksum" range="HexBinary"/>
+        <Element name="checksumValue" xmlname="ChecksumValue" typename="ChecksumValue" comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm." rdf="http://spdx.org/rdf/terms#checksumValue" domain="Checksum" range="HexBinary"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Comment" type="CommentType" nillable="true">
+  <xs:element name="CommentText" type="CommentType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A data type for Comment</xs:documentation>
+      <xs:documentation>A data type for CommentText</xs:documentation>
       <xs:appinfo>
-        <Element name="comment" xmlname="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+        <Element name="comment" xmlname="CommentText" typename="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Created" type="CreatedType" nillable="true">
+  <xs:element name="CreatedDateTime" type="CreatedType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
       <xs:appinfo>
-        <Element name="created" xmlname="Created" comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator." rdf="http://spdx.org/rdf/terms#created" domain="CreationInfo" range="DateTime" subpropertyof="Date"/>
+        <Element name="created" xmlname="CreatedDateTime" typename="Created" comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator." rdf="http://spdx.org/rdf/terms#created" domain="CreationInfo" range="DateTime" subpropertyof="Date"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -637,19 +626,19 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="Creator" type="CreatorType" nillable="true">
+  <xs:element name="CreatorText" type="CreatorType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
       <xs:appinfo>
-        <Element name="creator" xmlname="Creator" comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax." rdf="http://spdx.org/rdf/terms#creator" domain="CreationInfo" range="String"/>
+        <Element name="creator" xmlname="CreatorText" typename="Creator" comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax." rdf="http://spdx.org/rdf/terms#creator" domain="CreationInfo" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DataLicense" type="LicenseIDType" nillable="true">
+  <xs:element name="DataLicenseText" type="SpdxDocumentType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data item for The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files.</xs:documentation>
       <xs:appinfo>
-        <Element name="dataLicense" xmlname="DataLicense" comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files." rdf="http://spdx.org/rdf/terms#dataLicense" domain="SpdxDocument" type="FunctionalProperty"/>
+        <Element name="dataLicense" xmlname="DataLicenseText" comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files." rdf="http://spdx.org/rdf/terms#dataLicense" domain="SpdxDocument" type="FunctionalProperty"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -657,7 +646,7 @@
     <xs:annotation>
       <xs:documentation>A data type for A date-time stamp.</xs:documentation>
       <xs:appinfo>
-        <Element name="date" xmlname="Date" comment="A date-time stamp." rdf="http://spdx.org/rdf/terms#date" domain="AnnotationCreationInfo" range="DateTime"/>
+        <Element name="date" xmlname="Date" typename="Date" comment="A date-time stamp." rdf="http://spdx.org/rdf/terms#date" domain="AnnotationCreationInfo" range="DateTime"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -681,7 +670,7 @@
     <xs:annotation>
       <xs:documentation>A data type for externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document.</xs:documentation>
       <xs:appinfo>
-        <Element name="externalDocumentId" xmlname="ExternalDocumentID" comment="externalDocumentId is a string containing letters, numbers, &#x201C;.&#x201D;, &#x201C;-&#x201D; or &#x201C;+&#x201D; which uniquely identifies an external document within this document." rdf="http://spdx.org/rdf/terms#externalDocumentId" domain="ExternalDocumentRef" range="String"/>
+        <Element name="externalDocumentId" xmlname="ExternalDocumentID" typename="ExternalDocumentID" comment="externalDocumentId is a string containing letters, numbers, &#x201C;.&#x201D;, &#x201C;-&#x201D; or &#x201C;+&#x201D; which uniquely identifies an external document within this document." rdf="http://spdx.org/rdf/terms#externalDocumentId" domain="ExternalDocumentRef" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -701,11 +690,11 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="LicenseListVersion" type="LicenseListVersionType" nillable="true">
+  <xs:element name="LicenseListVersionText" type="LicenseListVersionType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
       <xs:appinfo>
-        <Element name="licenseListVersion" xmlname="LicenseListVersion" comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created." rdf="http://spdx.org/rdf/terms#licenseListVersion" domain="CreationInfo" range="String"/>
+        <Element name="licenseListVersion" xmlname="LicenseListVersionText" typename="LicenseListVersion" comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created." rdf="http://spdx.org/rdf/terms#licenseListVersion" domain="CreationInfo" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -713,7 +702,7 @@
     <xs:annotation>
       <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
       <xs:appinfo>
-        <Element name="name" xmlname="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
+        <Element name="name" xmlname="Name" typename="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -757,11 +746,11 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="SpecVersion" type="SpecVersionType" nillable="true">
+  <xs:element name="SpecVersionText" type="SpecVersionType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
       <xs:appinfo>
-        <Element name="specVersion" xmlname="SpecVersion" comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes." rdf="http://spdx.org/rdf/terms#specVersion" domain="SpdxDocument" range="String"/>
+        <Element name="specVersion" xmlname="SpecVersionText" typename="SpecVersion" comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes." rdf="http://spdx.org/rdf/terms#specVersion" domain="SpdxDocument" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>

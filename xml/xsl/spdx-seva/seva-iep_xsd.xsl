@@ -1,84 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:spd="spdx:xsd::1.0/ref" xmlns:exsl="http://exslt.org/common" version="1.0">
-
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:strings="http://exslt.org/strings" 
+    exclude-result-prefixes="xs" version="1.0">
     <xsl:output method="xml" indent="yes"/>
-
-    <!--<xsl:include href="identity.xsl"/>
-    <xsl:include href="spdx_map.xsl"/>-->
-
-    <xsl:variable name="spdx_xsd" select="document('../xsd/spdx-ref.xsd')"/>
-
-    <xsl:variable name="Top" select="'SpdxDocumentType'"/>
-    <xsl:variable name="Super" select="'SpdxElementType'"/>
-    <xsl:variable name="Root" select="'SpdxDocumentType'"/>
-    <xsl:variable name="RootEl" select="'SpdxDocument'"/>
-
+    <!--
+        This XSL Generates an Implementation Schema from a NIEM Reference Schema 
+        which allows validation without importing NIEM artifacts
+        
+        To run the XSL ensure that the sevaNiemXsd and sevaImpXsdOut paths are correct
+        and configure the XSL processor to use the 'main' template.
+    -->
+    
+    <!-- 
+    input: /iepd/xml/xsd/ref.xsd
+    output:/iepd/xml/xsd/iep.xsd
+   -->
+    
     <xsl:template match="/">
         <xsl:call-template name="main"/>
     </xsl:template>
 
     <xsl:template name="main">
-        <!--<xsl:result-document href="../xsd/spdx-doc.xsd">-->
-            <xs:schema xmlns="spdx:xsd::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                <xsl:apply-templates select="//xs:schema/*[@name = $Root]"/>
-                <!--<xsl:apply-templates select="/xs:schema/*[@name = $Root]"/>-->
-                <xsl:variable name="allnodes">
-                    <xsl:apply-templates select="//xs:schema/*[@name = $Super]"/>
-                    <!--<xsl:apply-templates select="$spdx_xsd/xs:schema/*[@name = $RootEl]"/>-->
-                    <xsl:apply-templates select="//xs:schema/*[@name = 'AlgorithmCodeSimpleType']"/>
-                    <xsl:apply-templates select="//xs:schema/*[@name = 'AnnotationTypeCodeSimpleType']"/>
-                    <xsl:apply-templates select="//xs:schema/*[@name = 'RelationshipTypeCodeSimpleType']"/>
-                    <xsl:call-template name="deDupList">
-                        <xsl:with-param name="list">
-                            <xsl:apply-templates select="//xs:schema/*[@name = $Root]//xs:element" mode="iterate"/>
-                            <xsl:apply-templates select="//xs:schema/*[@name = $Super]//xs:element" mode="iterate"/>
-                            <xsl:apply-templates select="//xs:schema/xs:element[@name = 'SpdxElement']"/>
-                            <xsl:apply-templates select="//xs:schema/*[@name = 'CreationInfoType']//xs:element" mode="iterate"/>
-                            <xsl:apply-templates select="//xs:schema/*[@name = 'AnnotationType']//xs:element" mode="iterate"/>
-                            <xsl:apply-templates select="//xs:schema/*[@name = 'AnnotationTypeCodeType']//xs:element" mode="iterate"/>
-                            <xsl:apply-templates select="//xs:schema/*[@name = 'ExternalDocumentRefType']//xs:element" mode="iterate"/>
-                            <xsl:apply-templates select="//xs:schema/*[@name = 'ChecksumType']//xs:element" mode="iterate"/>
-                            <xsl:apply-templates select="//xs:schema/*[@name = 'RelationshipType']//xs:element" mode="iterate"/>
-                        </xsl:with-param>
-                    </xsl:call-template>
-                </xsl:variable>
-                <xsl:for-each select="exsl:node-set($allnodes)/xs:simpleType">
-                    <xsl:sort select="@name"/>
-                    <xsl:copy-of select="."/>
-                </xsl:for-each>
-                <xsl:for-each select="exsl:node-set($allnodes)/xs:complexType[not(@name = $Root)]">
-                    <xsl:sort select="@name"/>
-                    <xsl:copy-of select="."/>
-                </xsl:for-each>
-                <xsl:for-each select="exsl:node-set($allnodes)/xs:element">
-                    <xsl:sort select="@name"/>
-                    <xsl:copy-of select="."/>
-                </xsl:for-each>
-            </xs:schema>
-        <!--</xsl:result-document>-->
-    </xsl:template>
-
-    <xsl:template match="*" mode="iterate">
-        <xsl:variable name="br">
-            <xsl:choose>
-                <xsl:when test="@ref">
-                    <xsl:value-of select="@ref"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select=".//@base"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
-        <xsl:apply-templates select="//xs:schema/xs:element[@name = $br]"/>
-        <xsl:variable name="t" select="//xs:schema/xs:element[@name = $br]/@type"/>
-        <xsl:apply-templates select="//xs:schema/*[@name = $t]"/>
-        <xsl:apply-templates select="//xs:schema/xs:complexType[@name = $t]/*" mode="iterate"/>
-        <!--<xsl:apply-templates select="$spdx_xsd/xs:schema/xs:complexType[@name = $t]/xs:sequence/xs:element" mode="iterate"/>-->
-    </xsl:template>
-
-    <xsl:template match="xs:sequence" mode="iterate">
-        <xsl:apply-templates select="*" mode="iterate"/>
+        <xs:schema xmlns="urn:seva::1.0" 
+            attributeFormDefault="unqualified" 
+            elementFormDefault="qualified" 
+            targetNamespace="urn:seva::1.0" 
+            version="1" 
+            xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+            <xsl:apply-templates select="xs:schema/*"/>
+        </xs:schema>
     </xsl:template>
 
     <xsl:template match="*">
@@ -92,7 +44,7 @@
     <xsl:template match="xs:element[substring(@ref, string-length(@ref) - string-length('Representation') + 1) = 'Representation']">
         <xsl:variable name="n" select="@ref"/>
         <xsl:element name="xs:choice">
-            <xsl:for-each select="//xs:schema/xs:element[@substitutionGroup = $n]">
+            <xsl:for-each select="/xs:schema/xs:element[@substitutionGroup = $n]">
                 <xsl:element name="xs:element">
                     <xsl:attribute name="ref">
                         <xsl:value-of select="@name"/>
@@ -103,29 +55,23 @@
         </xsl:element>
     </xsl:template>
 
-
     <xsl:template match="xs:complexContent">
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
     <xsl:template match="xs:simpleContent[not(xs:restriction)]">
-        <xs:simpleContent>
-            <xs:extension>
-                <xsl:copy-of select="xs:extension/@base"/>
-            </xs:extension>
-        </xs:simpleContent>
+        <xsl:apply-templates select="*"/>
     </xsl:template>
 
-
     <xsl:template match="xs:element/xs:annotation/xs:appinfo/*">
-        <!-- <xsl:variable name="xpath">
+        <xsl:variable name="xpath">
             <xsl:apply-templates select="ancestor::xs:element" mode="makeXpath"/>
-        </xsl:variable>-->
+        </xsl:variable>
         <xsl:copy>
             <xsl:apply-templates select="@*"/>
-            <!--<xsl:attribute name="xpath">
-                <xsl:value-of select="concat(substring-before($xpath, 'xs:complexContent/xs:extension'), substring-after($xpath, 'xs:complexContent/xs:extension'))"/>
-            </xsl:attribute>-->
+            <xsl:attribute name="xpath">
+                <xsl:value-of select="concat(substring-before($xpath, 'xs:complexContent/xs:extension'),substring-after($xpath, 'xs:complexContent/xs:extension'))"/>
+            </xsl:attribute>
         </xsl:copy>
     </xsl:template>
 
@@ -154,14 +100,13 @@
                 <xsl:apply-templates select="*"/>
             </xsl:when>
             <xsl:otherwise>
-                <xs:complexContent>
+                <xsl:element name="xs:simpleContent">
                     <xsl:element name="xs:extension">
                         <xsl:attribute name="base">
                             <xsl:value-of select="$b"/>
                         </xsl:attribute>
-                        <xsl:apply-templates select="*"/>
                     </xsl:element>
-                </xs:complexContent>
+                </xsl:element>
             </xsl:otherwise>
         </xsl:choose>
     </xsl:template>
@@ -299,22 +244,7 @@
             </xsl:if>
         </xsl:for-each>
     </xsl:template>
-    <xsl:template name="deDupList">
-        <xsl:param name="list"/>
-        <xsl:for-each select="exsl:node-set($list)/*">
-            <xsl:sort select="@name"/>
-            <xsl:sort select="@value"/>
-            <xsl:variable name="n" select="@name"/>
-            <xsl:variable name="v" select="@value"/>
-            <xsl:choose>
-                <xsl:when test="preceding-sibling::*[@name = $n]"/>
-                <xsl:when test="preceding-sibling::*[@value = $v]"/>
-                <xsl:otherwise>
-                    <xsl:copy-of select="."/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:for-each>
-    </xsl:template>
+
 
 
 </xsl:stylesheet>
