@@ -8,7 +8,7 @@
     output: /iepd/xml/instance/test_instance.xml
    -->
     
-    <xsl:param name="TestData" select="'../instance/test_data.xml'"/>
+    <xsl:param name="TestData" select="'../../instance/test_data.xml'"/>
     <xsl:param name="Root" select="'SoftwareEvidenceArchiveType'"/>
     
     <xsl:template match="/">

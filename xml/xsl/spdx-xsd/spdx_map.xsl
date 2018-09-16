@@ -4,7 +4,7 @@
     xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" version="2.0">
     <xsl:output method="xml" indent="yes"/>
 
-    <xsl:variable name="changes" select="document('../instance/changes.xml')/SpdxChanges"/>
+    <xsl:variable name="changes" select="document('../../instance/changes.xml')/SpdxChanges"/>
 
     <xsl:template name="mapSpdx">
         <xsl:param name="rdfData"/>

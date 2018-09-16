@@ -6,11 +6,11 @@
     <xsl:include href="spdx_map.xsl"/>
     <xsl:variable name="spdxMap">
         <xsl:call-template name="mapSpdx">
-            <xsl:with-param name="rdfData" select="document('../../resources/SPDX.rdf')"/>
+            <xsl:with-param name="rdfData" select="document('../../../resources/SPDX.rdf')"/>
         </xsl:call-template>
     </xsl:variable>
-    <xsl:variable name="xsdOut" select="'../xsd/spdx-ref.xsd'"/>
-    <xsl:variable name="xmlOut" select="'../instance/spdx-map.xml'"/>
+    <xsl:variable name="xsdOut" select="'../../xsd/spdx-ref.xsd'"/>
+    <xsl:variable name="xmlOut" select="'../../instance/spdx-map.xml'"/>
     <xsl:variable name="Enumerations">
         <xsl:variable name="all">
             <xsl:apply-templates select="$spdxMap/SPDX//Class/Union[Restriction/@hasvalue]" mode="enum"/>
@@ -175,7 +175,7 @@
         </xs:complexType>
     </xsl:variable>
     <xsl:variable name="SEvARef">
-        <xsl:apply-templates select="document('../xsd/ext/seva/xml/xsd/ref.xsd')/xs:schema/*" mode="copyseva"/>
+        <xsl:apply-templates select="document('../../xsd/ext/seva/xml/xsd/ref.xsd')/xs:schema/*" mode="copyseva"/>
     </xsl:variable>
    
     <xsl:template match="*:Element" mode="copyseva">
