@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SoftwareEvidenceArchive xmlns="urn:seva::1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:seva::1.0  https://seva.specchain.org/iepd/iep.xsd">
+   <SoftwareInformation/>
+   <FileInformation/>
+   <AuthoritativeSourceInformation/>
+   <EcosystemInformation/>
+   <DependencyInformation/>
+   <LicenseInformation/>
+   <VulnerabilityInformation/>
+   <GovernanceRiskCompliance/>
+   <DeliveryInformation/>
+</SoftwareEvidenceArchive>

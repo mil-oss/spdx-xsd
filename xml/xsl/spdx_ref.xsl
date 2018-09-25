@@ -10,11 +10,11 @@
     <xsl:include href="spdx_map.xsl"/>
     <xsl:variable name="spdxMap">
         <xsl:call-template name="mapSpdx">
-            <xsl:with-param name="rdfData" select="document('../../../resources/SPDX.rdf')"/>
+            <xsl:with-param name="rdfData" select="document('../../resources/SPDX.rdf')"/>
         </xsl:call-template>
     </xsl:variable>
-    <xsl:variable name="xsdOut" select="'../../xsd/spdx-ref.xsd'"/>
-    <xsl:variable name="xmlOut" select="'../../instance/spdx-map.xml'"/>
+    <xsl:variable name="xsdOut" select="'../xsd/spdx-ref.xsd'"/>
+    <xsl:variable name="xmlOut" select="'../instance/spdx-map.xml'"/>
     <xsl:variable name="Enumerations">
         <xsl:variable name="all">
             <xsl:apply-templates select="$spdxMap/SPDX//Class/Union[Restriction/@hasvalue]" mode="enum"/>
@@ -179,7 +179,7 @@
         </xs:complexType>
     </xsl:variable>
     <xsl:variable name="SEvARef">
-        <xsl:apply-templates select="document('../../xsd/ext/seva/xml/xsd/ref.xsd')/xs:schema/*" mode="copyseva"/>
+        <xsl:apply-templates select="document('../xsd/ext/seva/xml/xsd/ref.xsd')/xs:schema/*" mode="copyseva"/>
     </xsl:variable>
     
     <xsl:template name="main">
@@ -261,13 +261,51 @@
     <xsl:template match="@*" mode="copyseva">
         <xsl:copy-of select="."/>
     </xsl:template>
+    <xsl:template match="@mapvar" mode="copyseva"/>
     <xsl:template match="text()" mode="copyseva">
         <xsl:value-of select="normalize-space(.)"/>
     </xsl:template>
-    <xsl:template match="xs:complexType[@name = 'FileType']" mode="copyseva"/>
-    <xsl:template match="xs:complexType[@name = 'FileNameType']" mode="copyseva"/>
-    <xsl:template match="xs:element[@name = 'SummaryText']" mode="copyseva"/>
-    <xsl:template match="xs:element[@name = 'Name']" mode="copyseva"/>
+    <xsl:template match="@name[.='FileType']" mode="copyseva">
+          <xsl:attribute name="name">
+              <xsl:text>SevaFileType</xsl:text>
+          </xsl:attribute>         
+    </xsl:template> 
+    <xsl:template match="@name[.='FileNameType']" mode="copyseva">
+        <xsl:attribute name="name">
+            <xsl:text>SevaFileNameType</xsl:text>
+        </xsl:attribute>         
+    </xsl:template>
+    <xsl:template match="@name[.='SummaryText']" mode="copyseva">
+        <xsl:attribute name="name">
+            <xsl:text>SevaSummaryText</xsl:text>
+        </xsl:attribute>         
+    </xsl:template>
+    <xsl:template match="@name[.='Name']" mode="copyseva">
+        <xsl:attribute name="name">
+            <xsl:text>SevaName</xsl:text>
+        </xsl:attribute>         
+    </xsl:template>
+    <xsl:template match="@type[.='FileType']" mode="copyseva">
+        <xsl:attribute name="type">
+            <xsl:text>SevaFileType</xsl:text>
+        </xsl:attribute>         
+    </xsl:template> 
+    <xsl:template match="@type[.='FileNameType']" mode="copyseva">
+        <xsl:attribute name="type">
+            <xsl:text>SevaFileNameType</xsl:text>
+        </xsl:attribute>         
+    </xsl:template>
+    
+<!--    <xsl:template match="xs:complexType[@name = 'FileNameType']" mode="copyseva">
+        
+    </xsl:template>
+    <xsl:template match="xs:element[@name = 'SummaryText']" mode="copyseva">
+        
+    </xsl:template>
+    <xsl:template match="xs:element[@name = 'Name']" mode="copyseva">
+        
+    </xsl:template>  -->  
+    
     <xsl:variable name="LicenseCtype">
         <xs:complexType name="LicenseType">
             <xs:annotation>
@@ -293,7 +331,8 @@
             </xs:complexContent>
         </xs:complexType>
     </xsl:variable>
-
+    
+    <xsl:template match="@mapvar"/>
     <xsl:template match="Ontology" mode="annot">
         <xs:annotation>
             <xs:documentation>

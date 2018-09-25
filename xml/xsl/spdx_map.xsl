@@ -8,7 +8,7 @@
     exclude-result-prefixes="xs owl rdf ns rdfs">
     <xsl:output method="xml" indent="yes"/>
 
-    <xsl:variable name="changes" select="document('../../instance/spdx-changes.xml')/SpdxChanges"/>
+    <xsl:variable name="changes" select="document('../instance/spdx-changes.xml')/SpdxChanges"/>
 
     <xsl:template name="mapSpdx">
         <xsl:param name="rdfData"/>

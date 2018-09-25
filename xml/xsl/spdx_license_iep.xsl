@@ -1,35 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:spd="spdx:xsd::1.0/ref" xmlns:exsl="http://exslt.org/common" version="1.0">
-
+<xsl:stylesheet 
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:spd="spdx:xsd::1.0/ref" 
+    xmlns:exsl="http://exslt.org/common" 
+    version="1.0">
     <xsl:output method="xml" indent="yes"/>
 
-    <xsl:include href="identity.xsl"/>
+    <!--<xsl:include href="identity.xsl"/>
+    <xsl:include href="spdx_map.xsl"/>-->
 
-    <xsl:variable name="Super" select="'SpdxElementType'"/>
-    <xsl:variable name="Root" select="'SoftwareEvidenceArchiveType'"/>
-    <xsl:variable name="RootEl" select="'SoftwareEvidenceArchive'"/>
+    <!-- <xsl:variable name="spdx_xsd" select="document('../xsd/spdx-ref.xsd')"/>-->
+
+    <xsl:variable name="Top" select="'AnyLicenseInfoType'"/>
+    <xsl:variable name="Super" select="'SimpleLicensingInfoType'"/>
+    <xsl:variable name="Root" select="'LicenseType'"/>
+    <xsl:variable name="RootEl" select="'License'"/>
 
     <xsl:template match="/">
         <xsl:call-template name="main"/>
     </xsl:template>
 
     <xsl:template name="main">
-        <!--<xsl:result-document href="../xsd/spdx-doc-iep.xsd">-->
+        <!--        <xsl:result-document href="../xsd/spdx-license.xsd">-->
         <xs:schema xmlns="spdx:xsd::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <xsl:apply-templates select="//xs:schema/*[@name = $Root]" mode="identity"/>
-            <!--<xsl:apply-templates select="/xs:schema/*[@name = $Root]"/>-->
+            <!-- <xsl:apply-templates select="$spdx_xsd/xs:schema/*"/>-->
+            <xsl:apply-templates select="/xs:schema/*[@name = $Root]"/>
             <xsl:variable name="allnodes">
-                <xsl:apply-templates select="//xs:schema/*[@name = $Super]"/>
-                <!--<xsl:apply-templates select="//xs:schema/*[@name = $RootEl]"/>-->
-                <xsl:apply-templates select="//xs:schema/*[@name = 'AlgorithmCodeSimpleType']"/>
-                <xsl:apply-templates select="//xs:schema/*[@name = 'AnnotationTypeCodeSimpleType']"/>
-                <xsl:apply-templates select="//xs:schema/*[@name = 'RelationshipTypeCodeSimpleType']"/>
+                <xsl:apply-templates select="/xs:schema/*[@name = $Super]"/>
+                <xsl:apply-templates select="/xs:schema/*[@name = $Top]"/>
+                <xsl:apply-templates select="/xs:schema/*[@name = $RootEl]"/>
                 <xsl:call-template name="deDupList">
                     <xsl:with-param name="list">
-                        <xsl:apply-templates select="//xs:schema/*[@name = $Root]//xs:element" mode="iterate"/>
-                        <xsl:apply-templates select="//xs:schema/*[@name = $Super]//xs:element" mode="iterate"/>
-                        <xsl:apply-templates select="//xs:schema/xs:element[@name = $RootEl]"/>
+                        <xsl:apply-templates select="/xs:schema/*[@name = $Root]//xs:element" mode="iterate"/>
+                        <xsl:apply-templates select="/xs:schema/*[@name = $Super]//xs:element" mode="iterate"/>
                     </xsl:with-param>
                 </xsl:call-template>
             </xsl:variable>
@@ -37,7 +42,7 @@
                 <xsl:sort select="@name"/>
                 <xsl:copy-of select="."/>
             </xsl:for-each>
-            <xsl:for-each select="exsl:node-set($allnodes)/xs:complexType[not(@name = $Root)]">
+            <xsl:for-each select="exsl:node-set($allnodes)/xs:complexType">
                 <xsl:sort select="@name"/>
                 <xsl:copy-of select="."/>
             </xsl:for-each>
@@ -51,24 +56,13 @@
 
     <xsl:template match="*" mode="iterate">
         <xsl:variable name="br">
-            <xsl:choose>
-                <xsl:when test="@ref">
-                    <xsl:value-of select="@ref"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select=".//@base"/>
-                </xsl:otherwise>
-            </xsl:choose>
+            <xsl:value-of select="@ref"/>
+            <xsl:value-of select=".//@base"/>
         </xsl:variable>
-        <xsl:apply-templates select="//xs:schema/xs:element[@name = $br]"/>
-        <xsl:variable name="t" select="//xs:schema/xs:element[@name = $br]/@type"/>
-        <xsl:apply-templates select="//xs:schema/*[@name = $t]"/>
-        <xsl:apply-templates select="//xs:schema/xs:complexType[@name = $t]/*" mode="iterate"/>
-        <xsl:apply-templates select="//xs:schema/xs:complexType[@name = $t]/xs:sequence/xs:element" mode="iterate"/>
-    </xsl:template>
-
-    <xsl:template match="xs:sequence" mode="iterate">
-        <xsl:apply-templates select="*" mode="iterate"/>
+        <xsl:apply-templates select="/xs:schema/*[@name = $br]"/>
+        <xsl:variable name="t" select="/xs:schema/*[@name = $br]/@type"/>
+        <xsl:apply-templates  select="/xs:schema/*[@name = $t]"/>
+        <xsl:apply-templates select="/xs:schema/*[@name = $t]//xs:element" mode="iterate"/>
     </xsl:template>
 
     <xsl:template match="*">
@@ -79,12 +73,10 @@
         </xsl:copy>
     </xsl:template>
 
-    <xsl:template match="@mapvar" mode="identity"/>
-
     <xsl:template match="xs:element[substring(@ref, string-length(@ref) - string-length('Representation') + 1) = 'Representation']">
         <xsl:variable name="n" select="@ref"/>
         <xsl:element name="xs:choice">
-            <xsl:for-each select="//xs:schema/xs:element[@substitutionGroup = $n]">
+            <xsl:for-each select="/xs:schema/xs:element[@substitutionGroup = $n]">
                 <xsl:element name="xs:element">
                     <xsl:attribute name="ref">
                         <xsl:value-of select="@name"/>
@@ -96,7 +88,7 @@
     </xsl:template>
 
     <xsl:template match="xs:complexContent">
-        <xsl:apply-templates select="*" mode="iterate"/>
+        <xsl:apply-templates select="*"/>
     </xsl:template>
 
     <xsl:template match="xs:simpleContent[not(xs:restriction)]">
@@ -106,6 +98,7 @@
             </xs:extension>
         </xs:simpleContent>
     </xsl:template>
+
 
     <xsl:template match="xs:element/xs:annotation/xs:appinfo/*">
         <!-- <xsl:variable name="xpath">
@@ -119,7 +112,7 @@
         </xsl:copy>
     </xsl:template>
 
-        <xsl:template match="xs:extension">
+    <xsl:template match="xs:extension">
         <xsl:variable name="b" select="@base"/>
         <xsl:choose>
             <xsl:when test="$b = 'xs:boolean'">
@@ -136,15 +129,6 @@
                     <xsl:element name="xs:extension">
                         <xsl:attribute name="base">
                             <xsl:value-of select="$b"/>
-                        </xsl:attribute>
-                    </xsl:element>
-                </xsl:element>
-            </xsl:when>
-            <xsl:when test="$b = 'structures:ObjectType'">
-                <xsl:element name="xs:simpleContent">
-                    <xsl:element name="xs:extension">
-                        <xsl:attribute name="base">
-                            <xsl:text>SpdxElement</xsl:text>
                         </xsl:attribute>
                     </xsl:element>
                 </xsl:element>
@@ -168,15 +152,17 @@
     <xsl:template match="xs:import"/>
 
     <!-- Ends-with XSL 1.0-->
-    <xsl:template match="xs:element[substring(@name, string-length(@name) - string-length('AugmentationPoint') + 1) = 'AugmentationPoint']"/>
-    <xsl:template match="xs:element[substring(@ref, string-length(@ref) - string-length('AugmentationPoint') + 1) = 'AugmentationPoint']"/>
-    <xsl:template match="xs:element[substring(@ref, string-length(@ref) - string-length('AugmentationPoint') + 1) = 'AugmentationPoint']" mode="identity"/>
+    <xsl:template match="*[substring(@name, string-length(@name) - string-length('AugmentationPoint') + 1) = 'AugmentationPoint']"/>
+
+    <!-- Ends-with XSL 1.0-->
+    <xsl:template match="*[substring(@ref, string-length(@ref) - string-length('AugmentationPoint') + 1) = 'AugmentationPoint']"/>
 
     <xsl:template match="xs:attributeGroup[@ref = 'structures:SimpleObjectAttributeGroup']"/>
 
     <xsl:template match="@*">
         <xsl:copy-of select="."/>
     </xsl:template>
+
 
     <xsl:template match="text()">
         <xsl:copy-of select="normalize-space(.)"/>
