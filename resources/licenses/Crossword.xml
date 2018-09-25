@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<License xmlns="spdx:xsd::1.0">
+  <LicenseID>Crossword</LicenseID>
+  <Comment/>
+  <SeeAlso>https://fedoraproject.org/wiki/Licensing/Crossword</SeeAlso>
+  <Name>Crossword License</Name>
+  <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+  <IsOsiApproved>false</IsOsiApproved>
+  <IsFsfLibre>false</IsFsfLibre>
+  <StandardLicenseHeader/>
+  <LicenseText>Copyright (C) 1995-2009 Gerd Neugebauer
+
+cwpuzzle.dtx is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. No author or distributor accepts responsibility to anyone for the consequences of using it or for whether it serves any particular purpose or works at all, unless he says so in writing.
+
+.
+
+Everyone is granted permission to copy, modify and redistribute cwpuzzle.dtx, provided this copyright notice is preserved and any modifications are indicated.</LicenseText>
+  <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; Copyright (C) 1995-2009 Gerd Neugebauer&lt;&lt;endOptional&gt;&gt;
+
+cwpuzzle.dtx is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY. No author or distributor accepts responsibility to anyone for the consequences of using it or for whether it serves any particular purpose or works at all, unless he says so in writing.
+
+.
+
+Everyone is granted permission to copy, modify and redistribute cwpuzzle.dtx, provided this copyright notice is preserved and any modifications are indicated.</StandardLicenseTemplate>
+</License>

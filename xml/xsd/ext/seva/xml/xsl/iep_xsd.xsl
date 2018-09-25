@@ -22,14 +22,14 @@
     </xsl:template>
 
     <xsl:template name="main">
-        <xs:schema xmlns="urn:seva::1.0" 
+        <xs:schema xmlns="spdx:xsd::1.0" 
             attributeFormDefault="unqualified" 
             elementFormDefault="qualified" 
-            targetNamespace="urn:seva::1.0" 
+            targetNamespace="spdx:xsd::1.0" 
             version="1" 
             xmlns:xs="http://www.w3.org/2001/XMLSchema"
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-            <xsl:apply-templates select="xs:schema/*"/>
+            <xsl:apply-templates select="xs:schema/*[@name='SoftwareEvidenceArchiveType']"/>
         </xs:schema>
     </xsl:template>
 

@@ -43,6 +43,7 @@ func StartWeb() {
 	router := http.NewServeMux()
 	router.Handle("/", index())
 	router.Handle("/file/", getResource())
+	router.Handle("/license/", getLicense())
 	router.Handle("/iepd/", getResource())
 	router.Handle("/dload", dload())
 	router.Handle("/validate", validate())
@@ -90,6 +91,18 @@ func index() http.Handler {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
+<<<<<<< HEAD
+		if cfg.Redirect != "" {
+			http.Redirect(w, r, cfg.Redirect, 301)
+		} else {
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("X-Content-Type-Options", "nosniff")
+			w.WriteHeader(http.StatusOK)
+			fmt.Fprintln(w, "SPDX-XSD 1.0")
+			//fmt.Fprintln(w, temppath)
+		}
+=======
 		//http.Redirect(w, r, "https://sevaxsd.specchain.org", 301)
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -97,14 +110,18 @@ func index() http.Handler {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, name)
 		//fmt.Fprintln(w, temppath)
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	})
 }
 
 func getResource() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
+<<<<<<< HEAD
+=======
 			var p = filepath.Base(r.URL.Path)
 			f, err := ioutil.ReadFile(temppath + resources[p])
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 			check(err)
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -112,11 +129,37 @@ func getResource() http.Handler {
 			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
 			w.Header().Set("Pragma", "no-cache")
 			w.Header().Set("X-Accel-Expires", "0")
+			var p = filepath.Base(r.URL.Path)
+			f, err := ioutil.ReadFile(Tpath + resources[p])
+			check(err)
 			w.Write(f)
+
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
+<<<<<<< HEAD
+func getLicense() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if atomic.LoadInt32(&healthy) == 1 {
+			check(err)
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
+			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+			w.Header().Set("Pragma", "no-cache")
+			w.Header().Set("X-Accel-Expires", "0")
+			var p = filepath.Base(r.URL.Path)
+			f, err := ioutil.ReadFile(Tpath + "resources/licenses/" + p)
+			check(err)
+			w.Write(f)
+
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+=======
+>>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 func verify() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {

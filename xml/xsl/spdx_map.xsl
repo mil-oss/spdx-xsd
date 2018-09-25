@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" exclude-result-prefixes="xs owl rdf ns rdfs" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" version="2.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" version="2.0"
+    exclude-result-prefixes="xs owl rdf ns rdfs">
     <xsl:output method="xml" indent="yes"/>
 
-    <xsl:variable name="changes" select="document('../instance/changes.xml')/SpdxChanges"/>
+    <xsl:variable name="changes" select="document('../instance/spdx-changes.xml')/SpdxChanges"/>
 
     <xsl:template name="mapSpdx">
         <xsl:param name="rdfData"/>
@@ -64,12 +68,15 @@
         <xsl:variable name="xn">
             <xsl:apply-templates select="@rdf:about" mode="getname"/>
         </xsl:variable>
+        <xsl:variable name="tn">
+            <xsl:apply-templates select="@rdf:about" mode="typename"/>
+        </xsl:variable>
         <xsl:variable name="c">
             <xsl:apply-templates select="@rdf:about" mode="getcomment">
                 <xsl:with-param name="comment" select="rdfs:comment"/>
             </xsl:apply-templates>
         </xsl:variable>
-        <Datatype name="{$n}" xmlname="{$xn}" comment="{$c}" rdf="{@rdf:about}">
+        <Datatype name="{$n}" xmlname="{$xn}" typename="{$tn}" comment="{$c}" rdf="{@rdf:about}">
             <xsl:if test="rdfs:domain/@rdf:resource">
                 <xsl:attribute name="domain">
                     <xsl:apply-templates select="rdfs:domain/@rdf:resource" mode="getname"/>
@@ -192,7 +199,7 @@
 
     <xsl:template match="owl:onProperty" mode="att">
         <xsl:attribute name="onproperty">
-            <xsl:apply-templates select="@rdf:resource" mode="getname"/>
+            <xsl:apply-templates select="@rdf:resource" mode="typename"/>
         </xsl:attribute>
     </xsl:template>
 
@@ -395,6 +402,10 @@
                 <xsl:apply-templates select="." mode="xmlname"/>
             </xsl:otherwise>
         </xsl:choose>
+    </xsl:template>
+
+    <xsl:template match="@*" mode="typename">
+        <xsl:apply-templates select="." mode="xmlname"/>
     </xsl:template>
 
     <xsl:template match="@*" mode="getcomment">

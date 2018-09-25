@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns="spdx:xsd::1.0"
+           xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns:niem-xs="http://release.niem.gov/niem/proxy/xsd/4.0/"
+           xmlns:structures="http://release.niem.gov/niem/structures/4.0/"
+           xmlns:appinfo="http://release.niem.gov/niem/appinfo/4.0/"
+           xmlns:owl="http://www.w3.org/2002/07/owl#"
+           xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+           xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+           attributeFormDefault="unqualified"
+           elementFormDefault="qualified"
+           targetNamespace="spdx:xsd::1.0"
+           version="1"
+           xsi:schemaLocation="http://release.niem.gov/niem/conformanceTargets/3.0/ ext/niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
+           ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/#ReferenceSchemaDocument">
+   <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd"
+              namespace="http://release.niem.gov/niem/structures/4.0/"/>
+   <xs:import schemaLocation="ext/niem/utility/appinfo/4.0/appinfo.xsd"
+              namespace="http://release.niem.gov/niem/appinfo/4.0/"/>
+   <xs:import schemaLocation="ext/niem/proxy/xsd/4.0/xs.xsd"
+              namespace="http://release.niem.gov/niem/proxy/xsd/4.0/"/>
+   <xs:complexType name="IsDeprecatedLicenseIDType">
+      <xs:annotation>
+         <xs:documentation>A data type that indicates if the license id is Deprecated.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="IsDeprecatedLicenseIDType"
+                         comment="Indicates if the license is is Deprecated."
+                         rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId"
+                         domain="License"
+                         range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:boolean">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="IsFsfLibreType">
+      <xs:annotation>
+         <xs:documentation>A data type for an indicator that the license is is FSF Libre.</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="IsFsfLibre"
+                         comment="True if the license is is FSF Libre; false if not."
+                         rdf="http://spdx.org/rdf/terms#isFsfLibre"
+                         domain="License"
+                         range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:simpleContent>
+         <xs:extension base="xs:boolean">
+            <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+         </xs:extension>
+      </xs:simpleContent>
+   </xs:complexType>
+   <xs:complexType name="LicenseType">
+      <xs:annotation>
+         <xs:documentation>A data type for License type</xs:documentation>
+         <xs:appinfo>
+            <ComplexType name="License"
+                         xmlname="License"
+                         comment="A License represents a copyright license. The SPDX license list website is annotated with these properties (using RDFa) to allow license data published there to be easily processed. The license list is populated in accordance with the License List fields guidelines. These guidelines are not normative and may change over time. SPDX tooling should not rely on values in the license list conforming to the current guidelines."
+                         rdf="http://spdx.org/rdf/terms#License"
+                         subclassof="SimpleLicensingInfo"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="SimpleLicensingInfoType">
+            <xs:sequence>
+               <xs:element ref="IsDeprecatedLicenseID" minOccurs="0"/>
+               <xs:element ref="IsOsiApprovedIndicator" minOccurs="1"/>
+               <xs:element ref="IsFsfLibreIndicator" minOccurs="0"/>
+               <xs:element ref="StandardLicenseHeaderText" minOccurs="0"/>
+               <xs:element ref="LicenseText" minOccurs="1"/>
+               <xs:element ref="StandardLicenseTemplateText" minOccurs="1"/>
+               <xs:element ref="LicenseAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="IsDeprecatedLicenseID"
+               type="IsDeprecatedLicenseIDType"
+               nillable="true">
+      <xs:annotation>
+         <xs:documentation>A data item that indicates if the license id is Deprecated.</xs:documentation>
+         <xs:appinfo>
+            <Element name="IsDeprecatedLicenseID"
+                     comment="Indicates if the license id is Deprecated."
+                     rdf="http://spdx.org/rdf/terms#isDeprecatedLicenseId"
+                     domain="License"
+                     range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+   <xs:element name="IsFsfLibreIndicator" type="IsFsfLibreType" nillable="true">
+      <xs:annotation>
+         <xs:documentation>True if the license is is FSF Libre; false if not.</xs:documentation>
+         <xs:appinfo>
+            <Element name="IsFsfLibre"
+                     comment="True if the license is is FSF Libre; false if not."
+                     rdf="http://spdx.org/rdf/terms#isFsfLibre"
+                     domain="License"
+                     range="Boolean"/>
+         </xs:appinfo>
+      </xs:annotation>
+   </xs:element>
+</xs:schema>

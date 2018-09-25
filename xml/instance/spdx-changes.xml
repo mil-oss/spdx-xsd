@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SpdxChanges>
+    <Node rdf="http://spdx.org/rdf/terms#ReferenceType" xmlname="ReferenceID"/>
+    <Node rdf="http://spdx.org/rdf/terms#referenceType" xmlname="ReferenceID"/>
+    <Node rdf="http://spdx.org/rdf/terms#SimpleLicenseingInfo" xmlname="SimpleLicensingInfo"/>
+    <Node rdf="http://spdx.org/rdf/terms#annotator" xmlname="AnnotatorText"/>
+    <Node rdf="http://www.w3.org/2000/01/rdf-schema#comment" xmlname="CommentText"/>
+    <Node rdf="http://spdx.org/rdf/terms#contextualExample" xmlname="ContextualExampleText"/>
+    <Node rdf="http://spdx.org/rdf/terms#created" xmlname="CreatedDateTime"/>    
+    <Node rdf="http://spdx.org/rdf/terms#creator" xmlname="CreatorText"/>
+    <Node rdf="http://spdx.org/rdf/terms#dataLicense" xmlname="DataLicenseText"/>
+    <Node rdf="http://spdx.org/rdf/terms#description" xmlname="DescriptionText"/>
+    <Node rdf="http://spdx.org/rdf/terms#documentation" xmlname="DocumentationURI"/>
+    <Node rdf="http://spdx.org/rdf/terms#downloadLocation" xmlname="DownloadLocationURI"/>
+    <Node rdf="http://spdx.org/rdf/terms#example" xmlname="ExampleText"/>
+    <Node rdf="http://spdx.org/rdf/terms#externalReferenceSite" xmlname="ExternalReferenceSiteURI"/>
+    <Node rdf="http://spdx.org/rdf/terms#fileContributor" xmlname="FileContributorText"/>
+    <Node rdf="http://spdx.org/rdf/terms#filesAnalyzed" xmlname="FilesAnalyzedIndicator" comment="True if the file content of this package has been available for or subjected to analysis; false if not."/>
+    <Node rdf="http://usefulinc.com/ns/doap#homepage" xmlname="HomepageURI"/>
+    <Node rdf="http://spdx.org/rdf/terms#isFsfLibre" xmlname="IsFsfLibreIndicator" comment="True if the license is is FSF Libre; false if not."/>
+    <Node rdf="http://spdx.org/rdf/terms#isOsiApproved" xmlname="IsOsiApprovedIndicator" comment="True if the license is is OSI Approved; false if not."/>
+    <Node rdf="http://spdx.org/rdf/terms#licenseComments" xmlname="LicenseCommentsText"/>
+    <Node rdf="http://spdx.org/rdf/terms#licenseListVersion" xmlname="LicenseListVersionText"/>
+    <Node rdf="http://www.w3.org/2009/pointers#lineNumber" xmlname="LineNumberNumeric"/>
+    <Node rdf="http://spdx.org/rdf/terms#locatorFormat" xmlname="LocatorFormatText"/>
+    <Node rdf="http://www.w3.org/2009/pointers#offset" xmlname="OffsetNumeric"/>
+    <Node rdf="http://spdx.org/rdf/terms#originator" xmlname="OriginatorText"/>
+    <Node rdf="http://spdx.org/rdf/terms#referenceLocator" xmlname="ReferenceLocatorText"/>
+    <Node rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso" xmlname="SeeAlsoURI"/>
+    <Node rdf="http://spdx.org/rdf/terms#sourceInfo" xmlname="SourceInfoText"/>
+    <Node rdf="http://spdx.org/rdf/terms#specVersion" xmlname="SpecVersionText"/>
+    <Node rdf="http://spdx.org/rdf/terms#standardLicenseHeader" xmlname="StandardLicenseHeaderText"/>
+    <Node rdf="http://spdx.org/rdf/terms#standardLicenseTemplate" xmlname="StandardLicenseTemplateText"/>
+    <Node rdf="http://spdx.org/rdf/terms#summary" xmlname="SummaryText"/>
+    <Node rdf="http://spdx.org/rdf/terms#supplier" xmlname="SupplierText"/>
+    <Node rdf="http://spdx.org/rdf/terms#verificationCodeExcludedFile" xmlname="VerificationCodeExcludedFileText"/>
+    <Node rdf="http://spdx.org/rdf/terms#versionInfo" xmlname="VersionInfoText"/>
+</SpdxChanges>

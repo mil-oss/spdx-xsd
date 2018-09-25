@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<License xmlns="spdx:xsd::1.0">
+  <LicenseID>Fair</LicenseID>
+  <Comment/>
+  <SeeAlso>http://www.opensource.org/licenses/Fair</SeeAlso>
+  <SeeAlso>http://fairlicense.org/</SeeAlso>
+  <Name>Fair License</Name>
+  <IsDeprecatedLicenseID>false</IsDeprecatedLicenseID>
+  <IsOsiApproved>true</IsOsiApproved>
+  <IsFsfLibre>false</IsFsfLibre>
+  <StandardLicenseHeader/>
+  <LicenseText>Fair License
+
+&lt;Copyright Information&gt;
+
+Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
+
+DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.</LicenseText>
+  <StandardLicenseTemplate>&lt;&lt;beginOptional&gt;&gt; Fair License&lt;&lt;endOptional&gt;&gt;
+
+&lt;Copyright Information&gt;
+
+Usage of the works is permitted provided that this instrument is retained with the works, so that any entity that uses the works is notified of this instrument.
+
+DISCLAIMER: THE WORKS ARE WITHOUT WARRANTY.</StandardLicenseTemplate>
+</License>
