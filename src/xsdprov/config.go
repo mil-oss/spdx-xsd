@@ -12,12 +12,8 @@ type Cfg struct {
 	Testlink string `json:"testlink,omitempty"`
 	Homeurl  string `json:"homeurl,omitempty"`
 	Port     string `json:"port,omitempty"`
-<<<<<<< HEAD
-	Redirect string `json:"redirect,omitempty"`
-=======
 	Dbloc    string `json:"dbloc,omitempty"`
 	Temppath string `json:"temppath,omitempty"`
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 }
 
 //GetConfig ...
