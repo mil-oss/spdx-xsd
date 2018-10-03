@@ -1,7 +1,7 @@
 {
     "project":"spdx-seva",
-    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-ref.xsd",
-    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/spdx-test-data.xml",
+    "reflink": "https://github.com/mil-oss/spdx-xsd/raw/master/IEPD/spdx-seva/xml/xsd/spdx-ref.xsd",
+    "testlink":"https://github.com/mil-oss/spdx-xsd/raw/master/IEPD/spdx-seva/xml/instance/test_data.xml",
     "homeurl":"http://localhost",
     "port":":8181",
     "dbloc":"tmp/IEPD/spdx-seva/db",
