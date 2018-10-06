@@ -7,7 +7,7 @@ var Tpath = "/tmp/IEPD/iepd/"
 
 func main() {
 	xsdprov.Setup(Tpath, Resources, Resdirectories, NewLicense())
-	MakeLicenses(Resources, Tpath)
+	//MakeLicenses(Resources, Tpath)
 	xsdprov.BuildIep()
 	xsdprov.StartWeb(Tpath)
 }

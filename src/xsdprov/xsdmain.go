@@ -43,8 +43,7 @@ func InitXSDProv(rsrcs map[string]string, rsrcdirs map[string]string, config str
 		return
 	}
 	DirSetup()
-	//CopyDirs(temppath, resourcedirs)
-	db, err := DbSetup(dbloc + "/spdx-lic.db")
+	db, err := DbSetup(cfg.Dbloc)
 	check(err)
 	// InitTempDir ...
 	InitTempDir(db)
@@ -53,11 +52,11 @@ func InitXSDProv(rsrcs map[string]string, rsrcdirs map[string]string, config str
 // InitTempDir ...
 func InitTempDir(db *bolt.DB) (err error) {
 	log.Println("TempDir ")
-	tempdir, err := queryDB(db, "ADMIN", dbloc+"/spdx-lic.db")
-	log.Println("TEMPDIR " + dbloc + "/spdx-lic.db")
-	ferr := os.RemoveAll(dbloc + "/spdx-lic.db")
+	tempdir, err := queryDB(db, "ADMIN", dbloc+"/spdx.db")
+	log.Println("TEMPDIR " + dbloc + "/spdx.db")
+	ferr := os.RemoveAll(dbloc + "/spdx.db")
 	err = ferr
-	dberr := updateDB(db, "ADMIN", tempdir, []byte(dbloc+"/spdx-lic.db"))
+	dberr := updateDB(db, "ADMIN", tempdir, []byte(dbloc+"/spdx.db"))
 	err = dberr
 	return err
 }
