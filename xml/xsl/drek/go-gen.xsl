@@ -7,12 +7,6 @@
     output:/iepd/src/golang/struct/xsd-struct.go
    -->
 
-   <!-- <xsl:template match="/">
-        <xsl:call-template name="makego">
-            <xsl:with-param name="rootname" select="'License'"/>
-        </xsl:call-template>
-    </xsl:template>-->
-
     <xsl:variable name="a">
         <xsl:text>&amp;</xsl:text>
     </xsl:variable>
@@ -46,30 +40,24 @@
     <xsl:variable name="in">
         <xsl:value-of select="concat($sp, $sp, $sp, $sp)"/>
     </xsl:variable>
-    <xsl:variable name="tab">
-        <xsl:text>&#09;</xsl:text>
-    </xsl:variable>
+    <xsl:variable name="tab" select="40"/>
     <xsl:variable name="json" select="' json:'"/>
     <xsl:variable name="omitempty" select="'omitempty'"/>
+    <xsl:variable name="rootname" select="'License'"/>
+    <xsl:variable name="roottype" select="xs:schema/xs:element[@name = $rootname]/@type"/>
+    <xsl:variable name="ns" select="xs:schema/@targetNamespace"/>
 
-    <xsl:template name="makego">
-        <xsl:param name="rootname"/>
+    <xsl:template match="/">
         <xsl:value-of select="concat('package main', $cr, $cr)"/>
         <xsl:value-of select="concat('import ', $qt, 'encoding/xml', $qt, $cr, $cr)"/>
-        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]" mode="func">
-            <xsl:with-param name="rootname" select="$rootname"/>
-        </xsl:apply-templates>
-        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]">
-            <xsl:with-param name="rootname" select="$rootname"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]" mode="func"/>
+        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]"/>
         <xsl:apply-templates select="xs:schema/xs:element[not(@name = $rootname)]">
-            <xsl:with-param name="rootname" select="$rootname"/>
             <xsl:sort select="@name"/>
         </xsl:apply-templates>
     </xsl:template>
 
     <xsl:template match="xs:element[@name]" mode="func">
-        <xsl:param name="rootname"/>
         <xsl:variable name="n" select="@name"/>
         <xsl:variable name="t" select="@type"/>
         <xsl:if test="//xs:complexType[@name = $t]//xs:element[@ref]">
@@ -90,7 +78,6 @@
     </xsl:template>
 
     <xsl:template match="*" mode="makevar">
-        <xsl:param name="rootname"/>
         <xsl:variable name="r" select="@ref"/>
         <xsl:variable name="nr">
             <xsl:choose>
@@ -109,7 +96,7 @@
                 <xsl:text>[]</xsl:text>
             </xsl:if>
             <xsl:choose>
-                <xsl:when test="$b = 'xs:boolean'">
+                <xsl:when test="$b='xs:boolean'">
                     <xsl:text>bool</xsl:text>
                 </xsl:when>
                 <xsl:otherwise>
@@ -141,26 +128,60 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>-->
-        <xsl:value-of select="concat($tab, $nr, $tab, $typ, $tab, $tab, $bq, 'xml:', $qt, @ref, $cm, $omitempty, $qt, ' ', $json, $qt, @ref, $cm, $omitempty, $qt, $bq, $cr)"/>
-
+        <xsl:variable name="rspcs">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length($r)"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="vspcs">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length($typ)"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:value-of select="concat($in, $in, $nr, $rspcs, $typ, $vspcs, $bq, 'xml:', $qt, @ref, $cm, $omitempty, $qt, ' ', $json, $qt, @ref, $cm, $omitempty, $qt, $bq, $cr)"/>
+        
     </xsl:template>
 
     <xsl:template match="xs:schema/xs:element">
-        <xsl:param name="rootname"/>
         <xsl:variable name="n" select="@name"/>
         <xsl:variable name="t" select="@type"/>
-
+        <xsl:variable name="xspcs">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length('XMLName')"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="tspcs">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length('xml.Name')"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="att1spc">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length('AttrXmlnsXsi')"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="att2spc">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length('AttrXmlns')"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="strspc">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length('string')"/>
+            </xsl:call-template>
+        </xsl:variable>
         <xsl:if test="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
             <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
             <xsl:value-of select="concat('//', $n, ' ... ', substring-before(xs:annotation/xs:documentation, '.'), $cr)"/>
             <xsl:value-of select="concat('type ', $n, ' struct ', $lb, $cr)"/>
             <xsl:if test="@name = $rootname">
-                <xsl:value-of select="concat($in, $in, 'AttrXmlnsXsi', $tab, 'string', $tab, $tab, $bq, 'xml:', $qt, 'xmlns:xsi,attr', $qt, $json, $qt, 'AttrXmlnsXsi', $cm, $omitempty, $qt, $bq, $cr)"/>
-                <xsl:value-of select="concat($tab, 'AttrXmlns', $tab, 'string', $tab, $tab, $bq, 'xml:', $qt, 'xmlns,attr', $qt, $json, $qt, 'AttrXmlns', $cm, $omitempty, $qt, $bq, $cr)"/>
+                <xsl:value-of
+                    select="concat($in, $in, 'AttrXmlnsXsi', $att1spc, 'string', $strspc, $bq, 'xml:', $qt, 'xmlns:xsi,attr', $qt, $json, $qt, 'AttrXmlnsXsi', $cm, $omitempty, $qt, $bq, $cr)"/>
+                <xsl:value-of select="concat($in, $in, 'AttrXmlns', $att2spc, 'string', $strspc, $bq, 'xml:', $qt, 'xmlns,attr', $qt, $json, $qt, 'AttrXmlns', $cm, $omitempty, $qt, $bq, $cr)"/>
             </xsl:if>
             <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar"/>
             <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]" mode="makevar"/>
-            <xsl:value-of select="concat($tab, 'XMLName', $tab, 'xml.Name', $tab, $tab, $bq, 'xml:', $qt, $n, $cm, $omitempty, $qt, ' ', $json, $qt, $n, $cm, $omitempty, $qt, $bq, $cr)"/>
+            <xsl:value-of select="concat($in, $in, 'XMLName', $xspcs, 'xml.Name', $tspcs, $bq, 'xml:', $qt, $n, $cm, $omitempty, $qt, ' ', $json, $qt, $n, $cm, $omitempty, $qt, $bq, $cr)"/>
             <xsl:value-of select="concat($rb, $cr)"/>
         </xsl:if>
     </xsl:template>
@@ -213,21 +234,36 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:value-of select="concat($tab, $nr, $tab, $dt, $tab, $tab, $bq, 'xml:', $qt, @ref, $cm, $omitempty, $qt, ' ', $json, $qt, @ref, $typ, $cm, $omitempty, $qt, $bq, $cr)"/>
+        <xsl:variable name="rspcs">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length($r)"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:variable name="vspcs">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($tab) - string-length($dt)"/>
+            </xsl:call-template>
+        </xsl:variable>
+        <xsl:value-of select="concat($in, $in, $nr, $rspcs, $dt, $vspcs, $bq, 'xml:', $qt, @ref, $cm, $omitempty, $qt, ' ', $json, $qt, @ref, $typ, $cm, $omitempty, $qt, $bq, $cr)"/>
     </xsl:template>
+
     <xsl:template match="*">
-        <xsl:param name="rootname"/>
-        <xsl:apply-templates select="*">
-            <xsl:with-param name="rootname" select="$rootname"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates select="*"/>
     </xsl:template>
     <xsl:template match="*" mode="def">
-        <xsl:param name="rootname"/>
-        <xsl:apply-templates select="*" mode="def">
-            <xsl:with-param name="rootname" select="$rootname"/>
-        </xsl:apply-templates>
+        <xsl:apply-templates select="*" mode="def"/>
     </xsl:template>
     <xsl:template match="text()"/>
+
+    <xsl:template name="mkspc">
+        <xsl:param name="spc"/>
+        <xsl:value-of select="$sp"/>
+        <xsl:if test="number($spc) &gt; 0">
+            <xsl:call-template name="mkspc">
+                <xsl:with-param name="spc" select="number($spc) - 1"/>
+            </xsl:call-template>
+        </xsl:if>
+    </xsl:template>
 
     <xsl:template name="dotpaths">
         <xsl:param name="elname"/>

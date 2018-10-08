@@ -85,7 +85,7 @@
            domain="SpdxDocument"
            range="CreationInfo"/>
    <Object name="dataLicense"
-           xmlname="DataLicenseText"
+           xmlname="DataLicense"
            comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files."
            rdf="http://spdx.org/rdf/terms#dataLicense"
            domain="SpdxDocument"
@@ -93,7 +93,7 @@
       <Restriction rdf="http://spdx.org/rdf/terms#dataLicense"
                    onproperty="DataLicense"
                    hasvalue="CC0-1.0"
-                   xmlname="DataLicenseText"/>
+                   xmlname="DataLicense"/>
    </Object>
    <Object name="describesFile"
            xmlname="DescribesFile"
@@ -733,7 +733,7 @@
                       onproperty="Date"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="dateTimeStamp"
+                      ondatarange="xsd:dateTimeStamp"
                       xmlname="Date"/>
       </SubClass>
       <SubClass>
@@ -755,7 +755,7 @@
                       onproperty="Comment"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CommentText"/>
       </SubClass>
       <SubClass>
@@ -763,7 +763,7 @@
                       onproperty="Annotator"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="AnnotatorText"/>
       </SubClass>
    </Class>
@@ -781,7 +781,7 @@
                       onproperty="ChecksumValue"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="hexBinary"
+                      ondatarange="xsd:hexBinary"
                       xmlname="ChecksumValue"/>
       </SubClass>
       <SubClass>
@@ -829,7 +829,7 @@
          <Restriction rdf="http://spdx.org/rdf/terms#licenseListVersion"
                       onproperty="LicenseListVersion"
                       minOccurs="0"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="LicenseListVersionText"/>
       </SubClass>
       <SubClass>
@@ -837,21 +837,21 @@
                       onproperty="Created"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="dateTimeStamp"
+                      ondatarange="xsd:dateTimeStamp"
                       xmlname="CreatedDateTime"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#comment"
                       onproperty="Comment"
                       minOccurs="0"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#creator"
                       onproperty="Creator"
                       minOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CreatorText"/>
       </SubClass>
    </Class>
@@ -890,7 +890,7 @@
                       onproperty="ExternalDocumentID"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="anyURI"
+                      ondatarange="xsd:anyURI"
                       xmlname="ExternalDocumentID"/>
       </SubClass>
       <SubClass>
@@ -910,7 +910,7 @@
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#comment"
                       onproperty="Comment"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CommentText"/>
       </SubClass>
       <SubClass>
@@ -918,7 +918,7 @@
                       onproperty="ReferenceLocator"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="ReferenceLocatorText"/>
       </SubClass>
       <SubClass>
@@ -960,7 +960,7 @@
                       onproperty="ExtractedText"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="ExtractedText"/>
       </SubClass>
    </Class>
@@ -975,14 +975,14 @@
          <Restriction rdf="http://spdx.org/rdf/terms#noticeText"
                       onproperty="NoticeText"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="NoticeText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#fileContributor"
                       onproperty="FileContributor"
                       minOccurs="0"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="FileContributorText"/>
       </SubClass>
       <SubClass>
@@ -997,7 +997,7 @@
                       onproperty="FileName"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="FileName"/>
       </SubClass>
       <SubClass>
@@ -1070,14 +1070,14 @@
                       onproperty="IsOsiApproved"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="boolean"
+                      ondatarange="xsd:boolean"
                       xmlname="IsOsiApprovedIndicator"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#standardLicenseHeader"
                       onproperty="StandardLicenseHeader"
                       minOccurs="0"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="StandardLicenseHeaderText"/>
       </SubClass>
       <SubClass>
@@ -1085,14 +1085,14 @@
                       onproperty="LicenseText"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="LicenseText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#standardLicenseTemplate"
                       onproperty="StandardLicenseTemplate"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="StandardLicenseTemplateText"/>
       </SubClass>
    </Class>
@@ -1105,7 +1105,7 @@
                       onproperty="LicenseExceptionText"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="LicenseExceptionText"/>
       </SubClass>
       <SubClass>
@@ -1113,14 +1113,14 @@
                       onproperty="Comment"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#example"
                       onproperty="Example"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="ExampleText"/>
       </SubClass>
       <SubClass>
@@ -1128,14 +1128,14 @@
                       onproperty="Name"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="Name"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"
                       onproperty="SeeAlso"
                       minOccurs="0"
-                      ondatarange="anyURI"
+                      ondatarange="xsd:anyURI"
                       xmlname="SeeAlsoURI"/>
       </SubClass>
       <SubClass>
@@ -1143,7 +1143,7 @@
                       onproperty="LicenseExceptionID"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="LicenseExceptionID"/>
       </SubClass>
    </Class>
@@ -1188,35 +1188,35 @@
                       onproperty="PackageFileName"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="PackageFileName"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#filesAnalyzed"
                       onproperty="FilesAnalyzed"
                       maxOccurs="1"
-                      ondatarange="boolean"
+                      ondatarange="xsd:boolean"
                       xmlname="FilesAnalyzedIndicator"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#description"
                       onproperty="Description"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="DescriptionText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://usefulinc.com/ns/doap#homepage"
                       onproperty="Homepage"
                       maxOccurs="1"
-                      ondatarange="anyURI"
+                      ondatarange="xsd:anyURI"
                       xmlname="HomepageURI"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#originator"
                       onproperty="Originator"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="OriginatorText"/>
       </SubClass>
       <SubClass>
@@ -1224,21 +1224,21 @@
                       onproperty="DownloadLocation"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="DownloadLocationURI"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#sourceInfo"
                       onproperty="SourceInfo"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="SourceInfoText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#supplier"
                       onproperty="Supplier"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="SupplierText"/>
       </SubClass>
       <SubClass>
@@ -1273,14 +1273,14 @@
          <Restriction rdf="http://spdx.org/rdf/terms#versionInfo"
                       onproperty="VersionInfo"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="VersionInfoText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#summary"
                       onproperty="Summary"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="SummaryText"/>
       </SubClass>
       <SubClass>
@@ -1300,14 +1300,14 @@
                       onproperty="PackageVerificationCodeValue"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="PackageVerificationCodeValue"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://spdx.org/rdf/terms#verificationCodeExcludedFile"
                       onproperty="VerificationCodeExcludedFile"
                       minOccurs="0"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="VerificationCodeExcludedFileText"/>
       </SubClass>
    </Class>
@@ -1320,7 +1320,7 @@
                       onproperty="ExternalReferenceSite"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="anyURI"
+                      ondatarange="xsd:anyURI"
                       xmlname="ExternalReferenceSiteURI"/>
       </SubClass>
       <SubClass>
@@ -1328,7 +1328,7 @@
                       onproperty="ContextualExample"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="anyURI"
+                      ondatarange="xsd:anyURI"
                       xmlname="ContextualExampleText"/>
       </SubClass>
       <SubClass>
@@ -1336,7 +1336,7 @@
                       onproperty="Documentation"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="DocumentationURI"/>
       </SubClass>
    </Class>
@@ -1472,7 +1472,7 @@
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#comment"
                       onproperty="Comment"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CommentText"/>
       </SubClass>
       <SubClass>
@@ -1496,21 +1496,21 @@
                       onproperty="LicenseID"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="LicenseID"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#comment"
                       onproperty="Comment"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CommentText"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#seeAlso"
                       onproperty="SeeAlso"
                       minOccurs="0"
-                      ondatarange="anyURI"
+                      ondatarange="xsd:anyURI"
                       xmlname="SeeAlsoURI"/>
       </SubClass>
       <SubClass>
@@ -1518,7 +1518,7 @@
                       onproperty="Name"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="Name"/>
       </SubClass>
    </Class>
@@ -1585,7 +1585,7 @@
                       onproperty="SpecVersion"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="SpecVersionText"/>
       </SubClass>
       <SubClass>
@@ -1599,7 +1599,7 @@
          <Restriction rdf="http://spdx.org/rdf/terms#dataLicense"
                       onproperty="DataLicense"
                       hasvalue="CC0-1.0"
-                      xmlname="DataLicenseText"/>
+                      xmlname="DataLicense"/>
       </SubClass>
    </Class>
    <Class name="SpdxElement"
@@ -1620,14 +1620,14 @@
                       onproperty="Name"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="Name"/>
       </SubClass>
       <SubClass>
          <Restriction rdf="http://www.w3.org/2000/01/rdf-schema#comment"
                       onproperty="Comment"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CommentText"/>
       </SubClass>
       <SubClass>
@@ -1669,7 +1669,7 @@
                       onproperty="CopyrightText"
                       minOccurs="1"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="CopyrightText"/>
       </SubClass>
       <SubClass>
@@ -1683,7 +1683,7 @@
          <Restriction rdf="http://spdx.org/rdf/terms#licenseComments"
                       onproperty="LicenseComments"
                       maxOccurs="1"
-                      ondatarange="string"
+                      ondatarange="xsd:string"
                       xmlname="LicenseCommentsText"/>
       </SubClass>
    </Class>

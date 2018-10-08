@@ -1,19 +1,23 @@
 <?xml version="1.0"?>
-<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="spdx:xsd::1.0" xsi:schemaLocation="spdx:xsd::1.0  ../xsd/spdx-doc.xsd">
+<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-seva::1.0" xsi:schemaLocation="urn:spdx-seva::1.0 ../xsd/spdx-doc-iep.xsd">
   <Annotation>
     <Date>2018-04-12T13:20:00</Date>
-    <AnnotationTypeCode>Other</AnnotationTypeCode>
-    <Comment>Test string one</Comment>
-    <Annotator>Test string one</Annotator>
+    <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
+    <CommentText>Test string one</CommentText>
+    <AnnotatorText>Test string one</AnnotatorText>
   </Annotation>
   <Name>Test string one</Name>
-  <Comment>Test string one</Comment>
+  <CommentText>Test string one</CommentText>
+  <Relationship>
+    <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
+    <CommentText>Test string one</CommentText>
+  </Relationship>
   <CreationInfo>
-    <LicenseListVersion>Test string one</LicenseListVersion>
-    <Created>2018-04-12T13:20:00</Created>
-    <Comment>Test string one</Comment>
-    <Creator>Test string one</Creator>
+    <LicenseListVersionText>Test string one</LicenseListVersionText>
+    <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
+    <CommentText>Test string one</CommentText>
+    <CreatorText>Test string one</CreatorText>
   </CreationInfo>
-  <SpecVersion>Test string one</SpecVersion>
-  <DataLicense>Test string one</DataLicense>
+  <SpecVersionText>Test string one</SpecVersionText>
+  <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
 </SpdxDocument>

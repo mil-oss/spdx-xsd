@@ -2,63 +2,115 @@ package main
 
 import "encoding/xml"
 
-//NewSpdxDocument ...
-func NewSpdxDocument() *SpdxDocumentType{
-    return &SpdxDocumentType{
-        // Required for the proper namespacing
-        AttrXmlnsXsi:"http://www.w3.org/2001/XMLSchema-instance",
-        AttrXmlns:"spdx:xsd::1.0",
-    }
+//Annotation ...
+type Annotation struct {
+	Date               []string `xml:"Date,omitempty"  json:"Date,omitempty"`
+	AnnotationTypeCode string   `xml:"AnnotationTypeCode,omitempty"  json:"AnnotationTypeCode,omitempty"`
+	CommentText        []string `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	AnnotatorText      []string `xml:"AnnotatorText,omitempty"  json:"AnnotatorText,omitempty"`
+	XMLName            xml.Name `xml:"Annotation,omitempty"  json:"Annotation,omitempty"`
 }
-//SpdxDocumentType ... 
-type SpdxDocumentType struct {
-        AttrXmlnsXsi                             string                                   `xml:"xmlns:xsi,attr" json:"AttrXmlnsXsi,omitempty"`
-        AttrXmlns                                string                                   `xml:"xmlns,attr" json:"AttrXmlns,omitempty"`
-        Annotation                               *AnnotationType                          `xml:"Annotation,omitempty"  json:"Annotation,omitempty"`
-        Name                                     string                                   `xml:"Name,omitempty"  json:"Name,omitempty"`
-        Comment                                  string                                   `xml:"Comment,omitempty"  json:"Comment,omitempty"`
-        Relationship                             *RelationshipType                        `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
-        CreationInfo                             *CreationInfoType                        `xml:"CreationInfo,omitempty"  json:"CreationInfo,omitempty"`
-        SpecVersion                              string                                   `xml:"SpecVersion,omitempty"  json:"SpecVersion,omitempty"`
-        ExternalDocumentRef                      *ExternalDocumentRefType                 `xml:"ExternalDocumentRef,omitempty"  json:"ExternalDocumentRef,omitempty"`
-        DataLicense                              string                                   `xml:"DataLicense,omitempty"  json:"DataLicense,omitempty"`
-        XMLName                                  xml.Name                                 `xml:"SpdxDocument,omitempty"  json:"SpdxDocument,omitempty"`
+
+//Checksum ...
+type Checksum struct {
+	ChecksumValue []string `xml:"ChecksumValue,omitempty"  json:"ChecksumValue,omitempty"`
+	AlgorithmCode string   `xml:"AlgorithmCode,omitempty"  json:"AlgorithmCode,omitempty"`
+	XMLName       xml.Name `xml:"Checksum,omitempty"  json:"Checksum,omitempty"`
 }
-//AnnotationType ... 
-type AnnotationType struct {
-        Date                                     string                                   `xml:"Date,omitempty"  json:"Date,omitempty"`
-        AnnotationTypeCode                       string                                   `xml:"AnnotationTypeCode,omitempty"  json:"AnnotationTypeCode,omitempty"`
-        Comment                                  string                                   `xml:"Comment,omitempty"  json:"Comment,omitempty"`
-        Annotator                                string                                   `xml:"Annotator,omitempty"  json:"Annotator,omitempty"`
+
+//CreationInfo ...
+type CreationInfo struct {
+	LicenseListVersionText string   `xml:"LicenseListVersionText,omitempty"  json:"LicenseListVersionText,omitempty"`
+	CreatedDateTime        []string `xml:"CreatedDateTime,omitempty"  json:"CreatedDateTime,omitempty"`
+	CommentText            string   `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	CreatorText            string   `xml:"CreatorText,omitempty"  json:"CreatorText,omitempty"`
+	XMLName                xml.Name `xml:"CreationInfo,omitempty"  json:"CreationInfo,omitempty"`
 }
-//ChecksumType ... 
-type ChecksumType struct {
-        ChecksumValue                            string                                   `xml:"ChecksumValue,omitempty"  json:"ChecksumValue,omitempty"`
-        AlgorithmCode                            string                                   `xml:"AlgorithmCode,omitempty"  json:"AlgorithmCode,omitempty"`
+
+//DescribesFile ... A data item for The describesFile property relates an SpdxDocument to the file which it describes
+type DescribesFile struct {
+	Annotation                string   `xml:"Annotation,omitempty"  json:"Annotation,omitempty"`
+	Name                      []string `xml:"Name,omitempty"  json:"Name,omitempty"`
+	CommentText               []string `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	Relationship              string   `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
+	DescribesPackage          string   `xml:"DescribesPackage,omitempty"  json:"DescribesPackage,omitempty"`
+	DescribesFile             string   `xml:"DescribesFile,omitempty"  json:"DescribesFile,omitempty"`
+	HasExtractedLicensingInfo string   `xml:"HasExtractedLicensingInfo,omitempty"  json:"HasExtractedLicensingInfo,omitempty"`
+	CreationInfo              []string `xml:"CreationInfo,omitempty"  json:"CreationInfo,omitempty"`
+	SpecVersionText           []string `xml:"SpecVersionText,omitempty"  json:"SpecVersionText,omitempty"`
+	ExternalDocumentRef       string   `xml:"ExternalDocumentRef,omitempty"  json:"ExternalDocumentRef,omitempty"`
+	DataLicense               string   `xml:"DataLicense,omitempty"  json:"DataLicense,omitempty"`
+	XMLName                   xml.Name `xml:"DescribesFile,omitempty"  json:"DescribesFile,omitempty"`
 }
-//CreationInfoType ... 
-type CreationInfoType struct {
-        LicenseListVersion                       string                                   `xml:"LicenseListVersion,omitempty"  json:"LicenseListVersion,omitempty"`
-        Created                                  string                                   `xml:"Created,omitempty"  json:"Created,omitempty"`
-        Comment                                  string                                   `xml:"Comment,omitempty"  json:"Comment,omitempty"`
-        Creator                                  string                                   `xml:"Creator,omitempty"  json:"Creator,omitempty"`
+
+//DescribesPackage ... A data item for The describesPackage property relates an SpdxDocument to the package which it describes
+type DescribesPackage struct {
+	Annotation                string   `xml:"Annotation,omitempty"  json:"Annotation,omitempty"`
+	Name                      []string `xml:"Name,omitempty"  json:"Name,omitempty"`
+	CommentText               []string `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	Relationship              string   `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
+	DescribesPackage          string   `xml:"DescribesPackage,omitempty"  json:"DescribesPackage,omitempty"`
+	DescribesFile             string   `xml:"DescribesFile,omitempty"  json:"DescribesFile,omitempty"`
+	HasExtractedLicensingInfo string   `xml:"HasExtractedLicensingInfo,omitempty"  json:"HasExtractedLicensingInfo,omitempty"`
+	CreationInfo              []string `xml:"CreationInfo,omitempty"  json:"CreationInfo,omitempty"`
+	SpecVersionText           []string `xml:"SpecVersionText,omitempty"  json:"SpecVersionText,omitempty"`
+	ExternalDocumentRef       string   `xml:"ExternalDocumentRef,omitempty"  json:"ExternalDocumentRef,omitempty"`
+	DataLicense               string   `xml:"DataLicense,omitempty"  json:"DataLicense,omitempty"`
+	XMLName                   xml.Name `xml:"DescribesPackage,omitempty"  json:"DescribesPackage,omitempty"`
 }
-//ExternalDocumentRefType ... 
-type ExternalDocumentRefType struct {
-        Checksum                                 *ChecksumType                            `xml:"Checksum,omitempty"  json:"Checksum,omitempty"`
-        ExternalDocumentID                       string                                   `xml:"ExternalDocumentID,omitempty"  json:"ExternalDocumentID,omitempty"`
-        SpdxDocument                             *SpdxDocumentType                        `xml:"SpdxDocument,omitempty"  json:"SpdxDocument,omitempty"`
+
+//ExternalDocumentRef ...
+type ExternalDocumentRef struct {
+	Checksum           []string `xml:"Checksum,omitempty"  json:"Checksum,omitempty"`
+	ExternalDocumentID []string `xml:"ExternalDocumentID,omitempty"  json:"ExternalDocumentID,omitempty"`
+	SpdxDocument       []string `xml:"SpdxDocument,omitempty"  json:"SpdxDocument,omitempty"`
+	XMLName            xml.Name `xml:"ExternalDocumentRef,omitempty"  json:"ExternalDocumentRef,omitempty"`
 }
-//RelationshipType ... 
-type RelationshipType struct {
-        RelationshipTypeCode                     string                                   `xml:"RelationshipTypeCode,omitempty"  json:"RelationshipTypeCode,omitempty"`
-        Comment                                  string                                   `xml:"Comment,omitempty"  json:"Comment,omitempty"`
-        RelatedSpdxElement                       *RelationshipType                        `xml:"RelatedSpdxElement,omitempty"  json:"RelatedSpdxElement,omitempty"`
+
+//HasExtractedLicensingInfo ... A data item for Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument
+type HasExtractedLicensingInfo struct {
+	Annotation                string   `xml:"Annotation,omitempty"  json:"Annotation,omitempty"`
+	Name                      []string `xml:"Name,omitempty"  json:"Name,omitempty"`
+	CommentText               []string `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	Relationship              string   `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
+	DescribesPackage          string   `xml:"DescribesPackage,omitempty"  json:"DescribesPackage,omitempty"`
+	DescribesFile             string   `xml:"DescribesFile,omitempty"  json:"DescribesFile,omitempty"`
+	HasExtractedLicensingInfo string   `xml:"HasExtractedLicensingInfo,omitempty"  json:"HasExtractedLicensingInfo,omitempty"`
+	CreationInfo              []string `xml:"CreationInfo,omitempty"  json:"CreationInfo,omitempty"`
+	SpecVersionText           []string `xml:"SpecVersionText,omitempty"  json:"SpecVersionText,omitempty"`
+	ExternalDocumentRef       string   `xml:"ExternalDocumentRef,omitempty"  json:"ExternalDocumentRef,omitempty"`
+	DataLicense               string   `xml:"DataLicense,omitempty"  json:"DataLicense,omitempty"`
+	XMLName                   xml.Name `xml:"HasExtractedLicensingInfo,omitempty"  json:"HasExtractedLicensingInfo,omitempty"`
 }
-//SpdxElementType ... 
-type SpdxElementType struct {
-        Annotation                               *AnnotationType                          `xml:"Annotation,omitempty"  json:"Annotation,omitempty"`
-        Name                                     string                                   `xml:"Name,omitempty"  json:"Name,omitempty"`
-        Comment                                  string                                   `xml:"Comment,omitempty"  json:"Comment,omitempty"`
-        Relationship                             *RelationshipType                        `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
+
+//RelatedSpdxElement ... A data item for A related SpdxElement
+type RelatedSpdxElement struct {
+	RelationshipTypeCode string   `xml:"RelationshipTypeCode,omitempty"  json:"RelationshipTypeCode,omitempty"`
+	CommentText          []string `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	RelatedSpdxElement   []string `xml:"RelatedSpdxElement,omitempty"  json:"RelatedSpdxElement,omitempty"`
+	XMLName              xml.Name `xml:"RelatedSpdxElement,omitempty"  json:"RelatedSpdxElement,omitempty"`
+}
+
+//Relationship ...
+type Relationship struct {
+	RelationshipTypeCode string   `xml:"RelationshipTypeCode,omitempty"  json:"RelationshipTypeCode,omitempty"`
+	CommentText          []string `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	RelatedSpdxElement   []string `xml:"RelatedSpdxElement,omitempty"  json:"RelatedSpdxElement,omitempty"`
+	XMLName              xml.Name `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
+}
+
+//SpdxDocument ...
+type SpdxDocument struct {
+	Annotation                string   `xml:"Annotation,omitempty"  json:"Annotation,omitempty"`
+	Name                      []string `xml:"Name,omitempty"  json:"Name,omitempty"`
+	CommentText               []string `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	Relationship              string   `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
+	DescribesPackage          string   `xml:"DescribesPackage,omitempty"  json:"DescribesPackage,omitempty"`
+	DescribesFile             string   `xml:"DescribesFile,omitempty"  json:"DescribesFile,omitempty"`
+	HasExtractedLicensingInfo string   `xml:"HasExtractedLicensingInfo,omitempty"  json:"HasExtractedLicensingInfo,omitempty"`
+	CreationInfo              []string `xml:"CreationInfo,omitempty"  json:"CreationInfo,omitempty"`
+	SpecVersionText           []string `xml:"SpecVersionText,omitempty"  json:"SpecVersionText,omitempty"`
+	ExternalDocumentRef       string   `xml:"ExternalDocumentRef,omitempty"  json:"ExternalDocumentRef,omitempty"`
+	DataLicense               string   `xml:"DataLicense,omitempty"  json:"DataLicense,omitempty"`
+	XMLName                   xml.Name `xml:"SpdxDocument,omitempty"  json:"SpdxDocument,omitempty"`
 }
