@@ -391,9 +391,9 @@
 
     <xsl:template name="main">
         <xsl:result-document href="{$xsdOut}">
-            <xs:schema xmlns="spdx:xsd::1.0" xmlns:spd="spdx:xsd::1.0/ref" xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+            <xs:schema xmlns="urn:spdx-seva::1.0" xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema"
                 xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:structures="http://release.niem.gov/niem/structures/4.0/"
-                attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="spdx:xsd::1.0" version="1"
+                attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-seva::1.0" version="1"
                 xsi:schemaLocation="http://release.niem.gov/niem/appinfo/4.0/ niem/utility/appinfo/4.0/appinfo.xsd http://release.niem.gov/niem/conformanceTargets/3.0/ ext/niem/utility/conformanceTargets/3.0/conformanceTargets.xsd"
                 ct:conformanceTargets="http://reference.niem.gov/niem/specification/naming-and-design-rules/4.0/#ReferenceSchemaDocument">
                 <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd" namespace="http://release.niem.gov/niem/structures/4.0/"/>

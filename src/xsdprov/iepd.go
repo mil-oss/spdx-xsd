@@ -12,40 +12,41 @@ import (
 )
 
 // GetSourceResources ...
-func GetSourceResources(refpath string, testdatapath string) {
+func GetSourceResources() {
 	log.Println("getSourceResources")
 	//Compare local copy of Ref XSD to Authoritative copy on GitHub
-	var snr = refpath
+	var snr = "refxsd"
 	log.Println(resources[snr])
 	tempfiles[snr] = temppath + resources[snr]
 	log.Println(tempfiles[snr])
 	pe := LoadRemote(snr, tempfiles[snr], reflink)
-	Provreport[time.Now().UnixNano()] = pe
+	provreport[time.Now().UnixNano()] = pe
 	ped := CheckDigest(resources[snr], pe.Digest, tempdigests[snr])
-	Provreport[time.Now().UnixNano()] = ped
+	provreport[time.Now().UnixNano()] = ped
 	if ped.Status == "Fail" {
 		CopyFile(temppath+resources[snr], resources[snr])
 		pcp := LoadRemote(snr, tempfiles[snr], reflink)
 		pcp.Message = "Resource Updated"
-		Provreport[time.Now().UnixNano()] = pcp
+		provreport[time.Now().UnixNano()] = pcp
 	}
 	//Test Data
-	var tdx = testdatapath
+	var tdx = "testdataxml"
 	tempfiles[tdx] = temppath + resources[tdx]
 	pex := LoadRemote(tdx, tempfiles[tdx], testlink)
-	Provreport[time.Now().UnixNano()] = pex
+	provreport[time.Now().UnixNano()] = pex
 	pedx := CheckDigest(resources[tdx], pex.Digest, tempdigests[tdx])
-	Provreport[time.Now().UnixNano()] = pedx
+	provreport[time.Now().UnixNano()] = pedx
 	if pedx.Status == "Fail" {
 		CopyFile(temppath+resources[tdx], resources[tdx])
 		tcp := LoadRemote(tdx, tempfiles[tdx], testlink)
 		tcp.Message = "Resource Updated"
-		Provreport[time.Now().UnixNano()] = tcp
+		provreport[time.Now().UnixNano()] = tcp
 	}
 	tempfiles[tdx] = temppath + resources[tdx]
 }
 
-func zipIEPD(path string) {
+// ZipIEPD ...
+func ZipIEPD(path string) {
 	cerr := Compress(path, "/tmp/IEPD/"+name+".zip")
 	check(cerr)
 }
@@ -70,10 +71,10 @@ func ResrcJSON(path string) []byte {
 
 //ProvenanceRpt ...
 func ProvenanceRpt() []byte {
-	log.Println("ProvenanceRpt " + temppath + resources["provenance-report.json"])
-	pr, err := json.Marshal(Provreport)
+	log.Println("ProvenanceRpt " + temppath + resources["provenancereportjson"])
+	pr, err := json.Marshal(provreport)
 	check(err)
-	ferr := WriteFile(temppath+resources["provenance-report.json"], pr)
+	ferr := WriteFile(temppath+resources["provenancereportjson"], pr)
 	check(ferr)
 	return pr
 }
