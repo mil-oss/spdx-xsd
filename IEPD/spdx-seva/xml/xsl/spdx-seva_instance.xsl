@@ -2,10 +2,10 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="1.0">
     <xsl:output method="xml" indent="yes"/>
 
-    <xsl:include href="./../../../../xml/xsl/xml_instance.xsl"/>
+    <xsl:include href="./common/xml-instance.xsl"/>
     <!-- 
-    input:  /iepd/xml/xsd/iep.xsd
-    output: /iepd/xml/instance/test_instance.xml
+    input:  ${pdu}/spdx-xsd/IEPD/spdx-seva/xml/xsd/spdx-seva-iep.xsd
+    output: ${pdu}/spdx-xsd/IEPD/spdx-seva/xml/instance/spdx-seva-instance.xml
    -->
 
     <xsl:variable name="TestData" select="'../instance/spdx-seva-test_data.xml'"/>

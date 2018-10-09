@@ -3,7 +3,7 @@
 
     <xsl:output method="xml" indent="yes"/>
 
-    <xsl:include href="./../../../../xml/xsl/iep.xsl"/>
+    <xsl:include href="./common/iep.xsl"/>
 
     <!--<xsl:variable name="spdx_xsd" select="document('./../../../../xml/xsd/spdx-seva-ref.xsd')"/>-->
 

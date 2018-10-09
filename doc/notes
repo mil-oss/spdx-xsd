@@ -1,10 +1,15 @@
-NIEM
-IEPD
-JAXB
+1. Generate IEP XSD
 
-Add SEvA Summary
+2. Generate Instance
 
-FAQ
+3. Generate XSD JSON
+
+3. Generate Instance JSON
+
+4. Generate Golang
+
+5. Generate GoTest
+
 
 
 

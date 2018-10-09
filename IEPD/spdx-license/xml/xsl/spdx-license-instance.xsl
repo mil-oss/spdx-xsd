@@ -3,7 +3,7 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs" version="1.0">
     <xsl:output method="xml" indent="yes"/>
     
-    <xsl:include href="./../../../../xml/xsl/xml_instance.xsl"/>
+    <xsl:include href="./common/xml-instance.xsl"/>
     
     <!-- 
     input:  ../xsd/spdx-license.xsd
