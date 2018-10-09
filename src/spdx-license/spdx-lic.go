@@ -5,16 +5,16 @@ import (
 )
 
 var (
-	testinstance string
-	iepderr      error
-	valerr       []error
-	provreport   = map[int64]xsdprov.ProvEntry{}
+	testinstance          string
+	iepderr               error
+	valerr                []error
+	spdxLicenseDatastruct interface{}
+	provreport            = map[int64]xsdprov.ProvEntry{}
 )
 
 func main() {
-	SPDXLicenseDatastruct = NewLicense()
+	//var LicenseDatastruct = NewLicense()
 	xsdprov.InitXSDProv(Resources, Resdirectories, "config/spdx-doc-cfg.json")
-	BuildLicenseIep()
 	xsdprov.StartWeb()
 }
 

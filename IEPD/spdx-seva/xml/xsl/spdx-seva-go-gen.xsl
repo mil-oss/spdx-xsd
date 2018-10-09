@@ -9,12 +9,8 @@
     output:${pdu}/spdx-xsd/src/golang/spdx-seva/spdx-seva-struct.go
    -->
 
-    <xsl:variable name="rootname" select="xs:schema/xs:annotation/xs:appinfo/Root/@type"/>
-
     <xsl:template match="/">
-        <xsl:call-template name="makego">
-            <xsl:with-param name="rootname" select="xs:schema/xs:annotation/xs:appinfo/Root/@type"/>
-        </xsl:call-template>
+        <xsl:call-template name="makego"/>
     </xsl:template>
 
 </xsl:stylesheet>

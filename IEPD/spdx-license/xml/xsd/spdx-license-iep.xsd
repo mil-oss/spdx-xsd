@@ -3,7 +3,7 @@
   <xs:annotation>
     <xs:documentation>XML Schema for SPDX License Information Exchange</xs:documentation>
     <xs:appinfo>
-      <Root xmlns="" type="LicenseType" element="License"/>
+      <Root type="LicenseType" name="License"/>
     </xs:appinfo>
   </xs:annotation>
   <xs:complexType name="AnyLicenseInfoType">

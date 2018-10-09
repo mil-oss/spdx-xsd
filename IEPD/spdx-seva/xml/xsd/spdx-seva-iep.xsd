@@ -3,7 +3,7 @@
   <xs:annotation>
     <xs:documentation>XML Schema for Software Evidence Archive Information Exchange</xs:documentation>
     <xs:appinfo>
-      <Root xmlns="" type="SoftwareEvidenceArchiveType" element="SoftwareEvidenceArchive"/>
+      <Root type="SoftwareEvidenceArchiveType" name="SoftwareEvidenceArchive"/>
     </xs:appinfo>
   </xs:annotation>
   <xs:complexType name="SoftwareEvidenceArchiveType">

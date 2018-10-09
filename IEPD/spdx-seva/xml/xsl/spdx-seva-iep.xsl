@@ -19,7 +19,7 @@
         <xs:annotation>
             <xs:documentation>XML Schema for Software Evidence Archive Information Exchange</xs:documentation>
             <xs:appinfo>
-                <Root type="{$Root}" element="{$RootEl}"/>
+                <Root type="{$Root}" name="{$RootEl}"/>
             </xs:appinfo>
         </xs:annotation>
         <xsl:apply-templates select="//xs:schema/*[@name = $Root]"/>
