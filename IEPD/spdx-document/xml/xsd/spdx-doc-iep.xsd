@@ -1,766 +1,766 @@
-<?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:spdx-seva::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-seva::1.0" version="1">
-   <xs:annotation>
-      <xs:documentation>XML Schema for SPDX Document Information Exchange</xs:documentation>
+<?xml version="1.0"?>
+<xs:schema xmlns="urn:spdx-seva::1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-seva::1.0" version="1">
+  <xs:annotation>
+    <xs:documentation>XML Schema for SPDX Document Information Exchange</xs:documentation>
+    <xs:appinfo>
+      <Root type="SpdxDocumentType" name="SpdxDocument"/>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:complexType name="SpdxDocumentType">
+    <xs:annotation>
+      <xs:documentation>A data type for SpdxDocument type</xs:documentation>
       <xs:appinfo>
-         <Root type="SpdxDocumentType" name="SpdxDocument"/>
+        <ComplexType name="SpdxDocument" xmlname="SpdxDocument" comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information." rdf="http://spdx.org/rdf/terms#SpdxDocument" subclassof="SpdxElement"/>
       </xs:appinfo>
-   </xs:annotation>
-   <xs:complexType name="SpdxDocumentType">
-      <xs:annotation>
-         <xs:documentation>A data type for SpdxDocument type</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="SpdxDocument" xmlname="SpdxDocument" comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information." rdf="http://spdx.org/rdf/terms#SpdxDocument" subclassof="SpdxElement"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:complexContent>
-         <xs:extension base="SpdxElementType">
-            <xs:sequence>
-               <xs:element ref="DescribesPackage" minOccurs="0"/>
-               <xs:element ref="DescribesFile" minOccurs="0"/>
-               <xs:element ref="HasExtractedLicensingInfo" minOccurs="0"/>
-               <xs:element ref="CreationInfo" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="SpecVersionText" minOccurs="1" maxOccurs="1"/>
-               <xs:element ref="ExternalDocumentRef" minOccurs="0"/>
-               <xs:element ref="DataLicense"/>
-            </xs:sequence>
-         </xs:extension>
-      </xs:complexContent>
-   </xs:complexType>
-   <xs:simpleType name="AlgorithmCodeSimpleType">
-      <xs:annotation>
-         <xs:documentation>A data type for Algorithm properties</xs:documentation>
-         <xs:appinfo>
-            <SimpleType name="AlgorithmCodeSimpleType" rdf="http://spdx.org/rdf/terms#algorithm"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:restriction base="xs:string">
-         <xs:enumeration value="ChecksumAlgorithmMd5">
-            <xs:annotation>
-               <xs:documentation>Indicates the algorithm used was MD5</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ChecksumAlgorithmSha1">
-            <xs:annotation>
-               <xs:documentation>Indicates the algorithm used was SHA-1</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="ChecksumAlgorithmSha256">
-            <xs:annotation>
-               <xs:documentation>Indicates the algorithm used was SHA256</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-      </xs:restriction>
-   </xs:simpleType>
-   <xs:simpleType name="AnnotationTypeCodeSimpleType">
-      <xs:annotation>
-         <xs:documentation>A data type for AnnotationType properties</xs:documentation>
-         <xs:appinfo>
-            <SimpleType name="AnnotationTypeCodeSimpleType" rdf="http://spdx.org/rdf/terms#annotationType"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:restriction base="xs:string">
-         <xs:enumeration value="AnnotationTypeOther">
-            <xs:annotation>
-               <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#annotationType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="AnnotationTypeReview">
-            <xs:annotation>
-               <xs:documentation>A Review represents an audit and signoff by an individual, organization or tool on the information for an SpdxElement.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#annotationType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-      </xs:restriction>
-   </xs:simpleType>
-   <xs:simpleType name="RelationshipTypeCodeSimpleType">
-      <xs:annotation>
-         <xs:documentation>A data type for RelationshipType properties</xs:documentation>
-         <xs:appinfo>
-            <SimpleType name="RelationshipTypeCodeSimpleType" rdf="http://spdx.org/rdf/terms#relationshipType"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:restriction base="xs:string">
-         <xs:enumeration value="RelationshipTypeAmendment">
-            <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A amends the SPDX information in SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeAncestorOf">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_ancestorOf expresses that an SPDXElement is an ancestor of (same lineage but pre-dates) the relatedSPDXElement. For example, an upstream File is an ancestor of a modified downstream File</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeBuildToolOf">
-            <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A is used to to build SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeContainedBy">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_containedBy expresses that an SPDXElement is contained by the relatedSPDXElement. For example, a File contained by a Package.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeContains">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_contains expresses that an SPDXElement contains the relatedSPDXElement. For example, a Package contains a File. (relationshipType_contains introduced in SPDX 2.0 deprecates property 'hasFile' from SPDX 1.2)</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeCopyOf">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_copyOf expresses that the SPDXElement is an exact copy of the relatedSDPXElement. For example, a downstream distribution of a binary library which was copied from the upstream package.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeDataFileOf">
-            <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A is a data file used in SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeDescendantOf">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_descendantOf expresses that an SPDXElement is a descendant of (same lineage but post-dates) the relatedSPDXElement. For example, an downstream File that was modified is a descendant of an upstream File</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeDescribedBy">
-            <xs:annotation>
-               <xs:documentation>Is to be used an SPDXRef-A is described by SPDXRef-Document.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeDescribes">
-            <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-DOCUMENT describes SPDXRef-A.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeDistributionArtifact">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_distributionArtifact expresses that distributing the SPDXElement requires that the relatedSPDXElement also be distributed. For example, distributing a binary File may require that a source tarball (another File) be made available with the distribuiton.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeDocumentation">
-            <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A provides documentation of SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeDynamicLink">
-            <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A dynamically links to SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeExpandedFromArchive">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_expandedFromArchive expresses that the SPDXElement is a file which was epanded from a relatedSPDXElement file. For example, if there is an archive file xyz.tar.gz containing a file foo.c the archive file was expanded in a directory arch/xyz, the file arch/xyz/foo.c would have a relationshipType_expandedFromArchive with the file xyz.tar.gz.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeFileAdded">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_fileAdded expresses that the SPDXElement is a file which has been added to the relatedSPDXElement package. For example, a package (the relatedSPDXElement) has been patched to remove a file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeFileDeleted">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_fileDeleted expresses that the SPDXElement is a package where the relatedSPDXElement file has been removed. For example, a package has been patched to remove a file a file (the relatedSPDXElement resulting in the patched package (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeFileModified">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_fileModified expresses that the SPDXElement is a file which is a modified version of the relatedSPDXElement file. For example, a file (the SPDXElement) has been patched to modify the contents of the original file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeGeneratedFrom">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_generatedFrom expresses that an SPDXElement was generated from the relatedSPDXElement. For example, a binary File might have been generated from a source File.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeGenerates">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_generates expresses that an SPDXElement generates the relatedSPDXElement. For example, a source File generates a binary File.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeHasPrerequisite">
-            <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A has as a prerequisite SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeMetafileOf">
-            <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A is a metafile of SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeOptionalComponentOf">
-            <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A is an optional component of SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeOther">
-            <xs:annotation>
-               <xs:documentation>to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypePackageOf">
-            <xs:annotation>
-               <xs:documentation>To be used when SPDXRef-A is used as a package as part of SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypePatchApplied">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_patchApplied expresses that the SPDXElement is a 'patchfile' that was applied and produced the relatedSPDXElement. For example, a .diff File relates to a specific file where the diff was applied.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypePatchFor">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_patchFor expresses that the SPDXElement is a 'patchfile' that is designed to patch (apply modifications to) the relatedSPDXElement. For example, relationship from a .diff File to a Package it is designed to patch.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypePrerequisiteFor">
-            <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A is a prerequisite for SPDXRef-B</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeStaticLink">
-            <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A statically links to SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeTestcaseOf">
-            <xs:annotation>
-               <xs:documentation>Is to be used when SPDXRef-A is a test case used in testing SPDXRef-B.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-         <xs:enumeration value="RelationshipTypeVariantOf">
-            <xs:annotation>
-               <xs:documentation>A Relationship of relationshipType_variantOf expresses that an SPDXElement is a variant of the relatedSPDXElement, but it is not clear which came first. For example, if the content of two Files differs by some edit, but there is no way to tell which came first (no reliable date information), then one File is a variant of the other File.</xs:documentation>
-               <xs:appinfo>
-                  <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
-               </xs:appinfo>
-            </xs:annotation>
-         </xs:enumeration>
-      </xs:restriction>
-   </xs:simpleType>
-   <xs:complexType name="AlgorithmCodeType">
-      <xs:annotation>
-         <xs:documentation>A data type for Algorithm properties</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="Algorithm CodeSimpleType" rdf="http://spdx.org/rdf/terms#algorithm"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="AlgorithmCodeSimpleType"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="AnnotationType">
-      <xs:annotation>
-         <xs:documentation>A data type for Annotation type</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="Annotation" xmlname="Annotation" comment="An Annotation is a comment on an SpdxItem by an agent." rdf="http://spdx.org/rdf/terms#Annotation" subclassof="Thing"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:sequence>
-         <xs:element ref="Date" minOccurs="1" maxOccurs="1"/>
-         <xs:element ref="AnnotationTypeCode"/>
-         <xs:element ref="CommentText" minOccurs="1" maxOccurs="1"/>
-         <xs:element ref="AnnotatorText" minOccurs="1" maxOccurs="1"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="AnnotationTypeCodeType">
-      <xs:annotation>
-         <xs:documentation>A data type for AnnotationType properties</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="AnnotationType CodeSimpleType" rdf="http://spdx.org/rdf/terms#annotationType"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="AnnotationTypeCodeSimpleType"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="AnnotatorTextType">
-      <xs:annotation>
-         <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="annotator" xmlname="AnnotatorText" typename="Annotator" comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document." rdf="http://spdx.org/rdf/terms#annotator" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:string"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="ChecksumType">
-      <xs:annotation>
-         <xs:documentation>A data type for Checksum type</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="Checksum" xmlname="Checksum" comment="A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented." rdf="http://spdx.org/rdf/terms#Checksum"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:sequence>
-         <xs:element ref="ChecksumValue" minOccurs="1" maxOccurs="1"/>
-         <xs:element ref="AlgorithmCode"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="ChecksumValueType">
-      <xs:annotation>
-         <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="checksumValue" xmlname="ChecksumValue" typename="ChecksumValue" comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm." rdf="http://spdx.org/rdf/terms#checksumValue" domain="Checksum" range="HexBinary"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:hexBinary"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="CommentTextType">
-      <xs:annotation>
-         <xs:documentation>A data type for CommentText</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="comment" xmlname="CommentText" typename="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:string"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="CreatedDateTimeType">
-      <xs:annotation>
-         <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="created" xmlname="CreatedDateTime" typename="Created" comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator." rdf="http://spdx.org/rdf/terms#created" domain="CreationInfo" range="DateTime" subpropertyof="Date"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:dateTime"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="CreationInfoType">
-      <xs:annotation>
-         <xs:documentation>A data type for CreationInfo type</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="CreationInfo" xmlname="CreationInfo" comment="A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument." rdf="http://spdx.org/rdf/terms#CreationInfo"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:sequence>
-         <xs:element ref="LicenseListVersionText" minOccurs="0"/>
-         <xs:element ref="CreatedDateTime" minOccurs="1" maxOccurs="1"/>
-         <xs:element ref="CommentText" minOccurs="0"/>
-         <xs:element ref="CreatorText" minOccurs="1"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="CreatorTextType">
-      <xs:annotation>
-         <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="creator" xmlname="CreatorText" typename="Creator" comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax." rdf="http://spdx.org/rdf/terms#creator" domain="CreationInfo" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:string"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="DateType">
-      <xs:annotation>
-         <xs:documentation>A data type for A date-time stamp.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="date" xmlname="Date" typename="Date" comment="A date-time stamp." rdf="http://spdx.org/rdf/terms#date" domain="AnnotationCreationInfo" range="DateTime"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:dateTime"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="ExternalDocumentIDType">
-      <xs:annotation>
-         <xs:documentation>A data type for externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="externalDocumentId" xmlname="ExternalDocumentID" typename="ExternalDocumentID" comment="externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document." rdf="http://spdx.org/rdf/terms#externalDocumentId" domain="ExternalDocumentRef" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:string"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="ExternalDocumentRefType">
-      <xs:annotation>
-         <xs:documentation>A data type for ExternalDocumentRef type</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="ExternalDocumentRef" xmlname="ExternalDocumentRef" comment="Information about an external SPDX document reference including the checksum. This allows for verification of the external references." rdf="http://spdx.org/rdf/terms#ExternalDocumentRef"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:sequence>
-         <xs:element ref="Checksum" minOccurs="1" maxOccurs="1"/>
-         <xs:element ref="ExternalDocumentID" minOccurs="1" maxOccurs="1"/>
-         <xs:element ref="SpdxDocument" minOccurs="1" maxOccurs="1"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="LicenseIDType">
-      <xs:annotation>
-         <xs:documentation>A data type for A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form LicenseRef-[idString] where [idString] is a unique string containing letters, numbers, ., - or +.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="licenseId" xmlname="LicenseID" typename="LicenseID" comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &#34;LicenseRef-&#34;[idString] where [idString] is a unique string containing letters, numbers, &#34;.&#34;, &#34;-&#34; or &#34;+&#34;." rdf="http://spdx.org/rdf/terms#licenseId" domain="SimpleLicensingInfo" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:string"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="LicenseListVersionTextType">
-      <xs:annotation>
-         <xs:documentation>A data type for An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="licenseListVersion" xmlname="LicenseListVersionText" typename="LicenseListVersion" comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created." rdf="http://spdx.org/rdf/terms#licenseListVersion" domain="CreationInfo" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:string"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="NameType">
-      <xs:annotation>
-         <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="name" xmlname="Name" typename="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:string"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="RelationshipType">
-      <xs:annotation>
-         <xs:documentation>A data type for Relationship type</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="Relationship" xmlname="Relationship" comment="A Relationship represents a relationship between two SpdxElements." rdf="http://spdx.org/rdf/terms#Relationship" subclassof="Thing"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:sequence>
-         <xs:element ref="RelationshipTypeCode"/>
-         <xs:element ref="CommentText" maxOccurs="1"/>
-         <xs:element ref="RelatedSpdxElement" minOccurs="0" maxOccurs="1"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="RelationshipTypeCodeType">
-      <xs:annotation>
-         <xs:documentation>A data type for RelationshipType properties</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="RelationshipType CodeSimpleType" rdf="http://spdx.org/rdf/terms#relationshipType"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="RelationshipTypeCodeSimpleType"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:complexType name="SpdxElementType">
-      <xs:annotation>
-         <xs:documentation>A data type for SpdxElement type</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="SpdxElement" xmlname="SpdxElement" comment="An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements." rdf="http://spdx.org/rdf/terms#SpdxElement" subclassof="Thing"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:sequence>
-         <xs:element ref="Annotation" minOccurs="0"/>
-         <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
-         <xs:element ref="CommentText" maxOccurs="1"/>
-         <xs:element ref="Relationship" minOccurs="0"/>
-      </xs:sequence>
-   </xs:complexType>
-   <xs:complexType name="SpecVersionTextType">
-      <xs:annotation>
-         <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
-         <xs:appinfo>
-            <ComplexType name="specVersion" xmlname="SpecVersionText" typename="SpecVersion" comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes." rdf="http://spdx.org/rdf/terms#specVersion" domain="SpdxDocument" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-      <xs:simpleContent>
-         <xs:extension base="xs:string"/>
-      </xs:simpleContent>
-   </xs:complexType>
-   <xs:element name="AlgorithmCode" type="AlgorithmCodeType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for Algorithm properties</xs:documentation>
-         <xs:appinfo>
-            <Element name="AlgorithmCode" rdf="http://spdx.org/rdf/terms#algorithm"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="Annotation" type="AnnotationType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for Annotation</xs:documentation>
-         <xs:appinfo>
-            <Element name="Annotation" xmlname="Annotation" comment="An Annotation is a comment on an SpdxItem by an agent." rdf="http://spdx.org/rdf/terms#Annotation" subclassof="Thing"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="AnnotationTypeCode" type="AnnotationTypeCodeType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for AnnotationType properties</xs:documentation>
-         <xs:appinfo>
-            <Element name="AnnotationTypeCode" rdf="http://spdx.org/rdf/terms#annotationType"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="AnnotatorText" type="AnnotatorTextType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
-         <xs:appinfo>
-            <Element name="annotator" xmlname="AnnotatorText" typename="Annotator" comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document." rdf="http://spdx.org/rdf/terms#annotator" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="Checksum" type="ChecksumType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for Checksum</xs:documentation>
-         <xs:appinfo>
-            <Element name="Checksum" xmlname="Checksum" comment="A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented." rdf="http://spdx.org/rdf/terms#Checksum"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="ChecksumValue" type="ChecksumValueType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
-         <xs:appinfo>
-            <Element name="checksumValue" xmlname="ChecksumValue" typename="ChecksumValue" comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm." rdf="http://spdx.org/rdf/terms#checksumValue" domain="Checksum" range="HexBinary"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="CommentText" type="CommentTextType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for CommentText</xs:documentation>
-         <xs:appinfo>
-            <Element name="comment" xmlname="CommentText" typename="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="CreatedDateTime" type="CreatedDateTimeType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
-         <xs:appinfo>
-            <Element name="created" xmlname="CreatedDateTime" typename="Created" comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator." rdf="http://spdx.org/rdf/terms#created" domain="CreationInfo" range="DateTime" subpropertyof="Date"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="CreationInfo" type="CreationInfoType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for CreationInfo</xs:documentation>
-         <xs:appinfo>
-            <Element name="CreationInfo" xmlname="CreationInfo" comment="A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument." rdf="http://spdx.org/rdf/terms#CreationInfo"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="CreatorText" type="CreatorTextType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
-         <xs:appinfo>
-            <Element name="creator" xmlname="CreatorText" typename="Creator" comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax." rdf="http://spdx.org/rdf/terms#creator" domain="CreationInfo" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="DataLicense" type="LicenseIDType" nillable="true" fixed="http://spdx.org/licenses/CC0-1.0">
-      <xs:annotation>
-         <xs:documentation>A data item for The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files.</xs:documentation>
-         <xs:appinfo>
-            <Element name="dataLicense" xmlname="DataLicense" comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files." rdf="http://spdx.org/rdf/terms#dataLicense" domain="SpdxDocument" type="FunctionalProperty"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="Date" type="DateType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for A date-time stamp.</xs:documentation>
-         <xs:appinfo>
-            <Element name="date" xmlname="Date" typename="Date" comment="A date-time stamp." rdf="http://spdx.org/rdf/terms#date" domain="AnnotationCreationInfo" range="DateTime"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="DescribesFile" type="SpdxDocumentType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for The describesFile property relates an SpdxDocument to the file which it describes.</xs:documentation>
-         <xs:appinfo>
-            <Element name="describesFile" xmlname="DescribesFile" comment="The describesFile property relates an SpdxDocument to the file which it describes." rdf="http://spdx.org/rdf/terms#describesFile" domain="SpdxDocument" range="File"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="DescribesPackage" type="SpdxDocumentType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for The describesPackage property relates an SpdxDocument to the package which it describes.</xs:documentation>
-         <xs:appinfo>
-            <Element name="describesPackage" xmlname="DescribesPackage" comment="The describesPackage property relates an SpdxDocument to the package which it describes." rdf="http://spdx.org/rdf/terms#describesPackage" domain="SpdxDocument" range="Package"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="ExternalDocumentID" type="ExternalDocumentIDType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document.</xs:documentation>
-         <xs:appinfo>
-            <Element name="externalDocumentId" xmlname="ExternalDocumentID" typename="ExternalDocumentID" comment="externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document." rdf="http://spdx.org/rdf/terms#externalDocumentId" domain="ExternalDocumentRef" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="ExternalDocumentRef" type="ExternalDocumentRefType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for ExternalDocumentRef</xs:documentation>
-         <xs:appinfo>
-            <Element name="ExternalDocumentRef" xmlname="ExternalDocumentRef" comment="Information about an external SPDX document reference including the checksum. This allows for verification of the external references." rdf="http://spdx.org/rdf/terms#ExternalDocumentRef"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="HasExtractedLicensingInfo" type="SpdxDocumentType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument.</xs:documentation>
-         <xs:appinfo>
-            <Element name="hasExtractedLicensingInfo" xmlname="HasExtractedLicensingInfo" comment="Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument." rdf="http://spdx.org/rdf/terms#hasExtractedLicensingInfo" domain="ExtractedLicenseInfoSpdxDocument"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="LicenseListVersionText" type="LicenseListVersionTextType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
-         <xs:appinfo>
-            <Element name="licenseListVersion" xmlname="LicenseListVersionText" typename="LicenseListVersion" comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created." rdf="http://spdx.org/rdf/terms#licenseListVersion" domain="CreationInfo" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="Name" type="NameType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
-         <xs:appinfo>
-            <Element name="name" xmlname="Name" typename="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="RelatedSpdxElement" type="SpdxElementType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for A related SpdxElement.</xs:documentation>
-         <xs:appinfo>
-            <Element name="relatedSpdxElement" xmlname="RelatedSpdxElement" comment="A related SpdxElement." rdf="http://spdx.org/rdf/terms#relatedSpdxElement" domain="Relationship" range="SpdxElement"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="Relationship" type="RelationshipType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for Relationship</xs:documentation>
-         <xs:appinfo>
-            <Element name="Relationship" xmlname="Relationship" comment="A Relationship represents a relationship between two SpdxElements." rdf="http://spdx.org/rdf/terms#Relationship" subclassof="Thing"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="RelationshipTypeCode" type="RelationshipTypeCodeType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for RelationshipType properties</xs:documentation>
-         <xs:appinfo>
-            <Element name="RelationshipTypeCode" rdf="http://spdx.org/rdf/terms#relationshipType"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="SpdxDocument" type="SpdxDocumentType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data item for SpdxDocument</xs:documentation>
-         <xs:appinfo>
-            <Element name="SpdxDocument" xmlname="SpdxDocument" comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information." rdf="http://spdx.org/rdf/terms#SpdxDocument" subclassof="SpdxElement"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
-   <xs:element name="SpecVersionText" type="SpecVersionTextType" nillable="true">
-      <xs:annotation>
-         <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
-         <xs:appinfo>
-            <Element name="specVersion" xmlname="SpecVersionText" typename="SpecVersion" comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes." rdf="http://spdx.org/rdf/terms#specVersion" domain="SpdxDocument" range="String"/>
-         </xs:appinfo>
-      </xs:annotation>
-   </xs:element>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="SpdxElementType">
+        <xs:sequence>
+          <xs:element ref="DescribesPackage" minOccurs="0"/>
+          <xs:element ref="DescribesFile" minOccurs="0"/>
+          <xs:element ref="HasExtractedLicensingInfo" minOccurs="0"/>
+          <xs:element ref="CreationInfo" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="SpecVersionText" minOccurs="1" maxOccurs="1"/>
+          <xs:element ref="ExternalDocumentRef" minOccurs="0"/>
+          <xs:element ref="DataLicense"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:simpleType name="AlgorithmCodeSimpleType">
+    <xs:annotation>
+      <xs:documentation>A data type for Algorithm properties</xs:documentation>
+      <xs:appinfo>
+        <SimpleType name="AlgorithmCodeSimpleType" rdf="http://spdx.org/rdf/terms#algorithm"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="ChecksumAlgorithmMd5">
+        <xs:annotation>
+          <xs:documentation>Indicates the algorithm used was MD5</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ChecksumAlgorithmSha1">
+        <xs:annotation>
+          <xs:documentation>Indicates the algorithm used was SHA-1</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ChecksumAlgorithmSha256">
+        <xs:annotation>
+          <xs:documentation>Indicates the algorithm used was SHA256</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#algorithm"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AnnotationTypeCodeSimpleType">
+    <xs:annotation>
+      <xs:documentation>A data type for AnnotationType properties</xs:documentation>
+      <xs:appinfo>
+        <SimpleType name="AnnotationTypeCodeSimpleType" rdf="http://spdx.org/rdf/terms#annotationType"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="AnnotationTypeOther">
+        <xs:annotation>
+          <xs:documentation>Type of annotation which does not fit in any of the pre-defined annotation types.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#annotationType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AnnotationTypeReview">
+        <xs:annotation>
+          <xs:documentation>A Review represents an audit and signoff by an individual, organization or tool on the information for an SpdxElement.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#annotationType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="RelationshipTypeCodeSimpleType">
+    <xs:annotation>
+      <xs:documentation>A data type for RelationshipType properties</xs:documentation>
+      <xs:appinfo>
+        <SimpleType name="RelationshipTypeCodeSimpleType" rdf="http://spdx.org/rdf/terms#relationshipType"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="RelationshipTypeAmendment">
+        <xs:annotation>
+          <xs:documentation>To be used when SPDXRef-A amends the SPDX information in SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeAncestorOf">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_ancestorOf expresses that an SPDXElement is an ancestor of (same lineage but pre-dates) the relatedSPDXElement. For example, an upstream File is an ancestor of a modified downstream File</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeBuildToolOf">
+        <xs:annotation>
+          <xs:documentation>To be used when SPDXRef-A is used to to build SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeContainedBy">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_containedBy expresses that an SPDXElement is contained by the relatedSPDXElement. For example, a File contained by a Package.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeContains">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_contains expresses that an SPDXElement contains the relatedSPDXElement. For example, a Package contains a File. (relationshipType_contains introduced in SPDX 2.0 deprecates property 'hasFile' from SPDX 1.2)</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeCopyOf">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_copyOf expresses that the SPDXElement is an exact copy of the relatedSDPXElement. For example, a downstream distribution of a binary library which was copied from the upstream package.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeDataFileOf">
+        <xs:annotation>
+          <xs:documentation>Is to be used when SPDXRef-A is a data file used in SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeDescendantOf">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_descendantOf expresses that an SPDXElement is a descendant of (same lineage but post-dates) the relatedSPDXElement. For example, an downstream File that was modified is a descendant of an upstream File</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeDescribedBy">
+        <xs:annotation>
+          <xs:documentation>Is to be used an SPDXRef-A is described by SPDXRef-Document.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeDescribes">
+        <xs:annotation>
+          <xs:documentation>Is to be used when SPDXRef-DOCUMENT describes SPDXRef-A.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeDistributionArtifact">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_distributionArtifact expresses that distributing the SPDXElement requires that the relatedSPDXElement also be distributed. For example, distributing a binary File may require that a source tarball (another File) be made available with the distribuiton.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeDocumentation">
+        <xs:annotation>
+          <xs:documentation>To be used when SPDXRef-A provides documentation of SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeDynamicLink">
+        <xs:annotation>
+          <xs:documentation>Is to be used when SPDXRef-A dynamically links to SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeExpandedFromArchive">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_expandedFromArchive expresses that the SPDXElement is a file which was epanded from a relatedSPDXElement file. For example, if there is an archive file xyz.tar.gz containing a file foo.c the archive file was expanded in a directory arch/xyz, the file arch/xyz/foo.c would have a relationshipType_expandedFromArchive with the file xyz.tar.gz.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeFileAdded">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_fileAdded expresses that the SPDXElement is a file which has been added to the relatedSPDXElement package. For example, a package (the relatedSPDXElement) has been patched to remove a file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeFileDeleted">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_fileDeleted expresses that the SPDXElement is a package where the relatedSPDXElement file has been removed. For example, a package has been patched to remove a file a file (the relatedSPDXElement resulting in the patched package (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeFileModified">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_fileModified expresses that the SPDXElement is a file which is a modified version of the relatedSPDXElement file. For example, a file (the SPDXElement) has been patched to modify the contents of the original file (the SPDXElement). This relationship is typically used to express the result of a patched package when the actual patchfile is not present.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeGeneratedFrom">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_generatedFrom expresses that an SPDXElement was generated from the relatedSPDXElement. For example, a binary File might have been generated from a source File.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeGenerates">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_generates expresses that an SPDXElement generates the relatedSPDXElement. For example, a source File generates a binary File.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeHasPrerequisite">
+        <xs:annotation>
+          <xs:documentation>Is to be used when SPDXRef-A has as a prerequisite SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeMetafileOf">
+        <xs:annotation>
+          <xs:documentation>To be used when SPDXRef-A is a metafile of SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeOptionalComponentOf">
+        <xs:annotation>
+          <xs:documentation>To be used when SPDXRef-A is an optional component of SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeOther">
+        <xs:annotation>
+          <xs:documentation>to be used for a relationship which has not been defined in the formal SPDX specification. A description of the relationship should be included in the Relationship comments field.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypePackageOf">
+        <xs:annotation>
+          <xs:documentation>To be used when SPDXRef-A is used as a package as part of SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypePatchApplied">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_patchApplied expresses that the SPDXElement is a 'patchfile' that was applied and produced the relatedSPDXElement. For example, a .diff File relates to a specific file where the diff was applied.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypePatchFor">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_patchFor expresses that the SPDXElement is a 'patchfile' that is designed to patch (apply modifications to) the relatedSPDXElement. For example, relationship from a .diff File to a Package it is designed to patch.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypePrerequisiteFor">
+        <xs:annotation>
+          <xs:documentation>Is to be used when SPDXRef-A is a prerequisite for SPDXRef-B</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeStaticLink">
+        <xs:annotation>
+          <xs:documentation>Is to be used when SPDXRef-A statically links to SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeTestcaseOf">
+        <xs:annotation>
+          <xs:documentation>Is to be used when SPDXRef-A is a test case used in testing SPDXRef-B.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RelationshipTypeVariantOf">
+        <xs:annotation>
+          <xs:documentation>A Relationship of relationshipType_variantOf expresses that an SPDXElement is a variant of the relatedSPDXElement, but it is not clear which came first. For example, if the content of two Files differs by some edit, but there is no way to tell which came first (no reliable date information), then one File is a variant of the other File.</xs:documentation>
+          <xs:appinfo>
+            <Enum rdf="http://spdx.org/rdf/terms#relationshipType"/>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="AlgorithmCodeType">
+    <xs:annotation>
+      <xs:documentation>A data type for Algorithm properties</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="Algorithm CodeSimpleType" rdf="http://spdx.org/rdf/terms#algorithm"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="AlgorithmCodeSimpleType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AnnotationType">
+    <xs:annotation>
+      <xs:documentation>A data type for Annotation type</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="Annotation" xmlname="Annotation" comment="An Annotation is a comment on an SpdxItem by an agent." rdf="http://spdx.org/rdf/terms#Annotation" subclassof="Thing"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="Date" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="AnnotationTypeCode"/>
+      <xs:element ref="CommentText" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="AnnotatorText" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AnnotationTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>A data type for AnnotationType properties</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="AnnotationType CodeSimpleType" rdf="http://spdx.org/rdf/terms#annotationType"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="AnnotationTypeCodeSimpleType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AnnotatorTextType">
+    <xs:annotation>
+      <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="annotator" xmlname="AnnotatorText" typename="Annotator" comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document." rdf="http://spdx.org/rdf/terms#annotator" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ChecksumType">
+    <xs:annotation>
+      <xs:documentation>A data type for Checksum type</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="Checksum" xmlname="Checksum" comment="A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented." rdf="http://spdx.org/rdf/terms#Checksum"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="ChecksumValue" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="AlgorithmCode"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChecksumValueType">
+    <xs:annotation>
+      <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="checksumValue" xmlname="ChecksumValue" typename="ChecksumValue" comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm." rdf="http://spdx.org/rdf/terms#checksumValue" domain="Checksum" range="HexBinary"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:hexBinary"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CommentTextType">
+    <xs:annotation>
+      <xs:documentation>A data type for CommentText</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="comment" xmlname="CommentText" typename="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CreatedDateTimeType">
+    <xs:annotation>
+      <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="created" xmlname="CreatedDateTime" typename="Created" comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator." rdf="http://spdx.org/rdf/terms#created" domain="CreationInfo" range="DateTime" subpropertyof="Date"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:dateTime"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="CreationInfoType">
+    <xs:annotation>
+      <xs:documentation>A data type for CreationInfo type</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="CreationInfo" xmlname="CreationInfo" comment="A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument." rdf="http://spdx.org/rdf/terms#CreationInfo"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="LicenseListVersionText" minOccurs="0"/>
+      <xs:element ref="CreatedDateTime" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="CommentText" minOccurs="0"/>
+      <xs:element ref="CreatorText" minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CreatorTextType">
+    <xs:annotation>
+      <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="creator" xmlname="CreatorText" typename="Creator" comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax." rdf="http://spdx.org/rdf/terms#creator" domain="CreationInfo" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DateType">
+    <xs:annotation>
+      <xs:documentation>A data type for A date-time stamp.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="date" xmlname="Date" typename="Date" comment="A date-time stamp." rdf="http://spdx.org/rdf/terms#date" domain="AnnotationCreationInfo" range="DateTime"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:dateTime"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ExternalDocumentIDType">
+    <xs:annotation>
+      <xs:documentation>A data type for externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="externalDocumentId" xmlname="ExternalDocumentID" typename="ExternalDocumentID" comment="externalDocumentId is a string containing letters, numbers, &#x201C;.&#x201D;, &#x201C;-&#x201D; or &#x201C;+&#x201D; which uniquely identifies an external document within this document." rdf="http://spdx.org/rdf/terms#externalDocumentId" domain="ExternalDocumentRef" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ExternalDocumentRefType">
+    <xs:annotation>
+      <xs:documentation>A data type for ExternalDocumentRef type</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="ExternalDocumentRef" xmlname="ExternalDocumentRef" comment="Information about an external SPDX document reference including the checksum. This allows for verification of the external references." rdf="http://spdx.org/rdf/terms#ExternalDocumentRef"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="Checksum" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="ExternalDocumentID" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="SpdxDocument" minOccurs="1" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LicenseIDType">
+    <xs:annotation>
+      <xs:documentation>A data type for A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form LicenseRef-[idString] where [idString] is a unique string containing letters, numbers, ., - or +.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="licenseId" xmlname="LicenseID" typename="LicenseID" comment="A human readable short form license identifier for a license. The license ID is iether on the standard license oist or the form &quot;LicenseRef-&quot;[idString] where [idString] is a unique string containing letters, numbers, &quot;.&quot;, &quot;-&quot; or &quot;+&quot;." rdf="http://spdx.org/rdf/terms#licenseId" domain="SimpleLicensingInfo" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="LicenseListVersionTextType">
+    <xs:annotation>
+      <xs:documentation>A data type for An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="licenseListVersion" xmlname="LicenseListVersionText" typename="LicenseListVersion" comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created." rdf="http://spdx.org/rdf/terms#licenseListVersion" domain="CreationInfo" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="NameType">
+    <xs:annotation>
+      <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="name" xmlname="Name" typename="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="RelationshipType">
+    <xs:annotation>
+      <xs:documentation>A data type for Relationship type</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="Relationship" xmlname="Relationship" comment="A Relationship represents a relationship between two SpdxElements." rdf="http://spdx.org/rdf/terms#Relationship" subclassof="Thing"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="RelationshipTypeCode"/>
+      <xs:element ref="CommentText" maxOccurs="1"/>
+      <xs:element ref="RelatedSpdxElement" minOccurs="0" maxOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RelationshipTypeCodeType">
+    <xs:annotation>
+      <xs:documentation>A data type for RelationshipType properties</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="RelationshipType CodeSimpleType" rdf="http://spdx.org/rdf/terms#relationshipType"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="RelationshipTypeCodeSimpleType"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SpdxElementType">
+    <xs:annotation>
+      <xs:documentation>A data type for SpdxElement type</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="SpdxElement" xmlname="SpdxElement" comment="An SpdxElement is any thing described in SPDX, either a document or an SpdxItem. SpdxElements can be related to other SpdxElements." rdf="http://spdx.org/rdf/terms#SpdxElement" subclassof="Thing"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="Annotation" minOccurs="0"/>
+      <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="CommentText" maxOccurs="1"/>
+      <xs:element ref="Relationship" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SpecVersionTextType">
+    <xs:annotation>
+      <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="specVersion" xmlname="SpecVersionText" typename="SpecVersion" comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes." rdf="http://spdx.org/rdf/terms#specVersion" domain="SpdxDocument" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:element name="AlgorithmCode" type="AlgorithmCodeType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for Algorithm properties</xs:documentation>
+      <xs:appinfo>
+        <Element name="AlgorithmCode" rdf="http://spdx.org/rdf/terms#algorithm"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Annotation" type="AnnotationType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for Annotation</xs:documentation>
+      <xs:appinfo>
+        <Element name="Annotation" xmlname="Annotation" comment="An Annotation is a comment on an SpdxItem by an agent." rdf="http://spdx.org/rdf/terms#Annotation" subclassof="Thing"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AnnotationTypeCode" type="AnnotationTypeCodeType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for AnnotationType properties</xs:documentation>
+      <xs:appinfo>
+        <Element name="AnnotationTypeCode" rdf="http://spdx.org/rdf/terms#annotationType"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="AnnotatorText" type="AnnotatorTextType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for This field identifies the person, organization or tool that has commented on a file, package, or entire document.</xs:documentation>
+      <xs:appinfo>
+        <Element name="annotator" xmlname="AnnotatorText" typename="Annotator" comment="This field identifies the person, organization or tool that has commented on a file, package, or entire document." rdf="http://spdx.org/rdf/terms#annotator" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Checksum" type="ChecksumType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for Checksum</xs:documentation>
+      <xs:appinfo>
+        <Element name="Checksum" xmlname="Checksum" comment="A Checksum is value that allows the contents of a file to be authenticated. Even small changes to the content of the file will change its checksum. This class allows the results of a variety of checksum and cryptographic message digest algorithms to be represented." rdf="http://spdx.org/rdf/terms#Checksum"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ChecksumValue" type="ChecksumValueType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm.</xs:documentation>
+      <xs:appinfo>
+        <Element name="checksumValue" xmlname="ChecksumValue" typename="ChecksumValue" comment="The checksumValue property provides a lower case hexidecimal encoded digest value produced using a specific algorithm." rdf="http://spdx.org/rdf/terms#checksumValue" domain="Checksum" range="HexBinary"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CommentText" type="CommentTextType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for CommentText</xs:documentation>
+      <xs:appinfo>
+        <Element name="comment" xmlname="CommentText" typename="Comment" comment="" rdf="http://www.w3.org/2000/01/rdf-schema#comment"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CreatedDateTime" type="CreatedDateTimeType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator.</xs:documentation>
+      <xs:appinfo>
+        <Element name="created" xmlname="CreatedDateTime" typename="Created" comment="The date and time at which the SpdxDocument was created. This value must in UTC and have 'Z' as its timezone indicator." rdf="http://spdx.org/rdf/terms#created" domain="CreationInfo" range="DateTime" subpropertyof="Date"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CreationInfo" type="CreationInfoType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for CreationInfo</xs:documentation>
+      <xs:appinfo>
+        <Element name="CreationInfo" xmlname="CreationInfo" comment="A CreationInfo provides information about the individuals, organizations and tools involved in the creation of an SpdxDocument." rdf="http://spdx.org/rdf/terms#CreationInfo"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="CreatorText" type="CreatorTextType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax.</xs:documentation>
+      <xs:appinfo>
+        <Element name="creator" xmlname="CreatorText" typename="Creator" comment="The name and, optionally, contact information of a person, organization or tool that created, or was used to create, the SpdxDocument. Values of this property must conform to the agent and tool syntax." rdf="http://spdx.org/rdf/terms#creator" domain="CreationInfo" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DataLicense" type="LicenseIDType" nillable="true" fixed="http://spdx.org/licenses/CC0-1.0">
+    <xs:annotation>
+      <xs:documentation>A data item for The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files.</xs:documentation>
+      <xs:appinfo>
+        <Element name="dataLicense" xmlname="DataLicense" comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files." rdf="http://spdx.org/rdf/terms#dataLicense" domain="SpdxDocument" type="FunctionalProperty"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Date" type="DateType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for A date-time stamp.</xs:documentation>
+      <xs:appinfo>
+        <Element name="date" xmlname="Date" typename="Date" comment="A date-time stamp." rdf="http://spdx.org/rdf/terms#date" domain="AnnotationCreationInfo" range="DateTime"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DescribesFile" type="SpdxDocumentType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for The describesFile property relates an SpdxDocument to the file which it describes.</xs:documentation>
+      <xs:appinfo>
+        <Element name="describesFile" xmlname="DescribesFile" comment="The describesFile property relates an SpdxDocument to the file which it describes." rdf="http://spdx.org/rdf/terms#describesFile" domain="SpdxDocument" range="File"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="DescribesPackage" type="SpdxDocumentType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for The describesPackage property relates an SpdxDocument to the package which it describes.</xs:documentation>
+      <xs:appinfo>
+        <Element name="describesPackage" xmlname="DescribesPackage" comment="The describesPackage property relates an SpdxDocument to the package which it describes." rdf="http://spdx.org/rdf/terms#describesPackage" domain="SpdxDocument" range="Package"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ExternalDocumentID" type="ExternalDocumentIDType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for externalDocumentId is a string containing letters, numbers, “.”, “-” or “+” which uniquely identifies an external document within this document.</xs:documentation>
+      <xs:appinfo>
+        <Element name="externalDocumentId" xmlname="ExternalDocumentID" typename="ExternalDocumentID" comment="externalDocumentId is a string containing letters, numbers, &#x201C;.&#x201D;, &#x201C;-&#x201D; or &#x201C;+&#x201D; which uniquely identifies an external document within this document." rdf="http://spdx.org/rdf/terms#externalDocumentId" domain="ExternalDocumentRef" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="ExternalDocumentRef" type="ExternalDocumentRefType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for ExternalDocumentRef</xs:documentation>
+      <xs:appinfo>
+        <Element name="ExternalDocumentRef" xmlname="ExternalDocumentRef" comment="Information about an external SPDX document reference including the checksum. This allows for verification of the external references." rdf="http://spdx.org/rdf/terms#ExternalDocumentRef"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="HasExtractedLicensingInfo" type="SpdxDocumentType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument.</xs:documentation>
+      <xs:appinfo>
+        <Element name="hasExtractedLicensingInfo" xmlname="HasExtractedLicensingInfo" comment="Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument." rdf="http://spdx.org/rdf/terms#hasExtractedLicensingInfo" domain="ExtractedLicenseInfoSpdxDocument"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="LicenseListVersionText" type="LicenseListVersionTextType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created.</xs:documentation>
+      <xs:appinfo>
+        <Element name="licenseListVersion" xmlname="LicenseListVersionText" typename="LicenseListVersion" comment="An optional field for creators of the SPDX file to provide the version of the SPDX License List used when the SPDX file was created." rdf="http://spdx.org/rdf/terms#licenseListVersion" domain="CreationInfo" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Name" type="NameType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for The full human readable name of the item. This should include version information when applicable.</xs:documentation>
+      <xs:appinfo>
+        <Element name="name" xmlname="Name" typename="Name" comment="The full human readable name of the item. This should include version information when applicable." rdf="http://spdx.org/rdf/terms#name" domain="SpdxElement" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RelatedSpdxElement" type="SpdxElementType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for A related SpdxElement.</xs:documentation>
+      <xs:appinfo>
+        <Element name="relatedSpdxElement" xmlname="RelatedSpdxElement" comment="A related SpdxElement." rdf="http://spdx.org/rdf/terms#relatedSpdxElement" domain="Relationship" range="SpdxElement"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Relationship" type="RelationshipType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for Relationship</xs:documentation>
+      <xs:appinfo>
+        <Element name="Relationship" xmlname="Relationship" comment="A Relationship represents a relationship between two SpdxElements." rdf="http://spdx.org/rdf/terms#Relationship" subclassof="Thing"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="RelationshipTypeCode" type="RelationshipTypeCodeType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for RelationshipType properties</xs:documentation>
+      <xs:appinfo>
+        <Element name="RelationshipTypeCode" rdf="http://spdx.org/rdf/terms#relationshipType"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SpdxDocument" type="SpdxDocumentType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item for SpdxDocument</xs:documentation>
+      <xs:appinfo>
+        <Element name="SpdxDocument" xmlname="SpdxDocument" comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information." rdf="http://spdx.org/rdf/terms#SpdxDocument" subclassof="SpdxElement"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SpecVersionText" type="SpecVersionTextType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</xs:documentation>
+      <xs:appinfo>
+        <Element name="specVersion" xmlname="SpecVersionText" typename="SpecVersion" comment="Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes." rdf="http://spdx.org/rdf/terms#specVersion" domain="SpdxDocument" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
 </xs:schema>

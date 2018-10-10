@@ -24,7 +24,7 @@ type SpdxDocument struct {
 	CreationInfo	*CreationInfo		`xml:"CreationInfo,omitempty"  json:"CreationInfo,omitempty"`
 	SpecVersionText	string		`xml:"SpecVersionText,omitempty"  json:"SpecVersionText,omitempty"`
 	ExternalDocumentRef	*ExternalDocumentRef		`xml:"ExternalDocumentRef,omitempty"  json:"ExternalDocumentRef,omitempty"`
-	DataLicenseText	*DataLicenseText		`xml:"DataLicenseText,omitempty"  json:"DataLicenseText,omitempty"`
+	DataLicense	string		`xml:"DataLicense,omitempty"  json:"DataLicense,omitempty"`
 	XMLName	xml.Name		`xml:"SpdxDocument,omitempty"  json:"SpdxDocument,omitempty"`
 }
 //Annotation ... 
@@ -58,9 +58,10 @@ type ExternalDocumentRef struct {
 }
 //RelatedSpdxElement ... A data item for A related SpdxElement
 type RelatedSpdxElement struct {
-	RelationshipTypeCode	string		`xml:"RelationshipTypeCode,omitempty"  json:"RelationshipTypeCode,omitempty"`
+	Annotation	*Annotation		`xml:"Annotation,omitempty"  json:"Annotation,omitempty"`
+	Name	string		`xml:"Name,omitempty"  json:"Name,omitempty"`
 	CommentText	string		`xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
-	RelatedSpdxElement	string		`xml:"RelatedSpdxElement,omitempty"  json:"RelatedSpdxElement,omitempty"`
+	Relationship	*Relationship		`xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
 	XMLName	xml.Name		`xml:"RelatedSpdxElement,omitempty"  json:"RelatedSpdxElement,omitempty"`
 }
 //Relationship ... 
