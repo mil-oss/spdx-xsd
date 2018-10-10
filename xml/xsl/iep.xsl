@@ -165,9 +165,6 @@
         <xsl:copy-of select="."/>
     </xsl:template>
 
-    <xsl:template match="text()">
-        <xsl:copy-of select="normalize-space(.)"/>
-    </xsl:template>
 
     <!-- ***************** UTILITY XSL *****************-->
 
@@ -194,6 +191,7 @@
             <xsl:value-of select="."/>
         </xsl:attribute>
     </xsl:template>
+    
     <xsl:template match="text()">
         <xsl:value-of select="normalize-space(translate(., '&#34;&#xA;', ''))"/>
     </xsl:template>

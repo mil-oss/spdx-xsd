@@ -1,0 +1,702 @@
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=AnnotationType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=AnnotationType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=Annotation
+      ATTRIBUTE type
+        TEXT
+          content=AnnotationType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=Annotation
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=AnnotationType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=AnnotationType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=Annotation
+      ATTRIBUTE type
+        TEXT
+          content=AnnotationType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=Annotation
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=AnnotationType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=AnnotationType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=Annotation
+      ATTRIBUTE type
+        TEXT
+          content=AnnotationType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=Annotation
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=AnnotationType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=AnnotationType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=Annotation
+      ATTRIBUTE type
+        TEXT
+          content=AnnotationType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=Annotation
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=xs:string
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=NameType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=NameType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=Name
+      ATTRIBUTE type
+        TEXT
+          content=NameType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=Name
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=RelationshipType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=RelationshipType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=Relationship
+      ATTRIBUTE type
+        TEXT
+          content=RelationshipType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=Relationship
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=RelationshipType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=RelationshipType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=Relationship
+      ATTRIBUTE type
+        TEXT
+          content=RelationshipType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=Relationship
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=CreationInfoType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=CreationInfoType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=CreationInfo
+      ATTRIBUTE type
+        TEXT
+          content=CreationInfoType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=CreationInfo
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=CreationInfoType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=CreationInfoType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=CreationInfo
+      ATTRIBUTE type
+        TEXT
+          content=CreationInfoType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=CreationInfo
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=CreationInfoType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=CreationInfoType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=CreationInfo
+      ATTRIBUTE type
+        TEXT
+          content=CreationInfoType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=CreationInfo
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=CreationInfoType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=CreationInfoType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=CreationInfo
+      ATTRIBUTE type
+        TEXT
+          content=CreationInfoType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=CreationInfo
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+  NodeSet is NULL !
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=xs:string
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=SpecVersionTextType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=SpecVersionTextType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=SpecVersionText
+      ATTRIBUTE type
+        TEXT
+          content=SpecVersionTextType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=SpecVersionText
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=SpdxElementType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:complexType
+      ATTRIBUTE name
+        TEXT
+          content=SpdxDocumentType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE type
+      TEXT
+        content=SpdxDocumentType
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ELEMENT xs:element
+      ATTRIBUTE name
+        TEXT
+          content=DataLicenseText
+      ATTRIBUTE type
+        TEXT
+          content=SpdxDocumentType
+      ATTRIBUTE nillable
+        TEXT
+          content=true
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE ref
+      TEXT
+        content=DataLicenseText
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 1 nodes:
+  1    ATTRIBUTE base
+      TEXT
+        content=SpdxElementType
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is a Node Set :
+Set contains 0 nodes:
+  Object is an XSLT value tree :
+  2    Node is NULL !

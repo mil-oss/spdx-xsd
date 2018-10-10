@@ -5,21 +5,23 @@ import (
 )
 
 var (
-	testinstance          string
-	iepderr               error
-	valerr                []error
-	spdxLicenseDatastruct interface{}
-	provreport            = map[int64]xsdprov.ProvEntry{}
+	testinstance string
+	iepderr      error
+	valerr       []error
+	provreport   = map[int64]xsdprov.ProvEntry{}
+	// SpdxLicenseDatastruct ...
+	SpdxLicenseDatastruct interface{}
 )
 
 func main() {
-	//var LicenseDatastruct = NewLicense()
-	xsdprov.InitXSDProv(Resources, Resdirectories, "config/spdx-doc-cfg.json")
+	SpdxLicenseDatastruct = NewLicense()
+	xsdprov.InitXSDProv("config/spdx-license-cfg.json")
+	xsdprov.BuildIep(SpdxLicenseDatastruct)
 	xsdprov.StartWeb()
 }
 
 // Resources ...
-var Resources = map[string]string{
+/* var Resources = map[string]string{
 	"spdx-ref.xsd":                          "xml/xsd/spdx-ref.xsd",
 	"spdx-license.xsd":                      "xml/xsd/spdx-license.xsd",
 	"XMLSchema.xsd":                         "xml/xsd/ext/w3c/XMLSchema.xsd",
@@ -55,3 +57,4 @@ var Resdirectories = map[string]string{
 	"spdx":     "src/spdx",
 	"xsdprov":  "src/xsdprov",
 }
+*/

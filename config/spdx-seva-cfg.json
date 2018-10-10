@@ -1,9 +1,158 @@
 {
-    "project":"spdx-seva",
+    "project": "spdx-seva",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-seva-ref.xsd",
-    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-seva/xml/instance/spdx-seva-test_data.xml",
-    "homeurl":"http://localhost",
-    "port":":8181",
-    "dbloc":"tmp/spdx-seva-iepd/db/spdx-seva.db",
-    "temppath":"tmp/spdx-seva-iepd/"
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-seva/xml/instance/spdx-seva-test_data.xml",
+    "homeurl": "http://localhost",
+    "port": ":8181",
+    "dbloc": "tmp/spdx-seva-iepd/db/spdx-seva.db",
+    "temppath": "tmp/spdx-seva-iepd/",
+    "resources": [
+        {
+            "name": "refxsd",
+            "src": "xml/xsd/spdx-seva-ref.xsd",
+            "path": "xml/xsd/spdx-seva-ref.xsd"
+        },
+        {
+            "name": "iepxsd",
+            "src": "IEPD/spdx-seva/xml/xsd/spdx-seva-iep.xsd",
+            "path": "xml/xsd/spdx-seva-iep.xsd"
+        },
+        {
+            "name": "xmlschemaxsd",
+            "src": "xml/xsd/ext/w3c/XMLSchema.xsd",
+            "path": "xml/xsd/ext/w3c/XMLSchema.xsd"
+        },
+        {
+            "name": "xsltxsd",
+            "src": "xml/xsd/ext/w3c/xslt.xsd",
+            "path": "xml/xsd/ext/w3c/xslt.xsd"
+        },
+        {
+            "name": "iepxsdxsl",
+            "src": "IEPD/spdx-seva/xml/xsl/spdx-seva-iep.xsl",
+            "path": "xml/xsl/spdx-seva-iep.xsl"
+        },
+        {
+            "name": "instancexsl",
+            "src": "IEPD/spdx-seva/xml/xsl/spdx-seva-instance.xsl",
+            "path": "xml/xsl/spdx-seva-instance.xsl"
+        },
+        {
+            "name": "gogenxsdxsl",
+            "src": "IEPD/spdx-seva/xml/xsl/spdx-seva-go-gen.xsl",
+            "path": "xml/xsl/spdx-seva-go-gen.xsl"
+        },
+        {
+            "name": "gotestgenxsl",
+            "src": "IEPD/spdx-seva/xml/xsl/spdx-seva-go-test-gen.xsl",
+            "path": "xml/xsl/spdx-seva-go-test-gen.xsl"
+        },
+        {
+            "name": "testdataxml",
+            "src": "IEPD/spdx-seva/xml/instance/spdx-seva-test-data.xml",
+            "path": "xml/instance/spdx-seva-test-data.xml"
+        },
+        {
+            "name": "instancexml",
+            "src": "IEPD/spdx-seva/xml/instance/spdx-seva-instance.xml",
+            "path": "xml/instance/spdx-seva-instance.xml"
+        },
+        {
+            "name": "instancegolangxml",
+            "src": "IEPD/spdx-seva/xml/instance/test-instance-golang.xml",
+            "path": "xml/instance/spdx-seva-instance-golang.xml"
+        },
+        {
+            "name": "structgo",
+            "src": "src/spdx-seva/spdx-seva-struct.go",
+            "path": "src/spdx-seva/spdx-seva-struct.go"
+        },
+        {
+            "name": "structtestgo",
+            "src": "src/spdx-seva/spdx-seva-struct_test.go",
+            "path": "src/spdx-seva/spdx-seva-struct_test.go"
+        },
+        {
+            "name": "maingo",
+            "src": "src/spdx-seva/spdx-seva.go",
+            "path": "src/spdx-seva/spdx-seva.go"
+        },
+        {
+            "name": "iepxsdjson",
+            "src": "IEPD/spdx-seva/json/spdx-seva-iep-xsd.json",
+            "path": "json/spdx-seva-iep-xsd.json"
+        },
+        {
+            "name": "refxsdjson",
+            "src": "IEPD/spdx-seva/json/spdx-seva-ref-xsd.json",
+            "path": "json/spdx-seva-ref-xsd.json"
+        },
+        {
+            "name": "instancejson",
+            "src": "IEPD/spdx-seva/json/spdx-seva-instance.json",
+            "path": "json/spdx-seva-instance.json"
+        },
+        {
+            "name": "provenancereportjson",
+            "src": "IEPD/spdx-seva/json/provenance-report.json",
+            "path": "json/spdx-seva-provenance-report.json"
+        },
+        {
+            "name": "resourcesjson",
+            "src": "IEPD/spdx-seva/json/resources.json",
+            "path": "json/spdx-seva-resources.json"
+        },
+        {
+            "name": "iepxsl",
+            "src": "xml/xsl/iep.xsl",
+            "path": "xml/xsl/common/iep.xsl"
+        },
+        {
+            "name": "xmlinstancexsl",
+            "src": "xml/xsl/xml-instance.xsl",
+            "path": "xml/xsl/common/xml-instance.xsl"
+        },
+        {
+            "name": "gogenxsl",
+            "src": "xml/xsl/go-gen.xsl",
+            "path": "xml/xsl/common/go-gen.xsl"
+        },
+        {
+            "name": "xsdjsonxsl",
+            "src": "xml/xsl/xsd-json.xsl",
+            "path": "xml/xsl/common/xsd-json.xsl"
+        },
+        {
+            "name": "xmljsonxsl",
+            "src": "xml/xsl/xml-json.xsl",
+            "path": "xml/xsl/common/xml-json.xsl"
+        },
+        {
+            "name": "zipiepd",
+            "src": "",
+            "path": "spdx-seva-iepd.zip"
+        }
+    ],
+    "directories": [
+        {
+            "name": "niem",
+            "src": "xml/xsd/ext/niem",
+            "path": "xml/xsd/ext/niem"
+        },
+        {
+            "name": "w3c",
+            "src": "xml/xsd/ext/w3c",
+            "path": "xml/xsd/ext/w3c"
+        },
+        {
+            "name": "gostruct",
+            "src": "src/spdx-seva",
+            "path": "src/spdx-seva"
+        },
+        {
+            "name": "gocode",
+            "src": "src/xsdprov",
+            "path": "src/xsdprov"
+        }
+    ]
 }

@@ -1,0 +1,12 @@
+  <License xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-seva::1.0">
+      <LicenseID>Test string one</LicenseID>
+      <CommentText>Test string one</CommentText>
+      <SeeAlsoURI>http://anyuri.org</SeeAlsoURI>
+      <Name>Test string one</Name>
+      <IsDeprecatedLicenseID>true</IsDeprecatedLicenseID>
+      <IsOsiApprovedIndicator>true</IsOsiApprovedIndicator>
+      <IsFsfLibreIndicator>true</IsFsfLibreIndicator>
+      <StandardLicenseHeader>Test string one</StandardLicenseHeader>
+      <LicenseText>Test string one</LicenseText>
+      <StandardLicenseTemplate>Test string one</StandardLicenseTemplate>
+  </License>

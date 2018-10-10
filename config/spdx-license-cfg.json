@@ -1,9 +1,158 @@
 {
-    "project":"spdx-license",
-    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-ref.xsd",
-    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/spdx-test-data.xml",
-    "homeurl":"http://localhost",
-    "port":":8181",
-    "dbloc":"tmp/IEPD/spdx-license/db",
-    "temppath":"tmp/IEPD/spdx-license/"
+    "project": "spdx-license",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-seva-ref.xsd",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-license/xml/instance/spdx-license-test-data.xml",
+    "homeurl": "http://localhost",
+    "port": ":8181",
+    "dbloc": "tmp/spdx-license-iepd/db/spdx-license.db",
+    "temppath": "tmp/spdx-license-iepd/",
+    "resources": [
+        {
+            "name": "refxsd",
+            "src": "xml/xsd/spdx-seva-ref.xsd",
+            "path": "xml/xsd/spdx-seva-ref.xsd"
+        },
+        {
+            "name": "iepxsd",
+            "src": "IEPD/spdx-license/xml/xsd/spdx-license-iep.xsd",
+            "path": "xml/xsd/spdx-license-iep.xsd"
+        },
+        {
+            "name": "xmlschemaxsd",
+            "src": "xml/xsd/ext/w3c/XMLSchema.xsd",
+            "path": "xml/xsd/ext/w3c/XMLSchema.xsd"
+        },
+        {
+            "name": "xsltxsd",
+            "src": "xml/xsd/ext/w3c/xslt.xsd",
+            "path": "xml/xsd/ext/w3c/xslt.xsd"
+        },
+        {
+            "name": "iepxsdxsl",
+            "src": "IEPD/spdx-license/xml/xsl/spdx-license-iep.xsl",
+            "path": "xml/xsl/spdx-license-iep.xsl"
+        },
+        {
+            "name": "instancexsl",
+            "src": "IEPD/spdx-license/xml/xsl/spdx-license-instance.xsl",
+            "path": "xml/xsl/spdx-license-instance.xsl"
+        },
+        {
+            "name": "gogenxsdxsl",
+            "src": "IEPD/spdx-license/xml/xsl/spdx-license-go-gen.xsl",
+            "path": "xml/xsl/spdx-license-go-gen.xsl"
+        },
+        {
+            "name": "gotestgenxsl",
+            "src": "IEPD/spdx-license/xml/xsl/spdx-license-go-test-gen.xsl",
+            "path": "xml/xsl/spdx-license-go-test-gen.xsl"
+        },
+        {
+            "name": "testdataxml",
+            "src": "IEPD/spdx-license/xml/instance/spdx-license-test-data",
+            "path": "xml/instance/spdx-license-test-data.xml"
+        },
+        {
+            "name": "instancexml",
+            "src": "IEPD/spdx-license/xml/instance/spdx-license-instance.xml",
+            "path": "xml/instance/spdx-license-instance.xml"
+        },
+        {
+            "name": "instancegolangxml",
+            "src": "IEPD/spdx-license/xml/instance/test-instance-golang.xml",
+            "path": "xml/instance/spdx-license-instance-golang.xml"
+        },
+        {
+            "name": "structgo",
+            "src": "src/spdx-license/spdx-license-struct.go",
+            "path": "src/spdx-license/spdx-license-struct.go"
+        },
+        {
+            "name": "structtestgo",
+            "src": "src/spdx-license/spdx-license-struct_test.go",
+            "path": "src/spdx-license/spdx-license-struct_test.go"
+        },
+        {
+            "name": "maingo",
+            "src": "src/spdx-license/spdx-lic.go",
+            "path": "src/spdx-license/spdx-lic.go"
+        },
+        {
+            "name": "iepxsdjson",
+            "src": "IEPD/spdx-license/json/iep-xsd.json",
+            "path": "json/spdx-license-iep-xsd.json"
+        },
+        {
+            "name": "refxsdjson",
+            "src": "IEPD/spdx-license/json/ref-xsd.json",
+            "path": "json/spdx-license-ref-xsd.json"
+        },
+        {
+            "name": "instancejson",
+            "src": "IEPD/spdx-license/json/spdx-license-instance.json",
+            "path": "json/spdx-license-instance.json"
+        },
+        {
+            "name": "provenancereportjson",
+            "src": "IEPD/spdx-license/json/provenance-report.json",
+            "path": "json/spdx-license-provenance-report.json"
+        },
+        {
+            "name": "resourcesjson",
+            "src": "IEPD/spdx-license/json/resources.json",
+            "path": "json/spdx-license-resources.json"
+        },
+        {
+            "name": "iepxsl",
+            "src": "xml/xsl/iep.xsl",
+            "path": "xml/xsl/common/iep.xsl"
+        },
+        {
+            "name": "xmlinstancexsl",
+            "src": "xml/xsl/xml-instance.xsl",
+            "path": "xml/xsl/common/xml-instance.xsl"
+        },
+        {
+            "name": "gogenxsl",
+            "src": "xml/xsl/go-gen.xsl",
+            "path": "xml/xsl/common/go-gen.xsl"
+        },
+        {
+            "name": "xsdjsonxsl",
+            "src": "xml/xsl/xsd-json.xsl",
+            "path": "xml/xsl/common/xsd-json.xsl"
+        },
+        {
+            "name": "xmljsonxsl",
+            "src": "xml/xsl/xml-json.xsl",
+            "path": "xml/xsl/common/xml-json.xsl"
+        },
+        {
+            "name": "zipiepd",
+            "src": "",
+            "path": "spdx-license-iepd.zip"
+        }
+    ],
+    "directories": [
+        {
+            "name": "niem",
+            "src": "xml/xsd/ext/niem",
+            "path": "xml/xsd/ext/niem"
+        },
+        {
+            "name": "w3c",
+            "src": "xml/xsd/ext/w3c",
+            "path": "xml/xsd/ext/w3c"
+        },
+        {
+            "name": "gostruct",
+            "src": "src/spdx-license",
+            "path": "src/spdx-license"
+        },
+        {
+            "name": "gocode",
+            "src": "src/xsdprov",
+            "path": "src/xsdprov"
+        }
+    ]
 }

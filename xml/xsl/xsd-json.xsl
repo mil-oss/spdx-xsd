@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" exclude-result-prefixes="xsd" version="1.0">
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" exclude-result-prefixes="xs" version="1.0">
     <xsl:output method="text" indent="yes"/>
 
     <!--
@@ -34,11 +34,11 @@
 
     <xsl:template name="main">
         <xsl:value-of select="$lb"/>
-        <xsl:apply-templates select="xsd:schema/*"/>
+        <xsl:apply-templates select="xs:schema/*"/>
         <xsl:value-of select="$rb"/>
     </xsl:template>
 
-    <xsl:template match="xsd:simpleType">
+    <xsl:template match="xs:simpleType">
         <xsl:value-of select="concat($q, @name, $q, $c, $lb)"/>
         <xsl:value-of select="concat($q, 'xsdnode', $q, $c, $q, substring-after(name(), ':'), $q)"/>
         <xsl:value-of select="$cm"/>
@@ -46,50 +46,51 @@
         <xsl:value-of select="$cm"/>
         <xsl:variable name="doc">
             <xsl:call-template name="escape-bs-string">
-                <xsl:with-param name="s" select="xsd:annotation/xsd:documentation"/>
+                <xsl:with-param name="s" select="xs:annotation/xs:documentation"/>
             </xsl:call-template>
         </xsl:variable>
         <xsl:value-of select="concat($q, 'documentation', $q, $c, $q, normalize-space($doc), $q)"/>
-        <xsl:if test="xsd:restriction/@base">
-            <xsl:value-of select="$cm"/>
-            <xsl:apply-templates select="xsd:restriction/@base" mode="tojson"/>
-        </xsl:if>
-        <!--<xsl:apply-templates select="xsd:annotation/xsd:appinfo" mode="tojson"/>-->
-        <xsl:if test="xsd:restriction/xsd:enumeration">
-            <xsl:value-of select="$cm"/>
-            <xsl:value-of select="concat($q, 'enumerations', $q, $c, $lb)"/>
-            <xsl:for-each select="xsd:restriction/xsd:enumeration">
-                <xsl:value-of select="concat($q, @value, $q, $c, $lb)"/>
-                <xsl:value-of select="concat($q, 'value', $q, $c, $q, @value, $q)"/>
-                <xsl:if test="@dataitem">
-                    <xsl:value-of select="concat($cm, $q, 'dataitem', $q, $c, $q, @dataitem, $q)"/>
-                </xsl:if>
-                <xsl:if test="xsd:annotation/xsd:documentation">
-                    <xsl:variable name="edoc">
-                        <xsl:call-template name="escape-bs-string">
-                            <xsl:with-param name="s" select="xsd:annotation/xsd:documentation"/>
-                        </xsl:call-template>
-                    </xsl:variable>
-                    <xsl:value-of select="concat($cm, $q, 'documentation', $q, $c, $q, normalize-space($edoc), $q)"/>
-                </xsl:if>
+        <xsl:choose>
+            <xsl:when test="xs:restriction/xs:enumeration">
+                <xsl:value-of select="$cm"/>
+                <xsl:value-of select="concat($q, 'enumerations', $q, $c, $lb)"/>
+                <xsl:for-each select="xs:restriction/xs:enumeration">
+                    <xsl:value-of select="concat($q, @value, $q, $c, $lb)"/>
+                    <xsl:value-of select="concat($q, 'value', $q, $c, $q, @value, $q)"/>
+                    <xsl:if test="@dataitem">
+                        <xsl:value-of select="concat($cm, $q, 'dataitem', $q, $c, $q, @dataitem, $q)"/>
+                    </xsl:if>
+                    <xsl:if test="xs:annotation/xs:documentation">
+                        <xsl:variable name="edoc">
+                            <xsl:call-template name="escape-bs-string">
+                                <xsl:with-param name="s" select="xs:annotation/xs:documentation"/>
+                            </xsl:call-template>
+                        </xsl:variable>
+                        <xsl:value-of select="concat($cm, $q, 'documentation', $q, $c, $q, normalize-space($edoc), $q)"/>
+                    </xsl:if>
+                    <xsl:value-of select="$rb"/>
+                    <xsl:if test="following-sibling::xs:enumeration">
+                        <xsl:value-of select="$cm"/>
+                    </xsl:if>
+                </xsl:for-each>
                 <xsl:value-of select="$rb"/>
-                <xsl:if test="following-sibling::xsd:enumeration">
-                    <xsl:value-of select="$cm"/>
-                </xsl:if>
-            </xsl:for-each>
-            <xsl:value-of select="$rb"/>
-        </xsl:if>
-        <xsl:if test="xsd:restriction/*[@value][not(name() = 'xsd:enumeration')]">
+            </xsl:when>
+            <xsl:when test="xs:restriction/@base">
+                    <!--<xsl:value-of select="$cm"/>-->
+                    <xsl:apply-templates select="xs:restriction/@base" mode="tojson"/>
+            </xsl:when>
+        </xsl:choose>
+        <xsl:if test="xs:restriction/*[@value][not(name() = 'xs:enumeration')]">
             <xsl:value-of select="$cm"/>
-            <xsl:apply-templates select="xsd:restriction/*[@value][not(name() = 'xsd:enumeration')]" mode="tojson"/>
+            <xsl:apply-templates select="xs:restriction/*[@value][not(name() = 'xs:enumeration')]" mode="tojson"/>
         </xsl:if>
         <xsl:value-of select="$rb"/>
-        <xsl:if test="following-sibling::xsd:*">
+        <xsl:if test="following-sibling::xs:*">
             <xsl:value-of select="$cm"/>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="xsd:complexType">
+    <xsl:template match="xs:complexType">
         <xsl:value-of select="concat($q, @name, $q, $c, $lb)"/>
         <xsl:value-of select="concat($q, 'xsdnode', $q, $c, $q, substring-after(name(), ':'), $q)"/>
         <xsl:value-of select="$cm"/>
@@ -97,27 +98,27 @@
         <xsl:value-of select="$cm"/>
         <xsl:variable name="doc">
             <xsl:call-template name="escape-bs-string">
-                <xsl:with-param name="s" select="xsd:annotation/xsd:documentation"/>
+                <xsl:with-param name="s" select="xs:annotation/xs:documentation"/>
             </xsl:call-template>
         </xsl:variable>
         <xsl:value-of select="concat($q, 'documentation', $q, $c, $q, normalize-space($doc), $q)"/>
-        <xsl:if test="xsd:restriction/@base">
+        <xsl:if test="xs:restriction/@base">
             <xsl:value-of select="$cm"/>
-            <xsl:apply-templates select="xsd:restriction/@base" mode="tojson"/>
+            <xsl:apply-templates select="xs:restriction/@base" mode="tojson"/>
         </xsl:if>
-        <!--<xsl:apply-templates select="xsd:annotation/xsd:appinfo" mode="tojson"/>-->
-        <xsl:apply-templates select="xsd:simpleContent/xsd:extension/@base" mode="tojson"/>
-        <xsl:apply-templates select="xsd:simpleContent/xsd:restriction/@base" mode="tojson"/>
+        <!--<xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>-->
+        <xsl:apply-templates select="xs:simpleContent/xs:extension/@base" mode="tojson"/>
+        <xsl:apply-templates select="xs:simpleContent/xs:restriction/@base" mode="tojson"/>
         <xsl:if test="./*">
             <xsl:apply-templates select="*"/>
         </xsl:if>
         <xsl:value-of select="$rb"/>
-        <xsl:if test="following-sibling::xsd:*">
+        <xsl:if test="following-sibling::xs:*">
             <xsl:value-of select="$cm"/>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="xsd:element">
+    <xsl:template match="xs:element">
         <xsl:variable name="n" select="@name | @ref"/>
         <xsl:variable name="pos">
             <xsl:if test="preceding-sibling::*[@name=$n or @ref=$n]">
@@ -141,40 +142,40 @@
                 <xsl:value-of select="$cm"/>
             </xsl:if>
         </xsl:for-each>
-        <xsl:if test="xsd:annotation/xsd:documentation">
+        <xsl:if test="xs:annotation/xs:documentation">
             <xsl:value-of select="$cm"/>
             <xsl:variable name="doc">
                 <xsl:call-template name="escape-bs-string">
-                    <xsl:with-param name="s" select="xsd:annotation/xsd:documentation"/>
+                    <xsl:with-param name="s" select="xs:annotation/xs:documentation"/>
                 </xsl:call-template>
             </xsl:variable>
             <xsl:value-of select="concat($q, 'documentation', $q, $c, $q, normalize-space($doc), $q)"/>
         </xsl:if>
-        <xsl:if test="xsd:annotation/xsd:appinfo">
-            <xsl:apply-templates select="xsd:annotation/xsd:appinfo" mode="tojson"/>
+        <xsl:if test="xs:annotation/xs:appinfo">
+            <xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>
         </xsl:if>
         <xsl:value-of select="$rb"/>
-        <xsl:if test="following-sibling::xsd:*">
+        <xsl:if test="following-sibling::xs:*">
             <xsl:value-of select="$cm"/>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="xsd:*">
+    <xsl:template match="xs:*">
         <xsl:apply-templates select="*"/>
     </xsl:template>
 
-    <xsl:template match="xsd:sequence">
+    <xsl:template match="xs:sequence">
         <xsl:value-of select="concat($cm,$q, 'sequence', $q, $c, $lb)"/>
         <xsl:apply-templates select="*"/>
         <xsl:value-of select="$rb"/>
     </xsl:template>
 
-    <xsl:template match="xsd:choice">
+    <xsl:template match="xs:choice">
         <xsl:value-of select="concat($q, 'choice', $q, $c, $lb)"/>
         <xsl:value-of select="concat($q, 'xsdnode', $q, $c, $q, 'choice', $q, $cm)"/>
         <xsl:apply-templates select="*"/>
         <xsl:value-of select="$rb"/>
-        <xsl:if test="following-sibling::xsd:*">
+        <xsl:if test="following-sibling::xs:*">
             <xsl:value-of select="$cm"/>
         </xsl:if>
     </xsl:template>
@@ -182,7 +183,7 @@
     <xsl:template match="@base" mode="tojson">
         <xsl:choose>
             <xsl:when test="contains(., ':')">
-                <xsl:value-of select="concat($q, 'datatype', $q, $c, $q, substring-after(., ':'), $q)"/>
+                <xsl:value-of select="concat($cm,$q, 'datatype', $q, $c, $q, substring-after(., ':'), $q)"/>
             </xsl:when>
             <xsl:otherwise>
                 <xsl:value-of select="concat($cm,$q, 'datatype', $q, $c, $q, ., $q)"/>
@@ -190,7 +191,7 @@
         </xsl:choose>
     </xsl:template>
 
-    <xsl:template match="xsd:restriction/*[@value]" mode="tojson">
+    <xsl:template match="xs:restriction/*[@value]" mode="tojson">
         <xsl:variable name="n" select="substring-after(name(), ':')"/>
         <xsl:choose>
             <xsl:when test="$n = 'pattern'">
@@ -205,20 +206,20 @@
                 <xsl:value-of select="concat($q, $n, $q, $c, $q, @value, $q)"/>
             </xsl:otherwise>
         </xsl:choose>
-        <xsl:if test="following-sibling::xsd:*">
+        <xsl:if test="following-sibling::xs:*">
             <xsl:value-of select="$cm"/>
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="xsd:appinfo" mode="tojson"/>
+    <xsl:template match="xs:appinfo" mode="tojson"/>
 
     <xsl:template match="text()"/>
-    <!--<xsl:template match="xsd:appinfo" mode="tojson">
+    <!--<xsl:template match="xs:appinfo" mode="tojson">
         <xsl:value-of select="concat($cm, $q, 'appinfo', $q, $c, $lb)"/>
         <xsl:variable name="p" select="position()"/>
         <xsl:for-each select="*">
             <xsl:variable name="inc">
-                <xsl:if test="parent::xsd:appinfo/preceding-sibling::xsd:appinfo">
+                <xsl:if test="parent::xs:appinfo/preceding-sibling::xs:appinfo">
                     <xsl:value-of select="$p"/>
                 </xsl:if>
             </xsl:variable>
@@ -266,13 +267,13 @@
                     </xsl:if>
                 </xsl:for-each>
             </xsl:if>
-            <xsl:if test="following-sibling::xsd:*">
+            <xsl:if test="following-sibling::xs:*">
                 <xsl:value-of select="$cm"/>
             </xsl:if>
             <xsl:value-of select="$rb"/>
             <xsl:for-each select="*">
                 <xsl:variable name="inc2">
-                    <xsl:if test="parent::xsd:appinfo/preceding-sibling::xsd:appinfo">
+                    <xsl:if test="parent::xs:appinfo/preceding-sibling::xs:appinfo">
                         <xsl:value-of select="$p"/>
                     </xsl:if>
                 </xsl:variable>
@@ -335,14 +336,14 @@
                         </xsl:if>
                     </xsl:for-each>
                 </xsl:if>
-                <xsl:if test="following-sibling::xsd:*">
+                <xsl:if test="following-sibling::xs:*">
                     <xsl:value-of select="$cm"/>
                 </xsl:if>
                 <xsl:value-of select="$rb"/>
             </xsl:for-each>
         </xsl:for-each>
         <xsl:value-of select="$rb"/>
-        <xsl:if test="parent::xsd:annotation/following-sibling::*[not(@base)]">
+        <xsl:if test="parent::xs:annotation/following-sibling::*[not(@base)]">
             <xsl:value-of select="$cm"/>
         </xsl:if>
     </xsl:template>

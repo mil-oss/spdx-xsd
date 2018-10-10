@@ -46,8 +46,8 @@ func GetSourceResources() {
 }
 
 // ZipIEPD ...
-func ZipIEPD(path string) {
-	cerr := Compress(path, "/tmp/IEPD/"+name+".zip")
+func ZipIEPD(dirpath string, path string) {
+	cerr := Compress(dirpath, path)
 	check(cerr)
 }
 

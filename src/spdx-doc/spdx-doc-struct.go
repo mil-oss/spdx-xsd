@@ -19,9 +19,9 @@ type SpdxDocument struct {
 	Name                      string               `xml:"Name,omitempty"  json:"Name,omitempty"`
 	CommentText               string               `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
 	Relationship              *Relationship        `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
-	DescribesPackage          *SpdxDocument        `xml:"DescribesPackage,omitempty"  json:"DescribesPackage,omitempty"`
-	DescribesFile             *SpdxDocument        `xml:"DescribesFile,omitempty"  json:"DescribesFile,omitempty"`
-	HasExtractedLicensingInfo *SpdxDocument        `xml:"HasExtractedLicensingInfo,omitempty"  json:"HasExtractedLicensingInfo,omitempty"`
+	DescribesPackage          string               `xml:"DescribesPackage,omitempty"  json:"DescribesPackage,omitempty"`
+	DescribesFile             string               `xml:"DescribesFile,omitempty"  json:"DescribesFile,omitempty"`
+	HasExtractedLicensingInfo bool                 `xml:"HasExtractedLicensingInfo,omitempty"  json:"HasExtractedLicensingInfo,omitempty"`
 	CreationInfo              *CreationInfo        `xml:"CreationInfo,omitempty"  json:"CreationInfo,omitempty"`
 	SpecVersionText           string               `xml:"SpecVersionText,omitempty"  json:"SpecVersionText,omitempty"`
 	ExternalDocumentRef       *ExternalDocumentRef `xml:"ExternalDocumentRef,omitempty"  json:"ExternalDocumentRef,omitempty"`
@@ -64,8 +64,8 @@ type ExternalDocumentRef struct {
 
 //Relationship ...
 type Relationship struct {
-	RelationshipTypeCode string        `xml:"RelationshipTypeCode,omitempty"  json:"RelationshipTypeCode,omitempty"`
-	CommentText          string        `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
-	RelatedSpdxElement   *Relationship `xml:"RelatedSpdxElement,omitempty"  json:"RelatedSpdxElement,omitempty"`
-	XMLName              xml.Name      `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
+	RelationshipTypeCode string   `xml:"RelationshipTypeCode,omitempty"  json:"RelationshipTypeCode,omitempty"`
+	CommentText          string   `xml:"CommentText,omitempty"  json:"CommentText,omitempty"`
+	RelatedSpdxElement   string   `xml:"RelatedSpdxElement,omitempty"  json:"RelatedSpdxElement,omitempty"`
+	XMLName              xml.Name `xml:"Relationship,omitempty"  json:"Relationship,omitempty"`
 }

@@ -52,22 +52,6 @@
     <xsl:variable name="json" select="' json:'"/>
     <xsl:variable name="omitempty" select="'omitempty'"/>
 
-    <xsl:template name="makego">
-        <xsl:variable name="rootname" select="xs:schema/xs:annotation/xs:appinfo/*/@name"/>
-        <xsl:value-of select="concat('package main', $cr, $cr)"/>
-        <xsl:value-of select="concat('import ', $qt, 'encoding/xml', $qt, $cr, $cr)"/>
-        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]" mode="func">
-            <xsl:with-param name="rootname" select="$rootname"/>
-        </xsl:apply-templates>
-        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]">
-            <xsl:with-param name="rootname" select="$rootname"/>
-        </xsl:apply-templates>
-        <xsl:apply-templates select="xs:schema/xs:element[not(@name = $rootname)]">
-            <xsl:with-param name="rootname" select="$rootname"/>
-            <xsl:sort select="@name"/>
-        </xsl:apply-templates>
-    </xsl:template>
-
     <xsl:template match="xs:element[@name]" mode="func">
         <xsl:param name="rootname"/>
         <xsl:variable name="n" select="@name"/>
@@ -95,7 +79,6 @@
         <xsl:variable name="t" select="@type"/>
         <xsl:choose>
             <!--Recursion Check-->
-            <xsl:when test="$n='RelatedSpdxElement'"/>
             <xsl:when test="concat($rootname,'Type')=$t and $n!=$rootname"/>
             <xsl:when test="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
                 <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
@@ -139,12 +122,6 @@
         </xsl:variable>
         <xsl:variable name="dt">
             <xsl:choose>
-                <xsl:when test="$t='SpdxDocumentType'">
-                    <xsl:value-of select="concat($ary, $ptr, $rootname)"/>
-                </xsl:when>
-                <xsl:when test="$t='RelationshipType'">
-                    <xsl:value-of select="concat($ary, $ptr, 'Relationship')"/>
-                </xsl:when>
                 <xsl:when test="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
                     <xsl:value-of select="concat($ary, $ptr, $r)"/>
                 </xsl:when>
@@ -276,12 +253,14 @@
         </xsl:variable>
         <xsl:value-of select="concat($tab, $r, $tab, $dt, $tab, $tab, $bq, 'xml:', $qt, @ref, $cm, $omitempty, $qt, ' ', $json, $qt, @ref, $ary, $cm, $omitempty, $qt, $bq, $cr)"/>
     </xsl:template>
+    
     <xsl:template match="*">
         <xsl:param name="rootname"/>
         <xsl:apply-templates select="*">
             <xsl:with-param name="rootname" select="$rootname"/>
         </xsl:apply-templates>
     </xsl:template>
+   
     <xsl:template match="*" mode="def">
         <xsl:param name="rootname"/>
         <xsl:apply-templates select="*" mode="def">

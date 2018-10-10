@@ -13,9 +13,11 @@ import (
 
 var (
 	datastruct   interface{}
-	resources    map[string]string
-	sources      map[string]string
-	resourcedirs map[string]string
+	rsrcs        []Resource
+	rsrcdirs     []Resource
+	resources    = map[string]string{}
+	resourcedirs = map[string]string{}
+	sources      = map[string]string{}
 	temppath     string
 	tempfiles    = map[string]string{}
 	resdigests   = map[string]string{}
@@ -32,11 +34,16 @@ var (
 )
 
 // InitXSDProv ...
-func InitXSDProv(rsrcs map[string]string, srcs map[string]string, rsrcdirs map[string]string, config string) {
-	resources = rsrcs
-	sources = srcs
-	resourcedirs = rsrcdirs
+func InitXSDProv(config string) {
 	cfg := GetConfig(config)
+	for r := range cfg.Resources {
+		resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
+		sources[cfg.Resources[r].Name] = cfg.Resources[r].Src
+	}
+	for r := range cfg.Directories {
+		resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Path
+		resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Src
+	}
 	dbloc = cfg.Dbloc
 	temppath = cfg.Temppath
 	name = cfg.Project
@@ -71,10 +78,12 @@ func InitTempDir(db *bolt.DB) (err error) {
 // DirSetup ...
 func DirSetup() (e error) {
 	log.Println("DirSetup")
-	for f, src := range sources {
+	for f := range resources {
 		dest := filepath.Dir(temppath + resources[f])
 		os.MkdirAll(dest, os.ModePerm)
-		CopyFile(src, temppath+resources[f])
+		if sources[f] != "" {
+			CopyFile(sources[f], temppath+resources[f])
+		}
 	}
 	CopyDirs(temppath, resourcedirs)
 	return
@@ -88,7 +97,7 @@ func BuildIep(dstruct interface{}) (map[int64]ProvEntry, []error) {
 	validateResources()
 	ResrcJSON(respath("resourcesjson"))
 	ProvenanceRpt()
-	ZipIEPD(respath("zipiepd"))
+	ZipIEPD(temppath, "tmp/"+resources["zipiepd"])
 	return provreport, errorlist
 }
 

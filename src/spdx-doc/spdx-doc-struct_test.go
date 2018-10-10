@@ -42,7 +42,11 @@ func TestSpdxDocument(t *testing.T) {
 	g.It("Must have Relationship",func() {
             Expect(spdx.Relationship.RelationshipTypeCode).To(Equal("RelationshipTypeAmendment"))
             Expect(spdx.Relationship.CommentText).To(Equal("Test string one"))
-            Expect(spdx.Relationship.RelatedSpdxElement.RelationshipTypeCode).To(Equal("RelationshipTypeAmendment"))
+            Expect(spdx.Relationship.RelatedSpdxElement.Annotation.Date).To(Equal(""))
+            Expect(spdx.Relationship.RelatedSpdxElement.Annotation.AnnotationTypeCode).To(Equal(""))
+            Expect(spdx.Relationship.RelatedSpdxElement.Annotation.CommentText).To(Equal("Test string one"))
+            Expect(spdx.Relationship.RelatedSpdxElement.Annotation.AnnotatorText).To(Equal(""))
+            Expect(spdx.Relationship.RelatedSpdxElement.Name).To(Equal(""))
             Expect(spdx.Relationship.RelatedSpdxElement.CommentText).To(Equal("Test string one"))
         })
 	g.It("Must have CreationInfo",func() {
