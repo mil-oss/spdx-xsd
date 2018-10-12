@@ -3,7 +3,7 @@
   <xs:annotation>
     <xs:documentation>XML Schema for SPDX Document Information Exchange</xs:documentation>
     <xs:appinfo>
-      <Root type="SpdxDocumentType" name="SpdxDocument"/>
+      <Root type="SpdxDocumentType" name="SpdxDocument" base="SpdxElementType"/>
     </xs:appinfo>
   </xs:annotation>
   <xs:complexType name="SpdxDocumentType">

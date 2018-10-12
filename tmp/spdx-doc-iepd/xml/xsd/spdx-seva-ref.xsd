@@ -7124,7 +7124,7 @@
             <xs:sequence>
                <xs:element ref="RelationshipTypeCode"/>
                <xs:element ref="CommentText" maxOccurs="1"/>
-               <xs:element ref="RelatedSpdxElement" minOccurs="1" maxOccurs="1"/>
+               <xs:element ref="RelatedSpdxElement" minOccurs="0" maxOccurs="1"/>
                <xs:element ref="RelationshipAugmentationPoint"
                            minOccurs="0"
                            maxOccurs="unbounded"/>

@@ -53,6 +53,11 @@
             "path": "xml/instance/spdx-doc-test-data.xml"
         },
         {
+            "name": "templatexml",
+            "src": "IEPD/spdx-document/xml/instance/spdx-doc-template.xml",
+            "path": "xml/instance/spdx-doc-template.xml"
+        },
+        {
             "name": "instancexml",
             "src": "IEPD/spdx-document/xml/instance/spdx-doc-instance.xml",
             "path": "xml/instance/spdx-doc-instance.xml"

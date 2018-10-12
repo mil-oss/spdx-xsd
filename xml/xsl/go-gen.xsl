@@ -56,7 +56,7 @@
         <xsl:param name="rootname"/>
         <xsl:variable name="n" select="@name"/>
         <xsl:variable name="t" select="@type"/>
-        <xsl:if test="//xs:complexType[@name = $t]//xs:element[@ref]">
+        <xsl:if test="//xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
             <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
             <xsl:value-of select="concat('//New', $rootname, ' ...', $cr)"/>
             <xsl:value-of select="concat('func ', 'New', $rootname, '() ', $as, $n, $lb, $cr)"/>
@@ -175,15 +175,16 @@
                 </xsl:if>
             </xsl:variable>
             <xsl:if test="not(//xs:schema/xs:complexType[@name = $ty]//xs:element[@ref])">
-               <!-- <xsl:variable name="dotpath">
-                    <xsl:call-template name="dotpaths">
-                        <xsl:with-param name="elname" select="$rootname"/>
-                        <xsl:with-param name="nextname" select="$r"/>
-                    </xsl:call-template>
-                </xsl:variable>-->
                 <xsl:variable name="testval">
                     <!--<xsl:value-of select="concat($r,', ',$rr)"/>-->
-                    <xsl:value-of select="$testdata//*[name() = $rootname][1]//*[name() = $r][1]"/>
+                    <xsl:choose>
+                        <xsl:when test="string-length($testdata//*[name() = $rootname][1]//*[name() = $r][1])&gt;0">
+                            <xsl:value-of select="$testdata//*[name() = $rootname][1]//*[name() = $r][1]"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:text>Test string one</xsl:text>
+                        </xsl:otherwise>
+                    </xsl:choose>
                 </xsl:variable>
                 <xsl:value-of select="concat($tab, $tab, 'Expect(', 'spdx.', $r, $ary, ').To(Equal(', $qt, $testval, $qt, '))', $cr)"/>
             </xsl:if>
@@ -209,6 +210,16 @@
                     <xsl:variable name="testval1">
                         <!--<xsl:value-of select="concat($r,', ',$rr)"/>-->
                         <xsl:value-of select="$testdata//*[name() = $r][1]//*[name() = $el][1]"/>
+                    </xsl:variable>
+                    <xsl:variable name="testval2">
+                        <xsl:choose>
+                            <xsl:when test="string-length($testval1)&gt;0">
+                                <xsl:value-of select="$testval1"/>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:text>Test string one</xsl:text>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:variable>
                     <xsl:value-of select="concat($in, $in, $in, 'Expect(', 'spdx.', ., $ary1, ').To(Equal(', $qt, $testval1, $qt, '))', $cr)"/>
                 </xsl:for-each>

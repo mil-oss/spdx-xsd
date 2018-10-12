@@ -1,66 +1,168 @@
 package main
 
 import (
-    "encoding/xml"
-    "fmt"
-    "io/ioutil"
-    "testing"
+	"encoding/xml"
+	"fmt"
+	"io/ioutil"
+	"testing"
 
-    . "github.com/franela/goblin"
-    . "github.com/onsi/gomega"
+	. "github.com/franela/goblin"
+	. "github.com/onsi/gomega"
 )
 
 var testinstances = map[string]string{
-    "test_instance.xml":      "xml/test_instance.xml",
+	"test_instance.xml": "xml/test_instance.xml",
 }
-func TestSpdxDocument(t *testing.T) {
-    g := Goblin(t)
-    RegisterFailHandler(func(m string, _ ...int) { g.Fail(m) })
 
-    xf, ferr := ioutil.ReadFile(testinstances["test_instance.xml"])
-    if ferr != nil {
-        fmt.Printf(ferr.Error())
-    }
-    var spdx = NewSpdxDocument()
-    err := xml.Unmarshal([]byte(xf), &spdx)
-    if err != nil {
-        fmt.Printf(err.Error())
-    }
-    g.Describe("SpdxDocument",func() {
-	g.It("Must have Annotation",func() {
-            Expect(spdx.Annotation.Date).To(Equal("2018-04-12T13:20:00"))
-            Expect(spdx.Annotation.AnnotationTypeCode).To(Equal("AnnotationTypeOther"))
-            Expect(spdx.Annotation.CommentText).To(Equal("Test string one"))
-            Expect(spdx.Annotation.AnnotatorText).To(Equal("Test string one"))
-        })
-	g.It("Must have name",func() {
-		Expect(spdx.Name).To(Equal("Test string one"))
-        })
-	g.It("Must have comment",func() {
-		Expect(spdx.CommentText).To(Equal("Test string one"))
-        })
-	g.It("Must have Relationship",func() {
-            Expect(spdx.Relationship.RelationshipTypeCode).To(Equal("RelationshipTypeAmendment"))
-            Expect(spdx.Relationship.CommentText).To(Equal("Test string one"))
-            Expect(spdx.Relationship.RelatedSpdxElement.Annotation.Date).To(Equal(""))
-            Expect(spdx.Relationship.RelatedSpdxElement.Annotation.AnnotationTypeCode).To(Equal(""))
-            Expect(spdx.Relationship.RelatedSpdxElement.Annotation.CommentText).To(Equal("Test string one"))
-            Expect(spdx.Relationship.RelatedSpdxElement.Annotation.AnnotatorText).To(Equal(""))
-            Expect(spdx.Relationship.RelatedSpdxElement.Name).To(Equal(""))
-            Expect(spdx.Relationship.RelatedSpdxElement.CommentText).To(Equal("Test string one"))
-        })
-	g.It("Must have CreationInfo",func() {
-            Expect(spdx.CreationInfo.LicenseListVersionText).To(Equal("Test string one"))
-            Expect(spdx.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
-            Expect(spdx.CreationInfo.CommentText).To(Equal("Test string one"))
-            Expect(spdx.CreationInfo.CreatorText).To(Equal("Test string one"))
-        })
-	g.It("Must have specVersion",func() {
-		Expect(spdx.SpecVersionText).To(Equal("Test string one"))
-        })
-	g.It("Must have dataLicense",func() {
-		Expect(spdx.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
-        })
-    })
+func TestSpdxDocument(t *testing.T) {
+	g := Goblin(t)
+	RegisterFailHandler(func(m string, _ ...int) { g.Fail(m) })
+
+	xf, ferr := ioutil.ReadFile(testinstances["test_instance.xml"])
+	if ferr != nil {
+		fmt.Printf(ferr.Error())
+	}
+	var spdx = NewSpdxDocument()
+	err := xml.Unmarshal([]byte(xf), &spdx)
+	if err != nil {
+		fmt.Printf(err.Error())
+	}
+	g.Describe("SpdxDocument", func() {
+		g.It("Must have Annotation", func() {
+			Expect(spdx.Annotation.Date).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.Annotation.AnnotationTypeCode).To(Equal("AnnotationTypeOther"))
+			Expect(spdx.Annotation.CommentText).To(Equal("Test string one"))
+			Expect(spdx.Annotation.AnnotatorText).To(Equal("Test string one"))
+		})
+		g.It("Must have name", func() {
+			Expect(spdx.Name).To(Equal("Test string one"))
+		})
+		g.It("Must have comment", func() {
+			Expect(spdx.CommentText).To(Equal("Test string one"))
+		})
+		g.It("Must have Relationship", func() {
+			Expect(spdx.Relationship.RelationshipTypeCode).To(Equal("RelationshipTypeAmendment"))
+			Expect(spdx.Relationship.CommentText).To(Equal("Test string one"))
+			Expect(spdx.Relationship.RelatedSpdxElement.Annotation.Date).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.Relationship.RelatedSpdxElement.Annotation.AnnotationTypeCode).To(Equal("AnnotationTypeOther"))
+			Expect(spdx.Relationship.RelatedSpdxElement.Annotation.CommentText).To(Equal("Test string one"))
+			Expect(spdx.Relationship.RelatedSpdxElement.Annotation.AnnotatorText).To(Equal("Test string one"))
+			Expect(spdx.Relationship.RelatedSpdxElement.Name).To(Equal("Test string one"))
+			Expect(spdx.Relationship.RelatedSpdxElement.CommentText).To(Equal("Test string one"))
+		})
+		g.It("Must have CreationInfo", func() {
+			Expect(spdx.CreationInfo.LicenseListVersionText).To(Equal("Test string one"))
+			Expect(spdx.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.CreationInfo.CreatorText).To(Equal("Test string one"))
+		})
+		g.It("Must have specVersion", func() {
+			Expect(spdx.SpecVersionText).To(Equal("Test string one"))
+		})
+		g.It("Must have ExternalDocumentRef", func() {
+			Expect(spdx.ExternalDocumentRef.Checksum.ChecksumValue).To(Equal("77696f"))
+			Expect(spdx.ExternalDocumentRef.Checksum.AlgorithmCode).To(Equal("ChecksumAlgorithmMd5"))
+			Expect(spdx.ExternalDocumentRef.ExternalDocumentID).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.HasExtractedLicensingInfo.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.HasExtractedLicensingInfo.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.HasExtractedLicensingInfo.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.HasExtractedLicensingInfo.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.HasExtractedLicensingInfo.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.HasExtractedLicensingInfo.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DescribesFile.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.DescribesFile.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.DescribesFile.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.DescribesFile.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.DescribesFile.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.DescribesFile.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.DescribesFile.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.HasExtractedLicensingInfo.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesPackage.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.HasExtractedLicensingInfo.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.HasExtractedLicensingInfo.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.HasExtractedLicensingInfo.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.HasExtractedLicensingInfo.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.HasExtractedLicensingInfo.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.HasExtractedLicensingInfo.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DescribesPackage.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.DescribesPackage.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.DescribesPackage.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.DescribesPackage.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.DescribesPackage.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.DescribesPackage.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.DescribesPackage.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.HasExtractedLicensingInfo.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DescribesFile.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.DescribesFile.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.DescribesFile.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.DescribesFile.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.DescribesFile.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.DescribesFile.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.DescribesFile.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesPackage.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.DescribesPackage.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.DescribesPackage.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.DescribesPackage.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.DescribesPackage.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.DescribesPackage.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.DescribesPackage.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DescribesFile.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.HasExtractedLicensingInfo.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.CreationInfo.LicenseListVersionText).To(Equal(""))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.CreationInfo.CommentText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.CreationInfo.CreatorText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.SpecVersionText).To(Equal("Test string one"))
+			Expect(spdx.ExternalDocumentRef.SpdxDocument.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+		})
+		g.It("Must have dataLicense", func() {
+			Expect(spdx.DataLicense).To(Equal("http://spdx.org/licenses/CC0-1.0"))
+		})
+	})
 
 }

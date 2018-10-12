@@ -48,7 +48,7 @@
     <SpecVersionText>Test string one</SpecVersionText>
     <ExternalDocumentRef>
       <Checksum>
-        <ChecksumValue/>
+        <ChecksumValue>77696f</ChecksumValue>
         <AlgorithmCode>ChecksumAlgorithmMd5</AlgorithmCode>
       </Checksum>
       <ExternalDocumentID>Test string one</ExternalDocumentID>

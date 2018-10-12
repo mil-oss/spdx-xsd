@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestData>
     <AlgorithmCodeSimpleType>
-        <True1 valid="true">Md5</True1>
-        <True2 valid="true">Sha256</True2>
+        <True1 valid="true">ChecksumAlgorithmMd5</True1>
+        <True2 valid="true">ChecksumAlgorithmSha256</True2>
         <False1 valid="false">Crypto</False1>
     </AlgorithmCodeSimpleType>
     <AnnotationTypeCodeSimpleType>
