@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-seva::1.0" xmlns:exsl="http://exslt.org/common" xsi:schemaLocation="urn:spdx-seva::1.0 ../xsd/spdx-doc-iep.xsd">
+<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-seva::1.0"
+  xsi:schemaLocation="urn:spdx-seva::1.0 ../xsd/spdx-doc-iep.xsd">
   <Annotation>
     <Date>2018-04-12T13:20:00</Date>
     <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
@@ -53,14 +54,14 @@
       </Checksum>
       <ExternalDocumentID>Test string one</ExternalDocumentID>
       <SpdxDocument>
-        <Name>Test string one</Name>
-        <CommentText>Test string one</CommentText>
+        <Name/>
+        <CommentText/>
         <CreationInfo>
           <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-          <CreatorText>Test string one</CreatorText>
+          <CreatorText/>
         </CreationInfo>
-        <SpecVersionText>Test string one</SpecVersionText>
-        <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+        <SpecVersionText/>
+        <DataLicense/>
       </SpdxDocument>
     </ExternalDocumentRef>
     <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
@@ -79,34 +80,34 @@
       <CommentText>Test string one</CommentText>
     </Relationship>
     <DescribesPackage>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
+      <Name/>
+      <CommentText/>
       <CreationInfo>
         <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CreatorText>Test string one</CreatorText>
+        <CreatorText/>
       </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+      <SpecVersionText/>
+      <DataLicense/>
     </DescribesPackage>
     <DescribesFile>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
+      <Name/>
+      <CommentText/>
       <CreationInfo>
         <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CreatorText>Test string one</CreatorText>
+        <CreatorText/>
       </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+      <SpecVersionText/>
+      <DataLicense/>
     </DescribesFile>
     <HasExtractedLicensingInfo>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
+      <Name/>
+      <CommentText/>
       <CreationInfo>
         <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CreatorText>Test string one</CreatorText>
+        <CreatorText/>
       </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+      <SpecVersionText/>
+      <DataLicense/>
     </HasExtractedLicensingInfo>
     <CreationInfo>
       <LicenseListVersionText>Test string one</LicenseListVersionText>
@@ -122,14 +123,14 @@
       </Checksum>
       <ExternalDocumentID>Test string one</ExternalDocumentID>
       <SpdxDocument>
-        <Name>Test string one</Name>
-        <CommentText>Test string one</CommentText>
+        <Name/>
+        <CommentText/>
         <CreationInfo>
           <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-          <CreatorText>Test string one</CreatorText>
+          <CreatorText/>
         </CreationInfo>
-        <SpecVersionText>Test string one</SpecVersionText>
-        <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+        <SpecVersionText/>
+        <DataLicense/>
       </SpdxDocument>
     </ExternalDocumentRef>
     <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
@@ -148,40 +149,40 @@
       <CommentText>Test string one</CommentText>
     </Relationship>
     <DescribesPackage>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
+      <Name/>
+      <CommentText/>
       <CreationInfo>
         <LicenseListVersionText>Test string one</LicenseListVersionText>
         <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
         <CommentText>Test string one</CommentText>
         <CreatorText>Test string one</CreatorText>
       </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+      <SpecVersionText/>
+      <DataLicense/>
     </DescribesPackage>
     <DescribesFile>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
+      <Name/>
+      <CommentText/>
       <CreationInfo>
         <LicenseListVersionText>Test string one</LicenseListVersionText>
         <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
         <CommentText>Test string one</CommentText>
         <CreatorText>Test string one</CreatorText>
       </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+      <SpecVersionText/>
+      <DataLicense/>
     </DescribesFile>
     <HasExtractedLicensingInfo>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
+      <Name/>
+      <CommentText/>
       <CreationInfo>
         <LicenseListVersionText>Test string one</LicenseListVersionText>
         <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
         <CommentText>Test string one</CommentText>
         <CreatorText>Test string one</CreatorText>
       </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+      <SpecVersionText/>
+      <DataLicense/>
     </HasExtractedLicensingInfo>
     <CreationInfo>
       <LicenseListVersionText>Test string one</LicenseListVersionText>
@@ -206,14 +207,14 @@
     </Checksum>
     <ExternalDocumentID>Test string one</ExternalDocumentID>
     <SpdxDocument>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
+      <Name/>
+      <CommentText/>
       <CreationInfo>
         <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CreatorText>Test string one</CreatorText>
+        <CreatorText/>
       </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+      <SpecVersionText/>
+      <DataLicense/>
     </SpdxDocument>
   </ExternalDocumentRef>
   <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
