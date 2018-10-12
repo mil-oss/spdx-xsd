@@ -10,12 +10,14 @@
         {
             "name": "refxsd",
             "src": "xml/xsd/spdx-seva-ref.xsd",
-            "path": "xml/xsd/spdx-seva-ref.xsd"
+            "path": "xml/xsd/spdx-seva-ref.xsd",
+            "description": "NIEM Conformant Reference XML Schema for SPDX data"
         },
         {
             "name": "iepxsd",
             "src": "IEPD/spdx-license/xml/xsd/spdx-license-iep.xsd",
-            "path": "xml/xsd/spdx-license-iep.xsd"
+            "path": "xml/xsd/spdx-license-iep.xsd",
+            "description": "XML Schema for SPDX License information exchange"
         },
         {
             "name": "xmlschemaxsd",
@@ -65,32 +67,38 @@
         {
             "name": "structgo",
             "src": "src/spdx-license/spdx-license-struct.go",
-            "path": "src/spdx-license/spdx-license-struct.go"
-        },
+            "path": "src/spdx-license/spdx-license-struct.go",
+            "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
+            },
         {
             "name": "structtestgo",
             "src": "src/spdx-license/spdx-license-struct_test.go",
-            "path": "src/spdx-license/spdx-license-struct_test.go"
+            "path": "src/spdx-license/spdx-license-struct_test.go",
+            "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
         },
         {
             "name": "maingo",
             "src": "src/spdx-license/spdx-lic.go",
-            "path": "src/spdx-license/spdx-lic.go"
+            "path": "src/spdx-license/spdx-lic.go",
+            "description": "Golang start class"
         },
         {
             "name": "iepxsdjson",
             "src": "IEPD/spdx-license/json/iep-xsd.json",
-            "path": "json/spdx-license-iep-xsd.json"
+            "path": "json/spdx-license-iep-xsd.json",
+            "description": "JSON Representation of SPDX License Schema"
         },
         {
             "name": "refxsdjson",
             "src": "IEPD/spdx-license/json/ref-xsd.json",
-            "path": "json/spdx-license-ref-xsd.json"
+            "path": "json/spdx-license-ref-xsd.json",
+            "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {
             "name": "instancejson",
             "src": "IEPD/spdx-license/json/spdx-license-instance.json",
-            "path": "json/spdx-license-instance.json"
+            "path": "json/spdx-license-instance.json",
+            "description": "JSON Representation of SPDX License XML Test Instance"
         },
         {
             "name": "provenancereportjson",

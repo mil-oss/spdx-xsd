@@ -10,12 +10,14 @@
         {
             "name": "refxsd",
             "src": "xml/xsd/spdx-seva-ref.xsd",
-            "path": "xml/xsd/spdx-seva-ref.xsd"
+            "path": "xml/xsd/spdx-seva-ref.xsd",
+            "description": "NIEM Conformant Reference XML Schema for SPDX data"
         },
         {
             "name": "iepxsd",
             "src": "IEPD/spdx-document/xml/xsd/spdx-doc-iep.xsd",
-            "path": "xml/xsd/spdx-doc-iep.xsd"
+            "path": "xml/xsd/spdx-doc-iep.xsd",
+            "description": "XML Schema for SPDX Document information exchange"
         },
         {
             "name": "xmlschemaxsd",
@@ -60,7 +62,8 @@
         {
             "name": "instancexml",
             "src": "IEPD/spdx-document/xml/instance/spdx-doc-instance.xml",
-            "path": "xml/instance/spdx-doc-instance.xml"
+            "path": "xml/instance/spdx-doc-instance.xml",
+            "description": "SPDX Document XML Test Instance"
         },
         {
             "name": "instancegolangxml",
@@ -70,32 +73,38 @@
         {
             "name": "structgo",
             "src": "src/spdx-document/spdx-doc-struct.go",
-            "path": "src/spdx-document/spdx-doc-struct.go"
+            "path": "src/spdx-document/spdx-doc-struct.go",
+            "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
         },
         {
             "name": "structtestgo",
             "src": "src/spdx-document/spdx-doc-struct_test.go",
-            "path": "src/spdx-document/spdx-doc-struct_test.go"
+            "path": "src/spdx-document/spdx-doc-struct_test.go",
+            "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
         },
         {
             "name": "maingo",
             "src": "src/spdx-document/spdx-doc.go",
-            "path": "src/spdx-document/spdx-doc.go"
+            "path": "src/spdx-document/spdx-doc.go",
+            "description": "Golang start class"
         },
         {
             "name": "iepxsdjson",
             "src": "IEPD/spdx-document/json/spdx-doc-iep-xsd.json",
-            "path": "json/spdx-doc-iep-xsd.json"
+            "path": "json/spdx-doc-iep-xsd.json",
+            "description": "JSON Representation of SPDX Document Schema"
         },
         {
             "name": "refxsdjson",
             "src": "IEPD/spdx-document/json/spdx-seva-ref-xsd.json",
-            "path": "json/spdx-doc-ref-xsd.json"
+            "path": "json/spdx-doc-ref-xsd.json",
+            "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {
             "name": "instancejson",
             "src": "IEPD/spdx-document/json/spdx-doc-instance.json",
-            "path": "json/spdx-doc-instance.json"
+            "path": "json/spdx-doc-instance.json",
+            "description": "JSON Representation of SPDX Document XML Test Instance"
         },
         {
             "name": "provenancereportjson",
@@ -135,7 +144,8 @@
         {
             "name": "zipiepd",
             "src": "",
-            "path": "spdx-doc-iepd.zip"
+            "path": "spdx-doc-iepd.zip",
+            "description": "SPDX Document Information Exchange Packet Documentation - all files in a Zip"
         }
     ],
     "directories": [
