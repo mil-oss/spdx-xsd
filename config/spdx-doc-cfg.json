@@ -5,6 +5,7 @@
     "homeurl":"http://localhost",
     "port":":8181",
     "dbloc":"tmp/spdx-doc-iepd/db/spdx-doc.db",
+    "tempdir":"tmp/",
     "temppath":"tmp/spdx-doc-iepd/",
     "resources": [
         {
@@ -53,11 +54,6 @@
             "name": "testdataxml",
             "src": "IEPD/spdx-document/xml/instance/spdx-doc-test-data.xml",
             "path": "xml/instance/spdx-doc-test-data.xml"
-        },
-        {
-            "name": "templatexml",
-            "src": "IEPD/spdx-document/xml/instance/spdx-doc-template.xml",
-            "path": "xml/instance/spdx-doc-template.xml"
         },
         {
             "name": "instancexml",

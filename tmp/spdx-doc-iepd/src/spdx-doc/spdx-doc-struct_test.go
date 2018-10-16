@@ -66,7 +66,7 @@ func TestSpdxDocument(t *testing.T) {
 		Expect(spdx.SpecVersionText).To(Equal("Test string one"))
         })
 	g.It("Must have ExternalDocumentRef",func() {
-            Expect(spdx.ExternalDocumentRef.Checksum.ChecksumValue).To(Equal(""))
+            Expect(spdx.ExternalDocumentRef.Checksum.ChecksumValue).To(Equal("6865726F6E6779616E672E636F6D"))
             Expect(spdx.ExternalDocumentRef.Checksum.AlgorithmCode).To(Equal("ChecksumAlgorithmMd5"))
             Expect(spdx.ExternalDocumentRef.ExternalDocumentID).To(Equal("Test string one"))
             Expect(spdx.ExternalDocumentRef.SpdxDocumentID).To(Equal("Test string one"))

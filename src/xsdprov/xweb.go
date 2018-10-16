@@ -11,6 +11,8 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"sort"
+	"strings"
 	"sync/atomic"
 	"time"
 
@@ -91,13 +93,98 @@ func index() http.Handler {
 			return
 		}
 		//http.Redirect(w, r, "https://securityxsd.specchain.org", 301)
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, name)
-		//fmt.Fprintln(w, temppath)
+		fmt.Fprintln(w, "<html>")
+		fmt.Fprintln(w, "<body>")
+		fmt.Fprintln(w, "<div><b>"+strings.ToUpper(name)+"</b></div>")
+		fmt.Fprintln(w, "<hr>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>REST Endpoints:</b></div>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><a href='/dload'>/dload</a> - Get zipped package</div>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div style='float:left; width:50%;margin-bottom:12px;'>")
+		fmt.Fprintln(w, "<div><b>XML Schema:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		var sr = sortMap(resources)
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".xsd") {
+				fmt.Fprintln(w, "<tr><td style='width:200px'><a href='/file/"+p+"'>/file/"+p+"</a></td><td>"+filepath.Base(resources[p])+"</td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>XSLT:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".xsl") {
+				fmt.Fprintln(w, "<tr><td style='width:200px'><a href='/file/"+p+"'>/file/"+p+"</a></td><td>"+filepath.Base(resources[p])+"</td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>XML Instances:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".xml") {
+				fmt.Fprintln(w, "<tr><td style='width:200px'><a href='/file/"+p+"'>/file/"+p+"</a></td><td>"+filepath.Base(resources[p])+"</td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</div>")
+
+		fmt.Fprintln(w, "<div style='width:50%;float:left'>")
+		fmt.Fprintln(w, "<div><b>JSON:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".json") {
+				fmt.Fprintln(w, "<tr><td style='width:200px'><a href='/file/"+p+"'>/file/"+p+"</a></td><td>"+filepath.Base(resources[p])+"</td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>GOLANG:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".go") {
+				fmt.Fprintln(w, "<tr><td style='width:200px'><a href='/file/"+p+"'>/file/"+p+"</a></td><td>"+filepath.Base(resources[p])+"</td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</div>")
+
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td><b>Operations:</b></td><td></td></tr>")
+		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{XMLName='',XMLPath='',XMLString='',XSDName='',XSDPath='',XSDString=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{XMLName='',XMLPath='',XMLString='',XSLName='',XSLPath='',XSLString='',ResultPath='',Params=[{'':''},{'':''}]}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{ID='',XMLPath='',Digest=''}</td></tr>")
+		fmt.Fprintln(w, "<table>")
+
+		fmt.Fprintln(w, "</body>")
+		fmt.Fprintln(w, "</html>")
 	})
+}
+
+func sortMap(m map[string]string) []string {
+	type kv struct {
+		Key   string
+		Value string
+	}
+	var ss []kv
+	for k, v := range m {
+		ss = append(ss, kv{k, v})
+	}
+	sort.Slice(ss, func(i, j int) bool {
+		return ss[i].Value > ss[j].Value
+	})
+	var k []string
+	for _, kv := range ss {
+		k = append(k, kv.Key)
+	}
+	return k
 }
 
 func getResource() http.Handler {
@@ -193,7 +280,8 @@ func dload() http.Handler {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if atomic.LoadInt32(&healthy) == 1 {
-			DownloadFile("/tmp/IEPD/"+name+".zip", w)
+
+			DownloadFile(tempdir+name+"-iepd.zip", w)
 			//w.WriteHeader(http.StatusOK)
 			index()
 		}

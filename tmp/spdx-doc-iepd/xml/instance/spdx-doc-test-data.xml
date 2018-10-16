@@ -59,11 +59,6 @@
         <True2 valid="true">false</True2>
         <False1 valid="false">maybe</False1>
     </Boolean>
-    <HexBinary>
-        <True1 valid="true">true</True1>
-        <True2 valid="true">false</True2>
-        <False1 valid="false">maybe</False1>
-    </HexBinary>
     <String>
         <True1 valid="true">Test string one</True1>
         <True2 valid="true">Test string two</True2>
@@ -84,4 +79,9 @@
         <True2 valid="true">urn:anyuri.org</True2>
         <False1 valid="false">invalid link</False1>
     </SpdxID>
+    <ChecksumValue>
+        <True1 valid="true">6865726F6E6779616E672E636F6D</True1>
+        <True2 valid="true">41</True2>
+        <False1 valid="false">123</False1>
+    </ChecksumValue>
 </TestData>
