@@ -16,25 +16,17 @@
     <xs:complexContent>
       <xs:extension base="SpdxElementType">
         <xs:sequence>
-          <xs:element ref="DescribesPackage" minOccurs="0"/>
-          <xs:element ref="DescribesFile" minOccurs="0"/>
-          <xs:element ref="HasExtractedLicensingInfo" minOccurs="0"/>
+          <xs:element ref="DescribesPackageID"/>
+          <xs:element ref="DescribesFileID"/>
+          <xs:element ref="HasExtractedLicensingInfoID" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="CreationInfo" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="SpecVersionText" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="ExternalDocumentRef" minOccurs="0"/>
-          <xs:element ref="DataLicenseText"/>
+          <xs:element ref="DataLicenseID"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="SpdxDocument" type="SpdxDocumentType" nillable="true">
-    <xs:annotation>
-      <xs:documentation>A data item for SpdxDocument</xs:documentation>
-      <xs:appinfo>
-        <Element name="SpdxDocument" xmlname="SpdxDocument" comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information." rdf="http://spdx.org/rdf/terms#SpdxDocument" subclassof="SpdxElement"/>
-      </xs:appinfo>
-    </xs:annotation>
-  </xs:element>
   <xs:simpleType name="AlgorithmCodeSimpleType">
     <xs:annotation>
       <xs:documentation>A data type for Algorithm properties</xs:documentation>
@@ -494,7 +486,7 @@
     <xs:sequence>
       <xs:element ref="Checksum" minOccurs="1" maxOccurs="1"/>
       <xs:element ref="ExternalDocumentID" minOccurs="1" maxOccurs="1"/>
-      <xs:element ref="SpdxDocument" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="SpdxDocumentID" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="LicenseIDType">
@@ -540,7 +532,7 @@
     <xs:sequence>
       <xs:element ref="RelationshipTypeCode"/>
       <xs:element ref="CommentText" maxOccurs="1"/>
-      <xs:element ref="RelatedSpdxElement" minOccurs="1" maxOccurs="1"/>
+      <xs:element ref="RelatedSpdxElementID" minOccurs="1" maxOccurs="1"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="RelationshipTypeCodeType">
@@ -562,11 +554,23 @@
       </xs:appinfo>
     </xs:annotation>
     <xs:sequence>
+      <xs:element ref="SpdxID"/>
       <xs:element ref="Annotation" minOccurs="0"/>
       <xs:element ref="Name" minOccurs="1" maxOccurs="1"/>
       <xs:element ref="CommentText" maxOccurs="1"/>
       <xs:element ref="Relationship" minOccurs="0"/>
     </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SpdxIDType">
+    <xs:annotation>
+      <xs:documentation>A data type to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally.</xs:documentation>
+      <xs:appinfo>
+        <ComplexType name="IsDeprecatedLicenseIDType" comment="A data type to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally." rdf="#SPDXRef-DOCUMENT" domain="Document" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:simpleContent>
+      <xs:extension base="xs:string"/>
+    </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="SpecVersionTextType">
     <xs:annotation>
@@ -659,11 +663,11 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DataLicenseText" type="LicenseIDType" nillable="true">
+  <xs:element name="DataLicenseID" type="LicenseIDType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data item for The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files.</xs:documentation>
       <xs:appinfo>
-        <Element name="dataLicense" xmlname="DataLicense" comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files." rdf="http://spdx.org/rdf/terms#dataLicense" domain="SpdxDocument" type="FunctionalProperty"/>
+        <Element name="dataLicense" xmlname="DataLicenseID" comment="The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files." rdf="http://spdx.org/rdf/terms#dataLicense" domain="SpdxDocument" type="FunctionalProperty"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -675,19 +679,19 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DescribesFile" type="SpdxDocumentType" nillable="true">
+  <xs:element name="DescribesFileID" type="SpdxIDType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data item for The describesFile property relates an SpdxDocument to the file which it describes.</xs:documentation>
       <xs:appinfo>
-        <Element name="describesFile" xmlname="DescribesFile" comment="The describesFile property relates an SpdxDocument to the file which it describes." rdf="http://spdx.org/rdf/terms#describesFile" domain="SpdxDocument" range="File"/>
+        <Element name="describesFile" xmlname="DescribesFile" comment="The describesFile property relates an SpdxDocument to the file which it describes." rdf="http://spdx.org/rdf/terms#describesFile" domain="SpdxDocument" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DescribesPackage" type="SpdxDocumentType" nillable="true">
+  <xs:element name="DescribesPackageID" type="SpdxIDType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data item for The describesPackage property relates an SpdxDocument to the package which it describes.</xs:documentation>
       <xs:appinfo>
-        <Element name="describesPackage" xmlname="DescribesPackage" comment="The describesPackage property relates an SpdxDocument to the package which it describes." rdf="http://spdx.org/rdf/terms#describesPackage" domain="SpdxDocument" range="Package"/>
+        <Element name="describesPackage" xmlname="DescribesPackageID" comment="The describesPackage property relates an SpdxDocument to the package which it describes." rdf="http://spdx.org/rdf/terms#describesPackage" domain="SpdxDocument" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -707,11 +711,11 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="HasExtractedLicensingInfo" type="SpdxDocumentType" nillable="true">
+  <xs:element name="HasExtractedLicensingInfoID" type="SpdxIDType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data item for Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument.</xs:documentation>
       <xs:appinfo>
-        <Element name="hasExtractedLicensingInfo" xmlname="HasExtractedLicensingInfo" comment="Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument." rdf="http://spdx.org/rdf/terms#hasExtractedLicensingInfo" domain="ExtractedLicenseInfoSpdxDocument"/>
+        <Element name="HasExtractedLicensingInfoID" xmlname="HasExtractedLicensingInfo" comment="Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument." rdf="http://spdx.org/rdf/terms#hasExtractedLicensingInfo" domain="ExtractedLicenseInfoSpdxDocument" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -731,11 +735,11 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RelatedSpdxElement" type="RelationshipType" nillable="true">
+  <xs:element name="RelatedSpdxElementID" type="SpdxIDType" nillable="true">
     <xs:annotation>
-      <xs:documentation>A data item for A related SpdxElement.</xs:documentation>
+      <xs:documentation>A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally.</xs:documentation>
       <xs:appinfo>
-        <Element name="relatedSpdxElement" xmlname="RelatedSpdxElement" comment="A related SpdxElement." rdf="http://spdx.org/rdf/terms#relatedSpdxElement" domain="Relationship" range="SpdxElement"/>
+        <Element name="SpdxID" comment="A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally." rdf="#SPDXRef-DOCUMENT" domain="Document" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
@@ -760,6 +764,22 @@
       <xs:documentation>A data item for SpdxDocument</xs:documentation>
       <xs:appinfo>
         <Element name="SpdxDocument" xmlname="SpdxDocument" comment="An SpdxDocument is a summary of the contents, provenance, ownership and licensing analysis of a specific software package. This is, effectively, the top level of SPDX information." rdf="http://spdx.org/rdf/terms#SpdxDocument" subclassof="SpdxElement"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SpdxDocumentID" type="SpdxIDType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally.</xs:documentation>
+      <xs:appinfo>
+        <Element name="SpdxID" comment="A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally." rdf="#SPDXRef-DOCUMENT" domain="Document" range="String"/>
+      </xs:appinfo>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="SpdxID" type="SpdxIDType" nillable="true">
+    <xs:annotation>
+      <xs:documentation>A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally.</xs:documentation>
+      <xs:appinfo>
+        <Element name="SpdxID" comment="A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally." rdf="#SPDXRef-DOCUMENT" domain="Document" range="String"/>
       </xs:appinfo>
     </xs:annotation>
   </xs:element>

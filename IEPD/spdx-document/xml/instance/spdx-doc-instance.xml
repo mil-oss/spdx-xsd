@@ -26,7 +26,7 @@
   <SpecVersionText>Test string one</SpecVersionText>
   <ExternalDocumentRef>
     <Checksum>
-      <ChecksumValue/>
+      <ChecksumValue>6865726F6E6779616E672E636F6D</ChecksumValue>
       <AlgorithmCode>ChecksumAlgorithmMd5</AlgorithmCode>
     </Checksum>
     <ExternalDocumentID>Test string one</ExternalDocumentID>

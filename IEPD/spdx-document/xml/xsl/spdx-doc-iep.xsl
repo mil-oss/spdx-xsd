@@ -24,10 +24,17 @@
             </xs:appinfo>
         </xs:annotation>
         <xsl:apply-templates select="//xs:schema/*[@name = $Root]"/>
-        <xsl:apply-templates select="//xs:schema/*[@name = $RootEl]"/>
         <xsl:variable name="allnodes">
             <xsl:call-template name="deDupList">
                 <xsl:with-param name="list">
+                    <xsl:call-template name="iterateNode">
+                        <xsl:with-param name="node" select="//xs:schema/*[@name = $Root]"/>
+                        <xsl:with-param name="iteration" select="10"/>
+                    </xsl:call-template>
+                    <xsl:call-template name="iterateNode">
+                        <xsl:with-param name="node" select="//xs:schema/*[@name = $RootEl]"/>
+                        <xsl:with-param name="iteration" select="10"/>
+                    </xsl:call-template>
                     <xsl:call-template name="iterateNode">
                         <xsl:with-param name="node" select="//xs:schema/*[@name = $Root]"/>
                         <xsl:with-param name="iteration" select="10"/>
