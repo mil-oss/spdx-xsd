@@ -28,13 +28,13 @@ func TestSpdxDocument(t *testing.T) {
     }
     g.Describe("SpdxDocument",func() {
 	g.It("Must have SpdxID",func() {
-		Expect(spdx.SpdxID).To(Equal("urn:anyuri.org"))
+		Expect(spdx.SpdxID).To(Equal("Test string one"))
         })
 	g.It("Must have Annotation",func() {
-            Expect(spdx.Annotation.Date).To(Equal("2018-04-12T13:20:00"))
-            Expect(spdx.Annotation.AnnotationTypeCode).To(Equal("AnnotationTypeOther"))
-            Expect(spdx.Annotation.CommentText).To(Equal("Test string one"))
-            Expect(spdx.Annotation.AnnotatorText).To(Equal("Test string one"))
+            Expect(spdx.Annotation.Date).To(Equal(""))
+            Expect(spdx.Annotation.AnnotationTypeCode).To(Equal(""))
+            Expect(spdx.Annotation.CommentText).To(Equal(""))
+            Expect(spdx.Annotation.AnnotatorText).To(Equal(""))
         })
 	g.It("Must have name",func() {
 		Expect(spdx.Name).To(Equal("Test string one"))
@@ -43,9 +43,9 @@ func TestSpdxDocument(t *testing.T) {
 		Expect(spdx.CommentText).To(Equal("Test string one"))
         })
 	g.It("Must have Relationship",func() {
-            Expect(spdx.Relationship.RelationshipTypeCode).To(Equal("RelationshipTypeAmendment"))
-            Expect(spdx.Relationship.CommentText).To(Equal("Test string one"))
-            Expect(spdx.Relationship.RelatedSpdxElementID).To(Equal("Test string one"))
+            Expect(spdx.Relationship.RelationshipTypeCode).To(Equal(""))
+            Expect(spdx.Relationship.CommentText).To(Equal(""))
+            Expect(spdx.Relationship.RelatedSpdxElementID).To(Equal(""))
         })
 	g.It("Must have describesPackage",func() {
 		Expect(spdx.DescribesPackageID).To(Equal("Test string one"))
@@ -57,19 +57,19 @@ func TestSpdxDocument(t *testing.T) {
 		Expect(spdx.HasExtractedLicensingInfoID).To(Equal("Test string one"))
         })
 	g.It("Must have CreationInfo",func() {
-            Expect(spdx.CreationInfo.LicenseListVersionText).To(Equal("Test string one"))
-            Expect(spdx.CreationInfo.CreatedDateTime).To(Equal("2018-04-12T13:20:00"))
-            Expect(spdx.CreationInfo.CommentText).To(Equal("Test string one"))
-            Expect(spdx.CreationInfo.CreatorText).To(Equal("Test string one"))
+            Expect(spdx.CreationInfo.LicenseListVersionText).To(Equal(""))
+            Expect(spdx.CreationInfo.CreatedDateTime).To(Equal(""))
+            Expect(spdx.CreationInfo.CommentText).To(Equal(""))
+            Expect(spdx.CreationInfo.CreatorText).To(Equal(""))
         })
 	g.It("Must have specVersion",func() {
 		Expect(spdx.SpecVersionText).To(Equal("Test string one"))
         })
 	g.It("Must have ExternalDocumentRef",func() {
-            Expect(spdx.ExternalDocumentRef.Checksum.ChecksumValue).To(Equal("6865726F6E6779616E672E636F6D"))
-            Expect(spdx.ExternalDocumentRef.Checksum.AlgorithmCode).To(Equal("ChecksumAlgorithmMd5"))
-            Expect(spdx.ExternalDocumentRef.ExternalDocumentID).To(Equal("Test string one"))
-            Expect(spdx.ExternalDocumentRef.SpdxDocumentID).To(Equal("Test string one"))
+            Expect(spdx.ExternalDocumentRef.Checksum.ChecksumValue).To(Equal(""))
+            Expect(spdx.ExternalDocumentRef.Checksum.AlgorithmCode).To(Equal(""))
+            Expect(spdx.ExternalDocumentRef.ExternalDocumentID).To(Equal(""))
+            Expect(spdx.ExternalDocumentRef.SpdxDocumentID).To(Equal(""))
         })
 	g.It("Must have dataLicense",func() {
 		Expect(spdx.DataLicenseID).To(Equal("Test string one"))

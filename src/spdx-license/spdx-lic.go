@@ -1,4 +1,4 @@
-package main
+package spdxlic
 
 import (
 	"xsdprov"
@@ -13,11 +13,12 @@ var (
 	SpdxLicenseDatastruct interface{}
 )
 
-func main() {
+// BuildLicenseIEP ...
+func BuildLicenseIEP(config string) {
 	SpdxLicenseDatastruct = NewLicense()
-	xsdprov.InitXSDProv("config/spdx-license-cfg.json")
+	xsdprov.InitXSDProv(config)
 	xsdprov.BuildIep(SpdxLicenseDatastruct)
-	xsdprov.StartWeb()
+	xsdprov.StartWeb(xsdprov.Homeurl)
 }
 
 // Resources ...

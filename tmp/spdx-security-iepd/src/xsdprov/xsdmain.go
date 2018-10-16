@@ -18,19 +18,22 @@ var (
 	resources    = map[string]string{}
 	resourcedirs = map[string]string{}
 	sources      = map[string]string{}
+	tempdir      string
 	temppath     string
-	tempfiles    = map[string]string{}
-	resdigests   = map[string]string{}
-	tempdigests  = map[string]string{}
-	name         string
-	dbloc        string
-	cfg          Cfg
-	reflink      string
-	testlink     string
-	port         string
-	db           *bolt.DB
-	errorlist    []error
-	provreport   = map[int64]ProvEntry{}
+	// Homeurl ...
+	Homeurl     string
+	tempfiles   = map[string]string{}
+	resdigests  = map[string]string{}
+	tempdigests = map[string]string{}
+	name        string
+	dbloc       string
+	cfg         Cfg
+	reflink     string
+	testlink    string
+	port        string
+	db          *bolt.DB
+	errorlist   []error
+	provreport  = map[int64]ProvEntry{}
 )
 
 // InitXSDProv ...
@@ -45,7 +48,9 @@ func InitXSDProv(config string) {
 		resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Src
 	}
 	dbloc = cfg.Dbloc
+	tempdir = cfg.Tempdir
 	temppath = cfg.Temppath
+	Homeurl = cfg.Homeurl
 	name = cfg.Project
 	reflink = cfg.Reflink
 	testlink = cfg.Testlink

@@ -1,8 +1,8 @@
 {
     "project": "spdx-security",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
-    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-security/xml/instance/spdx-security-test-data.xml",
-    "homeurl": "http://localhost",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-security/xml/instance/spdx-security-test-data.xml",
+    "homeurl": "http://localhost/spdx-security",
     "port": ":8181",
     "dbloc": "tmp/spdx-security-iepd/db/spdx-security.db",
     "temppath": "tmp/spdx-security-iepd/",
@@ -15,7 +15,7 @@
         },
         {
             "name": "iepxsd",
-            "src": "IEPD/spdx-security/xml/xsd/spdx-security-iep.xsd",
+            "src": "iepd/spdx-security/xml/xsd/spdx-security-iep.xsd",
             "path": "xml/xsd/spdx-security-iep.xsd",
             "description": "XML Schema for SPDX Software Evaluation Data information exchange"
         },
@@ -31,37 +31,37 @@
         },
         {
             "name": "iepxsdxsl",
-            "src": "IEPD/spdx-security/xml/xsl/spdx-security-iep.xsl",
+            "src": "iepd/spdx-security/xml/xsl/spdx-security-iep.xsl",
             "path": "xml/xsl/spdx-security-iep.xsl"
         },
         {
             "name": "instancexsl",
-            "src": "IEPD/spdx-security/xml/xsl/spdx-security-instance.xsl",
+            "src": "iepd/spdx-security/xml/xsl/spdx-security-instance.xsl",
             "path": "xml/xsl/spdx-security-instance.xsl"
         },
         {
             "name": "gogenxsdxsl",
-            "src": "IEPD/spdx-security/xml/xsl/spdx-security-go-gen.xsl",
+            "src": "iepd/spdx-security/xml/xsl/spdx-security-go-gen.xsl",
             "path": "xml/xsl/spdx-security-go-gen.xsl"
         },
         {
             "name": "gotestgenxsl",
-            "src": "IEPD/spdx-security/xml/xsl/spdx-security-go-test-gen.xsl",
+            "src": "iepd/spdx-security/xml/xsl/spdx-security-go-test-gen.xsl",
             "path": "xml/xsl/spdx-security-go-test-gen.xsl"
         },
         {
             "name": "testdataxml",
-            "src": "IEPD/spdx-security/xml/instance/spdx-security-test-data.xml",
+            "src": "iepd/spdx-security/xml/instance/spdx-security-test-data.xml",
             "path": "xml/instance/spdx-security-test-data.xml"
         },
         {
             "name": "instancexml",
-            "src": "IEPD/spdx-security/xml/instance/spdx-security-instance.xml",
+            "src": "iepd/spdx-security/xml/instance/spdx-security-instance.xml",
             "path": "xml/instance/spdx-security-instance.xml"
         },
         {
             "name": "instancegolangxml",
-            "src": "IEPD/spdx-security/xml/instance/test-instance-golang.xml",
+            "src": "iepd/spdx-security/xml/instance/test-instance-golang.xml",
             "path": "xml/instance/spdx-security-instance-golang.xml"
         },
         {
@@ -86,30 +86,30 @@
         },
         {
             "name": "iepxsdjson",
-            "src": "IEPD/spdx-security/json/spdx-security-iep-xsd.json",
+            "src": "iepd/spdx-security/json/spdx-security-iep-xsd.json",
             "path": "json/spdx-security-iep-xsd.json",
             "description": "JSON Representation of SPDX Document Schema"
         },
         {
             "name": "refxsdjson",
-            "src": "IEPD/spdx-security/json/spdx-xml-ref-xsd.json",
+            "src": "iepd/spdx-security/json/spdx-xml-ref-xsd.json",
             "path": "json/spdx-security-ref-xsd.json",
             "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {
             "name": "instancejson",
-            "src": "IEPD/spdx-security/json/spdx-security-instance.json",
+            "src": "iepd/spdx-security/json/spdx-security-instance.json",
             "path": "json/spdx-security-instance.json",
             "description": "JSON Representation of SPDX Security XML Test Instance"
         },
         {
             "name": "provenancereportjson",
-            "src": "IEPD/spdx-security/json/provenance-report.json",
+            "src": "iepd/spdx-security/json/provenance-report.json",
             "path": "json/spdx-security-provenance-report.json"
         },
         {
             "name": "resourcesjson",
-            "src": "IEPD/spdx-security/json/resources.json",
+            "src": "iepd/spdx-security/json/resources.json",
             "path": "json/spdx-security-resources.json"
         },
         {

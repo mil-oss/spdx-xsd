@@ -1,8 +1,8 @@
 {
     "project": "spdx-license",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
-    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-license/xml/instance/spdx-license-test-data.xml",
-    "homeurl": "http://localhost",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-license/xml/instance/spdx-license-test-data.xml",
+    "homeurl": "http://localhost/spdx-license",
     "port": ":8181",
     "dbloc": "tmp/spdx-license-iepd/db/spdx-license.db",
     "temppath": "tmp/spdx-license-iepd/",
@@ -15,7 +15,7 @@
         },
         {
             "name": "iepxsd",
-            "src": "IEPD/spdx-license/xml/xsd/spdx-license-iep.xsd",
+            "src": "iepd/spdx-license/xml/xsd/spdx-license-iep.xsd",
             "path": "xml/xsd/spdx-license-iep.xsd",
             "description": "XML Schema for SPDX License information exchange"
         },
@@ -31,37 +31,37 @@
         },
         {
             "name": "iepxsdxsl",
-            "src": "IEPD/spdx-license/xml/xsl/spdx-license-iep.xsl",
+            "src": "iepd/spdx-license/xml/xsl/spdx-license-iep.xsl",
             "path": "xml/xsl/spdx-license-iep.xsl"
         },
         {
             "name": "instancexsl",
-            "src": "IEPD/spdx-license/xml/xsl/spdx-license-instance.xsl",
+            "src": "iepd/spdx-license/xml/xsl/spdx-license-instance.xsl",
             "path": "xml/xsl/spdx-license-instance.xsl"
         },
         {
             "name": "gogenxsdxsl",
-            "src": "IEPD/spdx-license/xml/xsl/spdx-license-go-gen.xsl",
+            "src": "iepd/spdx-license/xml/xsl/spdx-license-go-gen.xsl",
             "path": "xml/xsl/spdx-license-go-gen.xsl"
         },
         {
             "name": "gotestgenxsl",
-            "src": "IEPD/spdx-license/xml/xsl/spdx-license-go-test-gen.xsl",
+            "src": "iepd/spdx-license/xml/xsl/spdx-license-go-test-gen.xsl",
             "path": "xml/xsl/spdx-license-go-test-gen.xsl"
         },
         {
             "name": "testdataxml",
-            "src": "IEPD/spdx-license/xml/instance/spdx-license-test-data",
+            "src": "iepd/spdx-license/xml/instance/spdx-license-test-data",
             "path": "xml/instance/spdx-license-test-data.xml"
         },
         {
             "name": "instancexml",
-            "src": "IEPD/spdx-license/xml/instance/spdx-license-instance.xml",
+            "src": "iepd/spdx-license/xml/instance/spdx-license-instance.xml",
             "path": "xml/instance/spdx-license-instance.xml"
         },
         {
             "name": "instancegolangxml",
-            "src": "IEPD/spdx-license/xml/instance/test-instance-golang.xml",
+            "src": "iepd/spdx-license/xml/instance/test-instance-golang.xml",
             "path": "xml/instance/spdx-license-instance-golang.xml"
         },
         {
@@ -84,30 +84,30 @@
         },
         {
             "name": "iepxsdjson",
-            "src": "IEPD/spdx-license/json/spdx-license-iep-xsd.json",
+            "src": "iepd/spdx-license/json/spdx-license-iep-xsd.json",
             "path": "json/spdx-license-iep-xsd.json",
             "description": "JSON Representation of SPDX License Schema"
         },
         {
             "name": "refxsdjson",
-            "src": "IEPD/spdx-license/json/spdx-xml-ref-xsd.json",
+            "src": "iepd/spdx-license/json/spdx-xml-ref-xsd.json",
             "path": "json/spdx-xml-ref-xsd.json",
             "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {
             "name": "instancejson",
-            "src": "IEPD/spdx-license/json/spdx-license-instance.json",
+            "src": "iepd/spdx-license/json/spdx-license-instance.json",
             "path": "json/spdx-license-instance.json",
             "description": "JSON Representation of SPDX License XML Test Instance"
         },
         {
             "name": "provenancereportjson",
-            "src": "IEPD/spdx-license/json/provenance-report.json",
+            "src": "iepd/spdx-license/json/provenance-report.json",
             "path": "json/spdx-license-provenance-report.json"
         },
         {
             "name": "resourcesjson",
-            "src": "IEPD/spdx-license/json/resources.json",
+            "src": "iepd/spdx-license/json/resources.json",
             "path": "json/spdx-license-resources.json"
         },
         {

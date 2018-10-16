@@ -280,7 +280,8 @@ func dload() http.Handler {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if atomic.LoadInt32(&healthy) == 1 {
-			DownloadFile("/tmp/IEPD/"+name+".zip", w)
+
+			DownloadFile(tempdir+name+"-iepd.zip", w)
 			//w.WriteHeader(http.StatusOK)
 			index()
 		}

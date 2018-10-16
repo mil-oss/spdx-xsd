@@ -8,10 +8,12 @@ RUN apk add --update gcc g++ make wget curl bash libxslt libc-dev libxml2 libxml
 RUN apk --no-cache add openssh curl 
 
 ADD src /go/src
+ADD  config /go/src/config
+ADD iepd iepd
+ADD xml xml
 
 WORKDIR /go/src/spdx
-ADD  config /go/src/config
-ADD . .
+
 
 #build the binary with debug information removed
 RUN go build -ldflags '-w -s' -a -installsuffix cgo -o xsdprov

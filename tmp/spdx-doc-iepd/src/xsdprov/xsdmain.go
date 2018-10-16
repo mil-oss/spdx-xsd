@@ -18,6 +18,7 @@ var (
 	resources    = map[string]string{}
 	resourcedirs = map[string]string{}
 	sources      = map[string]string{}
+	tempdir      string
 	temppath     string
 	tempfiles    = map[string]string{}
 	resdigests   = map[string]string{}
@@ -45,6 +46,7 @@ func InitXSDProv(config string) {
 		resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Src
 	}
 	dbloc = cfg.Dbloc
+	tempdir = cfg.Tempdir
 	temppath = cfg.Temppath
 	name = cfg.Project
 	reflink = cfg.Reflink

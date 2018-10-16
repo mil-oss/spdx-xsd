@@ -1,8 +1,8 @@
 {
     "project":"spdx-doc",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
-    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-document/xml/instance/spdx-doc-test-data.xml",
-    "homeurl":"http://localhost",
+    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-document/xml/instance/spdx-doc-test-data.xml",
+    "homeurl":"http://localhost/spdx-doc",
     "port":":8181",
     "dbloc":"tmp/spdx-doc-iepd/db/spdx-doc.db",
     "tempdir":"tmp/",
@@ -16,7 +16,7 @@
         },
         {
             "name": "iepxsd",
-            "src": "IEPD/spdx-document/xml/xsd/spdx-doc-iep.xsd",
+            "src": "iepd/spdx-document/xml/xsd/spdx-doc-iep.xsd",
             "path": "xml/xsd/spdx-doc-iep.xsd",
             "description": "XML Schema for SPDX Document information exchange"
         },
@@ -32,38 +32,38 @@
         },
         {
             "name": "iepxsdxsl",
-            "src": "IEPD/spdx-document/xml/xsl/spdx-doc-iep.xsl",
+            "src": "iepd/spdx-document/xml/xsl/spdx-doc-iep.xsl",
             "path": "xml/xsl/spdx-doc-iep.xsl"
         },
         {
             "name": "instancexsl",
-            "src": "IEPD/spdx-document/xml/xsl/spdx-doc-instance.xsl",
+            "src": "iepd/spdx-document/xml/xsl/spdx-doc-instance.xsl",
             "path": "xml/xsl/spdx-doc-instance.xsl"
         },
         {
             "name": "gogenxsdxsl",
-            "src": "IEPD/spdx-document/xml/xsl/spdx-doc-go-gen.xsl",
+            "src": "iepd/spdx-document/xml/xsl/spdx-doc-go-gen.xsl",
             "path": "xml/xsl/spdx-doc-go-gen.xsl"
         },
         {
             "name": "gotestgenxsl",
-            "src": "IEPD/spdx-document/xml/xsl/spdx-doc-go-test-gen.xsl",
+            "src": "iepd/spdx-document/xml/xsl/spdx-doc-go-test-gen.xsl",
             "path": "xml/xsl/spdx-doc-go-test-gen.xsl"
         },
         {
             "name": "testdataxml",
-            "src": "IEPD/spdx-document/xml/instance/spdx-doc-test-data.xml",
+            "src": "iepd/spdx-document/xml/instance/spdx-doc-test-data.xml",
             "path": "xml/instance/spdx-doc-test-data.xml"
         },
         {
             "name": "instancexml",
-            "src": "IEPD/spdx-document/xml/instance/spdx-doc-instance.xml",
+            "src": "iepd/spdx-document/xml/instance/spdx-doc-instance.xml",
             "path": "xml/instance/spdx-doc-instance.xml",
             "description": "SPDX Document XML Test Instance"
         },
         {
             "name": "instancegolangxml",
-            "src": "IEPD/spdx-document/xml/instance/spdx-doc-instance-golang.xml",
+            "src": "iepd/spdx-document/xml/instance/spdx-doc-instance-golang.xml",
             "path": "xml/instance/spdx-doc-instance-golang.xml"
         },
         {
@@ -86,30 +86,30 @@
         },
         {
             "name": "iepxsdjson",
-            "src": "IEPD/spdx-document/json/spdx-doc-iep-xsd.json",
+            "src": "iepd/spdx-document/json/spdx-doc-iep-xsd.json",
             "path": "json/spdx-doc-iep-xsd.json",
             "description": "JSON Representation of SPDX Document Schema"
         },
         {
             "name": "refxsdjson",
-            "src": "IEPD/spdx-document/json/spdx-xml-ref-xsd.json",
+            "src": "iepd/spdx-document/json/spdx-xml-ref-xsd.json",
             "path": "json/spdx-xml-ref-xsd.json",
             "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {
             "name": "instancejson",
-            "src": "IEPD/spdx-document/json/spdx-doc-instance.json",
+            "src": "iepd/spdx-document/json/spdx-doc-instance.json",
             "path": "json/spdx-doc-instance.json",
             "description": "JSON Representation of SPDX Document XML Test Instance"
         },
         {
             "name": "provenancereportjson",
-            "src": "IEPD/spdx-document/json/provenance-report.json",
+            "src": "iepd/spdx-document/json/provenance-report.json",
             "path": "json/spdx-doc-provenance-report.json"
         },
         {
             "name": "resourcesjson",
-            "src": "IEPD/spdx-document/json/spdx-doc-resources.json",
+            "src": "iepd/spdx-document/json/spdx-doc-resources.json",
             "path": "json/spdx-doc-resources.json"
         },
         {

@@ -5,6 +5,20 @@ import (
 	"io/ioutil"
 )
 
+// Cfg ...
+type Cfg struct {
+	Project     string     `json:"project,omitempty"`
+	Reflink     string     `json:"reflink,omitempty"`
+	Testlink    string     `json:"testlink,omitempty"`
+	Homeurl     string     `json:"homeurl,omitempty"`
+	Port        string     `json:"port,omitempty"`
+	Dbloc       string     `json:"dbloc,omitempty"`
+	Tempdir     string     `json:"tempdir,omitempty"`
+	Temppath    string     `json:"temppath,omitempty"`
+	Resources   []Resource `json:"resources,omitempty"`
+	Directories []Resource `json:"directories,omitempty"`
+}
+
 //GetConfig ...
 func GetConfig(cfgpath string) Cfg {
 	jf, err := ioutil.ReadFile(cfgpath)

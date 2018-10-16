@@ -33,7 +33,7 @@ var (
 )
 
 //StartWeb .. simple web server
-func StartWeb() {
+func StartWeb(homeurl string) {
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
@@ -43,13 +43,13 @@ func StartWeb() {
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
 	logger.Println("Starting HTTP Server. .. ")
 	router := http.NewServeMux()
-	router.Handle("/", index())
-	router.Handle("/file/", getResource())
-	router.Handle("/iepd/", getResource())
-	router.Handle("/dload", dload())
-	router.Handle("/validate", validate())
-	router.Handle("/transform", transform())
-	router.Handle("/verify", verify())
+	router.Handle(homeurl+"/", index())
+	router.Handle(homeurl+"/file/", getResource())
+	router.Handle(homeurl+"/iepd/", getResource())
+	router.Handle(homeurl+"/dload", dload())
+	router.Handle(homeurl+"/validate", validate())
+	router.Handle(homeurl+"/transform", transform())
+	router.Handle(homeurl+"/verify", verify())
 	nextRequestID := func() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
 	}
