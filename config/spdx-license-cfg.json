@@ -1,6 +1,6 @@
 {
     "project": "spdx-license",
-    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-seva-ref.xsd",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
     "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-license/xml/instance/spdx-license-test-data.xml",
     "homeurl": "http://localhost",
     "port": ":8181",
@@ -9,8 +9,8 @@
     "resources": [
         {
             "name": "refxsd",
-            "src": "xml/xsd/spdx-seva-ref.xsd",
-            "path": "xml/xsd/spdx-seva-ref.xsd",
+            "src": "xml/xsd/spdx-xml-ref.xsd",
+            "path": "xml/xsd/spdx-xml-ref.xsd",
             "description": "NIEM Conformant Reference XML Schema for SPDX data"
         },
         {
@@ -84,14 +84,14 @@
         },
         {
             "name": "iepxsdjson",
-            "src": "IEPD/spdx-license/json/iep-xsd.json",
+            "src": "IEPD/spdx-license/json/spdx-license-iep-xsd.json",
             "path": "json/spdx-license-iep-xsd.json",
             "description": "JSON Representation of SPDX License Schema"
         },
         {
             "name": "refxsdjson",
-            "src": "IEPD/spdx-license/json/ref-xsd.json",
-            "path": "json/spdx-license-ref-xsd.json",
+            "src": "IEPD/spdx-license/json/spdx-xml-ref-xsd.json",
+            "path": "json/spdx-xml-ref-xsd.json",
             "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {

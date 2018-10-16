@@ -8,7 +8,7 @@
         This XSL Generates an Implementation Schema from a NIEM Reference Schema 
         which allows validation without importing NIEM artifacts
         
-        To run the XSL ensure that the sevaNiemXsd and sevaImpXsdOut paths are correct
+        To run the XSL ensure that the securityNiemXsd and securityImpXsdOut paths are correct
         and configure the XSL processor to use the 'main' template.
     -->
     

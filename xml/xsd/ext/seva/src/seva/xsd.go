@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	xsdprov.Setup("seva", "", Resources, Resdirectories, NewSoftwareEvidenceArchive())
+	xsdprov.Setup("security", "", Resources, Resdirectories, NewSoftwareEvidenceArchive())
 }
 
 // Resources ...
@@ -26,9 +26,9 @@ var Resources = map[string]string{
 	"iep_xsd.json":             "iepd/json/iep_xsd.json",
 	"ref_xsd.json":             "iepd/json/ref_xsd.json",
 	"test_instance.json":       "iepd/json/test_instance.json",
-	"xsd-struct.go":            "iepd/src/seva/xsd-struct.go",
-	"xsd-test.go":              "iepd/src/seva/xsd-test.go",
-	"xsd.go":                   "iepd/src/seva/xsd.go",
+	"xsd-struct.go":            "iepd/src/security/xsd-struct.go",
+	"xsd-test.go":              "iepd/src/security/xsd-test.go",
+	"xsd.go":                   "iepd/src/security/xsd.go",
 	"provenance_report.json":   "iepd/tests/provenance_report.json",
 	"resources.json":           "iepd/json/resources.json",
 }
@@ -39,6 +39,6 @@ var Resdirectories = map[string]string{
 	"w3c":      "iepd/xml/xsd/w3c",
 	"xsl":      "iepd/xml/xsl",
 	"instance": "iepd/xml/instance",
-	"seva":     "iepd/src/seva",
+	"security":     "iepd/src/security",
 	"xsdprov":  "iepd/src/xsdprov",
 }

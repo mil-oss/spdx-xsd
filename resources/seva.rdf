@@ -10,7 +10,7 @@
         <!ENTITY ns "http://www.w3.org/2003/06/sw-vocab-status/ns#">
 ]>
 
-<rdf:RDF xmlns="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:spd="spdx:xsd::1.0/ref" xmlns:exsl="http://exslt.org/common" xmlns:seva="spdx:xsd::1.0">
+<rdf:RDF xmlns="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:spd="spdx:xsd::1.0/ref" xmlns:exsl="http://exslt.org/common" xmlns:security="spdx:xsd::1.0">
   <owl:Class rdf:about="SoftwareEvidenceArchiveType">
     <rdfs:comment xml:lang="en">A data type for automated software supply chain Product and version information metadata</rdfs:comment>
     <ns:term_status xml:lang="en">proposed</ns:term_status>
@@ -2836,7 +2836,7 @@
     <rdfs:range rdf:resource="DateTimeType"/>
   </owl:ObjectProperty>
   <owl:ObjectProperty rdf:ID="DeliveringOrganizationText">
-    <rdfs:comment xml:lang="en">A data item for the Organization of Delivery for the SEvA</rdfs:comment>
+    <rdfs:comment xml:lang="en">A data item for the Organization of Delivery for the security</rdfs:comment>
     <ns:term_status xml:lang="en">proposed</ns:term_status>
     <rdfs:range rdf:resource="LineTextType"/>
   </owl:ObjectProperty>

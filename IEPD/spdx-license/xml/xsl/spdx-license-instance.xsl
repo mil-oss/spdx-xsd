@@ -18,7 +18,7 @@
     </xsl:template>
     
     <xsl:template name="main">
-        <License xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-seva::1.0" xsi:schemaLocation="urn:spdx-seva::1.0 ../xsd/spdx-license-iep.xsd">
+        <License xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml::1.0" xsi:schemaLocation="urn:spdx-xml::1.0 ../xsd/spdx-license-iep.xsd">
             <xsl:apply-templates select="xs:schema/xs:complexType[@name = $Root]" mode="root">
                 <xsl:with-param name="testData" select="document($TestData)"/>
             </xsl:apply-templates>

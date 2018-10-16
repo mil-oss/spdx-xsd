@@ -1,0 +1,168 @@
+{
+    "project": "spdx-security",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-security/xml/instance/spdx-security-test_data.xml",
+    "homeurl": "http://localhost",
+    "port": ":8181",
+    "dbloc": "tmp/spdx-security-iepd/db/spdx-security.db",
+    "temppath": "tmp/spdx-security-iepd/",
+    "resources": [
+        {
+            "name": "refxsd",
+            "src": "xml/xsd/spdx-xml-ref.xsd",
+            "path": "xml/xsd/spdx-xml-ref.xsd",
+            "description": "NIEM Conformant Reference XML Schema for SPDX data"
+        },
+        {
+            "name": "iepxsd",
+            "src": "IEPD/spdx-security/xml/xsd/spdx-security-iep.xsd",
+            "path": "xml/xsd/spdx-security-iep.xsd",
+            "description": "XML Schema for SPDX Software Evaluation Data information exchange"
+        },
+        {
+            "name": "xmlschemaxsd",
+            "src": "xml/xsd/ext/w3c/XMLSchema.xsd",
+            "path": "xml/xsd/ext/w3c/XMLSchema.xsd"
+        },
+        {
+            "name": "xsltxsd",
+            "src": "xml/xsd/ext/w3c/xslt.xsd",
+            "path": "xml/xsd/ext/w3c/xslt.xsd"
+        },
+        {
+            "name": "iepxsdxsl",
+            "src": "IEPD/spdx-security/xml/xsl/spdx-security-iep.xsl",
+            "path": "xml/xsl/spdx-security-iep.xsl"
+        },
+        {
+            "name": "instancexsl",
+            "src": "IEPD/spdx-security/xml/xsl/spdx-security-instance.xsl",
+            "path": "xml/xsl/spdx-security-instance.xsl"
+        },
+        {
+            "name": "gogenxsdxsl",
+            "src": "IEPD/spdx-security/xml/xsl/spdx-security-go-gen.xsl",
+            "path": "xml/xsl/spdx-security-go-gen.xsl"
+        },
+        {
+            "name": "gotestgenxsl",
+            "src": "IEPD/spdx-security/xml/xsl/spdx-security-go-test-gen.xsl",
+            "path": "xml/xsl/spdx-security-go-test-gen.xsl"
+        },
+        {
+            "name": "testdataxml",
+            "src": "IEPD/spdx-security/xml/instance/spdx-security-test-data.xml",
+            "path": "xml/instance/spdx-security-test-data.xml"
+        },
+        {
+            "name": "instancexml",
+            "src": "IEPD/spdx-security/xml/instance/spdx-security-instance.xml",
+            "path": "xml/instance/spdx-security-instance.xml"
+        },
+        {
+            "name": "instancegolangxml",
+            "src": "IEPD/spdx-security/xml/instance/test-instance-golang.xml",
+            "path": "xml/instance/spdx-security-instance-golang.xml"
+        },
+        {
+            "name": "structgo",
+            "src": "src/spdx-security/spdx-security-struct.go",
+            "path": "src/spdx-security/spdx-security-struct.go",
+            "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
+        
+        },
+        {
+            "name": "structtestgo",
+            "src": "src/spdx-security/spdx-security-struct_test.go",
+            "path": "src/spdx-security/spdx-security-struct_test.go",
+            "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
+       
+        },
+        {
+            "name": "maingo",
+            "src": "src/spdx-security/spdx-security.go",
+            "path": "src/spdx-security/spdx-security.go",
+            "description": "Golang start class"
+        },
+        {
+            "name": "iepxsdjson",
+            "src": "IEPD/spdx-security/json/spdx-security-iep-xsd.json",
+            "path": "json/spdx-security-iep-xsd.json",
+            "description": "JSON Representation of SPDX Document Schema"
+        },
+        {
+            "name": "refxsdjson",
+            "src": "IEPD/spdx-security/json/spdx-xml-ref-xsd.json",
+            "path": "json/spdx-security-ref-xsd.json",
+            "description": "JSON Representation of SPDX Reference XML Schema"
+        },
+        {
+            "name": "instancejson",
+            "src": "IEPD/spdx-security/json/spdx-security-instance.json",
+            "path": "json/spdx-security-instance.json",
+            "description": "JSON Representation of SPDX Security XML Test Instance"
+        },
+        {
+            "name": "provenancereportjson",
+            "src": "IEPD/spdx-security/json/provenance-report.json",
+            "path": "json/spdx-security-provenance-report.json"
+        },
+        {
+            "name": "resourcesjson",
+            "src": "IEPD/spdx-security/json/resources.json",
+            "path": "json/spdx-security-resources.json"
+        },
+        {
+            "name": "iepxsl",
+            "src": "xml/xsl/iep.xsl",
+            "path": "xml/xsl/common/iep.xsl"
+        },
+        {
+            "name": "xmlinstancexsl",
+            "src": "xml/xsl/xml-instance.xsl",
+            "path": "xml/xsl/common/xml-instance.xsl"
+        },
+        {
+            "name": "gogenxsl",
+            "src": "xml/xsl/go-gen.xsl",
+            "path": "xml/xsl/common/go-gen.xsl"
+        },
+        {
+            "name": "xsdjsonxsl",
+            "src": "xml/xsl/xsd-json.xsl",
+            "path": "xml/xsl/common/xsd-json.xsl"
+        },
+        {
+            "name": "xmljsonxsl",
+            "src": "xml/xsl/xml-json.xsl",
+            "path": "xml/xsl/common/xml-json.xsl"
+        },
+        {
+            "name": "zipiepd",
+            "src": "",
+            "path": "spdx-security-iepd.zip"
+        }
+    ],
+    "directories": [
+        {
+            "name": "niem",
+            "src": "xml/xsd/ext/niem",
+            "path": "xml/xsd/ext/niem"
+        },
+        {
+            "name": "w3c",
+            "src": "xml/xsd/ext/w3c",
+            "path": "xml/xsd/ext/w3c"
+        },
+        {
+            "name": "gostruct",
+            "src": "src/spdx-security",
+            "path": "src/spdx-security"
+        },
+        {
+            "name": "gocode",
+            "src": "src/xsdprov",
+            "path": "src/xsdprov"
+        }
+    ]
+}

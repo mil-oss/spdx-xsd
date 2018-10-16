@@ -1,4 +1,4 @@
-  <SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-seva::1.0">
+  <SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml::1.0">
       <SoftwareInformation>
           <ProductTitleText>Line text max length 48 characters.</ProductTitleText>
           <SoftwareNameText>Line text max length 48 characters.</SoftwareNameText>

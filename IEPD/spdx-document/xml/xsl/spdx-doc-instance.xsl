@@ -16,7 +16,7 @@
     
     <xsl:variable name="Xsd" select="/xs:schema"/>
     
-    <xsl:variable name="nsp" select="'urn:spdx-seva::1.0'"/>
+    <xsl:variable name="nsp" select="'urn:spdx-xml::1.0'"/>
 
     <xsl:template match="/">
         <xsl:call-template name="main"/>
@@ -24,8 +24,8 @@
 
     <xsl:template name="main">
         <SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns="urn:spdx-seva::1.0"
-            xsi:schemaLocation="urn:spdx-seva::1.0 ../xsd/spdx-doc-iep.xsd">
+            xmlns="urn:spdx-xml::1.0"
+            xsi:schemaLocation="urn:spdx-xml::1.0 ../xsd/spdx-doc-iep.xsd">
             <!--<xsl:copy-of select="/xs:schema"/>-->
             <xsl:apply-templates select="document($Template)/*/*" mode="tmplt"/>
             <!--<xsl:apply-templates select="//xs:schema/xs:complexType[@name = $Root]" mode="map"/>-->

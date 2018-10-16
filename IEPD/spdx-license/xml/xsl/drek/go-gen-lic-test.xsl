@@ -180,7 +180,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="p">
-                    <xsl:value-of select="concat('seva.', $path)"/>
+                    <xsl:value-of select="concat('security.', $path)"/>
                 </xsl:element>
             </xsl:otherwise>
         </xsl:choose>

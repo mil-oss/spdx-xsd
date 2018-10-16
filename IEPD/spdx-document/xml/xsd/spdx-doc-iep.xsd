@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
-<xs:schema xmlns="urn:spdx-seva::1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-seva::1.0" version="1">
+<xs:schema xmlns="urn:spdx-xml::1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-xml::1.0" version="1">
   <xs:annotation>
     <xs:documentation>XML Schema for SPDX Document Information Exchange</xs:documentation>
     <xs:appinfo>
-      <Root type="SpdxDocumentType" name="SpdxDocument" base="SpdxElementType"/>
+      <Root type="SpdxDocumentType" name="SpdxDocument"/>
     </xs:appinfo>
   </xs:annotation>
   <xs:complexType name="SpdxDocumentType">
@@ -22,7 +22,7 @@
           <xs:element ref="CreationInfo" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="SpecVersionText" minOccurs="1" maxOccurs="1"/>
           <xs:element ref="ExternalDocumentRef" minOccurs="0"/>
-          <xs:element ref="DataLicense"/>
+          <xs:element ref="DataLicenseText"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -651,7 +651,7 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="DataLicense" type="LicenseIDType" nillable="true" fixed="http://spdx.org/licenses/CC0-1.0">
+  <xs:element name="DataLicenseText" type="LicenseIDType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data item for The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files.</xs:documentation>
       <xs:appinfo>
@@ -723,7 +723,7 @@
       </xs:appinfo>
     </xs:annotation>
   </xs:element>
-  <xs:element name="RelatedSpdxElement" type="SpdxElementType" nillable="true">
+  <xs:element name="RelatedSpdxElement" type="RelationshipType" nillable="true">
     <xs:annotation>
       <xs:documentation>A data item for A related SpdxElement.</xs:documentation>
       <xs:appinfo>

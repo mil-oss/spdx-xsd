@@ -5,7 +5,7 @@
 
     <xsl:include href="./common/iep.xsl"/>
 
-    <!--<xsl:variable name="spdx_xsd" select="document('../xsd/spdx-seva-ref.xsd')"/>-->
+    <!--<xsl:variable name="spdx_xsd" select="document('../xsd/spdx-xml-ref.xsd')"/>-->
 
     <xsl:variable name="Top" select="'SpdxDocumentType'"/>
     <xsl:variable name="Super" select="'SpdxElementType'"/>

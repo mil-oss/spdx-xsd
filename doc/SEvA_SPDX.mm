@@ -1,6 +1,6 @@
 <map version="freeplane 1.3.0">
 <!--To view this file, download free mind mapping software Freeplane from http://freeplane.sourceforge.net -->
-<node TEXT="SEvA-SPDX" ID="ID_953746578" CREATED="1533147714559" MODIFIED="1537832444339">
+<node TEXT="security-SPDX" ID="ID_953746578" CREATED="1533147714559" MODIFIED="1537832444339">
 <font SIZE="18"/>
 <hook NAME="MapStyle">
     <properties fit_to_viewport="false" edgeColorConfiguration="#808080ff,#ff0000ff,#0000ffff,#00ff00ff,#ff00ffff,#00ffffff,#7c0000ff,#00007cff,#007c00ff,#7c007cff,#007c7cff,#7c7c00ff"/>
@@ -74,7 +74,7 @@
   </head>
   <body>
     <p>
-      This paper outlines the implementation of SPDX as XML Schema and the integration of Software Evidence Archive (SEvA) information with the Software Product Documentation Exchange (SPDX) data model using XML Schema.
+      This paper outlines the implementation of SPDX as XML Schema and the integration of Software Evidence Archive (security) information with the Software Product Documentation Exchange (SPDX) data model using XML Schema.
     </p>
   </body>
 </html>
@@ -95,7 +95,7 @@
 
 </richcontent>
 </node>
-<node TEXT="Software Evidence Archive (SEvA)" ID="ID_1269404110" CREATED="1537829662257" MODIFIED="1537830607711"><richcontent TYPE="DETAILS">
+<node TEXT="Software Evidence Archive (security)" ID="ID_1269404110" CREATED="1537829662257" MODIFIED="1537830607711"><richcontent TYPE="DETAILS">
 
 <html>
   <head>
@@ -103,7 +103,7 @@
   </head>
   <body>
     <p>
-      SEvA provides a resource for code identification, content, dependencies, vulnerabilities, and other assets in the Software Supply Chain.&#160;&#160;It is used to create audit reports on software, which can include sensitive information&#160;&#160;which requires validation for content and format using XML Schema.
+      security provides a resource for code identification, content, dependencies, vulnerabilities, and other assets in the Software Supply Chain.&#160;&#160;It is used to create audit reports on software, which can include sensitive information&#160;&#160;which requires validation for content and format using XML Schema.
     </p>
   </body>
 </html>
@@ -121,7 +121,7 @@
   </head>
   <body>
     <p>
-      Integrate Software Evidence Archive (SEvA) Information into the Software Product Documentation Exchange (SPDX) format.
+      Integrate Software Evidence Archive (security) Information into the Software Product Documentation Exchange (SPDX) format.
     </p>
   </body>
 </html>
@@ -153,7 +153,7 @@
   </head>
   <body>
     <p>
-      The core authoritative data for SEvA is contained in an XML Schema.&#160;&#160;SPDX does not have an XML Schema representation, but one has been generated and is proposed as a normative option for SPDX implementers.
+      The core authoritative data for security is contained in an XML Schema.&#160;&#160;SPDX does not have an XML Schema representation, but one has been generated and is proposed as a normative option for SPDX implementers.
     </p>
   </body>
 </html>
@@ -171,7 +171,7 @@
   </head>
   <body>
     <p>
-      NIEM&#160;&#160;XML Schema Naming and Design rules were employed in the creation of XML Schema for SEvA and SPDX.&#160;&#160;XML Schema based implementations
+      NIEM&#160;&#160;XML Schema Naming and Design rules were employed in the creation of XML Schema for security and SPDX.&#160;&#160;XML Schema based implementations
     </p>
   </body>
 </html>
@@ -186,7 +186,7 @@
   </head>
   <body>
     <p>
-      XML Schema for SPDX has been generated for SPDX, and License, Document, and SEvA information exchanges have been created using the NIEM Information Exchange Product Documentation (IEPD) methodology.
+      XML Schema for SPDX has been generated for SPDX, and License, Document, and security information exchanges have been created using the NIEM Information Exchange Product Documentation (IEPD) methodology.
     </p>
   </body>
 </html>
@@ -213,7 +213,7 @@
   </head>
   <body>
     <p>
-      /home/jdn/DATA/Neushul_Solutions/Projects/SEvA/IonChannel/spdx-xsd/doc/SeVA-SPDX.html
+      /home/jdn/DATA/Neushul_Solutions/Projects/security/IonChannel/spdx-xsd/doc/security-SPDX.html
     </p>
   </body>
 </html>
@@ -264,7 +264,7 @@
   </head>
   <body>
     <p>
-      SEvA SPDX Integration
+      security SPDX Integration
     </p>
   </body>
 </html>
@@ -284,7 +284,7 @@
       #!/bin/bash
     </p>
     <p>
-      java -cp /home/jdn/DATA/Neushul_Solutions/Projects/XML/saxon9he.jar net.sf.saxon.Transform -s:/home/jdn/DATA/Neushul_Solutions/Projects/SEvA/IonChannel/spdx-xsd/doc/SEvA_SPDX.mm -xsl:/home/jdn/DATA/Neushul_Solutions/Projects/XML/MM_Naval_Ltr_Format.xsl
+      java -cp /home/jdn/DATA/Neushul_Solutions/Projects/XML/saxon9he.jar net.sf.saxon.Transform -s:/home/jdn/DATA/Neushul_Solutions/Projects/security/IonChannel/spdx-xsd/doc/security_SPDX.mm -xsl:/home/jdn/DATA/Neushul_Solutions/Projects/XML/MM_Naval_Ltr_Format.xsl
     </p>
   </body>
 </html>

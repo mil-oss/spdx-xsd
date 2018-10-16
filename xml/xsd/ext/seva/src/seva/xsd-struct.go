@@ -7,7 +7,7 @@ func NewSoftwareEvidenceArchive()*SoftwareEvidenceArchive{
     return &SoftwareEvidenceArchive{
         // Required for the proper namespacingSoftwareEvidenceArchive
         AttrXmlnsXsi:"http://www.w3.org/2001/XMLSchema-instance",
-        AttrXmlns:"urn:seva::1.0",
+        AttrXmlns:"urn:security::1.0",
         SoftwareInformation: &SoftwareInformation{
             VersionInformation:&VersionInformation{},
         },

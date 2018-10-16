@@ -25,7 +25,7 @@
         <xsl:variable name="elname" select="//xs:schema/xs:element[@type = $namevar]/@name"/>
         <xsl:variable name="typevar" select="@type"/>
         <SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns="urn:seva::1.0" xsi:schemaLocation="urn:seva::1.0  https://seva.specchain.org/iepd/iep.xsd">
+            xmlns="urn:security::1.0" xsi:schemaLocation="urn:security::1.0  https://security.specchain.org/iepd/iep.xsd">
             <xsl:apply-templates select="*[not(name() = 'xsd:annotation')]"/> 
         </SoftwareEvidenceArchive>
     </xsl:template>
@@ -39,12 +39,12 @@
         <xsl:variable name="testValue">
             <xsl:value-of select="document($TestData)//*[name()=$typbase/@name]/*[@valid='true'][1]"/>
         </xsl:variable>
-        <xsl:element name="{$elnode/@name}" namespace="urn:seva::1.0">
+        <xsl:element name="{$elnode/@name}" namespace="urn:security::1.0">
             <xsl:value-of select="$testValue"/>
             <xsl:apply-templates select="$typnode/*"/>
         </xsl:element>
         <xsl:if test="@maxOccurs>1">
-            <xsl:element name="{$elnode/@name}" namespace="urn:seva::1.0">
+            <xsl:element name="{$elnode/@name}" namespace="urn:security::1.0">
                 <xsl:value-of select="$testValue"/>
                 <xsl:apply-templates select="$typnode/*"/>
             </xsl:element>

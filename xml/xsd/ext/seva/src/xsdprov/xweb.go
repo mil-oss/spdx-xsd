@@ -90,12 +90,12 @@ func index() http.Handler {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
-		http.Redirect(w, r, "https://sevaxsd.specchain.org", 301)
+		http.Redirect(w, r, "https://securityxsd.specchain.org", 301)
 		//w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 		//w.Header().Set("Access-Control-Allow-Origin", "*")
 		//w.Header().Set("X-Content-Type-Options", "nosniff")
 		//w.WriteHeader(http.StatusOK)
-		//fmt.Fprintln(w, "SEvA 1.0")
+		//fmt.Fprintln(w, "security 1.0")
 		//fmt.Fprintln(w, temppath)
 	})
 }
@@ -211,7 +211,7 @@ func dload() http.Handler {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if atomic.LoadInt32(&healthy) == 1 {
-			DownloadFile(temppath+"/SevA.zip", w)
+			DownloadFile(temppath+"/security.zip", w)
 			//w.WriteHeader(http.StatusOK)
 			index()
 		}
