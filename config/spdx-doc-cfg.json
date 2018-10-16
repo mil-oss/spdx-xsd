@@ -72,20 +72,20 @@
         },
         {
             "name": "structgo",
-            "src": "src/spdx-document/spdx-doc-struct.go",
-            "path": "src/spdx-document/spdx-doc-struct.go",
+            "src": "src/spdx-doc/spdx-doc-struct.go",
+            "path": "src/spdx-doc/spdx-doc-struct.go",
             "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
         },
         {
             "name": "structtestgo",
-            "src": "src/spdx-document/spdx-doc-struct_test.go",
-            "path": "src/spdx-document/spdx-doc-struct_test.go",
+            "src": "src/spdx-doc/spdx-doc-struct_test.go",
+            "path": "src/spdx-doc/spdx-doc-struct_test.go",
             "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
         },
         {
             "name": "maingo",
-            "src": "src/spdx-document/spdx-doc.go",
-            "path": "src/spdx-document/spdx-doc.go",
+            "src": "src/spdx-doc/spdx-doc.go",
+            "path": "src/spdx-doc/spdx-doc.go",
             "description": "Golang start class"
         },
         {

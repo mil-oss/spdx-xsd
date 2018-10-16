@@ -70,7 +70,7 @@
                         <xsl:with-param name="type" select="'FileType'"/>
                     </xsl:apply-templates>
                 </xsl:when>
-                <xsl:when test="$n = 'DataLicense'">
+                <xsl:when test="$n = 'DataLicenseID'">
                     <xsl:apply-templates select="." mode="element">
                         <xsl:with-param name="type" select="'LicenseID'"/>
                     </xsl:apply-templates>
@@ -130,7 +130,7 @@
     <xsl:variable name="FsfLibre">
         <xs:element name="IsFsfLibreIndicator" type="IsFsfLibreType" nillable="true">
             <xs:annotation>
-                <xs:documentation>A data item to indicate if the license is FSF Libre.</xs:documentation>
+                <xs:documentation>True if the license is FSF Libre; false if not or unknown.</xs:documentation>
                 <xs:appinfo>
                     <Element name="IsFsfLibre" comment="Indicates if the license is is FSF Libre." rdf="http://spdx.org/rdf/terms#isFsfLibre" domain="License" range="Boolean" xmlns="urn:spdx-xml:1.0"/>
                 </xs:appinfo>
@@ -151,54 +151,58 @@
             </xs:simpleContent>
         </xs:complexType>
     </xsl:variable>
-    <xsl:variable name="StandardLicenseHeader">
-        <xs:element name="StandardLicenseHeader" type="StandardLicenseHeaderType" nillable="true">
+    <!--<xsl:variable name="StandardLicenseHeader">
+        <xs:element name="StandardLicenseHeaderText" type="StandardLicenseHeaderTextType" nillable="true">
             <xs:annotation>
                 <xs:documentation>A data type for License author's preferred text to indicated that a file is covered by the license.</xs:documentation>
                 <xs:appinfo>
-                    <Element name="standardLicenseHeader" xmlname="StandardLicenseHeader" comment="License author's preferred text to indicated that a file is covered by the license."
+                    <Element xmlns="urn:spdx-xml:1.0" name="standardLicenseHeader" xmlname="StandardLicenseHeader" comment="License author's preferred text to indicated that a file is covered by the license."
                         rdf="http://spdx.org/rdf/terms#standardLicenseHeader" domain="License" range="String"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
-        <xs:complexType name="StandardLicenseHeaderType">
+        <xs:complexType name="StandardLicenseHeaderTextType" >
             <xs:annotation>
                 <xs:documentation>A data type for License author's preferred text to indicated that a file is covered by the license.</xs:documentation>
                 <xs:appinfo>
-                    <ComplexType name="standardLicenseHeader" xmlname="StandardLicenseHeader" comment="License author's preferred text to indicated that a file is covered by the license."
+                    <ComplexType xmlns="urn:spdx-xml:1.0" name="standardLicenseHeader" xmlname="StandardLicenseHeader" comment="License author's preferred text to indicated that a file is covered by the license."
                         rdf="http://spdx.org/rdf/terms#standardLicenseHeader" domain="License" range="String"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleContent>
-                <xs:extension base="xs:string"/>
+                <xs:extension base="xs:string">
+                    <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+                </xs:extension>
             </xs:simpleContent>
         </xs:complexType>
-        <xs:complexType name="StandardLicenseTemplateType">
+        <xs:complexType name="StandardLicenseTemplateTextType">
             <xs:annotation>
                 <xs:documentation>A data type for License template which describes sections of the license which can be varied. See License Template section of the specification for format
                     information.</xs:documentation>
                 <xs:appinfo>
-                    <ComplexType name="standardLicenseTemplate" xmlname="StandardLicenseTemplate"
+                    <ComplexType xmlns="urn:spdx-xml:1.0"  name="standardLicenseTemplate" xmlname="StandardLicenseTemplate"
                         comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information."
                         rdf="http://spdx.org/rdf/terms#standardLicenseTemplate" domain="License" range="String"/>
                 </xs:appinfo>
             </xs:annotation>
             <xs:simpleContent>
-                <xs:extension base="xs:string"/>
+                <xs:extension base="xs:string">
+                    <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+                </xs:extension>
             </xs:simpleContent>
         </xs:complexType>
-        <xs:element name="StandardLicenseTemplate" type="StandardLicenseTemplateType" nillable="true">
+        <xs:element name="StandardLicenseTemplateText" type="StandardLicenseTemplateTextType" nillable="true">
             <xs:annotation>
                 <xs:documentation>A data type for License template which describes sections of the license which can be varied. See License Template section of the specification for format
                     information.</xs:documentation>
                 <xs:appinfo>
-                    <Element name="standardLicenseTemplate" xmlname="StandardLicenseTemplate"
+                    <Element xmlns="urn:spdx-xml:1.0" name="standardLicenseTemplate" xmlname="StandardLicenseTemplate"
                         comment="License template which describes sections of the license which can be varied. See License Template section of the specification for format information."
                         rdf="http://spdx.org/rdf/terms#standardLicenseTemplate" domain="License" range="String"/>
                 </xs:appinfo>
             </xs:annotation>
         </xs:element>
-    </xsl:variable>
+    </xsl:variable>-->
     <xsl:variable name="IsDeprecatedLicenseId">
         <xs:element name="IsDeprecatedLicenseID" type="IsDeprecatedLicenseIDType" nillable="true">
             <xs:annotation>
@@ -240,13 +244,94 @@
                         <xs:element ref="IsDeprecatedLicenseID" minOccurs="0"/>
                         <xs:element ref="IsOsiApprovedIndicator" minOccurs="1"/>
                         <xs:element ref="IsFsfLibreIndicator" minOccurs="0"/>
-                        <xs:element ref="StandardLicenseHeader" minOccurs="0"/>
+                        <xs:element ref="StandardLicenseHeaderText" minOccurs="0"/>
                         <xs:element ref="LicenseText" minOccurs="1"/>
-                        <xs:element ref="StandardLicenseTemplate" minOccurs="1"/>
+                        <xs:element ref="StandardLicenseTemplateText" minOccurs="1"/>
                         <xs:element ref="LicenseAugmentationPoint" minOccurs="0" maxOccurs="unbounded"/>
                     </xs:sequence>
                 </xs:extension>
             </xs:complexContent>
+        </xs:complexType>
+    </xsl:variable>
+    <xsl:variable name="SPDXIdentifier">
+        <xs:element name="SpdxID" type="SpdxIDType" nillable="true">
+            <xs:annotation>
+                <xs:documentation>A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally. </xs:documentation>
+                <xs:appinfo>
+                    <Element name="SpdxID" comment="A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally." rdf="#SPDXRef-DOCUMENT" domain="Document" range="String"
+                        xmlns="urn:spdx-xml:1.0"/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="RelatedSpdxElementID" type="SpdxIDType" nillable="true">
+            <xs:annotation>
+                <xs:documentation>A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally. </xs:documentation>
+                <xs:appinfo>
+                    <Element name="SpdxID" comment="A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally." rdf="#SPDXRef-DOCUMENT" domain="Document" range="String"
+                        xmlns="urn:spdx-xml:1.0"/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="SpdxDocumentID" type="SpdxIDType" nillable="true">
+            <xs:annotation>
+                <xs:documentation>A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally. </xs:documentation>
+                <xs:appinfo>
+                    <Element name="SpdxID" comment="A data item to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally." rdf="#SPDXRef-DOCUMENT" domain="Document" range="String"
+                        xmlns="urn:spdx-xml:1.0"/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="DescribesFileID" type="SpdxIDType" nillable="true">
+            <xs:annotation>
+                <xs:documentation>A data item for The describesFile property relates an SpdxDocument to the file which it describes.</xs:documentation>
+                <xs:appinfo>
+                    <Element xmlns="urn:spdx-xml:1.0" name="describesFile"
+                        xmlname="DescribesFile"
+                        comment="The describesFile property relates an SpdxDocument to the file which it describes."
+                        rdf="http://spdx.org/rdf/terms#describesFile"
+                        domain="SpdxDocument"
+                        range="String"/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="DescribesPackageID" type="SpdxIDType" nillable="true">
+            <xs:annotation>
+                <xs:documentation>A data item for The describesPackage property relates an SpdxDocument to the package which it describes.</xs:documentation>
+                <xs:appinfo>
+                    <Element xmlns="urn:spdx-xml:1.0"  name="describesPackage"
+                        xmlname="DescribesPackageID"
+                        comment="The describesPackage property relates an SpdxDocument to the package which it describes."
+                        rdf="http://spdx.org/rdf/terms#describesPackage"
+                        domain="SpdxDocument"
+                        range="String"/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+        <xs:element name="HasExtractedLicensingInfoID" type="SpdxIDType" nillable="true">
+            <xs:annotation>
+                <xs:documentation>A data item for Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument.</xs:documentation>
+                <xs:appinfo>
+                    <Element xmlns="urn:spdx-xml:1.0"  name="HasExtractedLicensingInfoID"
+                        xmlname="HasExtractedLicensingInfo"
+                        comment="Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument."
+                        rdf="http://spdx.org/rdf/terms#hasExtractedLicensingInfo"
+                        domain="ExtractedLicenseInfoSpdxDocument" range="String"/>
+                </xs:appinfo>
+            </xs:annotation>
+        </xs:element>
+        <xs:complexType name="SpdxIDType">
+            <xs:annotation>
+                <xs:documentation>A data type to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally.</xs:documentation>
+                <xs:appinfo>
+                    <ComplexType xmlns="urn:spdx-xml:1.0"  name="IsDeprecatedLicenseIDType" comment="A data type to identify the current SPDX document which may be referenced in relationships by other files, packages internally and documents externally." rdf="#SPDXRef-DOCUMENT" domain="Document"
+                        range="String"/>
+                </xs:appinfo>
+            </xs:annotation>
+            <xs:simpleContent>
+                <xs:extension base="xs:string">
+                    <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
+                </xs:extension>
+            </xs:simpleContent>
         </xs:complexType>
     </xsl:variable>
 
@@ -267,25 +352,21 @@
     </xsl:template>
 
     <!--***********  CHANGES  **********-->
-
     <xsl:template match="*[@name = 'Name']/@name" mode="adjust">
         <xsl:attribute name="name">
             <xsl:text>NameText</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
     <xsl:template match="*[@ref = 'Name']/@ref" mode="adjust">
         <xsl:attribute name="ref">
             <xsl:text>NameText</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
     <xsl:template match="*[@name = 'FileType']/@name" mode="adjust">
         <xsl:attribute name="name">
             <xsl:text>ComputerFileType</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
     <xsl:template match="*[@type = 'FileType']/@type" mode="adjust">
         <xsl:attribute name="type">
             <xsl:text>ComputerFileType</xsl:text>
@@ -336,32 +417,26 @@
             <xsl:text>ComputerFileNameSimpleType</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
-
     <xsl:template match="*[@name = 'SummaryText']/@name" mode="adjust">
         <xsl:attribute name="name">
             <xsl:text>SecuritySummaryText</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
     <xsl:template match="*[@name = 'FileNameType']/@name" mode="adjust">
         <xsl:attribute name="name">
             <xsl:text>ComputerFileNameType</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
     <xsl:template match="*[@name = 'FileNameText']/@name" mode="adjust">
         <xsl:attribute name="name">
             <xsl:text>ComputerFileNameText</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
     <xsl:template match="*[@name = 'FileNameText']/@type" mode="adjust">
         <xsl:attribute name="type">
             <xsl:text>ComputerFileNameType</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
     <xsl:template match="*[@ref = 'FileNameText']/@ref" mode="adjust">
         <xsl:attribute name="ref">
             <xsl:text>ComputerFileNameText</xsl:text>
@@ -378,11 +453,12 @@
         <xsl:copy-of select="$LicenseCtype" copy-namespaces="no"/>
         <xsl:copy-of select="$FsfLibre" copy-namespaces="no"/>
         <xsl:copy-of select="$IsDeprecatedLicenseId" copy-namespaces="no"/>
-        <xsl:copy-of select="$StandardLicenseHeader" copy-namespaces="no"/>
+        <!--<xsl:copy-of select="$StandardLicenseHeader" copy-namespaces="no"/>-->
         <xsl:copy-of select="$Enumerations" copy-namespaces="no"/>
         <xsl:copy-of select="$Objects" copy-namespaces="no"/>
         <xsl:copy-of select="$Datatypes" copy-namespaces="no"/>
         <xsl:copy-of select="$Classes" copy-namespaces="no"/>
+        <xsl:copy-of select="$SPDXIdentifier" copy-namespaces="no"/>
         <xsl:for-each select="$seva/*">
             <xsl:sort select="@name"/>
             <xsl:copy-of select="." copy-namespaces="no"/>
@@ -466,6 +542,9 @@
                 <xs:complexContent>
                     <xs:extension base="{$base}">
                         <xs:sequence>
+                            <xsl:if test="@xmlname='SpdxElement'">
+                                <xs:element ref="SpdxID"/>
+                            </xsl:if>
                             <xsl:apply-templates select="SubClass" mode="sclass"/>
                             <xs:element ref="{concat(@xmlname,'AugmentationPoint')}" minOccurs="0" maxOccurs="unbounded"/>
                         </xs:sequence>
@@ -584,6 +663,21 @@
             <xsl:when test="@xmlname = 'SeeAlso'">
                 <xs:element ref="{@xmlname}" minOccurs="0" maxOccurs="unbounded"/>
             </xsl:when>
+            <xsl:when test="@xmlname = 'RelatedSpdxElement'">
+                <xs:element ref="RelatedSpdxElementID" minOccurs="1" maxOccurs="1"/>
+            </xsl:when>
+            <xsl:when test="@xmlname = 'SpdxDocument'">
+                <xs:element ref="SpdxDocumentID" minOccurs="1" maxOccurs="1"/>
+            </xsl:when>
+            <xsl:when test="@xmlname = 'DescribesFile'">
+                <xs:element ref="DescribesFileID"/>
+            </xsl:when>
+            <xsl:when test="@xmlname = 'DescribesPackage'">
+                <xs:element ref="DescribesPackageID"/>
+            </xsl:when>
+            <xsl:when test="@xmlname = 'HasExtractedLicensingInfo'">
+                <xs:element ref="HasExtractedLicensingInfoID" minOccurs="1" maxOccurs="1"/>
+            </xsl:when>
             <xsl:when test="@xmlname">
                 <xs:element ref="{@xmlname}">
                     <xsl:copy-of select="@minOccurs"/>
@@ -698,6 +792,12 @@
                     <xsl:choose>
                         <xsl:when test="@xmlname = 'SnippetName'">
                             <xsl:text>A data item to name a specific snippet in a human convenient manner</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="@xmlname = 'FilesAnalyzedIndicator'">
+                            <xsl:text>True if the file content of this package has been available for or subjected to analysis when creating the SPDX document; false if not. If “false” indicates packages that represent metadata or URI references to a project, product, artifact, distribution or a component. If set to “false”, the package must not contain any files.</xsl:text>
+                        </xsl:when>
+                        <xsl:when test="@xmlname = 'IsOsiApprovedIndicator'">
+                            <xsl:text>True if the OSI has approved the license; false if not or unknown.</xsl:text>
                         </xsl:when>
                         <xsl:when test="string-length(@comment) &gt; 0">
                             <xsl:value-of select="concat('A data type for ', @comment)"/>

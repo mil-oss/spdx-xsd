@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
-<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml:1.0" xmlns:exsl="http://exslt.org/common" xsi:schemaLocation="urn:spdx-xml:1.0 ../xsd/spdx-doc-iep.xsd">
+<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0 ../xsd/spdx-doc-iep.xsd">
+  <SpdxID>urn:anyuri.org</SpdxID>
   <Annotation>
     <Date>2018-04-12T13:20:00</Date>
     <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
@@ -11,188 +12,11 @@
   <Relationship>
     <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
     <CommentText>Test string one</CommentText>
-    <RelatedSpdxElement>
-      <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
-      <Annotation>
-        <Date>2018-04-12T13:20:00</Date>
-        <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
-        <CommentText>Test string one</CommentText>
-        <AnnotatorText>Test string one</AnnotatorText>
-      </Annotation>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
-      <Relationship>
-        <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
-        <CommentText>Test string one</CommentText>
-      </Relationship>
-    </RelatedSpdxElement>
+    <RelatedSpdxElementID>Test string one</RelatedSpdxElementID>
   </Relationship>
-  <DescribesPackage>
-    <Annotation>
-      <Date>2018-04-12T13:20:00</Date>
-      <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
-      <CommentText>Test string one</CommentText>
-      <AnnotatorText>Test string one</AnnotatorText>
-    </Annotation>
-    <Name>Test string one</Name>
-    <CommentText>Test string one</CommentText>
-    <Relationship>
-      <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
-      <CommentText>Test string one</CommentText>
-    </Relationship>
-    <CreationInfo>
-      <LicenseListVersionText>Test string one</LicenseListVersionText>
-      <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-      <CommentText>Test string one</CommentText>
-      <CreatorText>Test string one</CreatorText>
-    </CreationInfo>
-    <SpecVersionText>Test string one</SpecVersionText>
-    <ExternalDocumentRef>
-      <Checksum>
-        <ChecksumValue/>
-        <AlgorithmCode>ChecksumAlgorithmMd5</AlgorithmCode>
-      </Checksum>
-      <ExternalDocumentID>Test string one</ExternalDocumentID>
-      <SpdxDocument>
-        <Name>Test string one</Name>
-        <CommentText>Test string one</CommentText>
-        <CreationInfo>
-          <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-          <CreatorText>Test string one</CreatorText>
-        </CreationInfo>
-        <SpecVersionText>Test string one</SpecVersionText>
-        <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-      </SpdxDocument>
-    </ExternalDocumentRef>
-    <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-  </DescribesPackage>
-  <DescribesFile>
-    <Annotation>
-      <Date>2018-04-12T13:20:00</Date>
-      <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
-      <CommentText>Test string one</CommentText>
-      <AnnotatorText>Test string one</AnnotatorText>
-    </Annotation>
-    <Name>Test string one</Name>
-    <CommentText>Test string one</CommentText>
-    <Relationship>
-      <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
-      <CommentText>Test string one</CommentText>
-    </Relationship>
-    <DescribesPackage>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
-      <CreationInfo>
-        <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CreatorText>Test string one</CreatorText>
-      </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-    </DescribesPackage>
-    <DescribesFile>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
-      <CreationInfo>
-        <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CreatorText>Test string one</CreatorText>
-      </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-    </DescribesFile>
-    <HasExtractedLicensingInfo>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
-      <CreationInfo>
-        <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CreatorText>Test string one</CreatorText>
-      </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-    </HasExtractedLicensingInfo>
-    <CreationInfo>
-      <LicenseListVersionText>Test string one</LicenseListVersionText>
-      <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-      <CommentText>Test string one</CommentText>
-      <CreatorText>Test string one</CreatorText>
-    </CreationInfo>
-    <SpecVersionText>Test string one</SpecVersionText>
-    <ExternalDocumentRef>
-      <Checksum>
-        <ChecksumValue/>
-        <AlgorithmCode>ChecksumAlgorithmMd5</AlgorithmCode>
-      </Checksum>
-      <ExternalDocumentID>Test string one</ExternalDocumentID>
-      <SpdxDocument>
-        <Name>Test string one</Name>
-        <CommentText>Test string one</CommentText>
-        <CreationInfo>
-          <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-          <CreatorText>Test string one</CreatorText>
-        </CreationInfo>
-        <SpecVersionText>Test string one</SpecVersionText>
-        <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-      </SpdxDocument>
-    </ExternalDocumentRef>
-    <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-  </DescribesFile>
-  <HasExtractedLicensingInfo>
-    <Annotation>
-      <Date>2018-04-12T13:20:00</Date>
-      <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
-      <CommentText>Test string one</CommentText>
-      <AnnotatorText>Test string one</AnnotatorText>
-    </Annotation>
-    <Name>Test string one</Name>
-    <CommentText>Test string one</CommentText>
-    <Relationship>
-      <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
-      <CommentText>Test string one</CommentText>
-    </Relationship>
-    <DescribesPackage>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
-      <CreationInfo>
-        <LicenseListVersionText>Test string one</LicenseListVersionText>
-        <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CommentText>Test string one</CommentText>
-        <CreatorText>Test string one</CreatorText>
-      </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-    </DescribesPackage>
-    <DescribesFile>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
-      <CreationInfo>
-        <LicenseListVersionText>Test string one</LicenseListVersionText>
-        <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CommentText>Test string one</CommentText>
-        <CreatorText>Test string one</CreatorText>
-      </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-    </DescribesFile>
-    <HasExtractedLicensingInfo>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
-      <CreationInfo>
-        <LicenseListVersionText>Test string one</LicenseListVersionText>
-        <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CommentText>Test string one</CommentText>
-        <CreatorText>Test string one</CreatorText>
-      </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-    </HasExtractedLicensingInfo>
-    <CreationInfo>
-      <LicenseListVersionText>Test string one</LicenseListVersionText>
-      <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-      <CommentText>Test string one</CommentText>
-      <CreatorText>Test string one</CreatorText>
-    </CreationInfo>
-    <SpecVersionText>Test string one</SpecVersionText>
-    <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-  </HasExtractedLicensingInfo>
+  <DescribesPackageID>Test string one</DescribesPackageID>
+  <DescribesFileID>Test string one</DescribesFileID>
+  <HasExtractedLicensingInfoID>Test string one</HasExtractedLicensingInfoID>
   <CreationInfo>
     <LicenseListVersionText>Test string one</LicenseListVersionText>
     <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
@@ -206,16 +30,7 @@
       <AlgorithmCode>ChecksumAlgorithmMd5</AlgorithmCode>
     </Checksum>
     <ExternalDocumentID>Test string one</ExternalDocumentID>
-    <SpdxDocument>
-      <Name>Test string one</Name>
-      <CommentText>Test string one</CommentText>
-      <CreationInfo>
-        <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
-        <CreatorText>Test string one</CreatorText>
-      </CreationInfo>
-      <SpecVersionText>Test string one</SpecVersionText>
-      <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
-    </SpdxDocument>
+    <SpdxDocumentID>Test string one</SpdxDocumentID>
   </ExternalDocumentRef>
-  <DataLicense>http://spdx.org/licenses/CC0-1.0</DataLicense>
+  <DataLicenseID>Test string one</DataLicenseID>
 </SpdxDocument>

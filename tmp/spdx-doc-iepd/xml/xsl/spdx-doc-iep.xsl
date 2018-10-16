@@ -24,6 +24,7 @@
             </xs:appinfo>
         </xs:annotation>
         <xsl:apply-templates select="//xs:schema/*[@name = $Root]"/>
+        <xsl:apply-templates select="//xs:schema/*[@name = $RootEl]"/>
         <xsl:variable name="allnodes">
             <xsl:call-template name="deDupList">
                 <xsl:with-param name="list">
@@ -77,7 +78,7 @@
         </xsl:call-template>
     </xsl:template>
     
-    <xsl:template match="xs:element[@name = 'DataLicense']" mode="xsdcopy">
+    <!--<xsl:template match="xs:element[@name = 'DataLicense']" mode="xsdcopy">
        <xsl:element name="{name()}">
            <xsl:apply-templates select="@*" mode="xsdcopy"/>
            <xsl:attribute name="fixed">http://spdx.org/licenses/CC0-1.0</xsl:attribute>
@@ -90,5 +91,5 @@
             <xsl:text>0</xsl:text>
         </xsl:attribute>
     </xsl:template>
-
+-->
 </xsl:stylesheet>

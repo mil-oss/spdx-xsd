@@ -9,12 +9,12 @@
     <xsl:variable name="nspc" select="'urn:spdx-xml:1.0'"/>
 
     <xsl:template match="xs:schema/xs:complexType" mode="root">
-        <xsl:param name="testData"/>
+        <xsl:param name="testData"/> 
         <xsl:variable name="annot" select="xs:annotation"/>
         <xsl:variable name="namevar" select="@name"/>
         <xsl:variable name="elname" select="//xs:schema/xs:element[@type = $namevar]/@name"/>
         <xsl:variable name="typevar" select="@type"/>
-        <xsl:apply-templates select="*[not(name() = 'xsd:annotation')]">
+       <xsl:apply-templates select="*[not(name() = 'xsd:annotation')]">
             <xsl:with-param name="testData" select="$testData"/>
             <xsl:with-param name="depth" select="1"/>
         </xsl:apply-templates>
