@@ -2,11 +2,11 @@
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:exsl="http://exslt.org/common" xmlns:str="http://exslt.org/strings"
     extension-element-prefixes="str exsl" exclude-result-prefixes="xs" version="1.0">
     
-    <xsl:variable name="nspc" select="'urn:spdx-xml::1.0'"/>
+    <xsl:variable name="nspc" select="'urn:spdx-xml:1.0'"/>
 
     <xsl:template name="makeXSD">
         <xsl:param name="xsdnodes"/>       
-        <xs:schema xmlns="urn:spdx-xml::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-xml::1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xs:schema xmlns="urn:spdx-xml:1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-xml:1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
             <xsl:apply-templates select="exsl:node-set($xsdnodes)/*" mode="xsdcopy"/>
         </xs:schema>
     </xsl:template>

@@ -6,7 +6,7 @@
     input:  /iepd/xml/xsd/iep.xsd
     output: /iepd/xml/instance/test_instance.xml
    -->
-    <xsl:variable name="nspc" select="'urn:spdx-xml::1.0'"/>
+    <xsl:variable name="nspc" select="'urn:spdx-xml:1.0'"/>
 
     <xsl:template match="xs:schema/xs:complexType" mode="root">
         <xsl:param name="testData"/>
@@ -55,7 +55,6 @@
         </xsl:variable>
         <xsl:element name="{$elnode/@name}" namespace="{$nspc}">
             <xsl:value-of select="$testValue"/>
-            <xsl:value-of select="$depth"/>
             <xsl:apply-templates select="$typnode/*">
                 <xsl:with-param name="testData" select="$testData"/>
                 <xsl:with-param name="depth" select="$depth+1"/>
@@ -64,7 +63,6 @@
         <xsl:if test="@maxOccurs > 1">
             <xsl:element name="{$elnode/@name}" namespace="{$nspc}">
                 <xsl:value-of select="$testValue"/>
-                <xsl:value-of select="$depth"/>
                 <xsl:apply-templates select="$typnode/*">
                     <xsl:with-param name="testData" select="$testData"/>
                     <xsl:with-param name="depth" select="$depth+1"/>

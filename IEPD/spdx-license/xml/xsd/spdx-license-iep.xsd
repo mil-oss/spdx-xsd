@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:spdx-xml::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-xml::1.0" version="1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:spdx-xml:1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-xml:1.0" version="1">
    <xs:annotation>
       <xs:documentation>XML Schema for SPDX License Information Exchange</xs:documentation>
       <xs:appinfo>

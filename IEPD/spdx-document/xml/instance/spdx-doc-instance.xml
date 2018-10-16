@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml::1.0" xmlns:exsl="http://exslt.org/common" xsi:schemaLocation="urn:spdx-xml::1.0 ../xsd/spdx-doc-iep.xsd">
+<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml:1.0" xmlns:exsl="http://exslt.org/common" xsi:schemaLocation="urn:spdx-xml:1.0 ../xsd/spdx-doc-iep.xsd">
   <Annotation>
     <Date>2018-04-12T13:20:00</Date>
     <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
@@ -12,6 +12,7 @@
     <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
     <CommentText>Test string one</CommentText>
     <RelatedSpdxElement>
+      <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
       <Annotation>
         <Date>2018-04-12T13:20:00</Date>
         <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>

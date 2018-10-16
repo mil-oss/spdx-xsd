@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestData>
+    <AlgorithmCodeSimpleType>
+        <True1 valid="true">ChecksumAlgorithmMd5</True1>
+        <True2 valid="true">ChecksumAlgorithmSha256</True2>
+        <False1 valid="false">Crypto</False1>
+    </AlgorithmCodeSimpleType>
+    <AnnotationTypeCodeSimpleType>
+        <True1 valid="true">AnnotationTypeOther</True1>
+        <True2 valid="true">AnnotationTypeReview</True2>
+        <False1 valid="false">Stuff</False1>
+    </AnnotationTypeCodeSimpleType>
+    <CopyrightTextCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="false">Stuff</False1>
+    </CopyrightTextCodeSimpleType>
+    <DownloadLocationCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="false">Stuff</False1>
+    </DownloadLocationCodeSimpleType>
+    <FileTypeCodeSimpleType>
+        <True1 valid="true">Application</True1>
+        <True2 valid="true">Binary</True2>
+        <False1 valid="false">Info</False1>
+    </FileTypeCodeSimpleType>
+    <LicenseConcludedCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="true">Stuff</False1>
+    </LicenseConcludedCodeSimpleType>
+    <LicenseDeclaredCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="true">Stuff</False1>
+    </LicenseDeclaredCodeSimpleType>
+    <LicenseInfoFromFilesCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="true">Stuff</False1>
+    </LicenseInfoFromFilesCodeSimpleType>
+    <ReferenceCategoryCodeSimpleType>
+        <True1 valid="true">PackageManager</True1>
+        <True2 valid="true">Security</True2>
+        <False1 valid="false">Dewey</False1>
+    </ReferenceCategoryCodeSimpleType>
+    <RelationshipTypeCodeSimpleType>
+        <True1 valid="true">RelationshipTypeAmendment</True1>
+        <True2 valid="true">RelationshipTypeCopyOf</True2>
+        <False1 valid="false">Underneath</False1>
+    </RelationshipTypeCodeSimpleType>
+    <DataLicense>
+        <True1 valid="true">http://spdx.org/licenses/CC0-1.0</True1>
+        <True2 valid="false">Other</True2>
+    </DataLicense>    
+    <Boolean>
+        <True1 valid="true">true</True1>
+        <True2 valid="true">false</True2>
+        <False1 valid="false">maybe</False1>
+    </Boolean>
+    <String>
+        <True1 valid="true">Test string one</True1>
+        <True2 valid="true">Test string two</True2>
+        <False1 valid="false">false</False1>
+    </String>
+    <AnyURI>
+        <True1 valid="true">http://anyuri.org</True1>
+        <True2 valid="true">http://anyuri.org</True2>
+        <False1 valid="false">invalid link</False1>
+    </AnyURI>
+    <DateTime>
+        <True1 valid="true">2018-04-12T13:20:00</True1>
+        <True2 valid="true">2018-04-12T13:20:00-05:00</True2>
+        <False1 valid="false">2018-04-12T13:00</False1>
+    </DateTime>
+</TestData>

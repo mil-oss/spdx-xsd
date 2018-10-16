@@ -6,7 +6,7 @@
     input:  /iepd/xml/xsd/iep.xsd
     output: /iepd/xml/instance/test_instance.xml
    -->
-    <xsl:variable name="nspc" select="'urn:spdx-xml::1.0'"/>
+    <xsl:variable name="nspc" select="'urn:spdx-xml:1.0'"/>
 
     <xsl:template match="xs:schema/xs:complexType" mode="root">
         <xsl:param name="testData"/>

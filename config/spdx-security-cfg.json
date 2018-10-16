@@ -1,7 +1,7 @@
 {
     "project": "spdx-security",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
-    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-security/xml/instance/spdx-security-test_data.xml",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/IEPD/spdx-security/xml/instance/spdx-security-test-data.xml",
     "homeurl": "http://localhost",
     "port": ":8181",
     "dbloc": "tmp/spdx-security-iepd/db/spdx-security.db",

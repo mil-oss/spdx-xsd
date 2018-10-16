@@ -16,7 +16,7 @@
     </xsl:template>
 
     <xsl:template name="main">
-        <SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml::1.0" xsi:schemaLocation="urn:spdx-xml::1.0 ../xsd/spdx-security-iep.xsd">
+        <SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0 ../xsd/spdx-security-iep.xsd">
             <xsl:apply-templates select="xs:schema/xs:complexType[@name = $Root]" mode="root">
                 <xsl:with-param name="testData" select="document($TestData)"/>
             </xsl:apply-templates>

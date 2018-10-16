@@ -6,7 +6,7 @@
 
     <xsl:template name="makeXSD">
         <xsl:param name="xsdnodes"/>       
-        <xs:schema xmlns="urn:spdx-security::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-security::1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+        <xs:schema xmlns="urn:spdx-xml::1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-xml::1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema">
             <xsl:apply-templates select="exsl:node-set($xsdnodes)/*" mode="xsdcopy"/>
         </xs:schema>
     </xsl:template>

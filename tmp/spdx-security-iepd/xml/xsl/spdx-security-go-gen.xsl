@@ -10,7 +10,19 @@
    -->
 
     <xsl:template match="/">
-        <xsl:call-template name="makego"/>
+        <xsl:variable name="rootname" select="xs:schema/xs:annotation/xs:appinfo/*/@name"/>
+        <xsl:value-of select="concat('package main', $cr, $cr)"/>
+        <xsl:value-of select="concat('import ', $qt, 'encoding/xml', $qt, $cr, $cr)"/>
+        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]" mode="func">
+            <xsl:with-param name="rootname" select="$rootname"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]">
+            <xsl:with-param name="rootname" select="$rootname"/>
+        </xsl:apply-templates>
+        <xsl:apply-templates select="xs:schema/xs:element[not(@name = $rootname)]">
+            <xsl:with-param name="rootname" select="$rootname"/>
+            <xsl:sort select="@name"/>
+        </xsl:apply-templates>
     </xsl:template>
 
 </xsl:stylesheet>
