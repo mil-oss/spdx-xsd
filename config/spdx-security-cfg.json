@@ -5,6 +5,7 @@
     "homeurl": "http://localhost/spdx-security",
     "port": ":8181",
     "dbloc": "tmp/spdx-security-iepd/db/spdx-security.db",
+    "tempdir": "tmp/",
     "temppath": "tmp/spdx-security-iepd/",
     "resources": [
         {

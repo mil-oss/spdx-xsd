@@ -13,9 +13,10 @@ var (
 	SpdxDocDatastruct interface{}
 )
 
-func main() {
+// BuildDocIEP ...
+func BuildDocIEP(config string) {
 	SpdxDocDatastruct = NewSpdxDocument()
-	xsdprov.InitXSDProv("config/spdx-doc-cfg.json")
+	xsdprov.InitXSDProv(config)
 	xsdprov.BuildIep(SpdxDocDatastruct)
-	xsdprov.StartWeb()
+	//xsdprov.StartWeb(xsdprov.Homeurl)
 }

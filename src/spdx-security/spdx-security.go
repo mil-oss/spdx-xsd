@@ -18,5 +18,5 @@ func BuildSecurityIEP(config string) {
 	SecurityDatastruct = NewSoftwareEvidenceArchive()
 	xsdprov.InitXSDProv(config)
 	xsdprov.BuildIep(SecurityDatastruct)
-	xsdprov.StartWeb(xsdprov.Homeurl)
+	//xsdprov.StartWeb(xsdprov.Homeurl)
 }

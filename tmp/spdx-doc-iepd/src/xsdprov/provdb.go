@@ -1,6 +1,7 @@
 package xsdprov
 
 import (
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"log"
@@ -37,25 +38,64 @@ func DbSetup(path string) (*bolt.DB, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not set up buckets, %v", err)
 	}
+	defer db.Close()
 	return db, nil
 }
-func updateDB(db *bolt.DB, bckt string, name string, data []byte) error {
+
+func updateDB(bckt string, key string, data []byte) error {
+	db, err := bolt.Open(dbloc, 0600, nil)
+	if err != nil {
+		return fmt.Errorf("could not open db, %v", err)
+	}
+	defer db.Close()
 	dberr := db.Update(func(tx *bolt.Tx) error {
-		err := tx.Bucket([]byte(pdb)).Bucket([]byte(bckt)).Put([]byte(name), data)
+		err := tx.Bucket([]byte(pdb)).Bucket([]byte(bckt)).Put([]byte(key), data)
 		if err != nil {
 			return fmt.Errorf("could not insert entry: %v", err)
 		}
-		log.Println("updateDB " + bckt + ", " + name + ", " + byteStr(data))
+		log.Println("updateDB " + bckt + ", " + key + ", " + byteStr(data))
 		return nil
 	})
 	fmt.Println("Updated Entry")
 	return dberr
 }
-func queryDB(db *bolt.DB, bckt string, name string) (string, error) {
-	log.Println("queryDB, " + bckt + ", " + name)
+
+func incrementDB(bckt string, data []byte) error {
+	db, err := bolt.Open(dbloc, 0600, nil)
+	if err != nil {
+		return fmt.Errorf("could not open db, %v", err)
+	}
+	defer db.Close()
+	dberr := db.Update(func(tx *bolt.Tx) error {
+		b := tx.Bucket([]byte(pdb)).Bucket([]byte(bckt))
+		id, _ := b.NextSequence()
+		err := b.Put(itob(int(id)), data)
+		if err != nil {
+			return fmt.Errorf("could not insert entry: %v", err)
+		}
+		log.Println("updateDB " + bckt + ", " + string(id) + ", " + byteStr(data))
+		return nil
+	})
+	fmt.Println("Updated Entry")
+	return dberr
+}
+
+// itob returns an 8-byte big endian representation of v.
+func itob(v int) []byte {
+	b := make([]byte, 8)
+	binary.BigEndian.PutUint64(b, uint64(v))
+	return b
+}
+
+func queryDB(bckt string, key string) (string, error) {
+	db, err := bolt.Open(dbloc, 0600, nil)
+	if err != nil {
+		return "", fmt.Errorf("could not open db, %v", err)
+	}
+	log.Println("queryDB, " + bckt + ", " + key)
 	var v = []byte{}
 	verr := db.View(func(tx *bolt.Tx) error {
-		val := tx.Bucket([]byte(pdb)).Bucket([]byte(bckt)).Get([]byte(name))
+		val := tx.Bucket([]byte(pdb)).Bucket([]byte(bckt)).Get([]byte(key))
 		v = val
 		fmt.Println(byteStr(v))
 		return nil
@@ -63,6 +103,30 @@ func queryDB(db *bolt.DB, bckt string, name string) (string, error) {
 	fmt.Println("Found " + byteStr(v))
 	return byteStr(v), verr
 }
+
+func updateTransact(bckt string, key string, data []byte) error {
+	db, err := bolt.Open(dbloc, 0600, nil)
+	if err != nil {
+		return fmt.Errorf("could not open db, %v", err)
+	}
+	//defer db.Close()
+	// Start a writable transaction.
+	tx, err := db.Begin(true)
+	check(err)
+	defer tx.Rollback()
+	// Use the transaction...
+	terr := tx.Bucket([]byte(pdb)).Bucket([]byte(bckt)).Put([]byte(key), data)
+	if terr != nil {
+		return fmt.Errorf("could not insert entry: %v", terr)
+	}
+	log.Println("updateDB " + bckt + ", " + key + ", " + byteStr(data))
+	// Commit the transaction and check for error.
+	if err := tx.Commit(); err != nil {
+		return err
+	}
+	return nil
+}
+
 func jsonBytes(ifce interface{}, data string) ([]byte, error) {
 	vs := []interface{}{ifce, data}
 	encoded, err := json.Marshal(vs)

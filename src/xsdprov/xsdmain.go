@@ -6,7 +6,6 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
-	"time"
 
 	"github.com/boltdb/bolt"
 )
@@ -31,9 +30,10 @@ var (
 	reflink     string
 	testlink    string
 	port        string
-	db          *bolt.DB
-	errorlist   []error
-	provreport  = map[int64]ProvEntry{}
+	// ProvDB ...
+	ProvDB     *bolt.DB
+	errorlist  []error
+	provreport = map[int64]ProvEntry{}
 )
 
 // InitXSDProv ...
@@ -48,6 +48,7 @@ func InitXSDProv(config string) {
 		resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Src
 	}
 	dbloc = cfg.Dbloc
+	DbSetup(dbloc)
 	tempdir = cfg.Tempdir
 	temppath = cfg.Temppath
 	Homeurl = cfg.Homeurl
@@ -62,21 +63,19 @@ func InitXSDProv(config string) {
 		return
 	}
 	DirSetup()
-	db, err := DbSetup(cfg.Dbloc)
-	check(err)
-	// InitTempDir ...
-	InitTempDir(db)
+	InitTempDir()
 }
 
 // InitTempDir ...
-func InitTempDir(db *bolt.DB) (err error) {
+func InitTempDir() (err error) {
 	log.Println("InitTempDir")
-	tempdir, err := queryDB(db, "ADMIN", dbloc)
-	log.Println("TEMPDIR " + dbloc)
-	ferr := os.RemoveAll(dbloc)
-	err = ferr
-	dberr := updateDB(db, "ADMIN", tempdir, []byte(dbloc))
+	td, err := queryDB("ADMIN", dbloc)
+	log.Println("TEMPDIR " + td)
+	//ferr := os.RemoveAll(dbloc)
+	//err = ferr
+	dberr := updateTransact("ADMIN", dbloc, []byte(dbloc))
 	err = dberr
+	//defer db.Close()
 	return err
 }
 
@@ -109,29 +108,23 @@ func BuildIep(dstruct interface{}) (map[int64]ProvEntry, []error) {
 func generateResources() {
 	log.Println("Generate Resources")
 	//GenerateResource - iep.xsd - Information Exchange Package XML Schema
-	provreport[time.Now().UnixNano()], err = GenerateResource(respath("iepxsdxsl"), respath("refxsd"), respath("iepxsd"))
-	check(err)
+	GenerateResource(respath("iepxsdxsl"), respath("refxsd"), respath("iepxsd"))
 	//test_instance.xml - Information Exchange Package XML Instance
-	provreport[time.Now().UnixNano()], err = GenerateResource(respath("instancexsl"), respath("iepxsd"), respath("instancexml"))
-	check(err)
+	GenerateResource(respath("instancexsl"), respath("iepxsd"), respath("instancexml"))
 	//JSON
 	//iep.ref.json - JSON representation of ref.xsd
-	provreport[time.Now().UnixNano()], err = GenerateResource(respath("xsdjsonxsl"), respath("refxsd"), respath("refxsdjson"))
-	check(err)
+	GenerateResource(respath("xsdjsonxsl"), respath("refxsd"), respath("refxsdjson"))
 	//iep.xsd.json - JSON representation of iep.xsd
-	provreport[time.Now().UnixNano()], err = GenerateResource(respath("xsdjsonxsl"), respath("iepxsd"), respath("iepxsdjson"))
-	check(err)
+	GenerateResource(respath("xsdjsonxsl"), respath("iepxsd"), respath("iepxsdjson"))
 	//xml.json - JSON representation test_instance.xml
-	provreport[time.Now().UnixNano()], err = GenerateResource(respath("xmljsonxsl"), respath("instancexml"), respath("instancejson"))
-	check(err)
+	GenerateResource(respath("xmljsonxsl"), respath("instancexml"), respath("instancejson"))
 	//iep.xsd - Golang struct iep.go
-	provreport[time.Now().UnixNano()], err = GenerateResource(respath("gogenxsdxsl"), respath("iepxsd"), respath("structgo"))
-	check(err)
+	GenerateResource(respath("gogenxsdxsl"), respath("iepxsd"), respath("structgo"))
 	//iep.xsd - Golang test iep.go
-	provreport[time.Now().UnixNano()], err = GenerateResource(respath("gotestgenxsl"), respath("iepxsd"), respath("structtestgo"))
-	check(err)
+	GenerateResource(respath("gotestgenxsl"), respath("iepxsd"), respath("structtestgo"))
 	//Marshal instance
-	provreport[time.Now().UnixNano()] = MarshalXML(respath("instancexml"), respath("instancegolangxml"), datastruct)
+	MarshalXML(respath("instancexml"), respath("instancegolangxml"), datastruct)
+
 }
 
 func respath(str string) string {
@@ -140,21 +133,21 @@ func respath(str string) string {
 
 func validateResources() {
 	log.Println("Validate Resources")
-	var errs []error
-	var err error
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("refxsd", "xmlschemaxsd")
-	valerr(errs, err)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("iepxsd", "xmlschemaxsd")
-	valerr(errs, err)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("instancexml", "iepxsd")
-	valerr(errs, err)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("instancexml", "refxsd")
-	valerr(errs, err)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("instancegolangxml", "iepxsd")
-	valerr(errs, err)
-	provreport[time.Now().UnixNano()], errs, err = ValidateFile("instancegolangxml", "refxsd")
-	valerr(errs, err)
+
+	ValidateFile("refxsd", "xmlschemaxsd")
+
+	ValidateFile("iepxsd", "xmlschemaxsd")
+
+	ValidateFile("instancexml", "iepxsd")
+
+	ValidateFile("instancexml", "refxsd")
+
+	ValidateFile("instancegolangxml", "iepxsd")
+
+	ValidateFile("instancegolangxml", "refxsd")
+
 }
+
 func valerr(er []error, e error) {
 	if er != nil {
 		fmt.Printf("error: %v\n", e)

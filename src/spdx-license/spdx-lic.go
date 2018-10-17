@@ -18,7 +18,7 @@ func BuildLicenseIEP(config string) {
 	SpdxLicenseDatastruct = NewLicense()
 	xsdprov.InitXSDProv(config)
 	xsdprov.BuildIep(SpdxLicenseDatastruct)
-	xsdprov.StartWeb(xsdprov.Homeurl)
+	//xsdprov.StartWeb(xsdprov.Homeurl)
 }
 
 // Resources ...

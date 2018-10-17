@@ -18,5 +18,5 @@ func BuildDocIEP(config string) {
 	SpdxDocDatastruct = NewSpdxDocument()
 	xsdprov.InitXSDProv(config)
 	xsdprov.BuildIep(SpdxDocDatastruct)
-	xsdprov.StartWeb(xsdprov.Homeurl)
+	//xsdprov.StartWeb(xsdprov.Homeurl)
 }

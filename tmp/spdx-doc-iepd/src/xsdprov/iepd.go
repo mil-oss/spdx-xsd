@@ -14,35 +14,48 @@ import (
 // GetSourceResources ...
 func GetSourceResources() {
 	log.Println("getSourceResources")
+	check(err)
 	//Compare local copy of Ref XSD to Authoritative copy on GitHub
 	var snr = "refxsd"
 	log.Println(resources[snr])
 	tempfiles[snr] = temppath + resources[snr]
 	log.Println(tempfiles[snr])
 	pe := LoadRemote(snr, tempfiles[snr], reflink)
-	provreport[time.Now().UnixNano()] = pe
+	logResult(pe)
 	ped := CheckDigest(resources[snr], pe.Digest, tempdigests[snr])
-	provreport[time.Now().UnixNano()] = ped
+	logResult(ped)
 	if ped.Status == "Fail" {
 		CopyFile(temppath+resources[snr], resources[snr])
 		pcp := LoadRemote(snr, tempfiles[snr], reflink)
 		pcp.Message = "Resource Updated"
-		provreport[time.Now().UnixNano()] = pcp
+		logResult(pcp)
+		//provreport[time.Now().UnixNano()] = pcp
 	}
 	//Test Data
 	var tdx = "testdataxml"
 	tempfiles[tdx] = temppath + resources[tdx]
 	pex := LoadRemote(tdx, tempfiles[tdx], testlink)
-	provreport[time.Now().UnixNano()] = pex
+	logResult(pex)
+	//provreport[time.Now().UnixNano()] = pex
 	pedx := CheckDigest(resources[tdx], pex.Digest, tempdigests[tdx])
-	provreport[time.Now().UnixNano()] = pedx
+	//provreport[time.Now().UnixNano()] = pedx
+	logResult(pedx)
 	if pedx.Status == "Fail" {
 		CopyFile(temppath+resources[tdx], resources[tdx])
 		tcp := LoadRemote(tdx, tempfiles[tdx], testlink)
 		tcp.Message = "Resource Updated"
-		provreport[time.Now().UnixNano()] = tcp
+		logResult(tcp)
+		//provreport[time.Now().UnixNano()] = tcp
 	}
 	tempfiles[tdx] = temppath + resources[tdx]
+}
+
+func logResult(pe ProvEntry) {
+	provreport[time.Now().UnixNano()] = pe
+	pr, err := json.Marshal(pe)
+	check(err)
+	dberr := incrementDB("PROVDATA", pr)
+	check(dberr)
 }
 
 // ZipIEPD ...
@@ -96,6 +109,7 @@ func GenerateResource(xslpath string, xmlpath string, resultpath string) (ProvEn
 	if err != nil {
 		pe.Status = "Fail"
 	}
+	logResult(pe)
 	return pe, err
 }
 
@@ -116,6 +130,7 @@ func GenerateResourceParam(xslpath string, xmlpath string, resultpath string, pa
 	if err != nil {
 		pe.Status = "Fail"
 	}
+	logResult(pe)
 	return pe
 }
 
@@ -128,6 +143,7 @@ func MarshalXML(srcpath string, destpath string, dstruct interface{}) ProvEntry 
 	pe := provEntry("Marshal Data", name)
 	pe.Status = "Pass"
 	pe.Digest = spaceMap(GetHash(destpath, "Sha256"))
+	logResult(pe)
 	return pe
 }
 
@@ -151,10 +167,12 @@ func ValidateFile(xmlname string, xsdname string) (pe ProvEntry, errs []error, e
 		pe.Status = "Fail"
 		pe.Valid = false
 		pe.Errors = jsonList(errs)
+		logResult(pe)
 		return pe, errs, err
 	}
 	pe.Valid = true
 	pe.Status = "Pass"
+	logResult(pe)
 	return pe, nil, nil
 }
 

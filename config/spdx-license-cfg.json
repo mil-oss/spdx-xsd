@@ -5,6 +5,7 @@
     "homeurl": "http://localhost/spdx-license",
     "port": ":8181",
     "dbloc": "tmp/spdx-license-iepd/db/spdx-license.db",
+    "tempdir": "tmp/",
     "temppath": "tmp/spdx-license-iepd/",
     "resources": [
         {

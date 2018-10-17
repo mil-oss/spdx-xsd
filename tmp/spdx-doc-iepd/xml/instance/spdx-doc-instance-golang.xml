@@ -1,8 +1,0 @@
-  <SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml:1.0">
-      <Annotation></Annotation>
-      <Relationship></Relationship>
-      <CreationInfo></CreationInfo>
-      <ExternalDocumentRef>
-          <Checksum></Checksum>
-      </ExternalDocumentRef>
-  </SpdxDocument>
