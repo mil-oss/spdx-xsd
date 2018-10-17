@@ -1,13 +1,13 @@
 {
-    "project": "spdx-security",
-    "configfile": "spdx-security-cfg.json",
+    "project": "spdx-sec-ism",
+    "configfile": "spdx-sec-ism-cfg.json",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
-    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-security/xml/instance/spdx-security-test-data.xml",
-    "homeurl": "http://localhost/spdx-security",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-security/xml/instance/spdx-sec-ism-test-data.xml",
+    "homeurl": "http://localhost/spdx-sec-ism",
     "port": ":8080",
-    "dbloc": "tmp/spdx-security-iepd/db/spdx-security.db",
+    "dbloc": "tmp/spdx-sec-ism-iepd/db/spdx-sec-ism.db",
     "tempdir": "tmp/",
-    "temppath": "tmp/spdx-security-iepd/",
+    "temppath": "tmp/spdx-sec-ism-iepd/",
     "resources": [
         {
             "name": "refxsd",
