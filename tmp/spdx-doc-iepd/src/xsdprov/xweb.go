@@ -30,10 +30,11 @@ var (
 	healthy    int32
 	xsdstruct  interface{}
 	project    string
+	router     = http.NewServeMux()
 )
 
 //StartWeb .. simple web server
-func StartWeb(homeurl string) {
+func StartWeb() {
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
@@ -42,14 +43,15 @@ func StartWeb(homeurl string) {
 	flag.Parse()
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
 	logger.Println("Starting HTTP Server. .. ")
-	router := http.NewServeMux()
-	router.Handle(homeurl+"/", index())
-	router.Handle(homeurl+"/file/", getResource())
-	router.Handle(homeurl+"/iepd/", getResource())
-	router.Handle(homeurl+"/dload", dload())
-	router.Handle(homeurl+"/validate", validate())
-	router.Handle(homeurl+"/transform", transform())
-	router.Handle(homeurl+"/verify", verify())
+	ConfigRouter()
+	/* 	router.Handle("/", index())
+	   	router.Handle("/file/", getResource())
+	   	router.Handle("/iepd/", getResource())
+	   	router.Handle("/dload", dload())
+	   	router.Handle("/validate", validate())
+	   	router.Handle("/transform", transform())
+	   	router.Handle("/verify", verify()) */
+
 	nextRequestID := func() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
 	}
@@ -86,13 +88,25 @@ func StartWeb(homeurl string) {
 	<-done
 	logger.Println("Server stopped")
 }
+
+//ConfigRouter ...
+func ConfigRouter() {
+	router.Handle("/", index())
+	router.Handle("/file/", getResource())
+	router.Handle("/iepd/", getResource())
+	router.Handle("/dload", dload())
+	router.Handle("/validate", validate())
+	router.Handle("/transform", transform())
+	router.Handle("/verify", verify())
+	router.Handle("/rebuild", rebuild())
+}
+
 func index() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
-		//http.Redirect(w, r, "https://securityxsd.specchain.org", 301)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
@@ -158,9 +172,9 @@ func index() http.Handler {
 
 		fmt.Fprintln(w, "<table>")
 		fmt.Fprintln(w, "<tr><td><b>Operations:</b></td><td></td></tr>")
-		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{XMLName='',XMLPath='',XMLString='',XSDName='',XSDPath='',XSDString=''}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{XMLName='',XMLPath='',XMLString='',XSLName='',XSLPath='',XSLString='',ResultPath='',Params=[{'':''},{'':''}]}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{ID='',XMLPath='',Digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
 		fmt.Fprintln(w, "<table>")
 
 		fmt.Fprintln(w, "</body>")
@@ -275,6 +289,25 @@ func transform() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
+func rebuild() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if atomic.LoadInt32(&healthy) == 1 {
+			//var p = filepath.Base(r.URL.Path)
+			//f, err := ioutil.ReadFile(temppath + resources[p])
+			//check(err)
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
+			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+			w.Header().Set("Pragma", "no-cache")
+			w.Header().Set("X-Accel-Expires", "0")
+			//check(err)
+			//w.Write(f)
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+
 func dload() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")

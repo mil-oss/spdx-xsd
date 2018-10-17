@@ -20,6 +20,7 @@ func DbSetup(path string) (*bolt.DB, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not open db, %v", err)
 	}
+	defer db.Close()
 	err = db.Update(func(tx *bolt.Tx) error {
 		root, err := tx.CreateBucketIfNotExists([]byte(pdb))
 		if err != nil {
@@ -38,7 +39,6 @@ func DbSetup(path string) (*bolt.DB, error) {
 	if err != nil {
 		return nil, fmt.Errorf("could not set up buckets, %v", err)
 	}
-	defer db.Close()
 	return db, nil
 }
 
@@ -92,6 +92,7 @@ func queryDB(bckt string, key string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("could not open db, %v", err)
 	}
+	//defer db.Close()
 	log.Println("queryDB, " + bckt + ", " + key)
 	var v = []byte{}
 	verr := db.View(func(tx *bolt.Tx) error {
@@ -109,7 +110,7 @@ func updateTransact(bckt string, key string, data []byte) error {
 	if err != nil {
 		return fmt.Errorf("could not open db, %v", err)
 	}
-	//defer db.Close()
+	defer db.Close()
 	// Start a writable transaction.
 	tx, err := db.Begin(true)
 	check(err)

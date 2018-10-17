@@ -9,16 +9,22 @@ var (
 	iepderr      error
 	valerr       []error
 	provreport   = map[int64]xsdprov.ProvEntry{}
+	// Config ...
+	Config = "config/spdx-license-cfg.json"
 	// SpdxLicenseDatastruct ...
 	SpdxLicenseDatastruct interface{}
 )
 
+func main() {
+	BuildLicenseIEP()
+	xsdprov.StartWeb(Config, SpdxLicenseDatastruct)
+}
+
 // BuildLicenseIEP ...
-func BuildLicenseIEP(config string) {
+func BuildLicenseIEP() {
 	SpdxLicenseDatastruct = NewLicense()
-	xsdprov.InitXSDProv(config)
+	xsdprov.InitXSDProv(Config)
 	xsdprov.BuildIep(SpdxLicenseDatastruct)
-	//xsdprov.StartWeb(xsdprov.Homeurl)
 }
 
 // Resources ...

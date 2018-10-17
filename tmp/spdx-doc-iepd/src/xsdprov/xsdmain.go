@@ -48,7 +48,6 @@ func InitXSDProv(config string) {
 		resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Src
 	}
 	dbloc = cfg.Dbloc
-	DbSetup(dbloc)
 	tempdir = cfg.Tempdir
 	temppath = cfg.Temppath
 	Homeurl = cfg.Homeurl
@@ -69,13 +68,22 @@ func InitXSDProv(config string) {
 // InitTempDir ...
 func InitTempDir() (err error) {
 	log.Println("InitTempDir")
-	td, err := queryDB("ADMIN", dbloc)
-	log.Println("TEMPDIR " + td)
+	db, err := DbSetup(dbloc)
+	check(err)
+	var v = []byte{}
+	verr := db.View(func(tx *bolt.Tx) error {
+		val := tx.Bucket([]byte(pdb)).Bucket([]byte("ADMIN")).Get([]byte(temppath))
+		v = val
+		fmt.Println(byteStr(v))
+		return nil
+	})
+	err = verr
+	//td, err := queryDB("ADMIN", temppath)
+	log.Println("TempPath " + string(v))
 	//ferr := os.RemoveAll(dbloc)
 	//err = ferr
-	dberr := updateTransact("ADMIN", dbloc, []byte(dbloc))
+	dberr := updateTransact("ADMIN", temppath, []byte(dbloc))
 	err = dberr
-	//defer db.Close()
 	return err
 }
 
