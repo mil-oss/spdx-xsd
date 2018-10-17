@@ -53,7 +53,7 @@ func updateDB(bckt string, key string, data []byte) error {
 		if err != nil {
 			return fmt.Errorf("could not insert entry: %v", err)
 		}
-		log.Println("updateDB " + bckt + ", " + key + ", " + byteStr(data))
+		//log.Println("updateDB " + bckt + ", " + key + ", " + byteStr(data))
 		return nil
 	})
 	fmt.Println("Updated Entry")
@@ -73,7 +73,7 @@ func incrementDB(bckt string, data []byte) error {
 		if err != nil {
 			return fmt.Errorf("could not insert entry: %v", err)
 		}
-		log.Println("updateDB " + bckt + ", " + string(id) + ", " + byteStr(data))
+		//log.Println("incrementDB " + bckt + ", " + string(id) + ", " + byteStr(data))
 		return nil
 	})
 	fmt.Println("Updated Entry")
@@ -120,7 +120,7 @@ func updateTransact(bckt string, key string, data []byte) error {
 	if terr != nil {
 		return fmt.Errorf("could not insert entry: %v", terr)
 	}
-	log.Println("updateDB " + bckt + ", " + key + ", " + byteStr(data))
+	//log.Println("updateTransact " + bckt + ", " + key + ", " + byteStr(data))
 	// Commit the transaction and check for error.
 	if err := tx.Commit(); err != nil {
 		return err

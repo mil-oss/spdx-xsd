@@ -1,4 +1,4 @@
-package spdxsec
+package main
 
 import "encoding/xml"
 

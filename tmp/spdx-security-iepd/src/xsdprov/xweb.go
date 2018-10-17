@@ -26,15 +26,19 @@ const (
 )
 
 var (
-	listenAddr string
-	healthy    int32
-	xsdstruct  interface{}
-	project    string
-	router     = http.NewServeMux()
+	listenAddr    string
+	healthy       int32
+	xsdstruct     interface{}
+	project       string
+	router        = http.NewServeMux()
+	config        string
+	appDatastruct interface{}
 )
 
 //StartWeb .. simple web server
-func StartWeb() {
+func StartWeb(cfg string, datastruct interface{}) {
+	config = cfg
+	appDatastruct = datastruct
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
@@ -43,14 +47,7 @@ func StartWeb() {
 	flag.Parse()
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
 	logger.Println("Starting HTTP Server. .. ")
-	/* router := http.NewServeMux()
-	router.Handle(homeurl+"/", index())
-	router.Handle(homeurl+"/file/", getResource())
-	router.Handle(homeurl+"/iepd/", getResource())
-	router.Handle(homeurl+"/dload", dload())
-	router.Handle(homeurl+"/validate", validate())
-	router.Handle(homeurl+"/transform", transform())
-	router.Handle(homeurl+"/verify", verify()) */
+	ConfigRouter()
 	nextRequestID := func() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
 	}
@@ -89,14 +86,15 @@ func StartWeb() {
 }
 
 //ConfigRouter ...
-func ConfigRouter(homeurl string) {
-	router.Handle(homeurl+"/", index())
-	router.Handle(homeurl+"/file/", getResource())
-	router.Handle(homeurl+"/iepd/", getResource())
-	router.Handle(homeurl+"/dload", dload())
-	router.Handle(homeurl+"/validate", validate())
-	router.Handle(homeurl+"/transform", transform())
-	router.Handle(homeurl+"/verify", verify())
+func ConfigRouter() {
+	router.Handle("/", index())
+	router.Handle("/file/", getResource())
+	router.Handle("/iepd/", getResource())
+	router.Handle("/dload", dload())
+	router.Handle("/validate", validate())
+	router.Handle("/transform", transform())
+	router.Handle("/verify", verify())
+	router.Handle("/rebuild", rebuild())
 }
 
 func index() http.Handler {
@@ -105,7 +103,6 @@ func index() http.Handler {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
-		//http.Redirect(w, r, "https://securityxsd.specchain.org", 301)
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
@@ -171,9 +168,10 @@ func index() http.Handler {
 
 		fmt.Fprintln(w, "<table>")
 		fmt.Fprintln(w, "<tr><td><b>Operations:</b></td><td></td></tr>")
-		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{XMLName='',XMLPath='',XMLString='',XSDName='',XSDPath='',XSDString=''}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{XMLName='',XMLPath='',XMLString='',XSLName='',XSLPath='',XSLString='',ResultPath='',Params=[{'':''},{'':''}]}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{ID='',XMLPath='',Digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/rebuild ..</td><td>json payload:  Config:{json file}</td></tr>")
 		fmt.Fprintln(w, "<table>")
 
 		fmt.Fprintln(w, "</body>")
@@ -288,14 +286,37 @@ func transform() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
+func rebuild() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		if atomic.LoadInt32(&healthy) == 1 {
+			defer r.Body.Close()
+			decoder := json.NewDecoder(r.Body)
+			var configdata Cfg
+			err := decoder.Decode(&configdata)
+			if err != nil {
+				HandleError(&w, 500, "Internal Server Error", "Error reading data from body", err)
+				return
+			}
+			c, err := json.Marshal(configdata)
+			check(err)
+			WriteFile(config, c)
+			http.Redirect(w, r, "/", 301)
+			InitXSDProv(config)
+			BuildIep(appDatastruct)
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+
 func dload() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if atomic.LoadInt32(&healthy) == 1 {
-
 			DownloadFile(tempdir+name+"-iepd.zip", w)
-			//w.WriteHeader(http.StatusOK)
+			w.WriteHeader(http.StatusOK)
 			index()
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)

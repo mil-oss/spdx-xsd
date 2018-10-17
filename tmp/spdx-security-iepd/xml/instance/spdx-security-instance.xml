@@ -1,214 +1,214 @@
-<?xml version="1.0" encoding="utf-8"?>
-<SoftwareEvidenceArchive xmlns="urn:spdx-xml:1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:spdx-xml:1.0 ../xsd/spdx-security-iep.xsd">
-   <SoftwareInformation>
-      <ProductTitleText>Line text max length 48 characters.</ProductTitleText>
-      <SoftwareNameText>Line text max length 48 characters.</SoftwareNameText>
-      <SoftwareOrgText>Line text max length 48 characters.</SoftwareOrgText>
-      <VersionInformation>
-         <SoftwareVersionText>Line text max length 48 characters.</SoftwareVersionText>
-         <SemanticVersionIndicator>true</SemanticVersionIndicator>
-         <SemanticVersionText>1.0.0-alpha.beta</SemanticVersionText>
-         <SemanticVersionInformation>
-            <APIName>APIname</APIName>
-            <MajorVersionNumeric>1</MajorVersionNumeric>
-            <MinorVersionNumeric>1</MinorVersionNumeric>
-            <PatchVersionText>1</PatchVersionText>
-            <PreReleaseVersionText>-alpha</PreReleaseVersionText>
-            <BuildMetaText>+exp.sha.5114f85</BuildMetaText>
-         </SemanticVersionInformation>
-         <SemanticVersionDate>2018-02-15T09:00:00</SemanticVersionDate>
-         <PythonSemanticVersionIndicator>true</PythonSemanticVersionIndicator>
-         <PythonSemanticVersion>
-            <PythonEpochSegmentText>1</PythonEpochSegmentText>
-            <PythonReleaseSegmentText>0</PythonReleaseSegmentText>
-            <PythonPreReleaseSegmentText>3</PythonPreReleaseSegmentText>
-            <PythonPostReleaseSegmentText>2</PythonPostReleaseSegmentText>
-            <PythonDevelopmentReleaseSegmentText>3</PythonDevelopmentReleaseSegmentText>
-         </PythonSemanticVersion>
-         <PythonVersionText>1.0.3.2.3</PythonVersionText>
-      </VersionInformation>
-      <GroupingText>Line text max length 48 characters.</GroupingText>
-      <ReleaseNotesText>Paragraph text max length 512 characters.</ReleaseNotesText>
-   </SoftwareInformation>
-   <FileInformation>
-      <ComputerFileNameText>FileNameNoExtension</ComputerFileNameText>
-      <FileExtensionText>.ext</FileExtensionText>
-   </FileInformation>
-   <AuthoritativeSourceInformation>
-      <SourceHashText>49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47C</SourceHashText>
-      <SourceURIText>good:URI</SourceURIText>
-      <AuthoritativeDigitalSignatureIndicator>true</AuthoritativeDigitalSignatureIndicator>
-   </AuthoritativeSourceInformation>
-   <EcosystemInformation>
-      <Ecosystem>
-         <CommitterQuantity>100</CommitterQuantity>
-         <Languages>
-            <LanguageText>Line text max length 48 characters.</LanguageText>
-            <LanguageText>Line text max length 48 characters.</LanguageText>
-         </Languages>
-         <CommitLogs>
-            <CommitLogText>Line text max length 48 characters.</CommitLogText>
-            <CommitLogText>Line text max length 48 characters.</CommitLogText>
-         </CommitLogs>
-      </Ecosystem>
-      <CompanyInformation>
-         <NameText>Line text max length 48 characters.</NameText>
-      </CompanyInformation>
-   </EcosystemInformation>
-   <DependencyInformation>
-      <Dependencies>
-         <Dependency>
-            <NameText>Line text max length 48 characters.</NameText>
-            <DependencyVersionText>Line text max length 48 characters.</DependencyVersionText>
-         </Dependency>
-         <Dependency>
-            <NameText>Line text max length 48 characters.</NameText>
-            <DependencyVersionText>Line text max length 48 characters.</DependencyVersionText>
-         </Dependency>
-      </Dependencies>
-      <Compiler>
-         <NameText>Line text max length 48 characters.</NameText>
-         <CompilerVersionText>Line text max length 48 characters.</CompilerVersionText>
-      </Compiler>
-   </DependencyInformation>
-   <LicenseInformation>
-      <LicenseCategoryCode>FOSS</LicenseCategoryCode>
-      <LicenseCode>LGPL</LicenseCode>
-      <LicenseCode>LGPL</LicenseCode>
-      <EndOfLifeIndicator>true</EndOfLifeIndicator>
-   </LicenseInformation>
-   <VulnerabilityInformation>
-      <Vulnerabilities>
-         <Vulnerability>
-            <VulnerabilityIdentifierText>Line text max length 48 characters.</VulnerabilityIdentifierText>
-            <SourceText>Line text max length 48 characters.</SourceText>
-            <VulnerabilityTitleText>Paragraph text max length 512 characters.</VulnerabilityTitleText>
-            <VulnerabilitySummaryText>Paragraph text max length 512 characters.</VulnerabilitySummaryText>
-            <VulnerabilityScoreValue>123.456</VulnerabilityScoreValue>
-            <VulnerabilityScoreVersionValue>123.456</VulnerabilityScoreVersionValue>
-            <VulnerabilityScoreSystemText>Line text max length 48 characters.</VulnerabilityScoreSystemText>
-            <ScoreDetails>
-               <CommonVulnerabilityScoringSystemV2>
-                  <VectorStringText>Line text max length 48 characters.</VectorStringText>
-                  <AccessVectorText>Line text max length 48 characters.</AccessVectorText>
-                  <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
-                  <VulnerabilityAuthenticationText>Line text max length 48 characters.</VulnerabilityAuthenticationText>
-                  <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
-                  <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
-                  <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
-                  <VulnerabilityBaseScoreValue>123.456</VulnerabilityBaseScoreValue>
-               </CommonVulnerabilityScoringSystemV2>
-               <CommonVulnerabilityScoringSystemV3>
-                  <VectorStringText>Line text max length 48 characters.</VectorStringText>
-                  <AccessVectorText>Line text max length 48 characters.</AccessVectorText>
-                  <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
-                  <PrivilegesRequiredText>Line text max length 48 characters.</PrivilegesRequiredText>
-                  <UserInteractionText>Line text max length 48 characters.</UserInteractionText>
-                  <VulnerabilityScopeText>Line text max length 48 characters.</VulnerabilityScopeText>
-                  <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
-                  <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
-                  <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
-                  <VulnerabilityBaseScoreValue>123.456</VulnerabilityBaseScoreValue>
-                  <BaseSeverityText>Line text max length 48 characters.</BaseSeverityText>
-               </CommonVulnerabilityScoringSystemV3>
-            </ScoreDetails>
-            <VulnerabilityVectorText>Line text max length 48 characters.</VulnerabilityVectorText>
+<?xml version="1.0"?>
+<SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0 ../xsd/spdx-security-iep.xsd">
+  <SoftwareInformation>
+    <ProductTitleText>Line text max length 48 characters.</ProductTitleText>
+    <SoftwareNameText>Line text max length 48 characters.</SoftwareNameText>
+    <SoftwareOrgText>Line text max length 48 characters.</SoftwareOrgText>
+    <VersionInformation>
+      <SoftwareVersionText>Line text max length 48 characters.</SoftwareVersionText>
+      <SemanticVersionIndicator>true</SemanticVersionIndicator>
+      <SemanticVersionText>1.0.0-alpha.beta</SemanticVersionText>
+      <SemanticVersionInformation>
+        <APIName>APIname</APIName>
+        <MajorVersionNumeric>1</MajorVersionNumeric>
+        <MinorVersionNumeric>1</MinorVersionNumeric>
+        <PatchVersionText>1</PatchVersionText>
+        <PreReleaseVersionText>-alpha</PreReleaseVersionText>
+        <BuildMetaText>+exp.sha.5114f85</BuildMetaText>
+      </SemanticVersionInformation>
+      <SemanticVersionDate>2018-02-15T09:00:00</SemanticVersionDate>
+      <PythonSemanticVersionIndicator>true</PythonSemanticVersionIndicator>
+      <PythonSemanticVersion>
+        <PythonEpochSegmentText>1</PythonEpochSegmentText>
+        <PythonReleaseSegmentText>0</PythonReleaseSegmentText>
+        <PythonPreReleaseSegmentText>3</PythonPreReleaseSegmentText>
+        <PythonPostReleaseSegmentText>2</PythonPostReleaseSegmentText>
+        <PythonDevelopmentReleaseSegmentText>3</PythonDevelopmentReleaseSegmentText>
+      </PythonSemanticVersion>
+      <PythonVersionText>1.0.3.2.3</PythonVersionText>
+    </VersionInformation>
+    <GroupingText>Line text max length 48 characters.</GroupingText>
+    <ReleaseNotesText>Paragraph text max length 512 characters.</ReleaseNotesText>
+  </SoftwareInformation>
+  <FileInformation>
+    <ComputerFileNameText>FileNameNoExtension</ComputerFileNameText>
+    <FileExtensionText>.ext</FileExtensionText>
+  </FileInformation>
+  <AuthoritativeSourceInformation>
+    <SourceHashText>49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47C</SourceHashText>
+    <SourceURIText>good:URI</SourceURIText>
+    <AuthoritativeDigitalSignatureIndicator>true</AuthoritativeDigitalSignatureIndicator>
+  </AuthoritativeSourceInformation>
+  <EcosystemInformation>
+    <Ecosystem>
+      <CommitterQuantity>100</CommitterQuantity>
+      <Languages>
+        <LanguageText>Line text max length 48 characters.</LanguageText>
+        <LanguageText>Line text max length 48 characters.</LanguageText>
+      </Languages>
+      <CommitLogs>
+        <CommitLogText>Line text max length 48 characters.</CommitLogText>
+        <CommitLogText>Line text max length 48 characters.</CommitLogText>
+      </CommitLogs>
+    </Ecosystem>
+    <CompanyInformation>
+      <NameText>Line text max length 48 characters.</NameText>
+    </CompanyInformation>
+  </EcosystemInformation>
+  <DependencyInformation>
+    <Dependencies>
+      <Dependency>
+        <NameText>Line text max length 48 characters.</NameText>
+        <DependencyVersionText>Line text max length 48 characters.</DependencyVersionText>
+      </Dependency>
+      <Dependency>
+        <NameText>Line text max length 48 characters.</NameText>
+        <DependencyVersionText>Line text max length 48 characters.</DependencyVersionText>
+      </Dependency>
+    </Dependencies>
+    <Compiler>
+      <NameText>Line text max length 48 characters.</NameText>
+      <CompilerVersionText>Line text max length 48 characters.</CompilerVersionText>
+    </Compiler>
+  </DependencyInformation>
+  <LicenseInformation>
+    <LicenseCategoryCode>FOSS</LicenseCategoryCode>
+    <LicenseCode>LGPL</LicenseCode>
+    <LicenseCode>LGPL</LicenseCode>
+    <EndOfLifeIndicator>true</EndOfLifeIndicator>
+  </LicenseInformation>
+  <VulnerabilityInformation>
+    <Vulnerabilities>
+      <Vulnerability>
+        <VulnerabilityIdentifierText>Line text max length 48 characters.</VulnerabilityIdentifierText>
+        <SourceText>Line text max length 48 characters.</SourceText>
+        <VulnerabilityTitleText>Paragraph text max length 512 characters.</VulnerabilityTitleText>
+        <VulnerabilitySummaryText>Paragraph text max length 512 characters.</VulnerabilitySummaryText>
+        <VulnerabilityScoreValue>123.456</VulnerabilityScoreValue>
+        <VulnerabilityScoreVersionValue>123.456</VulnerabilityScoreVersionValue>
+        <VulnerabilityScoreSystemText>Line text max length 48 characters.</VulnerabilityScoreSystemText>
+        <ScoreDetails>
+          <CommonVulnerabilityScoringSystemV2>
+            <VectorStringText>Line text max length 48 characters.</VectorStringText>
+            <AccessVectorText>Line text max length 48 characters.</AccessVectorText>
             <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
             <VulnerabilityAuthenticationText>Line text max length 48 characters.</VulnerabilityAuthenticationText>
             <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
             <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
             <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
-            <VulnerabilitySourceText>Line text max length 48 characters.</VulnerabilitySourceText>
-            <AssessmentCheckText>Line text max length 48 characters.</AssessmentCheckText>
-            <ScannerText>Line text max length 48 characters.</ScannerText>
-            <RecommendationText>Paragraph text max length 512 characters.</RecommendationText>
-            <VulnerabilityReference>
-               <TypeOfReferenceText>Line text max length 48 characters.</TypeOfReferenceText>
-               <ReferenceSourceText>Line text max length 48 characters.</ReferenceSourceText>
-               <URIText>good:URI</URIText>
-               <ReferenceText>Paragraph text max length 512 characters.</ReferenceText>
-            </VulnerabilityReference>
-            <VulnerabilityModifiedDate>2018-02-15T09:00:00</VulnerabilityModifiedDate>
-            <VulnerabilityPublishedDate>2018-02-15T09:00:00</VulnerabilityPublishedDate>
-         </Vulnerability>
-         <Vulnerability>
-            <VulnerabilityIdentifierText>Line text max length 48 characters.</VulnerabilityIdentifierText>
-            <SourceText>Line text max length 48 characters.</SourceText>
-            <VulnerabilityTitleText>Paragraph text max length 512 characters.</VulnerabilityTitleText>
-            <VulnerabilitySummaryText>Paragraph text max length 512 characters.</VulnerabilitySummaryText>
-            <VulnerabilityScoreValue>123.456</VulnerabilityScoreValue>
-            <VulnerabilityScoreVersionValue>123.456</VulnerabilityScoreVersionValue>
-            <VulnerabilityScoreSystemText>Line text max length 48 characters.</VulnerabilityScoreSystemText>
-            <ScoreDetails>
-               <CommonVulnerabilityScoringSystemV2>
-                  <VectorStringText>Line text max length 48 characters.</VectorStringText>
-                  <AccessVectorText>Line text max length 48 characters.</AccessVectorText>
-                  <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
-                  <VulnerabilityAuthenticationText>Line text max length 48 characters.</VulnerabilityAuthenticationText>
-                  <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
-                  <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
-                  <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
-                  <VulnerabilityBaseScoreValue>123.456</VulnerabilityBaseScoreValue>
-               </CommonVulnerabilityScoringSystemV2>
-               <CommonVulnerabilityScoringSystemV3>
-                  <VectorStringText>Line text max length 48 characters.</VectorStringText>
-                  <AccessVectorText>Line text max length 48 characters.</AccessVectorText>
-                  <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
-                  <PrivilegesRequiredText>Line text max length 48 characters.</PrivilegesRequiredText>
-                  <UserInteractionText>Line text max length 48 characters.</UserInteractionText>
-                  <VulnerabilityScopeText>Line text max length 48 characters.</VulnerabilityScopeText>
-                  <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
-                  <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
-                  <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
-                  <VulnerabilityBaseScoreValue>123.456</VulnerabilityBaseScoreValue>
-                  <BaseSeverityText>Line text max length 48 characters.</BaseSeverityText>
-               </CommonVulnerabilityScoringSystemV3>
-            </ScoreDetails>
-            <VulnerabilityVectorText>Line text max length 48 characters.</VulnerabilityVectorText>
+            <VulnerabilityBaseScoreValue>123.456</VulnerabilityBaseScoreValue>
+          </CommonVulnerabilityScoringSystemV2>
+          <CommonVulnerabilityScoringSystemV3>
+            <VectorStringText>Line text max length 48 characters.</VectorStringText>
+            <AccessVectorText>Line text max length 48 characters.</AccessVectorText>
+            <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
+            <PrivilegesRequiredText>Line text max length 48 characters.</PrivilegesRequiredText>
+            <UserInteractionText>Line text max length 48 characters.</UserInteractionText>
+            <VulnerabilityScopeText>Line text max length 48 characters.</VulnerabilityScopeText>
+            <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
+            <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
+            <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
+            <VulnerabilityBaseScoreValue>123.456</VulnerabilityBaseScoreValue>
+            <BaseSeverityText>Line text max length 48 characters.</BaseSeverityText>
+          </CommonVulnerabilityScoringSystemV3>
+        </ScoreDetails>
+        <VulnerabilityVectorText>Line text max length 48 characters.</VulnerabilityVectorText>
+        <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
+        <VulnerabilityAuthenticationText>Line text max length 48 characters.</VulnerabilityAuthenticationText>
+        <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
+        <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
+        <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
+        <VulnerabilitySourceText>Line text max length 48 characters.</VulnerabilitySourceText>
+        <AssessmentCheckText>Line text max length 48 characters.</AssessmentCheckText>
+        <ScannerText>Line text max length 48 characters.</ScannerText>
+        <RecommendationText>Paragraph text max length 512 characters.</RecommendationText>
+        <VulnerabilityReference>
+          <TypeOfReferenceText>Line text max length 48 characters.</TypeOfReferenceText>
+          <ReferenceSourceText>Line text max length 48 characters.</ReferenceSourceText>
+          <URIText>good:URI</URIText>
+          <ReferenceText>Paragraph text max length 512 characters.</ReferenceText>
+        </VulnerabilityReference>
+        <VulnerabilityModifiedDate>2018-02-15T09:00:00</VulnerabilityModifiedDate>
+        <VulnerabilityPublishedDate>2018-02-15T09:00:00</VulnerabilityPublishedDate>
+      </Vulnerability>
+      <Vulnerability>
+        <VulnerabilityIdentifierText>Line text max length 48 characters.</VulnerabilityIdentifierText>
+        <SourceText>Line text max length 48 characters.</SourceText>
+        <VulnerabilityTitleText>Paragraph text max length 512 characters.</VulnerabilityTitleText>
+        <VulnerabilitySummaryText>Paragraph text max length 512 characters.</VulnerabilitySummaryText>
+        <VulnerabilityScoreValue>123.456</VulnerabilityScoreValue>
+        <VulnerabilityScoreVersionValue>123.456</VulnerabilityScoreVersionValue>
+        <VulnerabilityScoreSystemText>Line text max length 48 characters.</VulnerabilityScoreSystemText>
+        <ScoreDetails>
+          <CommonVulnerabilityScoringSystemV2>
+            <VectorStringText>Line text max length 48 characters.</VectorStringText>
+            <AccessVectorText>Line text max length 48 characters.</AccessVectorText>
             <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
             <VulnerabilityAuthenticationText>Line text max length 48 characters.</VulnerabilityAuthenticationText>
             <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
             <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
             <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
-            <VulnerabilitySourceText>Line text max length 48 characters.</VulnerabilitySourceText>
-            <AssessmentCheckText>Line text max length 48 characters.</AssessmentCheckText>
-            <ScannerText>Line text max length 48 characters.</ScannerText>
-            <RecommendationText>Paragraph text max length 512 characters.</RecommendationText>
-            <VulnerabilityReference>
-               <TypeOfReferenceText>Line text max length 48 characters.</TypeOfReferenceText>
-               <ReferenceSourceText>Line text max length 48 characters.</ReferenceSourceText>
-               <URIText>good:URI</URIText>
-               <ReferenceText>Paragraph text max length 512 characters.</ReferenceText>
-            </VulnerabilityReference>
-            <VulnerabilityModifiedDate>2018-02-15T09:00:00</VulnerabilityModifiedDate>
-            <VulnerabilityPublishedDate>2018-02-15T09:00:00</VulnerabilityPublishedDate>
-         </Vulnerability>
-      </Vulnerabilities>
-      <VirusInformation>
-         <KnownVirusQuantity>100</KnownVirusQuantity>
-         <EngineVersionText>Line text max length 48 characters.</EngineVersionText>
-         <VirusEngineText>Line text max length 48 characters.</VirusEngineText>
-         <ScannedDirectoryQuantity>100</ScannedDirectoryQuantity>
-         <ScannedFileQuantity>100</ScannedFileQuantity>
-         <InfectedFileQuantity>100</InfectedFileQuantity>
-         <DataScannedText>Line text max length 48 characters.</DataScannedText>
-         <DataReadText>Line text max length 48 characters.</DataReadText>
-         <TimeText>Line text max length 48 characters.</TimeText>
-         <FileNotesText>Paragraph text max length 512 characters.</FileNotesText>
-         <EngineDetails>
-            <EngineVersionText>Line text max length 48 characters.</EngineVersionText>
-            <DatabaseVersionText>Line text max length 48 characters.</DatabaseVersionText>
-         </EngineDetails>
-      </VirusInformation>
-   </VulnerabilityInformation>
-   <GovernanceRiskCompliance>
-      <RiskCode>medium</RiskCode>
-      <StatementOfAssuranceText>Paragraph text max length 512 characters.</StatementOfAssuranceText>
-   </GovernanceRiskCompliance>
-   <DeliveryInformation>
-      <DeliveringOrganizationText>Line text max length 48 characters.</DeliveringOrganizationText>
-      <DestinationText>Line text max length 48 characters.</DestinationText>
-      <HashText>49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47C</HashText>
-      <LastRegistryUpdateDate>2018-02-15T09:00:00</LastRegistryUpdateDate>
-   </DeliveryInformation>
+            <VulnerabilityBaseScoreValue>123.456</VulnerabilityBaseScoreValue>
+          </CommonVulnerabilityScoringSystemV2>
+          <CommonVulnerabilityScoringSystemV3>
+            <VectorStringText>Line text max length 48 characters.</VectorStringText>
+            <AccessVectorText>Line text max length 48 characters.</AccessVectorText>
+            <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
+            <PrivilegesRequiredText>Line text max length 48 characters.</PrivilegesRequiredText>
+            <UserInteractionText>Line text max length 48 characters.</UserInteractionText>
+            <VulnerabilityScopeText>Line text max length 48 characters.</VulnerabilityScopeText>
+            <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
+            <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
+            <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
+            <VulnerabilityBaseScoreValue>123.456</VulnerabilityBaseScoreValue>
+            <BaseSeverityText>Line text max length 48 characters.</BaseSeverityText>
+          </CommonVulnerabilityScoringSystemV3>
+        </ScoreDetails>
+        <VulnerabilityVectorText>Line text max length 48 characters.</VulnerabilityVectorText>
+        <AccessComplexityText>Line text max length 48 characters.</AccessComplexityText>
+        <VulnerabilityAuthenticationText>Line text max length 48 characters.</VulnerabilityAuthenticationText>
+        <ConfidentialityImpactText>Line text max length 48 characters.</ConfidentialityImpactText>
+        <IntegrityImpactText>Line text max length 48 characters.</IntegrityImpactText>
+        <AvailabilityImpactText>Line text max length 48 characters.</AvailabilityImpactText>
+        <VulnerabilitySourceText>Line text max length 48 characters.</VulnerabilitySourceText>
+        <AssessmentCheckText>Line text max length 48 characters.</AssessmentCheckText>
+        <ScannerText>Line text max length 48 characters.</ScannerText>
+        <RecommendationText>Paragraph text max length 512 characters.</RecommendationText>
+        <VulnerabilityReference>
+          <TypeOfReferenceText>Line text max length 48 characters.</TypeOfReferenceText>
+          <ReferenceSourceText>Line text max length 48 characters.</ReferenceSourceText>
+          <URIText>good:URI</URIText>
+          <ReferenceText>Paragraph text max length 512 characters.</ReferenceText>
+        </VulnerabilityReference>
+        <VulnerabilityModifiedDate>2018-02-15T09:00:00</VulnerabilityModifiedDate>
+        <VulnerabilityPublishedDate>2018-02-15T09:00:00</VulnerabilityPublishedDate>
+      </Vulnerability>
+    </Vulnerabilities>
+    <VirusInformation>
+      <KnownVirusQuantity>100</KnownVirusQuantity>
+      <EngineVersionText>Line text max length 48 characters.</EngineVersionText>
+      <VirusEngineText>Line text max length 48 characters.</VirusEngineText>
+      <ScannedDirectoryQuantity>100</ScannedDirectoryQuantity>
+      <ScannedFileQuantity>100</ScannedFileQuantity>
+      <InfectedFileQuantity>100</InfectedFileQuantity>
+      <DataScannedText>Line text max length 48 characters.</DataScannedText>
+      <DataReadText>Line text max length 48 characters.</DataReadText>
+      <TimeText>Line text max length 48 characters.</TimeText>
+      <FileNotesText>Paragraph text max length 512 characters.</FileNotesText>
+      <EngineDetails>
+        <EngineVersionText>Line text max length 48 characters.</EngineVersionText>
+        <DatabaseVersionText>Line text max length 48 characters.</DatabaseVersionText>
+      </EngineDetails>
+    </VirusInformation>
+  </VulnerabilityInformation>
+  <GovernanceRiskCompliance>
+    <RiskCode>medium</RiskCode>
+    <StatementOfAssuranceText>Paragraph text max length 512 characters.</StatementOfAssuranceText>
+  </GovernanceRiskCompliance>
+  <DeliveryInformation>
+    <DeliveringOrganizationText>Line text max length 48 characters.</DeliveringOrganizationText>
+    <DestinationText>Line text max length 48 characters.</DestinationText>
+    <HashText>49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47C</HashText>
+    <LastRegistryUpdateDate>2018-02-15T09:00:00</LastRegistryUpdateDate>
+  </DeliveryInformation>
 </SoftwareEvidenceArchive>

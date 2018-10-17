@@ -1,4 +1,4 @@
-package spdxsec
+package main
 
 import (
 	"xsdprov"
@@ -9,18 +9,21 @@ var (
 	iepderr      error
 	valerr       []error
 	provreport   = map[int64]xsdprov.ProvEntry{}
-	// SecurityURL ...
-	SecurityURL string
+	// Config ...
+	Config = "config/spdx-security-cfg.json"
 	// SecurityDatastruct ...
 	SecurityDatastruct interface{}
 )
 
+func main() {
+	//xsdprov.InitXSDProv(Config)
+	BuildSecurityIEP()
+	xsdprov.StartWeb(Config, SecurityDatastruct)
+}
+
 // BuildSecurityIEP ...
-func BuildSecurityIEP(config string) {
+func BuildSecurityIEP() {
 	SecurityDatastruct = NewSoftwareEvidenceArchive()
-	xsdprov.InitXSDProv(config)
+	xsdprov.InitXSDProv(Config)
 	xsdprov.BuildIep(SecurityDatastruct)
-	cfg := xsdprov.GetConfig(config)
-	SecurityURL = cfg.Homeurl
-	//xsdprov.StartWeb(xsdprov.Homeurl)
 }

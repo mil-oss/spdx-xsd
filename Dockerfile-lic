@@ -8,17 +8,21 @@ RUN apk add --update gcc g++ make wget curl bash libxslt libc-dev libxml2 libxml
 RUN apk --no-cache add openssh curl 
 
 ADD src /go/src
-ADD  config /go/src/config
-ADD iepd iepd
-ADD xml xml
-
-WORKDIR /go/src/spdx
-
+ADD config /go/config
+ADD iepd /go/iepd
+ADD xml /go/xml
+ADD tmp /go/tmp
+WORKDIR /go
 
 #build the binary with debug information removed
-RUN go build -ldflags '-w -s' -a -installsuffix cgo -o xsdprov
-RUN go build -ldflags '-w -s' -a -installsuffix cgo -o spdx
-RUN go install spdx
+
+#RUN go build -ldflags '-w -s' -a -installsuffix cgo -o xsdprov
+#RUN go build -ldflags '-w -s' -a -installsuffix cgo -o spdx-license
+#RUN go install spdx-license
+RUN chmod -Rf 777 tmp
+RUN go build xsdprov
+RUN go build spdx-license
+RUN go install spdx-license
 
 EXPOSE 8080
-CMD ["spdx"]
+CMD ["./spdx-license"]

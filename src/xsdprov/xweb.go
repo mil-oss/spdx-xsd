@@ -48,14 +48,6 @@ func StartWeb(cfg string, datastruct interface{}) {
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
 	logger.Println("Starting HTTP Server. .. ")
 	ConfigRouter()
-	/* 	router.Handle("/", index())
-	   	router.Handle("/file/", getResource())
-	   	router.Handle("/iepd/", getResource())
-	   	router.Handle("/dload", dload())
-	   	router.Handle("/validate", validate())
-	   	router.Handle("/transform", transform())
-	   	router.Handle("/verify", verify()) */
-
 	nextRequestID := func() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
 	}
@@ -179,6 +171,7 @@ func index() http.Handler {
 		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
 		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
 		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/rebuild ..</td><td>json payload:  Config:{json file}</td></tr>")
 		fmt.Fprintln(w, "<table>")
 
 		fmt.Fprintln(w, "</body>")
@@ -298,10 +291,20 @@ func rebuild() http.Handler {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if atomic.LoadInt32(&healthy) == 1 {
+			defer r.Body.Close()
+			decoder := json.NewDecoder(r.Body)
+			var configdata Cfg
+			err := decoder.Decode(&configdata)
+			if err != nil {
+				HandleError(&w, 500, "Internal Server Error", "Error reading data from body", err)
+				return
+			}
+			c, err := json.Marshal(configdata)
+			check(err)
+			WriteFile(config, c)
+			http.Redirect(w, r, "/", 301)
 			InitXSDProv(config)
 			BuildIep(appDatastruct)
-			w.WriteHeader(http.StatusOK)
-			index()
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})

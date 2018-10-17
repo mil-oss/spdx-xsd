@@ -1,4 +1,4 @@
-package spdxlic
+package main
 
 import (
 	"encoding/xml"

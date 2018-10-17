@@ -141,19 +141,12 @@ func respath(str string) string {
 
 func validateResources() {
 	log.Println("Validate Resources")
-
 	ValidateFile("refxsd", "xmlschemaxsd")
-
 	ValidateFile("iepxsd", "xmlschemaxsd")
-
 	ValidateFile("instancexml", "iepxsd")
-
 	ValidateFile("instancexml", "refxsd")
-
 	ValidateFile("instancegolangxml", "iepxsd")
-
 	ValidateFile("instancegolangxml", "refxsd")
-
 }
 
 func valerr(er []error, e error) {

@@ -8,18 +8,21 @@ RUN apk add --update gcc g++ make wget curl bash libxslt libc-dev libxml2 libxml
 RUN apk --no-cache add openssh curl 
 
 ADD src /go/src
-ADD config /go/src/config
-ADD iepd iepd
-ADD xml xml
-ADD tmp tmp
-
-WORKDIR /go/src/spdx-security
-
+ADD config /go/config
+ADD iepd /go/iepd
+ADD xml /go/xml
+ADD tmp /go/tmp
+WORKDIR /go
 
 #build the binary with debug information removed
-RUN go build -ldflags '-w -s' -a -installsuffix cgo -o xsdprov
-RUN go build -ldflags '-w -s' -a -installsuffix cgo -o spdx-security
+
+#RUN go build -ldflags '-w -s' -a -installsuffix cgo -o xsdprov
+#RUN go build -ldflags '-w -s' -a -installsuffix cgo -o spdx-security
+#RUN go install spdx-security
+RUN chmod -Rf 777 tmp
+RUN go build xsdprov
+RUN go build spdx-security
 RUN go install spdx-security
 
 EXPOSE 8080
-CMD ["spdx-security"]
+CMD ["./spdx-security"]

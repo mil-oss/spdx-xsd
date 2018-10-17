@@ -1,4 +1,4 @@
-package spdxsec
+package main
 
 import (
 	"xsdprov"
@@ -16,7 +16,8 @@ var (
 )
 
 func main() {
-	BuildSecurityIEP()
+	xsdprov.InitXSDProv(Config)
+	//BuildSecurityIEP()
 	xsdprov.StartWeb(Config, SecurityDatastruct)
 }
 

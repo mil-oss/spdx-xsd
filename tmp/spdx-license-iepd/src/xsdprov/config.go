@@ -8,6 +8,7 @@ import (
 // Cfg ...
 type Cfg struct {
 	Project     string     `json:"project,omitempty"`
+	Configfile  string     `json:"configfile,omitempty"`
 	Reflink     string     `json:"reflink,omitempty"`
 	Testlink    string     `json:"testlink,omitempty"`
 	Homeurl     string     `json:"homeurl,omitempty"`
