@@ -1,4 +1,5 @@
 # spdx-xsd
+
 XML Schema for the Software Package Documentation Exchange (SPDX) Format
 
 SPDX XML:  https://spdx-xml.specchain.org
@@ -11,8 +12,7 @@ SPDX Security XML: https://spdx-xml.specchain.org/spdx-security
 
 SPDX Security ISM XML: https://spdx-xml.specchain.org/spdx-sec-ism
 
-
-# License
+## License
 
 SPDX-License-Identifier: CC-BY-3.0 and Apache-2.0
 
