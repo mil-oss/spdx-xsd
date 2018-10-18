@@ -1,155 +1,155 @@
 <?xml version="1.0"?>
 <SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ism="urn:us:gov:ic:ism" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0 file:./../xsd/spdx-sec-ism-iep.xsd" ism:classification="U">
   <SoftwareInformation ism:classification="U">
-    <ProductTitleText ism:classification="U">Line text max length 48 characters.</ProductTitleText>
-    <SoftwareNameText ism:classification="U">Line text max length 48 characters.</SoftwareNameText>
-    <SoftwareOrgText ism:classification="U">Line text max length 48 characters.</SoftwareOrgText>
+    <ProductTitleText ism:classification="U"/>
+    <SoftwareNameText ism:classification="U"/>
+    <SoftwareOrgText ism:classification="U"/>
     <VersionInformation ism:classification="U">
-      <SoftwareVersionText ism:classification="U">Line text max length 48 characters.</SoftwareVersionText>
-      <SemanticVersionIndicator ism:classification="U">true</SemanticVersionIndicator>
-      <SemanticVersionText ism:classification="U">1.0.0-alpha.beta</SemanticVersionText>
+      <SoftwareVersionText ism:classification="U"/>
+      <SemanticVersionIndicator ism:classification="U"/>
+      <SemanticVersionText ism:classification="U"/>
       <SemanticVersionInformation ism:classification="U">
-        <APIName ism:classification="U">APIname</APIName>
-        <MajorVersionNumeric ism:classification="U">1</MajorVersionNumeric>
-        <MinorVersionNumeric ism:classification="U">1</MinorVersionNumeric>
-        <PatchVersionText ism:classification="U">1</PatchVersionText>
-        <PreReleaseVersionText ism:classification="U">-alpha</PreReleaseVersionText>
-        <BuildMetaText ism:classification="U">+exp.sha.5114f85</BuildMetaText>
+        <APIName ism:classification="U"/>
+        <MajorVersionNumeric ism:classification="U"/>
+        <MinorVersionNumeric ism:classification="U"/>
+        <PatchVersionText ism:classification="U"/>
+        <PreReleaseVersionText ism:classification="U"/>
+        <BuildMetaText ism:classification="U"/>
       </SemanticVersionInformation>
-      <SemanticVersionDate ism:classification="U">2018-02-15T09:00:00</SemanticVersionDate>
-      <PythonSemanticVersionIndicator ism:classification="U">true</PythonSemanticVersionIndicator>
+      <SemanticVersionDate ism:classification="U"/>
+      <PythonSemanticVersionIndicator ism:classification="U"/>
       <PythonSemanticVersion ism:classification="U">
-        <PythonEpochSegmentText ism:classification="U">1</PythonEpochSegmentText>
-        <PythonReleaseSegmentText ism:classification="U">0</PythonReleaseSegmentText>
-        <PythonPreReleaseSegmentText ism:classification="U">3</PythonPreReleaseSegmentText>
-        <PythonPostReleaseSegmentText ism:classification="U">2</PythonPostReleaseSegmentText>
-        <PythonDevelopmentReleaseSegmentText ism:classification="U">3</PythonDevelopmentReleaseSegmentText>
+        <PythonEpochSegmentText ism:classification="U"/>
+        <PythonReleaseSegmentText ism:classification="U"/>
+        <PythonPreReleaseSegmentText ism:classification="U"/>
+        <PythonPostReleaseSegmentText ism:classification="U"/>
+        <PythonDevelopmentReleaseSegmentText ism:classification="U"/>
       </PythonSemanticVersion>
-      <PythonVersionText ism:classification="U">1.0.3.2.3</PythonVersionText>
+      <PythonVersionText ism:classification="U"/>
     </VersionInformation>
-    <GroupingText ism:classification="U">Line text max length 48 characters.</GroupingText>
-    <ReleaseNotesText ism:classification="U">Paragraph text max length 512 characters.</ReleaseNotesText>
+    <GroupingText ism:classification="U"/>
+    <ReleaseNotesText ism:classification="U"/>
   </SoftwareInformation>
   <FileInformation ism:classification="U">
-    <ComputerFileNameText ism:classification="U">filename</ComputerFileNameText>
-    <FileExtensionText ism:classification="U">.xml</FileExtensionText>
+    <ComputerFileNameText ism:classification="U"/>
+    <FileExtensionText ism:classification="U"/>
   </FileInformation>
   <AuthoritativeSourceInformation ism:classification="U">
-    <SourceHashText ism:classification="U">49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47C</SourceHashText>
-    <SourceURIText ism:classification="U">good:URI</SourceURIText>
-    <AuthoritativeDigitalSignatureIndicator ism:classification="U">true</AuthoritativeDigitalSignatureIndicator>
+    <SourceHashText ism:classification="U"/>
+    <SourceURIText ism:classification="U"/>
+    <AuthoritativeDigitalSignatureIndicator ism:classification="U"/>
   </AuthoritativeSourceInformation>
   <EcosystemInformation ism:classification="U">
     <Ecosystem ism:classification="U">
-      <CommitterQuantity ism:classification="U">100</CommitterQuantity>
+      <CommitterQuantity ism:classification="U"/>
       <Languages ism:classification="U">
-        <LanguageText ism:classification="U">Line text max length 48 characters.</LanguageText>
+        <LanguageText ism:classification="U"/>
       </Languages>
       <CommitLogs ism:classification="U">
-        <CommitLogText ism:classification="U">Line text max length 48 characters.</CommitLogText>
+        <CommitLogText ism:classification="U"/>
       </CommitLogs>
     </Ecosystem>
     <CompanyInformation ism:classification="U">
-      <NameText ism:classification="U">Line text max length 48 characters.</NameText>
+      <NameText ism:classification="U"/>
     </CompanyInformation>
   </EcosystemInformation>
   <DependencyInformation ism:classification="U">
     <Dependencies ism:classification="U">
       <Dependency ism:classification="U">
-        <NameText ism:classification="U">Line text max length 48 characters.</NameText>
-        <DependencyVersionText ism:classification="U">Line text max length 48 characters.</DependencyVersionText>
+        <NameText ism:classification="U"/>
+        <DependencyVersionText ism:classification="U"/>
       </Dependency>
     </Dependencies>
     <Compiler ism:classification="U">
-      <NameText ism:classification="U">Line text max length 48 characters.</NameText>
-      <CompilerVersionText ism:classification="U">Line text max length 48 characters.</CompilerVersionText>
+      <NameText ism:classification="U"/>
+      <CompilerVersionText ism:classification="U"/>
     </Compiler>
   </DependencyInformation>
   <LicenseInformation ism:classification="U">
-    <LicenseCategoryCode ism:classification="U">FOSS</LicenseCategoryCode>
-    <LicenseCode ism:classification="U">LGPL</LicenseCode>
-    <EndOfLifeIndicator ism:classification="U">true</EndOfLifeIndicator>
+    <LicenseCategoryCode ism:classification="U"/>
+    <LicenseCode ism:classification="U"/>
+    <EndOfLifeIndicator ism:classification="U"/>
   </LicenseInformation>
   <VulnerabilityInformation ism:classification="U">
     <Vulnerabilities ism:classification="U">
       <Vulnerability ism:classification="U">
-        <VulnerabilityIdentifierText ism:classification="U">Line text max length 48 characters.</VulnerabilityIdentifierText>
-        <SourceText ism:classification="U">Line text max length 48 characters.</SourceText>
-        <VulnerabilityTitleText ism:classification="U">Paragraph text max length 512 characters.</VulnerabilityTitleText>
-        <VulnerabilitySummaryText ism:classification="U">Paragraph text max length 512 characters.</VulnerabilitySummaryText>
-        <VulnerabilityScoreValue ism:classification="U">123.456</VulnerabilityScoreValue>
-        <VulnerabilityScoreVersionValue ism:classification="U">123.456</VulnerabilityScoreVersionValue>
-        <VulnerabilityScoreSystemText ism:classification="U">Line text max length 48 characters.</VulnerabilityScoreSystemText>
+        <VulnerabilityIdentifierText ism:classification="U"/>
+        <SourceText ism:classification="U"/>
+        <VulnerabilityTitleText ism:classification="U"/>
+        <VulnerabilitySummaryText ism:classification="U"/>
+        <VulnerabilityScoreValue ism:classification="U"/>
+        <VulnerabilityScoreVersionValue ism:classification="U"/>
+        <VulnerabilityScoreSystemText ism:classification="U"/>
         <ScoreDetails ism:classification="U">
           <CommonVulnerabilityScoringSystemV2 ism:classification="U">
-            <VectorStringText ism:classification="U">Line text max length 48 characters.</VectorStringText>
-            <AccessVectorText ism:classification="U">Line text max length 48 characters.</AccessVectorText>
-            <AccessComplexityText ism:classification="U">Line text max length 48 characters.</AccessComplexityText>
-            <VulnerabilityAuthenticationText ism:classification="U">Line text max length 48 characters.</VulnerabilityAuthenticationText>
-            <ConfidentialityImpactText ism:classification="U">Line text max length 48 characters.</ConfidentialityImpactText>
-            <IntegrityImpactText ism:classification="U">Line text max length 48 characters.</IntegrityImpactText>
-            <AvailabilityImpactText ism:classification="U">Line text max length 48 characters.</AvailabilityImpactText>
-            <VulnerabilityBaseScoreValue ism:classification="U">123.456</VulnerabilityBaseScoreValue>
+            <VectorStringText ism:classification="U"/>
+            <AccessVectorText ism:classification="U"/>
+            <AccessComplexityText ism:classification="U"/>
+            <VulnerabilityAuthenticationText ism:classification="U"/>
+            <ConfidentialityImpactText ism:classification="U"/>
+            <IntegrityImpactText ism:classification="U"/>
+            <AvailabilityImpactText ism:classification="U"/>
+            <VulnerabilityBaseScoreValue ism:classification="U"/>
           </CommonVulnerabilityScoringSystemV2>
           <CommonVulnerabilityScoringSystemV3 ism:classification="U">
-            <VectorStringText ism:classification="U">Line text max length 48 characters.</VectorStringText>
-            <AccessVectorText ism:classification="U">Line text max length 48 characters.</AccessVectorText>
-            <AccessComplexityText ism:classification="U">Line text max length 48 characters.</AccessComplexityText>
-            <PrivilegesRequiredText ism:classification="U">Line text max length 48 characters.</PrivilegesRequiredText>
-            <UserInteractionText ism:classification="U">Line text max length 48 characters.</UserInteractionText>
-            <VulnerabilityScopeText ism:classification="U">Line text max length 48 characters.</VulnerabilityScopeText>
-            <ConfidentialityImpactText ism:classification="U">Line text max length 48 characters.</ConfidentialityImpactText>
-            <IntegrityImpactText ism:classification="U">Line text max length 48 characters.</IntegrityImpactText>
-            <AvailabilityImpactText ism:classification="U">Line text max length 48 characters.</AvailabilityImpactText>
-            <VulnerabilityBaseScoreValue ism:classification="U">123.456</VulnerabilityBaseScoreValue>
-            <BaseSeverityText ism:classification="U">Line text max length 48 characters.</BaseSeverityText>
+            <VectorStringText ism:classification="U"/>
+            <AccessVectorText ism:classification="U"/>
+            <AccessComplexityText ism:classification="U"/>
+            <PrivilegesRequiredText ism:classification="U"/>
+            <UserInteractionText ism:classification="U"/>
+            <VulnerabilityScopeText ism:classification="U"/>
+            <ConfidentialityImpactText ism:classification="U"/>
+            <IntegrityImpactText ism:classification="U"/>
+            <AvailabilityImpactText ism:classification="U"/>
+            <VulnerabilityBaseScoreValue ism:classification="U"/>
+            <BaseSeverityText ism:classification="U"/>
           </CommonVulnerabilityScoringSystemV3>
         </ScoreDetails>
-        <VulnerabilityVectorText ism:classification="U">Line text max length 48 characters.</VulnerabilityVectorText>
-        <AccessComplexityText ism:classification="U">Line text max length 48 characters.</AccessComplexityText>
-        <VulnerabilityAuthenticationText ism:classification="U">Line text max length 48 characters.</VulnerabilityAuthenticationText>
-        <ConfidentialityImpactText ism:classification="U">Line text max length 48 characters.</ConfidentialityImpactText>
-        <IntegrityImpactText ism:classification="U">Line text max length 48 characters.</IntegrityImpactText>
-        <AvailabilityImpactText ism:classification="U">Line text max length 48 characters.</AvailabilityImpactText>
-        <VulnerabilitySourceText ism:classification="U">Line text max length 48 characters.</VulnerabilitySourceText>
-        <AssessmentCheckText ism:classification="U">Line text max length 48 characters.</AssessmentCheckText>
-        <ScannerText ism:classification="U">Line text max length 48 characters.</ScannerText>
-        <RecommendationText ism:classification="U">Paragraph text max length 512 characters.</RecommendationText>
+        <VulnerabilityVectorText ism:classification="U"/>
+        <AccessComplexityText ism:classification="U"/>
+        <VulnerabilityAuthenticationText ism:classification="U"/>
+        <ConfidentialityImpactText ism:classification="U"/>
+        <IntegrityImpactText ism:classification="U"/>
+        <AvailabilityImpactText ism:classification="U"/>
+        <VulnerabilitySourceText ism:classification="U"/>
+        <AssessmentCheckText ism:classification="U"/>
+        <ScannerText ism:classification="U"/>
+        <RecommendationText ism:classification="U"/>
         <VulnerabilityReference ism:classification="U">
-          <TypeOfReferenceText ism:classification="U">Line text max length 48 characters.</TypeOfReferenceText>
-          <ReferenceSourceText ism:classification="U">Line text max length 48 characters.</ReferenceSourceText>
-          <URIText ism:classification="U">good:URI</URIText>
-          <ReferenceText ism:classification="U">Paragraph text max length 512 characters.</ReferenceText>
+          <TypeOfReferenceText ism:classification="U"/>
+          <ReferenceSourceText ism:classification="U"/>
+          <URIText ism:classification="U"/>
+          <ReferenceText ism:classification="U"/>
         </VulnerabilityReference>
-        <VulnerabilityModifiedDate ism:classification="U">2018-02-15T09:00:00</VulnerabilityModifiedDate>
-        <VulnerabilityPublishedDate ism:classification="U">2018-02-15T09:00:00</VulnerabilityPublishedDate>
+        <VulnerabilityModifiedDate ism:classification="U"/>
+        <VulnerabilityPublishedDate ism:classification="U"/>
       </Vulnerability>
     </Vulnerabilities>
     <VirusInformation ism:classification="U">
-      <KnownVirusQuantity ism:classification="U">100</KnownVirusQuantity>
-      <EngineVersionText ism:classification="U">Line text max length 48 characters.</EngineVersionText>
-      <VirusEngineText ism:classification="U">Line text max length 48 characters.</VirusEngineText>
-      <ScannedDirectoryQuantity ism:classification="U">100</ScannedDirectoryQuantity>
-      <ScannedFileQuantity ism:classification="U">100</ScannedFileQuantity>
-      <InfectedFileQuantity ism:classification="U">100</InfectedFileQuantity>
-      <DataScannedText ism:classification="U">Line text max length 48 characters.</DataScannedText>
-      <DataReadText ism:classification="U">Line text max length 48 characters.</DataReadText>
-      <TimeText ism:classification="U">Line text max length 48 characters.</TimeText>
-      <FileNotesText ism:classification="U">Paragraph text max length 512 characters.</FileNotesText>
+      <KnownVirusQuantity ism:classification="U"/>
+      <EngineVersionText ism:classification="U"/>
+      <VirusEngineText ism:classification="U"/>
+      <ScannedDirectoryQuantity ism:classification="U"/>
+      <ScannedFileQuantity ism:classification="U"/>
+      <InfectedFileQuantity ism:classification="U"/>
+      <DataScannedText ism:classification="U"/>
+      <DataReadText ism:classification="U"/>
+      <TimeText ism:classification="U"/>
+      <FileNotesText ism:classification="U"/>
       <EngineDetails ism:classification="U">
-        <EngineVersionText ism:classification="U">Line text max length 48 characters.</EngineVersionText>
-        <DatabaseVersionText ism:classification="U">Line text max length 48 characters.</DatabaseVersionText>
+        <EngineVersionText ism:classification="U"/>
+        <DatabaseVersionText ism:classification="U"/>
       </EngineDetails>
     </VirusInformation>
   </VulnerabilityInformation>
   <GovernanceRiskCompliance ism:classification="U">
-    <RiskCode ism:classification="U">medium</RiskCode>
-    <StatementOfAssuranceText ism:classification="U">Paragraph text max length 512 characters.</StatementOfAssuranceText>
+    <RiskCode ism:classification="U"/>
+    <StatementOfAssuranceText ism:classification="U"/>
   </GovernanceRiskCompliance>
   <DeliveryInformation ism:classification="U">
-    <DeliveringOrganizationText ism:classification="U">Line text max length 48 characters.</DeliveringOrganizationText>
-    <DestinationText ism:classification="U">Line text max length 48 characters.</DestinationText>
-    <HashText ism:classification="U">49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47C</HashText>
-    <LastRegistryUpdateDate ism:classification="U">2018-02-15T09:00:00</LastRegistryUpdateDate>
+    <DeliveringOrganizationText ism:classification="U"/>
+    <DestinationText ism:classification="U"/>
+    <HashText ism:classification="U"/>
+    <LastRegistryUpdateDate ism:classification="U"/>
   </DeliveryInformation>
 </SoftwareEvidenceArchive>

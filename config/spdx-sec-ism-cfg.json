@@ -10,6 +10,12 @@
     "temppath": "tmp/spdx-sec-ism-iepd/",
     "resources": [
         {
+            "name": "config",
+            "src": "config/spdx-sec-ism-cfg.json",
+            "path": "config/spdx-sec-ism-cfg.json",
+            "description": "Configuration Information"
+        },
+        {
             "name": "refxsd",
             "src": "xml/xsd/spdx-xml-ref.xsd",
             "path": "xml/xsd/spdx-xml-ref.xsd",

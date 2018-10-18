@@ -1,0 +1,188 @@
+{
+    "project": "spdx-sec-ism",
+    "configfile": "spdx-sec-ism-cfg.json",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-sec-ism/xml/instance/spdx-sec-ism-test-data.xml",
+    "homeurl": "seva-ism.specchain.org",
+    "port": ":8080",
+    "dbloc": "tmp/spdx-sec-ism-iepd/db/spdx-sec-ism.db",
+    "tempdir": "tmp/",
+    "temppath": "tmp/spdx-sec-ism-iepd/",
+    "resources": [
+        {
+            "name": "config",
+            "src": "config/spdx-sec-ism-cfg.json",
+            "path": "config/spdx-sec-ism-cfg.json",
+            "description": "Configuration Information"
+        },
+        {
+            "name": "refxsd",
+            "src": "xml/xsd/spdx-xml-ref.xsd",
+            "path": "xml/xsd/spdx-xml-ref.xsd",
+            "description": "NIEM Conformant Reference XML Schema for SPDX data"
+        },
+        {
+            "name": "iepxsd",
+            "src": "iepd/spdx-sec-ism/xml/xsd/spdx-sec-ism-iep.xsd",
+            "path": "xml/xsd/spdx-sec-ism-iep.xsd",
+            "description": "XML Schema for SPDX Software Evaluation Data information exchange"
+        },
+        {
+            "name": "xmlschemaxsd",
+            "src": "xml/xsd/ext/w3c/XMLSchema.xsd",
+            "path": "xml/xsd/ext/w3c/XMLSchema.xsd"
+        },
+        {
+            "name": "xsltxsd",
+            "src": "xml/xsd/ext/w3c/xslt.xsd",
+            "path": "xml/xsd/ext/w3c/xslt.xsd"
+        },
+        {
+            "name": "iepxsdxsl",
+            "src": "iepd/spdx-sec-ism/xml/xsl/spdx-sec-ism-iep.xsl",
+            "path": "xml/xsl/spdx-sec-ism-iep.xsl"
+        },
+        {
+            "name": "instancexsl",
+            "src": "iepd/spdx-sec-ism/xml/xsl/spdx-sec-ism-instance.xsl",
+            "path": "xml/xsl/spdx-sec-ism-instance.xsl"
+        },
+        {
+            "name": "gogenxsdxsl",
+            "src": "iepd/spdx-sec-ism/xml/xsl/spdx-sec-ism-go-gen.xsl",
+            "path": "xml/xsl/spdx-sec-ism-go-gen.xsl"
+        },
+        {
+            "name": "gotestgenxsl",
+            "src": "iepd/spdx-sec-ism/xml/xsl/spdx-sec-ism-go-test-gen.xsl",
+            "path": "xml/xsl/spdx-sec-ism-go-test-gen.xsl"
+        },
+        {
+            "name": "testdataxml",
+            "src": "iepd/spdx-sec-ism/xml/instance/spdx-sec-ism-test-data.xml",
+            "path": "xml/instance/spdx-sec-ism-test-data.xml"
+        },
+        {
+            "name": "instancexml",
+            "src": "iepd/spdx-sec-ism/xml/instance/spdx-sec-ism-instance.xml",
+            "path": "xml/instance/spdx-sec-ism-instance.xml"
+        },
+        {
+            "name": "instancegolangxml",
+            "src": "iepd/spdx-sec-ism/xml/instance/test-instance-golang.xml",
+            "path": "xml/instance/spdx-sec-ism-instance-golang.xml"
+        },
+        {
+            "name": "ismstructgo",
+            "src": "src/spdx-sec-ism/ism-struct.go",
+            "path": "src/spdx-sec-ism/ism-struct.go",
+            "description": "Golang STRUCT for ISM security attributes"
+        
+        },
+        {
+            "name": "structgo",
+            "src": "src/spdx-sec-ism/spdx-sec-ism-struct.go",
+            "path": "src/spdx-sec-ism/spdx-sec-ism-struct.go",
+            "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
+        
+        },
+        {
+            "name": "structtestgo",
+            "src": "src/spdx-sec-ism/spdx-sec-ism-struct_test.go",
+            "path": "src/spdx-sec-ism/spdx-sec-ism-struct_test.go",
+            "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
+       
+        },
+        {
+            "name": "maingo",
+            "src": "src/spdx-sec-ism/spdx-sec-ism.go",
+            "path": "src/spdx-sec-ism/spdx-sec-ism.go",
+            "description": "Golang start class"
+        },
+        {
+            "name": "iepxsdjson",
+            "src": "iepd/spdx-sec-ism/json/spdx-sec-ism-iep-xsd.json",
+            "path": "json/spdx-sec-ism-iep-xsd.json",
+            "description": "JSON Representation of SPDX Document Schema"
+        },
+        {
+            "name": "refxsdjson",
+            "src": "iepd/spdx-sec-ism/json/spdx-xml-ref-xsd.json",
+            "path": "json/spdx-sec-ism-ref-xsd.json",
+            "description": "JSON Representation of SPDX Reference XML Schema"
+        },
+        {
+            "name": "instancejson",
+            "src": "iepd/spdx-sec-ism/json/spdx-sec-ism-instance.json",
+            "path": "json/spdx-sec-ism-instance.json",
+            "description": "JSON Representation of SPDX Security XML Test Instance"
+        },
+        {
+            "name": "provenancereportjson",
+            "src": "iepd/spdx-sec-ism/json/provenance-report.json",
+            "path": "json/spdx-sec-ism-provenance-report.json"
+        },
+        {
+            "name": "resourcesjson",
+            "src": "iepd/spdx-sec-ism/json/resources.json",
+            "path": "json/spdx-sec-ism-resources.json"
+        },
+        {
+            "name": "iepxsl",
+            "src": "xml/xsl/iep.xsl",
+            "path": "xml/xsl/common/iep.xsl"
+        },
+        {
+            "name": "xmlinstancexsl",
+            "src": "xml/xsl/xml-instance.xsl",
+            "path": "xml/xsl/common/xml-instance.xsl"
+        },
+        {
+            "name": "gogenxsl",
+            "src": "xml/xsl/go-gen.xsl",
+            "path": "xml/xsl/common/go-gen.xsl"
+        },
+        {
+            "name": "xsdjsonxsl",
+            "src": "xml/xsl/xsd-json.xsl",
+            "path": "xml/xsl/common/xsd-json.xsl"
+        },
+        {
+            "name": "xmljsonxsl",
+            "src": "xml/xsl/xml-json.xsl",
+            "path": "xml/xsl/common/xml-json.xsl"
+        },
+        {
+            "name": "zipiepd",
+            "src": "",
+            "path": "spdx-sec-ism-iepd.zip"
+        }
+    ],
+    "directories": [
+        {
+            "name": "niem",
+            "src": "xml/xsd/ext/niem",
+            "path": "xml/xsd/ext/niem"
+        },
+        {
+            "name": "w3c",
+            "src": "xml/xsd/ext/w3c",
+            "path": "xml/xsd/ext/w3c"
+        },
+        {
+            "name": "ic-xml",
+            "src": "xml/xsd/ext/ic-xml",
+            "path": "xml/xsd/ext/ic-xml"
+        },
+        {
+            "name": "gostruct",
+            "src": "src/spdx-sec-ism",
+            "path": "src/spdx-sec-ism"
+        },
+        {
+            "name": "gocode",
+            "src": "src/xsdprov",
+            "path": "src/xsdprov"
+        }
+    ]
+}

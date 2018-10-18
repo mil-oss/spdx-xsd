@@ -49,7 +49,7 @@ func StartWeb(cfg string, datastruct interface{}) {
 	flag.Parse()
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
 	logger.Println("Starting HTTP Server. .. ")
-	ConfigRouter()
+	ConfigRouter(configdata.Project)
 	nextRequestID := func() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
 	}
@@ -88,15 +88,15 @@ func StartWeb(cfg string, datastruct interface{}) {
 }
 
 //ConfigRouter ...
-func ConfigRouter() {
-	router.Handle("/", index())
-	router.Handle("/file/", getResource())
-	router.Handle("/iepd/", getResource())
-	router.Handle("/dload", dload())
-	router.Handle("/validate", validate())
-	router.Handle("/transform", transform())
-	router.Handle("/verify", verify())
-	router.Handle("/rebuild", rebuild())
+func ConfigRouter(path string) {
+	router.Handle(path+"/", index())
+	router.Handle(path+"/file/", getResource())
+	router.Handle(path+"/iepd/", getResource())
+	router.Handle(path+"/dload", dload())
+	router.Handle(path+"/validate", validate())
+	router.Handle(path+"/transform", transform())
+	router.Handle(path+"/verify", verify())
+	router.Handle(path+"/rebuild", rebuild())
 }
 
 func index() http.Handler {
@@ -109,6 +109,7 @@ func index() http.Handler {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		w.WriteHeader(http.StatusOK)
+		var pth = configdata.Project
 		fmt.Fprintln(w, "<html>")
 		fmt.Fprintln(w, "<body>")
 		fmt.Fprintln(w, "<div><b>"+strings.ToUpper(name)+"</b></div>")
@@ -124,7 +125,7 @@ func index() http.Handler {
 		var sr = sortMap(resources)
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xsd") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>/file/"+p+"</td><td><a href='/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -133,7 +134,7 @@ func index() http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xsl") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>/file/"+p+"</td><td><a href='/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -142,7 +143,7 @@ func index() http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xml") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>/file/"+p+"</td><td><a href='/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -153,7 +154,7 @@ func index() http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".json") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>/file/"+p+"</td><td><a href='/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -162,20 +163,18 @@ func index() http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".go") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>/file/"+p+"</td><td><a href='/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
 		fmt.Fprintln(w, "</div>")
-
 		fmt.Fprintln(w, "<table>")
 		fmt.Fprintln(w, "<tr><td><b>Operations:</b></td><td></td></tr>")
-		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>/rebuild ..</td><td>json payload:  Config:{json file}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>"+pth+"/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>"+pth+"/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>"+pth+"/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>"+pth+"/rebuild ..</td><td>json payload:  Config:{json file}</td></tr>")
 		fmt.Fprintln(w, "<table>")
-
 		fmt.Fprintln(w, "</body>")
 		fmt.Fprintln(w, "</html>")
 	})

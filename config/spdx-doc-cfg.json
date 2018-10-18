@@ -10,6 +10,12 @@
     "temppath":"tmp/spdx-doc-iepd/",
     "resources": [
         {
+            "name": "config",
+            "src": "config/spdx-doc-cfg.json",
+            "path": "config/spdx-doc-cfg.json",
+            "description": "Configuration Information"
+        },
+        {
             "name": "refxsd",
             "src": "xml/xsd/spdx-xml-ref.xsd",
             "path": "xml/xsd/spdx-xml-ref.xsd",

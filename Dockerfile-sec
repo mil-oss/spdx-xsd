@@ -1,0 +1,25 @@
+FROM golang:alpine
+ENV LANG=C.UTF-8
+#compile linux only
+ENV GOOS=linux
+LABEL name="spdx"
+LABEL version="1.0"
+RUN apk add --update gcc g++ make wget curl bash libxslt libc-dev libxml2 libxml2-dev zip
+RUN apk --no-cache add openssh curl 
+
+ADD pkg /go/pkg
+ADD src/spdx-security /go/src/spdx-security
+ADD src/xsdprov /go/src/xsdprov
+ADD config/spdx-security-cfg.json /go/config/spdx-security-cfg.json
+ADD iepd/spdx-security /go/iepd/spdx-security
+ADD xml /go/xml
+ADD tmp/spdx-security-iepd /go/tmp/spdx-security-iepd
+WORKDIR /go
+
+RUN chmod -Rf 777 tmp
+RUN go build xsdprov
+RUN go build spdx-security
+RUN go install spdx-security
+
+EXPOSE 8080
+CMD ["./spdx-security"]

@@ -1,0 +1,30 @@
+{
+    "project":"spdx",
+    "configfile": "spdx-cfg.json",
+    "homeurl":"spdx-xml.specchain.org",
+    "port":":8080",
+    "tempdir":"tmp/",
+    "temppath":"tmp/spdx-xml/",
+    "implementations": [
+        {
+            "name": "spdx-doc",
+            "src": "config/spdx-doc-cfg.json",
+            "path": "config/spdx-doc-cfg.json"
+        },
+        {
+            "name": "spdx-license",
+            "src": "config/spdx-license-cfg.json",
+            "path": "config/spdx-license-cfg.json"
+        },
+        {
+            "name": "spdx-security",
+            "src": "config/spdx-security-cfg.json",
+            "path":  "config/spdx-security-cfg.json"
+        },
+        {
+            "name": "spdx-sec-ism",
+            "src": "config/spdx-sec-ism-cfg.json",
+            "path": "config/spdx-sec-ism-cfg.json"
+        }
+    ]
+}

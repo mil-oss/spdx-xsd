@@ -14,13 +14,6 @@ type ProvEntry struct {
 	Errors    []string `json:"errors[],omitempty"`
 }
 
-// Resource ...
-type Resource struct {
-	Name string `json:"name,omitempty"`
-	Src  string `json:"src,omitempty"`
-	Path string `json:"path,omitempty"`
-}
-
 // ValidationData ... post data for validation
 type ValidationData struct {
 	XMLName   string `json:"xmlname,omitempty"`

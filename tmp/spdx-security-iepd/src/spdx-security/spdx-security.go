@@ -16,8 +16,8 @@ var (
 )
 
 func main() {
-	//xsdprov.InitXSDProv(Config)
-	BuildSecurityIEP()
+	xsdprov.InitXSDProv(Config)
+	//BuildSecurityIEP()
 	xsdprov.StartWeb(Config, SecurityDatastruct)
 }
 

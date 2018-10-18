@@ -16,8 +16,8 @@ var (
 )
 
 func main() {
-	//xsdprov.InitXSDProv(Config)
-	BuildLicenseIEP()
+	xsdprov.InitXSDProv(Config)
+	//BuildLicenseIEP()
 	xsdprov.StartWeb(Config, SpdxLicenseDatastruct)
 }
 

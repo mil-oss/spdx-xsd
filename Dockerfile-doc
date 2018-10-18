@@ -8,18 +8,14 @@ RUN apk add --update gcc g++ make wget curl bash libxslt libc-dev libxml2 libxml
 RUN apk --no-cache add openssh curl 
 
 ADD pkg /go/pkg
-ADD src /go/src
-ADD config /go/config
-ADD iepd /go/iepd
+ADD src/spdx-doc /go/src/spdx-doc
+ADD src/xsdprov /go/src/xsdprov
+ADD config/spdx-doc-cfg.json /go/config/spdx-doc-cfg.json
+ADD iepd/spdx-document /go/iepd/spdx-document
 ADD xml /go/xml
-ADD tmp /go/tmp
+ADD tmp/spdx-doc-iepd /go/tmp/spdx-doc-iepd
 WORKDIR /go
 
-#build the binary with debug information removed
-
-#RUN go build -ldflags '-w -s' -a -installsuffix cgo -o xsdprov
-#RUN go build -ldflags '-w -s' -a -installsuffix cgo -o spdx-doc
-#RUN go install spdx-doc
 RUN chmod -Rf 777 tmp
 RUN go build xsdprov
 RUN go build spdx-doc

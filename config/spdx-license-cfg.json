@@ -10,6 +10,12 @@
     "temppath": "tmp/spdx-license-iepd/",
     "resources": [
         {
+            "name": "config",
+            "src": "config/spdx-license-cfg.json",
+            "path": "config/spdx-license-cfg.json",
+            "description": "Configuration Information"
+        },
+        {
             "name": "refxsd",
             "src": "xml/xsd/spdx-xml-ref.xsd",
             "path": "xml/xsd/spdx-xml-ref.xsd",

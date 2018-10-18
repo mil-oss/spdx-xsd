@@ -16,8 +16,8 @@ var (
 )
 
 func main() {
-	//xsdprov.InitXSDProv(Config)
-	BuildDocIEP()
+	xsdprov.InitXSDProv(Config)
+	//BuildDocIEP()
 	xsdprov.StartWeb(Config, SpdxDocDatastruct)
 }
 
