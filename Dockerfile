@@ -22,8 +22,8 @@ WORKDIR /go
 #RUN go install spdx-doc
 RUN chmod -Rf 777 tmp
 RUN go build xsdprov
-RUN go build spdx-doc
-RUN go install spdx-doc
+RUN go build spdx
+RUN go install spdx
 
 EXPOSE 8080
-CMD ["./spdx-doc"]
+CMD ["./spdx"]

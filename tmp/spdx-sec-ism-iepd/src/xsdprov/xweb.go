@@ -37,10 +37,7 @@ var (
 )
 
 //StartWeb .. simple web server
-func StartWeb(cfg string, datastruct interface{}) {
-	config = cfg
-	configdata = GetConfig(config)
-	appDatastruct = datastruct
+func StartWeb() {
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
@@ -49,7 +46,6 @@ func StartWeb(cfg string, datastruct interface{}) {
 	flag.Parse()
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
 	logger.Println("Starting HTTP Server. .. ")
-	ConfigRouter(configdata.Project)
 	nextRequestID := func() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
 	}
@@ -88,18 +84,19 @@ func StartWeb(cfg string, datastruct interface{}) {
 }
 
 //ConfigRouter ...
-func ConfigRouter(path string) {
-	router.Handle(path+"/", index())
-	router.Handle(path+"/file/", getResource())
-	router.Handle(path+"/iepd/", getResource())
-	router.Handle(path+"/dload", dload())
-	router.Handle(path+"/validate", validate())
-	router.Handle(path+"/transform", transform())
-	router.Handle(path+"/verify", verify())
-	router.Handle(path+"/rebuild", rebuild())
+func ConfigRouter(c Cfg) {
+	router.Handle(c.Project+"/", Index(c.Temppath))
+	router.Handle(c.Project+"/file/", GetResource(c.Temppath))
+	router.Handle(c.Project+"/iepd/", GetResource(c.Temppath))
+	router.Handle(c.Project+"/dload", Dload(c.Temppath))
+	router.Handle(c.Project+"/validate", Validate())
+	router.Handle(c.Project+"/transform", Transform())
+	router.Handle(c.Project+"/verify", DocVerify())
+	router.Handle(c.Project+"/rebuild", Rebuild())
 }
 
-func index() http.Handler {
+// Index ...
+func Index(path string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -199,11 +196,12 @@ func sortMap(m map[string]string) []string {
 	return k
 }
 
-func getResource() http.Handler {
+// GetResource ...
+func GetResource(path string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
 			var p = filepath.Base(r.URL.Path)
-			f, err := ioutil.ReadFile(temppath + resources[p])
+			f, err := ioutil.ReadFile(path + resources[p])
 			check(err)
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -217,7 +215,9 @@ func getResource() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-func verify() http.Handler {
+
+// DocVerify ...
+func DocVerify() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
@@ -239,7 +239,9 @@ func verify() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-func validate() http.Handler {
+
+// Validate ...
+func Validate() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
@@ -264,7 +266,9 @@ func validate() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-func transform() http.Handler {
+
+// Transform ...
+func Transform() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -287,7 +291,9 @@ func transform() http.Handler {
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-func rebuild() http.Handler {
+
+// Rebuild ...
+func Rebuild() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
@@ -311,18 +317,20 @@ func rebuild() http.Handler {
 	})
 }
 
-func dload() http.Handler {
+// Dload ...
+func Dload(path string) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		if atomic.LoadInt32(&healthy) == 1 {
-			DownloadFile(tempdir+name+"-iepd.zip", w)
+			DownloadFile(path+name+"-iepd.zip", w)
 			w.WriteHeader(http.StatusOK)
-			index()
+			Index(path)
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
+
 func logging(logger *log.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

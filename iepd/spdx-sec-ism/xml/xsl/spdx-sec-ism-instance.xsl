@@ -8,7 +8,7 @@
     output: /iepd/xml/instance/test_instance-ism.xml
    -->
     
-    <xsl:param name="TestData" select="'../instance/sec-ism-test-data.xml'"/>
+    <xsl:param name="TestData" select="'../instance/spdx-sec-ism-test-data.xml'"/>
    
     <xsl:template match="/">
         <xsl:call-template name="main"/>

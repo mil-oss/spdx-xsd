@@ -53,14 +53,6 @@
         <False1 valid="false">1234.4E 56</False1>
         <False2 valid="false">NAN</False2>
     </FloatValueSimpleType>
-    <ForeignInfluenceIndicatorSimpleType>
-        <True1 valid="true">true</True1>
-        <True1 valid="true">false</True1>
-        <True1 valid="true">1</True1>
-        <True1 valid="true">0</True1>
-        <False1 valid="false">yes</False1>
-        <False2 valid="false">no</False2>
-    </ForeignInfluenceIndicatorSimpleType>
     <LicenseCategoryCodeSimpleType>
         <True1 valid="true">FOSS</True1>
         <True1 valid="true">COTS</True1>
@@ -144,14 +136,6 @@
         <False1 valid="false">49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47CXXX</False1>
         <False2 valid="false">49FE985C79ACECDAC8AC147A88E72FF4E134650367A9D7FC1EFCBAD8C28B47C</False2>
     </Sha256TextSimpleType>
-    <USBasedIndicatorSimpleType>
-        <True1 valid="true">true</True1>
-        <True1 valid="true">false</True1>
-        <True1 valid="true">1</True1>
-        <True1 valid="true">0</True1>
-        <False1 valid="false">yes</False1>
-        <False2 valid="false">no</False2>
-    </USBasedIndicatorSimpleType>
     <URITextSimpleType>
         <True1 valid="true">good:URI</True1>
         <False1 valid="true">bad/URI</False1>
