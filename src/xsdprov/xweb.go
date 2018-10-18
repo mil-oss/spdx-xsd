@@ -107,10 +107,10 @@ func Index() http.Handler {
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, "<html>")
 		fmt.Fprintln(w, "<body>")
-		fmt.Fprintln(w, "<div><b>SPDX XML APPLIANCE</b></div>")
+		fmt.Fprintln(w, "<div><b>SPDX XML</b></div>")
 		fmt.Fprintln(w, "<hr>")
 		fmt.Fprintln(w, "</p>")
-		fmt.Fprintln(w, "<div><b>SPDX Imformation Exchange Package Documentation (IEPD)</b></div>")
+		fmt.Fprintln(w, "<div><b>SPDX Information Exchange Package Documentation (IEPD)</b></div>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<table>")
 		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-doc</td><td><a href='/spdx-doc/'>SPDX Document IEPD</a></td></tr>")
@@ -160,7 +160,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div><b>REST Endpoints:</b></div>")
 		fmt.Fprintln(w, "</p>")
-		fmt.Fprintln(w, "<div><a href='/dload'>/dload</a> - Get zipped package</div>")
+		fmt.Fprintln(w, "<div><a href='"+pth+"/dload'>"+pth+"/dload</a> - Get zipped package</div>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div style='float:left; width:50%;margin-bottom:12px;'>")
 		fmt.Fprintln(w, "<div><b>XML Schema:</b></div>")
@@ -168,7 +168,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		var sr = sortMap(resources)
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xsd") {
-				fmt.Fprintln(w, "<tr><td style='width:300px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -177,7 +177,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xsl") {
-				fmt.Fprintln(w, "<tr><td style='width:300px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -186,7 +186,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xml") {
-				fmt.Fprintln(w, "<tr><td style='width:300px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -197,7 +197,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".json") {
-				fmt.Fprintln(w, "<tr><td style='width:300px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -206,7 +206,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".go") {
-				fmt.Fprintln(w, "<tr><td style='width:300px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
