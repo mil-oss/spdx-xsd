@@ -9,7 +9,7 @@ SPDX License XML: https://spdx-xml.specchain.org/spdx-license
 
 SPDX Security XML: https://spdx-xml.specchain.org/spdx-security
 
-SPDX Security ISM XML: https://spdx-xml.specchain.org/spdx-sec-sim
+SPDX Security ISM XML: https://spdx-xml.specchain.org/spdx-sec-ism
 
 
 # License
