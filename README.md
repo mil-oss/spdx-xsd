@@ -1,11 +1,15 @@
 # spdx-xsd
 XML Schema for the Software Package Documentation Exchange (SPDX) Format
 
-SPDX License XML:  https://spdx-license.specchain.org
+SPDX XML:  https://spdx-xml.specchain.org
 
-SPDX Document XML: https://spdx-doc.specchain.org
+SPDX Document XML: https://spdx-xml.specchain.org/spdx-doc
 
-SPDX Security XML: https://spdx-security.specchain.org
+SPDX License XML: https://spdx-xml.specchain.org/spdx-license
+
+SPDX Security XML: https://spdx-xml.specchain.org/spdx-security
+
+SPDX Security ISM XML: https://spdx-xml.specchain.org/spdx-sec-sim
 
 
 # License
