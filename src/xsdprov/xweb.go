@@ -33,22 +33,27 @@ var (
 	config        string
 	configdata    []Cfg
 	appDatastruct interface{}
+	hostCfg       Cfg
 )
 
 //StartWeb .. simple web server
-func StartWeb(port string, cdata []Cfg) {
+func StartWeb(hcfg Cfg, appcfg []Cfg) {
+	hostCfg = hcfg
+	var port = hcfg.Port
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
+
 	log.Println("Port .. " + port)
 	router := http.NewServeMux()
-	for c := range cdata {
-		router.Handle("/"+cdata[c].Project+"/", AppIndex(cdata[c]))
-		router.Handle("/"+cdata[c].Project+"/file/", GetResource(cdata[c]))
-		router.Handle("/"+cdata[c].Project+"/iepd/", GetResource(cdata[c]))
-		router.Handle("/"+cdata[c].Project+"/dload", Dload(cdata[c]))
+	for c := range appcfg {
+		router.Handle("/"+appcfg[c].Project+"/", AppIndex(appcfg[c]))
+		router.Handle("/"+appcfg[c].Project+"/file/", GetResource(appcfg[c]))
+		router.Handle("/"+appcfg[c].Project+"/iepd/", GetResource(appcfg[c]))
+		router.Handle("/"+appcfg[c].Project+"/dload", Dload(appcfg[c]))
 	}
 	router.Handle("/", Index())
+	router.Handle("/config", getConfig())
 	router.Handle("/validate", Validate())
 	router.Handle("/transform", Transform())
 	router.Handle("/verify", DocVerify())
@@ -141,13 +146,9 @@ func AppIndex(cfg Cfg) http.Handler {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
+		var resources = map[string]string{}
 		for r := range cfg.Resources {
 			resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
-			sources[cfg.Resources[r].Name] = cfg.Resources[r].Src
-		}
-		for r := range cfg.Directories {
-			resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Path
-			resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Src
 		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -160,7 +161,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div><b>REST Endpoints:</b></div>")
 		fmt.Fprintln(w, "</p>")
-		fmt.Fprintln(w, "<div><a href='"+pth+"/dload'>"+pth+"/dload</a> - Get zipped package</div>")
+		fmt.Fprintln(w, "<div><a href='"+pth+"dload'>"+pth+"dload</a> - Get zipped package</div>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div style='float:left; width:50%;margin-bottom:12px;'>")
 		fmt.Fprintln(w, "<div><b>XML Schema:</b></div>")
@@ -242,11 +243,33 @@ func sortMap(m map[string]string) []string {
 	return k
 }
 
+func getConfig() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if atomic.LoadInt32(&healthy) == 1 {
+			f, err := ioutil.ReadFile(hostCfg.Configfile)
+			check(err)
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
+			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+			w.Header().Set("Pragma", "no-cache")
+			w.Header().Set("X-Accel-Expires", "0")
+			check(err)
+			w.Write(f)
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+
 // GetResource ...
 func GetResource(cfg Cfg) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
 			var p = filepath.Base(r.URL.Path)
+			var resources = map[string]string{}
+			for r := range cfg.Resources {
+				resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
+			}
 			f, err := ioutil.ReadFile(cfg.Temppath + resources[p])
 			check(err)
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")

@@ -8,11 +8,13 @@ import (
 // Cfg ...
 type Cfg struct {
 	Project         string     `json:"project,omitempty"`
+	Title           string     `json:"title,omitempty"`
+	Host            string     `json:"host,omitempty"`
+	Port            string     `json:"port,omitempty"`
 	Configfile      string     `json:"configfile,omitempty"`
+	ConfigURL       string     `json:"configurl,omitempty"`
 	Reflink         string     `json:"reflink,omitempty"`
 	Testlink        string     `json:"testlink,omitempty"`
-	Homeurl         string     `json:"homeurl,omitempty"`
-	Port            string     `json:"port,omitempty"`
 	Dbloc           string     `json:"dbloc,omitempty"`
 	Tempdir         string     `json:"tempdir,omitempty"`
 	Temppath        string     `json:"temppath,omitempty"`
@@ -23,9 +25,11 @@ type Cfg struct {
 
 // Resource ...
 type Resource struct {
-	Name string `json:"name,omitempty"`
-	Src  string `json:"src,omitempty"`
-	Path string `json:"path,omitempty"`
+	Name        string `json:"name,omitempty"`
+	Src         string `json:"src,omitempty"`
+	SrcURL      string `json:"srcurl,omitempty"`
+	Path        string `json:"path,omitempty"`
+	Description string `json:"description,omitempty"`
 }
 
 //GetConfig ...

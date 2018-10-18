@@ -3,7 +3,7 @@
     "configfile": "spdx-license-cfg.json",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
     "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-license/xml/instance/spdx-license-test-data.xml",
-    "homeurl": "http://localhost/spdx-license",
+    "host": "https://spdx-xml.specchain.org/spdx-license/",
     "port": ":8080",
     "dbloc": "tmp/spdx-license-iepd/db/spdx-license.db",
     "tempdir": "tmp/",

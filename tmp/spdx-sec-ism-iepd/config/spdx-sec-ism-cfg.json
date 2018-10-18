@@ -3,7 +3,7 @@
     "configfile": "spdx-sec-ism-cfg.json",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
     "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-sec-ism/xml/instance/spdx-sec-ism-test-data.xml",
-    "homeurl": "seva-ism.specchain.org",
+    "host": "https://spdx-xml.specchain.org/spdx-sec-ism/",
     "port": ":8080",
     "dbloc": "tmp/spdx-sec-ism-iepd/db/spdx-sec-ism.db",
     "tempdir": "tmp/",

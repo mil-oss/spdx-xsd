@@ -3,7 +3,7 @@
     "configfile": "spdx-security-cfg.json",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
     "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-security/xml/instance/spdx-security-test-data.xml",
-    "homeurl": "http://localhost/spdx-security",
+    "host": "https://spdx-xml.specchain.org/spdx-security/",
     "port": ":8080",
     "dbloc": "tmp/spdx-security-iepd/db/spdx-security.db",
     "tempdir": "tmp/",

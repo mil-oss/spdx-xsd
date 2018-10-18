@@ -1,30 +1,40 @@
 {
     "project":"spdx",
-    "configfile": "spdx-cfg.json",
-    "homeurl":"spdx-xml.specchain.org",
+    "title":"XML Schema Implementtion of SPDX",
+    "host":"https://spdx-xml.specchain.org",
     "port":":8080",
+    "configfile": "config/spdx-cfg.json",
+    "configurl": "https://spdx-xml.specchain.org/config",
     "tempdir":"tmp/",
     "temppath":"tmp/spdx-xml/",
     "implementations": [
         {
             "name": "spdx-doc",
             "src": "config/spdx-doc-cfg.json",
-            "path": "config/spdx-doc-cfg.json"
+            "srcurl": "https://spdx-xml.specchain.org/spdx-doc/file/config",
+            "path": "config/spdx-doc-cfg.json",
+            "description": "SPDX Document Information"
         },
         {
             "name": "spdx-license",
             "src": "config/spdx-license-cfg.json",
-            "path": "config/spdx-license-cfg.json"
+            "srcurl": "https://spdx-xml.specchain.org/spdx-license/file/config",
+            "path": "config/spdx-license-cfg.json",
+            "description": "SPDX License Information"
         },
         {
             "name": "spdx-security",
-            "src": "config/spdx-security-cfg.json",
-            "path":  "config/spdx-security-cfg.json"
+            "src":  "config/spdx-security-cfg.json",
+            "srcurl": "https://spdx-xml.specchain.org/spdx-security/file/config",
+            "path":  "config/spdx-security-cfg.json",
+            "description": "SPDX Security Information"
         },
         {
             "name": "spdx-sec-ism",
             "src": "config/spdx-sec-ism-cfg.json",
-            "path": "config/spdx-sec-ism-cfg.json"
+            "srcurl": "https://spdx-xml.specchain.org/spdx-sec-ism/file/config",
+            "path": "config/spdx-sec-ism-cfg.json",
+            "description": "SPDX Security Information with ISM"
         }
     ]
 }

@@ -3,7 +3,7 @@
     "configfile": "spdx-doc-cfg.json",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
     "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-document/xml/instance/spdx-doc-test-data.xml",
-    "homeurl":"spdx-doc.specchain.org",
+    "homeurl":"https://spdx-xml.specchain.org/spdx-doc/",
     "port":":8080",
     "dbloc":"tmp/spdx-doc-iepd/db/spdx-doc.db",
     "tempdir":"tmp/",
@@ -87,8 +87,8 @@
         },
         {
             "name": "maingo",
-            "src": "src/spdx-doc/spdx-doc.go",
-            "path": "src/spdx-doc/spdx-doc.go",
+            "src": "src/spdx-doc/spdx-document.go",
+            "path": "src/spdx-doc/spdx-document.go",
             "description": "Golang start class"
         },
         {

@@ -50,7 +50,6 @@ func InitXSDProv(config string) {
 	dbloc = cfg.Dbloc
 	tempdir = cfg.Tempdir
 	temppath = cfg.Temppath
-	Homeurl = cfg.Homeurl
 	name = cfg.Project
 	reflink = cfg.Reflink
 	testlink = cfg.Testlink

@@ -30,18 +30,34 @@ var (
 	healthy       int32
 	xsdstruct     interface{}
 	project       string
-	router        = http.NewServeMux()
 	config        string
-	configdata    Cfg
+	configdata    []Cfg
 	appDatastruct interface{}
+	hostCfg       Cfg
 )
 
 //StartWeb .. simple web server
-func StartWeb() {
+func StartWeb(hcfg Cfg, appcfg []Cfg) {
+	hostCfg = hcfg
+	var port = hcfg.Port
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
+
 	log.Println("Port .. " + port)
+	router := http.NewServeMux()
+	for c := range appcfg {
+		router.Handle("/"+appcfg[c].Project+"/", AppIndex(appcfg[c]))
+		router.Handle("/"+appcfg[c].Project+"/file/", GetResource(appcfg[c]))
+		router.Handle("/"+appcfg[c].Project+"/iepd/", GetResource(appcfg[c]))
+		router.Handle("/"+appcfg[c].Project+"/dload", Dload(appcfg[c]))
+	}
+	router.Handle("/", Index())
+	router.Handle("/config", getConfig())
+	router.Handle("/validate", Validate())
+	router.Handle("/transform", Transform())
+	router.Handle("/verify", DocVerify())
+	router.Handle("/rebuild", Rebuild())
 	flag.StringVar(&listenAddr, "listen-addr", port, "server listen address")
 	flag.Parse()
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
@@ -83,20 +99,8 @@ func StartWeb() {
 	logger.Println("Server stopped")
 }
 
-//ConfigRouter ...
-func ConfigRouter(c Cfg) {
-	router.Handle(c.Project+"/", Index(c.Temppath))
-	router.Handle(c.Project+"/file/", GetResource(c.Temppath))
-	router.Handle(c.Project+"/iepd/", GetResource(c.Temppath))
-	router.Handle(c.Project+"/dload", Dload(c.Temppath))
-	router.Handle(c.Project+"/validate", Validate())
-	router.Handle(c.Project+"/transform", Transform())
-	router.Handle(c.Project+"/verify", DocVerify())
-	router.Handle(c.Project+"/rebuild", Rebuild())
-}
-
 // Index ...
-func Index(path string) http.Handler {
+func Index() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
@@ -106,7 +110,54 @@ func Index(path string) http.Handler {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 		w.Header().Set("X-Content-Type-Options", "nosniff")
 		w.WriteHeader(http.StatusOK)
-		var pth = configdata.Project
+		fmt.Fprintln(w, "<html>")
+		fmt.Fprintln(w, "<body>")
+		fmt.Fprintln(w, "<div><b>SPDX XML</b></div>")
+		fmt.Fprintln(w, "<hr>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>SPDX Information Exchange Package Documentation (IEPD)</b></div>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-doc</td><td><a href='/spdx-doc/'>SPDX Document IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-license</td><td><a href='/spdx-license/'>SPDX License IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-security</td><td><a href='/spdx-security/'>SPDX Security IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-sec-ism</td><td><a href='/spdx-sec-ism/'>SPDX Security IEPD with ISM markings</a></td></tr>")
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</div>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td><b>Operations:</b></td><td></td></tr>")
+		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/rebuild ..</td><td>json payload:  Config:{json data}</td></tr>")
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</body>")
+		fmt.Fprintln(w, "</html>")
+	})
+}
+
+// AppIndex ...
+func AppIndex(cfg Cfg) http.Handler {
+	var pth = "/" + cfg.Project + "/"
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		log.Println(pth)
+		log.Println(r.URL.Path)
+		if r.URL.Path != pth {
+			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+			return
+		}
+		for r := range cfg.Resources {
+			resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
+			sources[cfg.Resources[r].Name] = cfg.Resources[r].Src
+		}
+		for r := range cfg.Directories {
+			resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Path
+			resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Src
+		}
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, "<html>")
 		fmt.Fprintln(w, "<body>")
 		fmt.Fprintln(w, "<div><b>"+strings.ToUpper(name)+"</b></div>")
@@ -114,7 +165,7 @@ func Index(path string) http.Handler {
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div><b>REST Endpoints:</b></div>")
 		fmt.Fprintln(w, "</p>")
-		fmt.Fprintln(w, "<div><a href='/dload'>/dload</a> - Get zipped package</div>")
+		fmt.Fprintln(w, "<div><a href='"+pth+"dload'>"+pth+"dload</a> - Get zipped package</div>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div style='float:left; width:50%;margin-bottom:12px;'>")
 		fmt.Fprintln(w, "<div><b>XML Schema:</b></div>")
@@ -122,7 +173,7 @@ func Index(path string) http.Handler {
 		var sr = sortMap(resources)
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xsd") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -131,7 +182,7 @@ func Index(path string) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xsl") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -140,7 +191,7 @@ func Index(path string) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xml") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -151,7 +202,7 @@ func Index(path string) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".json") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -160,17 +211,17 @@ func Index(path string) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".go") {
-				fmt.Fprintln(w, "<tr><td style='width:200px'>"+pth+"/file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
 		fmt.Fprintln(w, "</div>")
 		fmt.Fprintln(w, "<table>")
 		fmt.Fprintln(w, "<tr><td><b>Operations:</b></td><td></td></tr>")
-		fmt.Fprintln(w, "<tr><td>"+pth+"/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>"+pth+"/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>"+pth+"/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
-		fmt.Fprintln(w, "<tr><td>"+pth+"/rebuild ..</td><td>json payload:  Config:{json file}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/rebuild ..</td><td>json payload:  Config:{json file}</td></tr>")
 		fmt.Fprintln(w, "<table>")
 		fmt.Fprintln(w, "</body>")
 		fmt.Fprintln(w, "</html>")
@@ -196,12 +247,10 @@ func sortMap(m map[string]string) []string {
 	return k
 }
 
-// GetResource ...
-func GetResource(path string) http.Handler {
+func getConfig() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
-			var p = filepath.Base(r.URL.Path)
-			f, err := ioutil.ReadFile(path + resources[p])
+			f, err := ioutil.ReadFile(hostCfg.Configfile)
 			check(err)
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			w.Header().Set("Access-Control-Allow-Origin", "*")
@@ -211,6 +260,40 @@ func GetResource(path string) http.Handler {
 			w.Header().Set("X-Accel-Expires", "0")
 			check(err)
 			w.Write(f)
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+
+// GetResource ...
+func GetResource(cfg Cfg) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if atomic.LoadInt32(&healthy) == 1 {
+			var p = filepath.Base(r.URL.Path)
+			f, err := ioutil.ReadFile(cfg.Temppath + resources[p])
+			check(err)
+			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			w.Header().Set("Access-Control-Allow-Origin", "*")
+			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
+			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+			w.Header().Set("Pragma", "no-cache")
+			w.Header().Set("X-Accel-Expires", "0")
+			check(err)
+			w.Write(f)
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+
+// Dload ...
+func Dload(cfg Cfg) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("X-Content-Type-Options", "nosniff")
+		if atomic.LoadInt32(&healthy) == 1 {
+			DownloadFile(cfg.Temppath+name+"-iepd.zip", w)
+			w.WriteHeader(http.StatusOK)
+			AppIndex(cfg)
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
@@ -308,24 +391,10 @@ func Rebuild() http.Handler {
 			}
 			c, err := json.Marshal(confgdata)
 			check(err)
-			WriteFile(config, c)
+			WriteFile(confgdata.Configfile, c)
 			http.Redirect(w, r, "/", 301)
-			InitXSDProv(config)
+			InitXSDProv(confgdata.Configfile)
 			BuildIep(appDatastruct)
-		}
-		w.WriteHeader(http.StatusServiceUnavailable)
-	})
-}
-
-// Dload ...
-func Dload(path string) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
-		if atomic.LoadInt32(&healthy) == 1 {
-			DownloadFile(path+name+"-iepd.zip", w)
-			w.WriteHeader(http.StatusOK)
-			Index(path)
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
