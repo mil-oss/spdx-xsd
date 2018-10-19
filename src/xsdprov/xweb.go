@@ -140,8 +140,8 @@ func Index() http.Handler {
 func AppIndex(cfg Cfg) http.Handler {
 	var pth = "/" + cfg.Project + "/"
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		log.Println(pth)
-		log.Println(r.URL.Path)
+		//log.Println(pth)
+		//log.Println(r.URL.Path)
 		if r.URL.Path != pth {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
@@ -249,6 +249,7 @@ func getConfig() http.Handler {
 			check(err)
 			setHeader(w)
 			w.Write(f)
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
@@ -268,6 +269,7 @@ func GetResource(cfg Cfg) http.Handler {
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 			setHeader(w)
 			w.Write(f)
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
@@ -279,8 +281,9 @@ func Dload(cfg Cfg) http.Handler {
 		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			DownloadFile(cfg.Temppath+name+"-iepd.zip", w)
-			w.WriteHeader(http.StatusOK)
 			AppIndex(cfg)
+			w.WriteHeader(http.StatusOK)
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
@@ -306,6 +309,7 @@ func DocVerify() http.Handler {
 				HandleError(&w, 500, "Verification Error", "Verification Error", err)
 				return
 			}
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
@@ -328,9 +332,10 @@ func Validate() http.Handler {
 			if valid {
 				log.Println("Validation Successful")
 				HandleSuccess(&w, Success{Status: true})
-			} else {
-				HandleValidationErrors(&w, "Validation Errors", errs)
+				return
 			}
+			HandleValidationErrors(&w, "Validation Errors", errs)
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
@@ -352,8 +357,10 @@ func Transform() http.Handler {
 			rslt, err := TransformXML(transform)
 			if err != nil {
 				HandleError(&w, 500, "Internal Server Error", "Transformation error", err)
+				return
 			}
 			HandleSuccess(&w, Success{Status: true, Content: fmt.Sprint(rslt)})
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
@@ -378,6 +385,7 @@ func Rebuild() http.Handler {
 			http.Redirect(w, r, "/", 301)
 			InitXSDProv(confgdata.Configfile)
 			BuildIep(appDatastruct)
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
