@@ -34,6 +34,7 @@ var (
 	configdata    []Cfg
 	appDatastruct interface{}
 	hostCfg       Cfg
+	requestID     string
 )
 
 //StartWeb .. simple web server
@@ -107,8 +108,7 @@ func Index() http.Handler {
 			return
 		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, "<html>")
 		fmt.Fprintln(w, "<body>")
@@ -151,8 +151,7 @@ func AppIndex(cfg Cfg) http.Handler {
 			resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
 		}
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		w.WriteHeader(http.StatusOK)
 		fmt.Fprintln(w, "<html>")
 		fmt.Fprintln(w, "<body>")
@@ -169,7 +168,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		var sr = sortMap(resources)
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xsd") {
-				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -178,7 +177,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xsl") {
-				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -187,7 +186,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".xml") {
-				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -198,7 +197,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".json") {
-				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -207,7 +206,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<table>")
 		for _, p := range sr {
 			if strings.Contains(resources[p], ".go") {
-				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"/file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
 			}
 		}
 		fmt.Fprintln(w, "</table>")
@@ -248,13 +247,7 @@ func getConfig() http.Handler {
 		if atomic.LoadInt32(&healthy) == 1 {
 			f, err := ioutil.ReadFile(hostCfg.Configfile)
 			check(err)
-			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
-			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
-			w.Header().Set("Pragma", "no-cache")
-			w.Header().Set("X-Accel-Expires", "0")
-			check(err)
+			setHeader(w)
 			w.Write(f)
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
@@ -273,12 +266,7 @@ func GetResource(cfg Cfg) http.Handler {
 			f, err := ioutil.ReadFile(cfg.Temppath + resources[p])
 			check(err)
 			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
-			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
-			w.Header().Set("Pragma", "no-cache")
-			w.Header().Set("X-Accel-Expires", "0")
-			check(err)
+			setHeader(w)
 			w.Write(f)
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
@@ -288,8 +276,7 @@ func GetResource(cfg Cfg) http.Handler {
 // Dload ...
 func Dload(cfg Cfg) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			DownloadFile(cfg.Temppath+name+"-iepd.zip", w)
 			w.WriteHeader(http.StatusOK)
@@ -302,6 +289,7 @@ func Dload(cfg Cfg) http.Handler {
 // DocVerify ...
 func DocVerify() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
 			decoder := json.NewDecoder(r.Body)
@@ -326,9 +314,7 @@ func DocVerify() http.Handler {
 // Validate ...
 func Validate() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
 			decoder := json.NewDecoder(r.Body)
@@ -353,9 +339,7 @@ func Validate() http.Handler {
 // Transform ...
 func Transform() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
 			decoder := json.NewDecoder(r.Body)
@@ -378,8 +362,7 @@ func Transform() http.Handler {
 // Rebuild ...
 func Rebuild() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
 			decoder := json.NewDecoder(r.Body)
@@ -422,10 +405,20 @@ func tracing(nextRequestID func() string) func(http.Handler) http.Handler {
 				requestID = nextRequestID()
 			}
 			ctx := context.WithValue(r.Context(), requestIDKey, requestID)
-			w.Header().Set("X-Request-Id", requestID)
+			//w.Header().Set("X-Request-Id", requestID)
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
+}
+
+func setHeader(w http.ResponseWriter) {
+	w.Header().Set("X-Content-Type-Options", "nosniff")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("X-Request-Id", requestID)
+	w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
+	w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+	w.Header().Set("Pragma", "no-cache")
+	w.Header().Set("X-Accel-Expires", "0")
 }
 
 //HandleSuccess ... handle success response
