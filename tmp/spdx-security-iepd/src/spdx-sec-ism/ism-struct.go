@@ -1,4 +1,4 @@
-package spdxsecism
+package main
 
 import (
 	"encoding/xml"

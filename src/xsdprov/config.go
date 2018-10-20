@@ -3,6 +3,7 @@ package xsdprov
 import (
 	"encoding/json"
 	"io/ioutil"
+	"log"
 )
 
 // Cfg ...
@@ -35,6 +36,7 @@ type Resource struct {
 
 //ReadConfig ...
 func ReadConfig(cfgpath string) Cfg {
+	log.Println("ReadConfig " + cfgpath)
 	jf, err := ioutil.ReadFile(cfgpath)
 	if err != nil {
 		panic(err)

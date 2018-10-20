@@ -1,4 +1,4 @@
-package main
+package spdxdoc
 
 import (
 	"xsdprov"
@@ -18,13 +18,12 @@ var (
 func main() {
 	xsdprov.InitXSDProv(Config)
 	//BuildDocIEP()
-	xsdprov.StartWeb(Config, SpdxDocDatastruct)
+	//xsdprov.StartWeb(Config, SpdxDocDatastruct)
 }
 
 // BuildDocIEP ...
-func BuildDocIEP() {
+func BuildDocIEP(config string) {
 	SpdxDocDatastruct = NewSpdxDocument()
-	xsdprov.InitXSDProv(Config)
+	xsdprov.InitXSDProv(config)
 	xsdprov.BuildIep(SpdxDocDatastruct)
-	//xsdprov.StartWeb(xsdprov.Homeurl)
 }

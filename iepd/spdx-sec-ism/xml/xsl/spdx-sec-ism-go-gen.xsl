@@ -3,7 +3,7 @@
     <xsl:output method="text" indent="yes"/>
 
     <xsl:include href="./common/go-gen.xsl"/>
-
+    
     <!-- 
     input: ${pdu}/spdx-xsd/IEPD/spdx-security/xml/xsd/spdx-security-iep.xsd
     output:${pdu}/spdx-xsd/src/golang/spdx-security/spdx-security-struct.go
@@ -11,7 +11,7 @@
 
     <xsl:template match="/">
         <xsl:variable name="rootname" select="xs:schema/xs:annotation/xs:appinfo/*/@name"/>
-        <xsl:value-of select="concat('package main', $cr, $cr)"/>
+        <xsl:value-of select="concat('package spdxsecism', $cr, $cr)"/>
         <xsl:value-of select="concat('import ', $qt, 'encoding/xml', $qt, $cr, $cr)"/>
         <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]" mode="func">
             <xsl:with-param name="rootname" select="$rootname"/>
@@ -23,10 +23,56 @@
             <xsl:with-param name="rootname" select="$rootname"/>
             <xsl:sort select="@name"/>
         </xsl:apply-templates>
-        <xsl:apply-templates select="xs:schema/xs:simpleType[@name = 'ClassificationType']"/>
         <xsl:apply-templates select="xs:schema/xs:attributeGroup">
             <xsl:sort select="@name"/>
         </xsl:apply-templates>
+    </xsl:template>
+    
+<!--    <xsl:template match="xs:schema/xs:element">
+        <xsl:param name="rootname"/>
+        <xsl:variable name="n" select="@name"/>
+        <xsl:variable name="t" select="@type"/>
+                <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
+                <xsl:value-of select="concat('//', $n, ' ... ', substring-before(xs:annotation/xs:documentation, '.'), $cr)"/>
+                <xsl:value-of select="concat('type ', $n, ' struct ', $lb, $cr)"/>
+                <xsl:if test="@name = $rootname">
+                    <xsl:value-of select="concat($in, $in, 'AttrXmlnsXsi', $tab, 'string', $tab, $tab, $bq, 'xml:', $qt, 'xmlns:xsi,attr', $qt, $json, $qt, 'AttrXmlnsXsi', $cm, $omitempty, $qt, $bq, $cr)"/>
+                    <xsl:value-of select="concat($tab, 'AttrXmlns', $tab, 'string', $tab, $tab, $bq, 'xml:', $qt, 'xmlns,attr', $qt, $json, $qt, 'AttrXmlns', $cm, $omitempty, $qt, $bq, $cr)"/>
+                    <xsl:value-of select="concat($tab, 'AttrXmlnsIsm', $tab, 'string', $tab, $bq, 'xml:', $qt, 'xmlns:ism,attr', $qt, $json, $qt, 'AttrXmlnsIsm', $cm, $omitempty, $qt, $bq, $cr)"/>
+                </xsl:if>
+                <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar">
+                    <xsl:with-param name="rootname" select="$rootname"/>
+                </xsl:apply-templates>
+                <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]" mode="makevar">
+                    <xsl:with-param name="rootname" select="$rootname"/>
+                </xsl:apply-templates>
+                <!-\-<xsl:apply-templates select="//xs:complexType[@name = $t]//xs:element[@ref]"/>-\->
+                <xsl:if test="not(//xs:complexType[@name = $t]//xs:element[@ref])">
+                    <xsl:value-of select="concat($tab, 'Value', $tab, 'string', $tab, $bq, 'xml:', $qt, $cm, 'chardata', $qt, ' ', $json, $qt, 'Value', $cm, $omitempty, $qt, $bq, $cr)"/>
+                </xsl:if>
+                <xsl:value-of select="concat($tab, 'SecurityAttributesOptionGroup', $tab, $tab, '//SecurityAttributesOptionGroup', $cr)"/>
+                <xsl:value-of select="concat($tab, 'XMLName', $tab, 'xml.Name', $tab, $tab, $bq, 'xml:', $qt, $n, $cm, $omitempty, $qt, ' ', $json, $qt, $n, $cm, $omitempty, $qt, $bq, $cr)"/>
+                <xsl:value-of select="concat($rb, $cr)"/>
+    </xsl:template>
+    -->
+  <xsl:template match="xs:schema/xs:element">
+        <xsl:param name="rootname"/>
+        <xsl:variable name="n" select="@name"/>
+        <xsl:variable name="t" select="@type"/>
+        <xsl:value-of select="concat('//', $n, ' ... ', xs:annotation/xs:documentation, $cr)"/>
+        <xsl:value-of select="concat('type ', $n, ' struct ', $lb, $cr)"/>
+        <xsl:if test="@name = $rootname">
+            <xsl:value-of select="concat($tab, 'AttrXmlnsXsi', $tab, 'string', $tab, $bq, 'xml:', $qt, 'xmlns:xsi,attr', $qt, $json, $qt, 'AttrXmlnsXsi', $cm, $omitempty, $qt, $bq, $cr)"/>
+            <xsl:value-of select="concat($tab, 'AttrXmlns', $tab, 'string', $tab, $bq, 'xml:', $qt, 'xmlns,attr', $qt, $json, $qt, 'AttrXmlns', $cm, $omitempty, $qt, $bq, $cr)"/>
+            <xsl:value-of select="concat($tab, 'AttrXmlnsIsm', $tab, 'string', $tab, $bq, 'xml:', $qt, 'xmlns:ism,attr', $qt, $json, $qt, 'AttrXmlnsIsm', $cm, $omitempty, $qt, $bq, $cr)"/>
+        </xsl:if>
+        <xsl:apply-templates select="//xs:complexType[@name = $t]//xs:element[@ref]"/>
+        <xsl:if test="not(//xs:complexType[@name = $t]//xs:element[@ref])">
+            <xsl:value-of select="concat($tab, 'Value', $tab, 'string', $tab, $bq, 'xml:', $qt, $cm, 'chardata', $qt, ' ', $json, $qt, 'Value', $cm, $omitempty, $qt, $bq, $cr)"/>
+        </xsl:if>
+        <xsl:value-of select="concat($tab, 'SecurityAttributesOptionGroup', $tab, $tab, '//SecurityAttributesOptionGroup', $cr)"/>
+        <xsl:value-of select="concat($tab, 'XMLName', $tab, 'xml.Name', $tab, $bq, 'xml:', $qt, $n, $cm, $omitempty, $qt, ' ', $json, $qt, $n, $cm, $omitempty, $qt, $bq, $cr)"/>
+        <xsl:value-of select="concat($rb, $cr)"/>
     </xsl:template>
     
     <xsl:template match="xs:attributeGroup">

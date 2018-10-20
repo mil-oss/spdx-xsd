@@ -12,6 +12,7 @@
     <xsl:template match="/">
         <xsl:call-template name="maketests">
             <xsl:with-param name="testdata" select="document('../instance/spdx-sec-ism-instance.xml')"/>
+            <xsl:with-param name="pckgname" select="'spdxsecism'"/>
         </xsl:call-template>
     </xsl:template>
     

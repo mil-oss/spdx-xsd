@@ -1,4 +1,4 @@
-package main
+package spdxsecism
 
 import (
 	"xsdprov"
@@ -17,13 +17,13 @@ var (
 
 func main() {
 	xsdprov.InitXSDProv(Config)
-	//SecurityIsmIEP()
-	xsdprov.StartWeb(Config, SecurityISMDatastruct)
+	//SecurityIsmIEP(Config)
+	//xsdprov.StartWeb(Config, SecurityISMDatastruct)
 }
 
 // SecurityIsmIEP ...
-func SecurityIsmIEP() {
+func SecurityIsmIEP(config string) {
 	SecurityISMDatastruct = NewSoftwareEvidenceArchive()
-	xsdprov.InitXSDProv(Config)
+	xsdprov.InitXSDProv(config)
 	xsdprov.BuildIep(SecurityISMDatastruct)
 }

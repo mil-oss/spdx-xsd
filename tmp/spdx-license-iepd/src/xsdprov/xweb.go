@@ -401,9 +401,10 @@ func RebuildAll() http.Handler {
 		if atomic.LoadInt32(&healthy) == 1 {
 			for i := range hostCfg.Implementations {
 				log.Println(hostCfg.Implementations[i].Name)
+				log.Println(hostCfg.Implementations[i].Src)
 				var c = ReadConfig(hostCfg.Implementations[i].Src)
-				InitXSDProv(c.Configfile)
 				cfgs = append(cfgs, c)
+				InitXSDProv(hostCfg.Implementations[i].Src)
 				BuildIep(appDatastruct)
 			}
 			StartWeb(hostCfg, cfgs)
