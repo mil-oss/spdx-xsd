@@ -64,6 +64,7 @@
             <xsl:if test="@name = $rootname">
                 <xsl:value-of select="concat($in, $in, '// Required for the proper namespacing', $cr)"/>
                 <xsl:value-of select="concat($in, $in, 'AttrXmlnsXsi', ':', $qt, 'http://www.w3.org/2001/XMLSchema-instance', $qt, $cm, $cr)"/>
+                <xsl:value-of select="concat($tab, 'XsiType', $tab,  'string', $tab, $bq, 'xml:', $qt, 'http://www.w3.org/2001/XMLSchema-instance type,attr,omitempty', $qt, $bq, $cr)"/>
                 <xsl:value-of select="concat($in, $in, 'AttrXmlns', ':', $qt, 'spdx:xsd::1.0', $qt, $cm, $cr)"/>
             </xsl:if>
             <!--<xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar"/>
@@ -128,9 +129,6 @@
                 <xsl:when test="/xs:schema/xs:complexType[@name = $t]//@base='xs:boolean'">
                     <xsl:value-of select="concat($ary, 'bool')"/>
                 </xsl:when>
-                <xsl:when test="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
-                    <xsl:value-of select="concat($ary, $ptr, $r)"/>
-                </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of select="concat($ary, 'string')"/>
                 </xsl:otherwise>
@@ -141,10 +139,12 @@
 
     <xsl:template name="maketests">
         <xsl:param name="testdata"/>
+        <xsl:param name="pckgname"/>
         <xsl:variable name="rootname" select="//xs:schema/xs:annotation/xs:appinfo/*/@name"/>
         <xsl:variable name="roottype" select="//xs:schema/xs:annotation/xs:appinfo/*/@type"/>
         <xsl:call-template name="teststart">
             <xsl:with-param name="appname" select="$rootname"/>
+            <xsl:with-param name="pckgname" select="$pckgname"/>
         </xsl:call-template>
         <xsl:variable name="b" select="//xs:schema/xs:complexType[@name = $roottype]//@base"/>
         <xsl:apply-templates select="//xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="maketest">
@@ -251,17 +251,7 @@
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-        <xsl:variable name="dt">
-            <xsl:choose>
-                <xsl:when test="//xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
-                    <xsl:value-of select="concat($ary, $ptr, $r)"/>
-                    <!--<xsl:value-of select="$r"/>-->
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="$t"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:variable>
+        <xsl:variable name="dt" select="concat($ary, '*', $r)"/>
         <xsl:value-of select="concat($tab, $r, $tab, $dt, $tab, $tab, $bq, 'xml:', $qt, @ref, $cm, $omitempty, $qt, ' ', $json, $qt, @ref, $ary, $cm, $omitempty, $qt, $bq, $cr)"/>
     </xsl:template>
     
@@ -281,7 +271,8 @@
 
     <xsl:template name="teststart">
         <xsl:param name="appname"/>
-        <xsl:value-of select="concat('package ', 'main', $cr, $cr)"/>
+        <xsl:param name="pckgname"/>
+        <xsl:value-of select="concat('package ', $pckgname, $cr, $cr)"/>
         <xsl:value-of select="concat('import (', $cr)"/>
         <xsl:value-of select="concat($in, $qt, 'encoding/xml', $qt, $cr)"/>
         <xsl:value-of select="concat($in, $qt, 'fmt', $qt, $cr)"/>

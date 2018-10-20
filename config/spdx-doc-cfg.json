@@ -26,8 +26,8 @@
         {
             "name": "reftestdataxml",
             "filename": "spdx-test-data.xml",
-            "src": "xml/xsd/spdx-xml-ref.xsd",
-            "path": "xml/xsd/spdx-xml-ref.xsd",
+            "src": "xml/xsd/spdx-test-data.xml",
+            "path": "xml/xsd/spdx-test-data.xml",
             "description": "Test values for all SPDX data items"
         },
         {

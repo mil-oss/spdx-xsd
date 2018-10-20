@@ -1,4 +1,4 @@
-package main
+package spdxdoc
 
 import "encoding/xml"
 
@@ -7,6 +7,7 @@ func NewSpdxDocument() *SpdxDocument{
     return &SpdxDocument{
         // Required for the proper namespacing
         AttrXmlnsXsi:"http://www.w3.org/2001/XMLSchema-instance",
+	XsiType	string	`xml:"http://www.w3.org/2001/XMLSchema-instance type,attr,omitempty"`
         AttrXmlns:"spdx:xsd::1.0",
     }
 }

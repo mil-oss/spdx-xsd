@@ -8,12 +8,14 @@ func NewSoftwareEvidenceArchive() *SoftwareEvidenceArchive {
 		// Required for the proper namespacing
 		AttrXmlnsXsi: "http://www.w3.org/2001/XMLSchema-instance",
 		AttrXmlns:    "spdx:xsd::1.0",
+		AttrXmlnsIsm: "urn:us:gov:ic:ism",
 	}
 }
 
 //SoftwareEvidenceArchive ... A data item for automated software supply chain metadata.
 type SoftwareEvidenceArchive struct {
-	AttrXmlnsXsi                   string                          `xml:"xmlns:xsi,attr" json:"AttrXmlnsXsi,omitempty"`
+	AttrXmlnsXsi                   string                          `xml:"xmlns:xsi,attr" json:"xmlns xsi,attr,,omitempty"`
+	XsiType                        string                          `xml:"http://www.w3.org/2001/XMLSchema-instance type,attr,omitempty"`
 	AttrXmlns                      string                          `xml:"xmlns,attr" json:"AttrXmlns,omitempty"`
 	AttrXmlnsIsm                   string                          `xml:"xmlns:ism,attr" json:"AttrXmlnsIsm,omitempty"`
 	SoftwareInformation            *SoftwareInformation            `xml:"SoftwareInformation,omitempty"  json:"SoftwareInformation,omitempty"`

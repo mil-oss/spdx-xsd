@@ -13,7 +13,7 @@
         <xsl:variable name="rootname" select="xs:schema/xs:annotation/xs:appinfo/*/@name"/>
         <xsl:value-of select="concat('package spdxsecism', $cr, $cr)"/>
         <xsl:value-of select="concat('import ', $qt, 'encoding/xml', $qt, $cr, $cr)"/>
-        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]" mode="func">
+        <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]" mode="ismfunc">
             <xsl:with-param name="rootname" select="$rootname"/>
         </xsl:apply-templates>
         <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]">
@@ -27,6 +27,29 @@
             <xsl:sort select="@name"/>
         </xsl:apply-templates>
     </xsl:template>
+    
+    <xsl:template match="xs:element[@name]" mode="ismfunc">
+        <xsl:param name="rootname"/>
+        <xsl:variable name="n" select="@name"/>
+        <xsl:variable name="t" select="@type"/>
+        <xsl:if test="//xs:schema/xs:complexType[@name = $t]//xs:element[@ref]">
+            <xsl:variable name="b" select="/xs:schema/xs:complexType[@name = $t]//xs:extension/@base"/>
+            <xsl:value-of select="concat('//New', $rootname, ' ...', $cr)"/>
+            <xsl:value-of select="concat('func ', 'New', $rootname, '() ', $as, $n, $lb, $cr)"/>
+            <xsl:value-of select="concat($tab, 'return ', $a, $n, $lb, $cr)"/>
+            <xsl:if test="@name = $rootname">
+                <xsl:value-of select="concat($tab,$tab, '// Required for the proper namespacing', $cr)"/>
+                <xsl:value-of select="concat($tab,$tab, 'AttrXmlnsXsi', ':', $qt, 'http://www.w3.org/2001/XMLSchema-instance', $qt, $cm, $cr)"/>
+                <xsl:value-of select="concat($tab,$tab, 'AttrXmlns', ':', $qt, 'spdx:xsd::1.0', $qt, $cm, $cr)"/>
+                <xsl:value-of select="concat($tab,$tab, 'AttrXmlnsIsm',':', $qt, 'urn:us:gov:ic:ism', $qt, $cm, $cr)"/>
+            </xsl:if>
+            <!--<xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar"/>
+            <xsl:apply-templates select="/xs:schema/xs:complexType[@name = $t]//xs:element[@ref]" mode="makevar"/>-->
+            <xsl:value-of select="concat($tab, $rb, $cr)"/>
+            <xsl:value-of select="concat($rb, $cr)"/>
+        </xsl:if>
+    </xsl:template>
+    
     
 <!--    <xsl:template match="xs:schema/xs:element">
         <xsl:param name="rootname"/>
@@ -62,7 +85,7 @@
         <xsl:value-of select="concat('//', $n, ' ... ', xs:annotation/xs:documentation, $cr)"/>
         <xsl:value-of select="concat('type ', $n, ' struct ', $lb, $cr)"/>
         <xsl:if test="@name = $rootname">
-            <xsl:value-of select="concat($tab, 'AttrXmlnsXsi', $tab, 'string', $tab, $bq, 'xml:', $qt, 'xmlns:xsi,attr', $qt, $json, $qt, 'AttrXmlnsXsi', $cm, $omitempty, $qt, $bq, $cr)"/>
+            <xsl:value-of select="concat($tab, 'AttrXmlnsXsi', $tab, 'string', $tab, $bq, 'xml:', $qt, 'xmlns:xsi,attr', $qt, $json, $qt, 'xmlns xsi,attr', $cm, $omitempty, $qt, $bq, $cr)"/>
             <xsl:value-of select="concat($tab, 'AttrXmlns', $tab, 'string', $tab, $bq, 'xml:', $qt, 'xmlns,attr', $qt, $json, $qt, 'AttrXmlns', $cm, $omitempty, $qt, $bq, $cr)"/>
             <xsl:value-of select="concat($tab, 'AttrXmlnsIsm', $tab, 'string', $tab, $bq, 'xml:', $qt, 'xmlns:ism,attr', $qt, $json, $qt, 'AttrXmlnsIsm', $cm, $omitempty, $qt, $bq, $cr)"/>
         </xsl:if>

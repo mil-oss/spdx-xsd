@@ -11,7 +11,7 @@
     
         <xsl:template match="/">
             <xsl:variable name="rootname" select="xs:schema/xs:annotation/xs:appinfo/*/@name"/>
-            <xsl:value-of select="concat('package main', $cr, $cr)"/>
+            <xsl:value-of select="concat('package spdxlic', $cr, $cr)"/>
             <xsl:value-of select="concat('import ', $qt, 'encoding/xml', $qt, $cr, $cr)"/>
             <xsl:apply-templates select="xs:schema/xs:element[@name = $rootname]" mode="func">
                 <xsl:with-param name="rootname" select="$rootname"/>

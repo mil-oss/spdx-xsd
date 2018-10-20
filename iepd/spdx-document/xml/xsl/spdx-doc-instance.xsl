@@ -18,7 +18,7 @@
     <xsl:template name="main">
         <SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xmlns="urn:spdx-xml:1.0"
-            xsi:schemaLocation="urn:spdx-xml:1.0 ../xsd/spdx-doc-iep.xsd">
+            xsi:schemaLocation="urn:spdx-xml:1.0  https://spdx-xml.specchain.org/spdx-doc/file/iepxsd">
            <xsl:apply-templates select="xs:schema/xs:complexType[@name = $Root]" mode="root">
                <xsl:with-param name="testData" select="document($TestData)"/>
             </xsl:apply-templates>

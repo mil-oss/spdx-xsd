@@ -64,6 +64,7 @@
             <xsl:if test="@name = $rootname">
                 <xsl:value-of select="concat($in, $in, '// Required for the proper namespacing', $cr)"/>
                 <xsl:value-of select="concat($in, $in, 'AttrXmlnsXsi', ':', $qt, 'http://www.w3.org/2001/XMLSchema-instance', $qt, $cm, $cr)"/>
+                <xsl:value-of select="concat($tab, 'XsiType', $tab,  'string', $tab, $bq, 'xml:', $qt, 'http://www.w3.org/2001/XMLSchema-instance type,attr,omitempty', $qt, $bq, $cr)"/>
                 <xsl:value-of select="concat($in, $in, 'AttrXmlns', ':', $qt, 'spdx:xsd::1.0', $qt, $cm, $cr)"/>
             </xsl:if>
             <!--<xsl:apply-templates select="/xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="makevar"/>

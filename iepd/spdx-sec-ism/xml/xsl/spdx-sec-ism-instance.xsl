@@ -27,7 +27,7 @@
         <xsl:variable name="elname" select="//xs:schema/xs:element[@type = $namevar]/@name"/>
         <xsl:variable name="typevar" select="@type"/>
         <SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xmlns:ism="urn:us:gov:ic:ism" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0 file:./../xsd/spdx-sec-ism-iep.xsd">
+            xmlns:ism="urn:us:gov:ic:ism" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0  https://spdx-xml.specchain.org/spdx-sec-ism/file/iepxsd">
                 <xsl:attribute name="ism:classification">
                     <xsl:text>U</xsl:text>
                 </xsl:attribute>

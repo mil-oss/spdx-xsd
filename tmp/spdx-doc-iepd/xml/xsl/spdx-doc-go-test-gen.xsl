@@ -19,6 +19,7 @@
         <xsl:variable name="roottype" select="//xs:schema/xs:annotation/xs:appinfo/*/@type"/>
         <xsl:call-template name="teststart">
             <xsl:with-param name="appname" select="$rootname"/>
+            <xsl:with-param name="pckgname" select="'spdxdoc'"/>
         </xsl:call-template>
         <xsl:variable name="b" select="//xs:schema/xs:complexType[@name = $roottype]//@base"/>
         <xsl:apply-templates select="//xs:schema/xs:complexType[@name = $b]//xs:element[@ref]" mode="maketest">

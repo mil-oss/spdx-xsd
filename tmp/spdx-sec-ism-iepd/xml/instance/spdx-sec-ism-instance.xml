@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ism="urn:us:gov:ic:ism" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0 file:./../xsd/spdx-sec-ism-iep.xsd" ism:classification="U">
+<SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ism="urn:us:gov:ic:ism" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0  https://spdx-xml.specchain.org/spdx-sec-ism/file/iepxsd" ism:classification="U">
   <SoftwareInformation ism:classification="U">
     <ProductTitleText ism:classification="U">Line text max length 48 characters.</ProductTitleText>
     <SoftwareNameText ism:classification="U">Line text max length 48 characters.</SoftwareNameText>
