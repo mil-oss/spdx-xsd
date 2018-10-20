@@ -38,7 +38,7 @@ var (
 
 // InitXSDProv ...
 func InitXSDProv(config string) {
-	cfg := GetConfig(config)
+	cfg := ReadConfig(config)
 	for r := range cfg.Resources {
 		resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
 		sources[cfg.Resources[r].Name] = cfg.Resources[r].Src

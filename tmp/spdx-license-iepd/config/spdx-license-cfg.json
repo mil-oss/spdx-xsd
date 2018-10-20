@@ -1,5 +1,6 @@
 {
     "project": "spdx-license",
+    "title": "SPDX Licence XML",
     "configfile": "spdx-license-cfg.json",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
     "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-license/xml/instance/spdx-license-test-data.xml",
@@ -11,142 +12,191 @@
     "resources": [
         {
             "name": "config",
+            "filename": "spdx-license-cfg.json",
             "src": "config/spdx-license-cfg.json",
             "path": "config/spdx-license-cfg.json",
             "description": "Configuration Information"
         },
         {
             "name": "refxsd",
+            "filename": "spdx-xml-ref.xsd",
             "src": "xml/xsd/spdx-xml-ref.xsd",
             "path": "xml/xsd/spdx-xml-ref.xsd",
             "description": "NIEM Conformant Reference XML Schema for SPDX data"
         },
         {
+            "name": "reftestdataxml",
+            "filename": "spdx-test-data.xml",
+            "src": "xml/instance/spdx-test-data.xml",
+            "path": "xml/instance/spdx-test-data.xml",
+            "description": "Test values for all SPDX data items"
+        },
+        {
             "name": "iepxsd",
+            "filename": "spdx-license-iep.xsd",
             "src": "iepd/spdx-license/xml/xsd/spdx-license-iep.xsd",
             "path": "xml/xsd/spdx-license-iep.xsd",
             "description": "XML Schema for SPDX License information exchange"
         },
         {
             "name": "xmlschemaxsd",
+            "filename": "XMLSchema.xsd",
             "src": "xml/xsd/ext/w3c/XMLSchema.xsd",
-            "path": "xml/xsd/ext/w3c/XMLSchema.xsd"
+            "path": "xml/xsd/ext/w3c/XMLSchema.xsd",
+            "description": "W3C XML Schema for XSD validation"
         },
         {
             "name": "xsltxsd",
+            "filename": "xslt.xsd",
             "src": "xml/xsd/ext/w3c/xslt.xsd",
-            "path": "xml/xsd/ext/w3c/xslt.xsd"
+            "path": "xml/xsd/ext/w3c/xslt.xsd",
+            "description": "W3C XSLT Schema for XSLT validation"
         },
         {
             "name": "iepxsdxsl",
             "src": "iepd/spdx-license/xml/xsl/spdx-license-iep.xsl",
-            "path": "xml/xsl/spdx-license-iep.xsl"
+            "path": "xml/xsl/spdx-license-iep.xsl",
+            "description": "XSLT to generate the SPDX Licence Implementation Schema"
         },
         {
             "name": "instancexsl",
             "src": "iepd/spdx-license/xml/xsl/spdx-license-instance.xsl",
-            "path": "xml/xsl/spdx-license-instance.xsl"
+            "path": "xml/xsl/spdx-license-instance.xsl",
+            "description": "XSLT to generate a SPDX Licence instance using test values"
         },
         {
             "name": "gogenxsdxsl",
+            "filename": "spdx-license-go-gen.xsl",
             "src": "iepd/spdx-license/xml/xsl/spdx-license-go-gen.xsl",
-            "path": "xml/xsl/spdx-license-go-gen.xsl"
+            "path": "xml/xsl/spdx-license-go-gen.xsl",
+            "description": "XSLT to generate a GOLANG Struct for SPDX License information"
         },
         {
             "name": "gotestgenxsl",
+            "filename": "spdx-license-go-test-gen.xsl",
             "src": "iepd/spdx-license/xml/xsl/spdx-license-go-test-gen.xsl",
-            "path": "xml/xsl/spdx-license-go-test-gen.xsl"
+            "path": "xml/xsl/spdx-license-go-test-gen.xsl",
+            "description": "XSLT to generate GOLANG Unit Tests for SPDX License information using test data"
         },
         {
             "name": "testdataxml",
+            "filename":"spdx-license-test-data.xml",
             "src": "iepd/spdx-license/xml/instance/spdx-license-test-data",
-            "path": "xml/instance/spdx-license-test-data.xml"
+            "path": "xml/instance/spdx-license-test-data.xml",
+            "description": "Test data for SPDX License information"
         },
         {
             "name": "instancexml",
+            "filename": "spdx-license-instance.xml",
             "src": "iepd/spdx-license/xml/instance/spdx-license-instance.xml",
-            "path": "xml/instance/spdx-license-instance.xml"
+            "path": "xml/instance/spdx-license-instance.xml",
+            "description": "SPDX License XML Instance generated using XSLT"
         },
         {
             "name": "instancegolangxml",
-            "src": "iepd/spdx-license/xml/instance/test-instance-golang.xml",
-            "path": "xml/instance/spdx-license-instance-golang.xml"
+            "filename": "spdx-license-instance-golang.xml",
+            "src": "iepd/spdx-license/xml/instance/spdx-license-instance-golang.xml",
+            "path": "xml/instance/spdx-license-instance-golang.xml",
+            "description": "SPDX License XML Instance created by marshalling XML instance using GOLANG struct"
         },
         {
             "name": "structgo",
+            "filename": "spdx-license-struct.go",
             "src": "src/spdx-license/spdx-license-struct.go",
             "path": "src/spdx-license/spdx-license-struct.go",
             "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
             },
         {
             "name": "structtestgo",
+            "filename": "spdx-license-struct_test.go",
             "src": "src/spdx-license/spdx-license-struct_test.go",
             "path": "src/spdx-license/spdx-license-struct_test.go",
             "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
         },
         {
             "name": "maingo",
-            "src": "src/spdx-license/spdx-lic.go",
-            "path": "src/spdx-license/spdx-lic.go",
-            "description": "Golang start class"
+            "filename": "spdx-lic.go",
+            "src": "src/spdx-license/spdx-license.go",
+            "path": "src/spdx-license/spdx-license.go",
+            "description": "GOLANG code to read and write XML"
         },
         {
             "name": "iepxsdjson",
+            "filename": "spdx-license-iep-xsd.json",
             "src": "iepd/spdx-license/json/spdx-license-iep-xsd.json",
             "path": "json/spdx-license-iep-xsd.json",
             "description": "JSON Representation of SPDX License Schema"
         },
         {
             "name": "refxsdjson",
+            "filename": "spdx-xml-ref-xsd.json",
             "src": "iepd/spdx-license/json/spdx-xml-ref-xsd.json",
             "path": "json/spdx-xml-ref-xsd.json",
             "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {
             "name": "instancejson",
+            "filename": "spdx-license-instance.json",
             "src": "iepd/spdx-license/json/spdx-license-instance.json",
             "path": "json/spdx-license-instance.json",
             "description": "JSON Representation of SPDX License XML Test Instance"
         },
         {
             "name": "provenancereportjson",
-            "src": "iepd/spdx-license/json/provenance-report.json",
-            "path": "json/spdx-license-provenance-report.json"
+            "filename": "spdx-license-provenance-report.json",
+            "src": "iepd/spdx-license/json/spdx-license-provenance-report.json",
+            "path": "json/spdx-license-provenance-report.json",
+            "description": "Report on all generation, verification and validation events"
         },
         {
             "name": "resourcesjson",
-            "src": "iepd/spdx-license/json/resources.json",
-            "path": "json/spdx-license-resources.json"
+            "filename": "spdx-license-resources.json",
+            "src": "iepd/spdx-license/json/spdx-license-resources.json",
+            "path": "json/spdx-license-resources.json",
+            "description": "List of resources uses to Implement SPDX License XML"
         },
         {
             "name": "iepxsl",
+            "filename": "iep.xsl",
             "src": "xml/xsl/iep.xsl",
-            "path": "xml/xsl/common/iep.xsl"
+            "path": "xml/xsl/common/iep.xsl",
+            "description": "Common XSLT utility for generating Implementaion XSDs from Reference XSDs"
         },
         {
             "name": "xmlinstancexsl",
+            "filename": "xml-instance.xsl",
             "src": "xml/xsl/xml-instance.xsl",
-            "path": "xml/xsl/common/xml-instance.xsl"
+            "path": "xml/xsl/common/xml-instance.xsl",
+            "description": "Common XSLT utility for generating XML Instances from Implemtation XSDs using test data"
         },
         {
             "name": "gogenxsl",
+            "filename": "go-gen.xsl",
             "src": "xml/xsl/go-gen.xsl",
-            "path": "xml/xsl/common/go-gen.xsl"
+            "path": "xml/xsl/common/go-gen.xsl",
+            "description": "Common XSLT utility for generating GOLANG structs and Unit Tests from Implemtation XSDs using test data"
         },
         {
             "name": "xsdjsonxsl",
+            "filename": "xsd-json.xsl",
             "src": "xml/xsl/xsd-json.xsl",
-            "path": "xml/xsl/common/xsd-json.xsl"
+            "path": "xml/xsl/common/xsd-json.xsl",
+            "description": "Common XSLT utility for generating a JSON representation of an XML Schema"
+       
         },
         {
             "name": "xmljsonxsl",
+            "filename": "xml-json.xsl",
             "src": "xml/xsl/xml-json.xsl",
-            "path": "xml/xsl/common/xml-json.xsl"
+            "path": "xml/xsl/common/xml-json.xsl",
+            "description": "Common XSLT utility for generating a JSON representation of an XML Instance"
         },
         {
             "name": "zipiepd",
+            "filename": "spdx-license-iepd.zip",
             "src": "",
-            "path": "spdx-license-iepd.zip"
+            "path": "spdx-license-iepd.zip",
+            "description": "Zipped archive of all Resources"
         }
     ],
     "directories": [

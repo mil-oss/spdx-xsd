@@ -116,8 +116,8 @@
         {
             "name": "maingo",
             "filename": "spdx-lic.go",
-            "src": "src/spdx-license/spdx-lic.go",
-            "path": "src/spdx-license/spdx-lic.go",
+            "src": "src/spdx-license/spdx-license.go",
+            "path": "src/spdx-license/spdx-license.go",
             "description": "GOLANG code to read and write XML"
         },
         {

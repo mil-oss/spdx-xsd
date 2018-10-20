@@ -11,69 +11,100 @@
     "resources": [
         {
             "name": "config",
+            "filename": "spdx-security-cfg.json",
             "src": "config/spdx-security-cfg.json",
             "path": "config/spdx-security-cfg.json",
             "description": "Configuration Information"
         },
         {
             "name": "refxsd",
+            "filename": "spdx-xml-ref.xsd",
             "src": "xml/xsd/spdx-xml-ref.xsd",
             "path": "xml/xsd/spdx-xml-ref.xsd",
             "description": "NIEM Conformant Reference XML Schema for SPDX data"
         },
         {
+            "name": "reftestdataxml",
+            "filename": "spdx-test-data.xml",
+            "src": "xml/instance/spdx-test-data.xml",
+            "path": "xml/instance/spdx-test-data.xml",
+            "description": "Test values for all SPDX data items"
+        },
+        {
             "name": "iepxsd",
+            "filename": "spdx-security-iep.xsd",
             "src": "iepd/spdx-security/xml/xsd/spdx-security-iep.xsd",
             "path": "xml/xsd/spdx-security-iep.xsd",
             "description": "XML Schema for SPDX Software Evaluation Data information exchange"
         },
         {
             "name": "xmlschemaxsd",
+            "filename": "XMLSchema.xsd",
             "src": "xml/xsd/ext/w3c/XMLSchema.xsd",
-            "path": "xml/xsd/ext/w3c/XMLSchema.xsd"
+            "path": "xml/xsd/ext/w3c/XMLSchema.xsd",
+            "description": "W3C XML Schema for XSD validation"
         },
         {
             "name": "xsltxsd",
+            "filename": "xslt.xsd",
             "src": "xml/xsd/ext/w3c/xslt.xsd",
-            "path": "xml/xsd/ext/w3c/xslt.xsd"
+            "path": "xml/xsd/ext/w3c/xslt.xsd",
+            "description": "W3C XSLT Schema for XSLT validation"
         },
         {
             "name": "iepxsdxsl",
             "src": "iepd/spdx-security/xml/xsl/spdx-security-iep.xsl",
-            "path": "xml/xsl/spdx-security-iep.xsl"
+            "path": "xml/xsl/spdx-security-iep.xsl",
+            "description": "XSLT to generate the SPDX Security Implementation Schema"
+        
         },
         {
             "name": "instancexsl",
             "src": "iepd/spdx-security/xml/xsl/spdx-security-instance.xsl",
-            "path": "xml/xsl/spdx-security-instance.xsl"
+            "path": "xml/xsl/spdx-security-instance.xsl",
+            "description": "XSLT to generate a SPDX Security instance using test values"
+        
         },
         {
             "name": "gogenxsdxsl",
+            "filename": "spdx-security-go-gen.xsl",
             "src": "iepd/spdx-security/xml/xsl/spdx-security-go-gen.xsl",
-            "path": "xml/xsl/spdx-security-go-gen.xsl"
+            "path": "xml/xsl/spdx-security-go-gen.xsl",
+            "description": "XSLT to generate a GOLANG Struct for SPDX Security information"
+        
         },
         {
             "name": "gotestgenxsl",
+            "filename": "spdx-security-go-test-gen.xsl",
             "src": "iepd/spdx-security/xml/xsl/spdx-security-go-test-gen.xsl",
-            "path": "xml/xsl/spdx-security-go-test-gen.xsl"
+            "path": "xml/xsl/spdx-security-go-test-gen.xsl",
+            "description": "XSLT to generate GOLANG Unit Tests for SPDX Security information using test data"
+        
         },
         {
             "name": "testdataxml",
+            "filename":"spdx-security-test-data.xml",
             "src": "iepd/spdx-security/xml/instance/spdx-security-test-data.xml",
-            "path": "xml/instance/spdx-security-test-data.xml"
+            "path": "xml/instance/spdx-security-test-data.xml",
+            "description": "Test data for SPDX Security information"
         },
         {
             "name": "instancexml",
+            "filename": "spdx-security-instance.xml",
             "src": "iepd/spdx-security/xml/instance/spdx-security-instance.xml",
-            "path": "xml/instance/spdx-security-instance.xml"
+            "path": "xml/instance/spdx-security-instance.xml",
+            "description": "SPDX Security XML Instance generated using XSLT"
         },
         {
             "name": "instancegolangxml",
-            "src": "iepd/spdx-security/xml/instance/test-instance-golang.xml",
-            "path": "xml/instance/spdx-security-instance-golang.xml"
+            "filename": "spdx-security-instance-golang.xml",
+            "src": "iepd/spdx-security/xml/instance/spdx-security-instance-golang.xml",
+            "path": "xml/instance/spdx-security-instance-golang.xml",
+            "description": "SPDX License XML Instance created by marshalling XML instance using GOLANG struct"
         },
         {
             "name": "structgo",
+            "filename": "spdx-security-struct.go",
             "src": "src/spdx-security/spdx-security-struct.go",
             "path": "src/spdx-security/spdx-security-struct.go",
             "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
@@ -81,6 +112,7 @@
         },
         {
             "name": "structtestgo",
+            "filename": "spdx-security-struct_test.go",
             "src": "src/spdx-security/spdx-security-struct_test.go",
             "path": "src/spdx-security/spdx-security-struct_test.go",
             "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
@@ -88,67 +120,86 @@
         },
         {
             "name": "maingo",
+            "filename": "spdx-security.go",
             "src": "src/spdx-security/spdx-security.go",
             "path": "src/spdx-security/spdx-security.go",
             "description": "Golang start class"
         },
         {
             "name": "iepxsdjson",
+            "filename": "spdx-security-iep-xsd.json",
             "src": "iepd/spdx-security/json/spdx-security-iep-xsd.json",
             "path": "json/spdx-security-iep-xsd.json",
-            "description": "JSON Representation of SPDX Document Schema"
+            "description": "JSON Representation of SPDX Security Schema"
         },
         {
             "name": "refxsdjson",
+            "filename": "spdx-xml-ref-xsd.json",
             "src": "iepd/spdx-security/json/spdx-xml-ref-xsd.json",
             "path": "json/spdx-security-ref-xsd.json",
             "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {
             "name": "instancejson",
+            "filename": "spdx-security-instance.json",
             "src": "iepd/spdx-security/json/spdx-security-instance.json",
             "path": "json/spdx-security-instance.json",
             "description": "JSON Representation of SPDX Security XML Test Instance"
         },
         {
             "name": "provenancereportjson",
-            "src": "iepd/spdx-security/json/provenance-report.json",
+            "filename": "spdx-security-provenance-report.json",
+            "src": "iepd/spdx-security/json/spdx-security-provenance-report.json",
             "path": "json/spdx-security-provenance-report.json"
         },
         {
             "name": "resourcesjson",
-            "src": "iepd/spdx-security/json/resources.json",
+            "filename": "spdx-security-resources.json",
+            "src": "iepd/spdx-security/json/spdx-security-resources.json",
             "path": "json/spdx-security-resources.json"
         },
         {
             "name": "iepxsl",
+            "filename": "iep.xsl",
             "src": "xml/xsl/iep.xsl",
-            "path": "xml/xsl/common/iep.xsl"
+            "path": "xml/xsl/common/iep.xsl",
+            "description": "Common XSLT utility for generating Implementaion XSDs from Reference XSDs"
         },
         {
             "name": "xmlinstancexsl",
+            "filename": "xml-instance.xsl",
             "src": "xml/xsl/xml-instance.xsl",
-            "path": "xml/xsl/common/xml-instance.xsl"
+            "path": "xml/xsl/common/xml-instance.xsl",
+            "description": "Common XSLT utility for generating XML Instances from Implemtation XSDs using test data"
         },
         {
             "name": "gogenxsl",
+            "filename": "go-gen.xsl",
             "src": "xml/xsl/go-gen.xsl",
-            "path": "xml/xsl/common/go-gen.xsl"
+            "path": "xml/xsl/common/go-gen.xsl",
+            "description": "Common XSLT utility for generating GOLANG structs and Unit Tests from Implemtation XSDs using test data"
         },
         {
             "name": "xsdjsonxsl",
+            "filename": "xsd-json.xsl",
             "src": "xml/xsl/xsd-json.xsl",
-            "path": "xml/xsl/common/xsd-json.xsl"
+            "path": "xml/xsl/common/xsd-json.xsl",
+            "description": "Common XSLT utility for generating a JSON representation of an XML Schema"
+       
         },
         {
             "name": "xmljsonxsl",
+            "filename": "xml-json.xsl",
             "src": "xml/xsl/xml-json.xsl",
-            "path": "xml/xsl/common/xml-json.xsl"
+            "path": "xml/xsl/common/xml-json.xsl",
+            "description": "Common XSLT utility for generating a JSON representation of an XML Instance"
         },
         {
             "name": "zipiepd",
+            "filename": "spdx-security-iepd.zip",
             "src": "",
-            "path": "spdx-security-iepd.zip"
+            "path": "spdx-security-iepd.zip",
+            "description": "Zipped archive of all Resources"
         }
     ],
     "directories": [

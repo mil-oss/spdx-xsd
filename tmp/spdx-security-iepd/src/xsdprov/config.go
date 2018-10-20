@@ -26,14 +26,15 @@ type Cfg struct {
 // Resource ...
 type Resource struct {
 	Name        string `json:"name,omitempty"`
+	FileName    string `json:"filename,omitempty"`
 	Src         string `json:"src,omitempty"`
 	SrcURL      string `json:"srcurl,omitempty"`
 	Path        string `json:"path,omitempty"`
 	Description string `json:"description,omitempty"`
 }
 
-//GetConfig ...
-func GetConfig(cfgpath string) Cfg {
+//ReadConfig ...
+func ReadConfig(cfgpath string) Cfg {
 	jf, err := ioutil.ReadFile(cfgpath)
 	if err != nil {
 		panic(err)

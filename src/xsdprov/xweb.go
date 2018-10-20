@@ -34,6 +34,7 @@ var (
 	configdata    []Cfg
 	appDatastruct interface{}
 	hostCfg       Cfg
+	cfgs          []Cfg
 	requestID     string
 )
 
@@ -59,6 +60,7 @@ func StartWeb(hcfg Cfg, appcfg []Cfg) {
 	router.Handle("/transform", Transform())
 	router.Handle("/verify", DocVerify())
 	router.Handle("/rebuild", Rebuild())
+	router.Handle("/rebuildall", RebuildAll())
 	flag.StringVar(&listenAddr, "listen-addr", port, "server listen address")
 	flag.Parse()
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
@@ -385,6 +387,26 @@ func Rebuild() http.Handler {
 			http.Redirect(w, r, "/", 301)
 			InitXSDProv(confgdata.Configfile)
 			BuildIep(appDatastruct)
+			return
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+
+// RebuildAll ...
+func RebuildAll() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		setHeader(w)
+		cfgs = []Cfg{}
+		if atomic.LoadInt32(&healthy) == 1 {
+			for i := range hostCfg.Implementations {
+				log.Println(hostCfg.Implementations[i].Name)
+				var c = ReadConfig(hostCfg.Implementations[i].Src)
+				InitXSDProv(c.Configfile)
+				cfgs = append(cfgs, c)
+				BuildIep(appDatastruct)
+			}
+			StartWeb(hostCfg, cfgs)
 			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
