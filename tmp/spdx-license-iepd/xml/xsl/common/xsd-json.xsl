@@ -106,7 +106,7 @@
             <xsl:value-of select="$cm"/>
             <xsl:apply-templates select="xs:restriction/@base" mode="tojson"/>
         </xsl:if>
-        <!--<xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>-->
+        <xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>
         <xsl:apply-templates select="xs:simpleContent/xs:extension/@base" mode="tojson"/>
         <xsl:apply-templates select="xs:simpleContent/xs:restriction/@base" mode="tojson"/>
         <xsl:if test="./*">
@@ -214,7 +214,8 @@
     <xsl:template match="xs:appinfo" mode="tojson"/>
 
     <xsl:template match="text()"/>
-    <!--<xsl:template match="xs:appinfo" mode="tojson">
+    
+   <xsl:template match="xs:appinfo" mode="tojson">
         <xsl:value-of select="concat($cm, $q, 'appinfo', $q, $c, $lb)"/>
         <xsl:variable name="p" select="position()"/>
         <xsl:for-each select="*">
@@ -343,11 +344,8 @@
             </xsl:for-each>
         </xsl:for-each>
         <xsl:value-of select="$rb"/>
-        <xsl:if test="parent::xs:annotation/following-sibling::*[not(@base)]">
-            <xsl:value-of select="$cm"/>
-        </xsl:if>
     </xsl:template>
--->
+
     <!--REGEX ESCAPING FOR JSON-->
     <!-- Escape the backslash (\) before everything else. -->
     <xsl:template name="escape-bs-string">
