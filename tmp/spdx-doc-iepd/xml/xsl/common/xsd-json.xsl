@@ -50,6 +50,7 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:value-of select="concat($q, 'documentation', $q, $c, $q, normalize-space($doc), $q)"/>
+        <xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>
         <xsl:choose>
             <xsl:when test="xs:restriction/xs:enumeration">
                 <xsl:value-of select="$cm"/>
@@ -60,14 +61,15 @@
                     <xsl:if test="@dataitem">
                         <xsl:value-of select="concat($cm, $q, 'dataitem', $q, $c, $q, @dataitem, $q)"/>
                     </xsl:if>
-                    <xsl:if test="xs:annotation/xs:documentation">
+
                         <xsl:variable name="edoc">
                             <xsl:call-template name="escape-bs-string">
                                 <xsl:with-param name="s" select="xs:annotation/xs:documentation"/>
                             </xsl:call-template>
                         </xsl:variable>
                         <xsl:value-of select="concat($cm, $q, 'documentation', $q, $c, $q, normalize-space($edoc), $q)"/>
-                    </xsl:if>
+                    
+                    <xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>
                     <xsl:value-of select="$rb"/>
                     <xsl:if test="following-sibling::xs:enumeration">
                         <xsl:value-of select="$cm"/>
@@ -102,11 +104,11 @@
             </xsl:call-template>
         </xsl:variable>
         <xsl:value-of select="concat($q, 'documentation', $q, $c, $q, normalize-space($doc), $q)"/>
+        <xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>
         <xsl:if test="xs:restriction/@base">
             <xsl:value-of select="$cm"/>
             <xsl:apply-templates select="xs:restriction/@base" mode="tojson"/>
         </xsl:if>
-        <xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>
         <xsl:apply-templates select="xs:simpleContent/xs:extension/@base" mode="tojson"/>
         <xsl:apply-templates select="xs:simpleContent/xs:restriction/@base" mode="tojson"/>
         <xsl:if test="./*">
@@ -151,9 +153,7 @@
             </xsl:variable>
             <xsl:value-of select="concat($q, 'documentation', $q, $c, $q, normalize-space($doc), $q)"/>
         </xsl:if>
-        <xsl:if test="xs:annotation/xs:appinfo">
-            <xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>
-        </xsl:if>
+        <xsl:apply-templates select="xs:annotation/xs:appinfo" mode="tojson"/>
         <xsl:value-of select="$rb"/>
         <xsl:if test="following-sibling::xs:*">
             <xsl:value-of select="$cm"/>
@@ -210,8 +210,6 @@
             <xsl:value-of select="$cm"/>
         </xsl:if>
     </xsl:template>
-
-    <xsl:template match="xs:appinfo" mode="tojson"/>
 
     <xsl:template match="text()"/>
     
