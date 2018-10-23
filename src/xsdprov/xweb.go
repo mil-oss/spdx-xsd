@@ -48,10 +48,10 @@ func StartWeb(hcfg Cfg, appcfg []Cfg) {
 
 	log.Println("Port .. " + port)
 	router := http.NewServeMux()
+	router.Handle("/"+hcfg.Project+"/file/", GetResource(hcfg))
 	for c := range appcfg {
 		router.Handle("/"+appcfg[c].Project+"/", AppIndex(appcfg[c]))
 		router.Handle("/"+appcfg[c].Project+"/file/", GetResource(appcfg[c]))
-		router.Handle("/"+appcfg[c].Project+"/iepd/", GetResource(appcfg[c]))
 		router.Handle("/"+appcfg[c].Project+"/dload", Dload(appcfg[c]))
 	}
 	router.Handle("/", Index())
@@ -118,6 +118,11 @@ func Index() http.Handler {
 		fmt.Fprintln(w, "<hr>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div><b>SPDX Information Exchange Package Documentation (IEPD)</b></div>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-ref-xsd</td><td><a href='/spdx-xml/file/refxsd'>SPDX REFERENCE XSD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-ref-xsd</td><td><a href='/spdx-xml/file/reftestdataxml'>SPDX Reference Test Data</a></td></tr>")
+		fmt.Fprintln(w, "</table>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<table>")
 		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-doc</td><td><a href='/spdx-doc/'>SPDX Document IEPD</a></td></tr>")

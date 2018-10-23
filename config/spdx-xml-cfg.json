@@ -1,7 +1,7 @@
 {
-    "project":"spdx",
+    "project":"spdx-xml",
     "title":"XML Schema Implementations of SPDX",
-    "host":"https://spdx-xml.specchain.org",
+    "host":"https://spdx-xml.specchain.org/",
     "port":":8080",
     "configfile": "config/spdx-xml-cfg.json",
     "configurl": "https://spdx-xml.specchain.org/config",
@@ -14,6 +14,13 @@
             "src": "xml/xsd/spdx-xml-ref.xsd",
             "path": "xml/xsd/spdx-xml-ref.xsd",
             "description": "NIEM Conformant Reference XML Schema for SPDX data"
+        },
+        {
+            "name": "refxsdjson",
+            "filename": "spdx-xml-ref-xsd.json",
+            "src": "json/spdx-xml-ref-xsd.json",
+            "path": "json/spdx-xml-ref-xsd.json",
+            "description": "JSON Representation of Reference XML Schema for SPDX data"
         },
         {
             "name": "reftestdataxml",
