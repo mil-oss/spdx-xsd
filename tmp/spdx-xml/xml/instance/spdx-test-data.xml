@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestData>
+    <AlgorithmCodeSimpleType>
+        <True1 valid="true">ChecksumAlgorithmMd5</True1>
+        <True2 valid="true">ChecksumAlgorithmSha256</True2>
+        <False1 valid="false">Crypto</False1>
+    </AlgorithmCodeSimpleType>
+    <AnnotationTypeCodeSimpleType>
+        <True1 valid="true">AnnotationTypeOther</True1>
+        <True2 valid="true">AnnotationTypeReview</True2>
+        <False1 valid="false">Stuff</False1>
+    </AnnotationTypeCodeSimpleType>
+    <APINameSimpleType>
+        <True1 valid="true">APIname</True1>
+        <False1 valid="false">APIname.v0</False1>
+    </APINameSimpleType>
+    <AuthoritativeDigitalSignatureIndicatorSimpleType>
+        <True1 valid="true">true</True1>
+        <False1 valid="true">false</False1>
+        <True2 valid="true">1</True2>
+        <True3 valid="true">0</True3>
+        <False2 valid="false">yes</False2>
+        <False3 valid="false">no</False3>
+    </AuthoritativeDigitalSignatureIndicatorSimpleType>
+    <BuildMetaSimpleType>
+        <True1 valid="true">+exp.sha.5114f85</True1>
+        <False1 valid="false">001</False1>
+    </BuildMetaSimpleType>
+    <ComputerFileNameSimpleType>
+        <True1 valid="true">filename</True1>
+        <Test2 valid="false">file.name</Test2>
+        <Test3 valid="false">10</Test3>
+    </ComputerFileNameSimpleType>
+    <ComputerFileExtensionSimpleType>
+        <True1 valid="true">.xml</True1>
+        <Test2 valid="false">xsd</Test2>
+        <Test3 valid="false">10</Test3>
+    </ComputerFileExtensionSimpleType>
+    <CopyrightTextCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="false">Stuff</False1>
+    </CopyrightTextCodeSimpleType>
+    <ChecksumValue>
+        <True1 valid="true">6865726F6E6779616E672E636F6D</True1>
+        <True2 valid="true">41</True2>
+        <False1 valid="false">123</False1>
+    </ChecksumValue>
+    <CommentTextType>
+        <True1 valid="true">Test string one</True1>
+        <True2 valid="true">Test string two</True2>
+        <False1 valid="false">false</False1>
+    </CommentTextType>
+    <DataCountSimpleType>
+        <True1 valid="true">100</True1>
+        <Test2 valid="false">10000001</Test2>
+        <Test3 valid="false">-10</Test3>
+    </DataCountSimpleType>
+    <DateTimeSimpleType>
+        <True1 valid="true">2018-02-15T09:00:00</True1>
+        <False1 valid="false">2018-13-15T09:00:00</False1>
+        <Test3 valid="false">2018-02-15T25:00:00</Test3>
+    </DateTimeSimpleType>
+    <DownloadLocationCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="false">Stuff</False1>
+    </DownloadLocationCodeSimpleType>
+    <EndOfLifeIndicatorSimpleType>
+        <True1 valid="true">true</True1>
+        <True2 valid="true">1</True2>
+        <True3 valid="true">0</True3>
+        <False1 valid="true">false</False1>
+        <False2 valid="false">yes</False2>
+        <False3 valid="false">no</False3>
+    </EndOfLifeIndicatorSimpleType>
+    <FileExtensionSimpleType>
+        <True1 valid="true">.ext</True1>
+        <False1 valid="false">badext</False1>
+    </FileExtensionSimpleType>
+    <FileNameSimpleType>
+        <True1 valid="true">FileNameNoExtension</True1>
+        <False1 valid="false">FileNameWithExtension.ext</False1>
+    </FileNameSimpleType>
+    <FileSimpleType>
+        <True1 valid="true">FileNameWithExtension.ext</True1>
+        <False1 valid="false">FileNameNoExtension</False1>
+    </FileSimpleType>
+    <FileTypeCodeSimpleType>
+        <True1 valid="true">Application</True1>
+        <True2 valid="true">Binary</True2>
+        <False1 valid="false">Info</False1>
+    </FileTypeCodeSimpleType>
+    <FloatValueSimpleType>
+        <True1 valid="true">123.456</True1>
+        <True2 valid="true">INF</True2>
+        <True3 valid="true">NaN</True3>
+        <False1 valid="false">1234.4E 56</False1>
+        <False2 valid="false">NAN</False2>
+    </FloatValueSimpleType>
+    <LicenseCategoryCodeSimpleType>
+        <True1 valid="true">FOSS</True1>
+        <True1 valid="true">COTS</True1>
+        <True1 valid="true">GOSS</True1>
+        <False1 valid="false">OSS</False1>
+    </LicenseCategoryCodeSimpleType>
+    <LicenseCodeSimpleType>
+        <True1 valid="true">LGPL</True1>
+        <False1 valid="false">XGPL</False1>
+    </LicenseCodeSimpleType>
+    <LicenseConcludedCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="true">Stuff</False1>
+    </LicenseConcludedCodeSimpleType>
+    <LicenseDeclaredCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="true">Stuff</False1>
+    </LicenseDeclaredCodeSimpleType>
+    <LicenseInfoFromFilesCodeSimpleType>
+        <True1 valid="true">Noassertion</True1>
+        <True2 valid="true">None</True2>
+        <False1 valid="true">Stuff</False1>
+    </LicenseInfoFromFilesCodeSimpleType>
+    <LineTextSimpleType>
+        <True1 valid="true">Line text max length 48 characters.</True1>
+        <False1 valid="false">Line text exceeding maximum length of 48 characters.</False1>
+        <False2 valid="false">Line text Illegal Characters \&amp;, \&lt;, \&gt;.</False2>
+    </LineTextSimpleType>
+    <ParagraphTextSimpleType>
+        <True1 valid="true">Paragraph text max length 512 characters.</True1>
+        <False1 valid="false">Paragraph text exceeding maximum length of 512 characters. Paragraph text exceeding maximum length of 512 characters. Paragraph text exceeding maximum length of 512
+            characters. Paragraph text exceeding maximum length of 512 characters. Paragraph text exceeding maximum length of 512 characters. Paragraph text exceeding maximum length of 512
+            characters. Paragraph text exceeding maximum length of 512 characters. Paragraph text exceeding maximum length of 512 characters. Paragraph text exceeding maximum length of 512
+            characters.</False1>
+        <False2 valid="false">Paragraph text Illegal Characters ===== </False2>
+    </ParagraphTextSimpleType>
+    <PreReleaseVersionSimpleType>
+        <True1 valid="true">-alpha</True1>
+        <False1 valid="false">beta</False1>
+    </PreReleaseVersionSimpleType>
+    <PythonDevelopmentVersionSimpleType>
+        <True1 valid="true">0</True1>
+        <False1 valid="false">beta.0.1</False1>
+    </PythonDevelopmentVersionSimpleType>
+    <PythonEpochVersionSimpleType>
+        <True1 valid="true">1</True1>
+        <False1 valid="false">beta.0.1</False1>
+    </PythonEpochVersionSimpleType>
+    <PythonPostReleaseVersionSimpleType>
+        <True1 valid="true">2</True1>
+        <False1 valid="false">beta.0.1</False1>
+    </PythonPostReleaseVersionSimpleType>
+    <PythonPreReleaseVersionSimpleType>
+        <True1 valid="true">3</True1>
+        <False1 valid="false">beta.0.1</False1>
+    </PythonPreReleaseVersionSimpleType>
+    <PythonReleaseVersionSimpleType>
+        <True1 valid="true">0</True1>
+        <False1 valid="false">beta.0.1</False1>
+    </PythonReleaseVersionSimpleType>
+    <PythonSemanticVersionIndicatorSimpleType>
+        <True1 valid="true">true</True1>
+        <True1 valid="true">false</True1>
+        <True1 valid="true">1</True1>
+        <True1 valid="true">0</True1>
+        <False1 valid="false">yes</False1>
+        <False2 valid="false">no</False2>
+    </PythonSemanticVersionIndicatorSimpleType>
+    <PythonVersionTextSimpleType>
+        <True1 valid="true">1.0.3.2.3</True1>
+        <False1 valid="false">beta.0.1</False1>
+    </PythonVersionTextSimpleType> 
+    <ReferenceCategoryCodeSimpleType>
+        <True1 valid="true">PackageManager</True1>
+        <True2 valid="true">Security</True2>
+        <False1 valid="false">Dewey</False1>
+    </ReferenceCategoryCodeSimpleType>
+    <RelationshipTypeCodeSimpleType>
+        <True1 valid="true">RelationshipTypeAmendment</True1>
+        <True2 valid="true">RelationshipTypeCopyOf</True2>
+        <False1 valid="false">Underneath</False1>
+    </RelationshipTypeCodeSimpleType>
+    <RiskCodeSimpleType>
+        <True1 valid="true">medium</True1>
+        <False1 valid="false">red</False1>
+    </RiskCodeSimpleType>
+    <SemanticVersionIndicatorSimpleType>
+        <True1 valid="true">true</True1>
+        <True1 valid="true">false</True1>
+        <True1 valid="true">1</True1>
+        <True1 valid="true">0</True1>
+        <False1 valid="false">yes</False1>
+        <False2 valid="false">no</False2>
+    </SemanticVersionIndicatorSimpleType>
+    <SemanticVersionTextSimpleType>
+        <True1 valid="true">1.0.0-alpha.beta</True1>
+        <False1 valid="false">012</False1>
+    </SemanticVersionTextSimpleType>
+    <Sha1TextSimpleType>
+        <True1 valid="true">0c6e2aca93404814736d5f3df212b1ac8cdce6a0</True1>
+        <False1 valid="false">0c6e2aca93404814736d5ff212b1ac8cdce6a0</False1>
+    </Sha1TextSimpleType>
+    <Sha256TextSimpleType>
+        <True1 valid="true">49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47C</True1>
+        <False1 valid="false">49FE985C79ACECDAC8AC147A88E872FF4E134650367A9D7FC1EFCBAD8C28B47CXXX</False1>
+        <False2 valid="false">49FE985C79ACECDAC8AC147A88E72FF4E134650367A9D7FC1EFCBAD8C28B47C</False2>
+    </Sha256TextSimpleType>
+    <URITextSimpleType>
+        <True1 valid="true">http://anyuri.org</True1>
+        <True2 valid="true">http://anyuri.org</True2>
+        <False1 valid="false">invalid uri</False1>
+    </URITextSimpleType>
+    <VersionSimpleType>
+        <True1 valid="true">1</True1>
+        <False1 valid="false">a</False1>
+    </VersionSimpleType>
+    <DataLicense>
+        <True1 valid="true">http://spdx.org/licenses/CC0-1.0</True1>
+        <True2 valid="false">Other</True2>
+    </DataLicense>    
+    <Boolean>
+        <True1 valid="true">true</True1>
+        <True2 valid="true">false</True2>
+        <False1 valid="false">maybe</False1>
+    </Boolean>
+    <String>
+        <True1 valid="true">Test string one</True1>
+        <True2 valid="true">Test string two</True2>
+        <False1 valid="false">false</False1>
+    </String>
+    <AnyURI>
+        <True1 valid="true">http://anyuri.org</True1>
+        <True2 valid="true">http://anyuri.org</True2>
+        <False1 valid="false">invalid link</False1>
+    </AnyURI>
+    <DateTime>
+        <True1 valid="true">2018-04-12T13:20:00</True1>
+        <True2 valid="true">2018-04-12T13:20:00-05:00</True2>
+        <False1 valid="false">2018-04-12T13:00</False1>
+    </DateTime>
+    <SpdxID>
+        <True1 valid="true">urn:anyuri.org</True1>
+        <True2 valid="true">urn:anyuri.org</True2>
+        <False1 valid="false">invalid link</False1>
+    </SpdxID>
+</TestData>

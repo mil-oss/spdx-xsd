@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><style type="text/css">
+                    body {
+                        width: 7in;
+                        padding: .75in;
+                        font-family: "Courier New", Courier, monospace;
+                        font-size: .9em;
+                        border: thin black solid;
+                    }
+                    pre {
+                        white-space: pre-wrap; /* css-3 */
+                        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+                        white-space: -pre-wrap; /* Opera 4-6 */
+                        white-space: -o-pre-wrap; /* Opera 7 */
+                        word-wrap: break-word;
+                        font-family: "Courier New", Courier, monospace;
+                        font-size: .9em;
+                    }
+                    
+                    .tab {
+                        padding-right: .2in;
+                    }
+                    .lvl2 {
+                        display: inline;
+                    }
+                    .lvl3 {
+                        display: inline;
+                        padding-left: .3in;
+                    }
+                    .lvl4 {
+                        display: inline;
+                        padding-left: .6in;
+                    }
+                    .lvl5 {
+                        display: inline;
+                        padding-left: 1in;
+                    }
+                    .lvl6 {
+                        display: inline;
+                        padding-left: 1.4in;
+                    }
+                    .lvl7 {
+                        display: inline;
+                        padding-left: 1.8in;
+                    }
+                    .lvl8 {
+                        display: inline;
+                        padding-left: 2.2in;
+                    }
+                    .lvl9 {
+                        display: inline;
+                        padding-left: 2.6in;
+                    }
+                    .uline {
+                        text-decoration: underline;
+                    }
+                    .ctr_title {
+                        text-align: center;
+                    }
+                    .center
+                    {
+                        margin-left: auto;
+                        margin-right: auto;
+                        width: 100%;
+                    }
+                    P.pagebreak
+                    {
+                        page-break-before: always
+                    }</style></head><body><pre><div style="text-align:center">SPDX XML</div></pre><pre><div style="text-align:center"><b><span>License</span></b></div><div style="text-align:center"><span>A data type for License type</span></div></pre><pre><div>1.  <u>IsDeprecatedLicenseID</u>.  <span>A data item that indicates if the license id is Deprecated.</span></div><div>    type = IsDeprecatedLicenseIDType </div><div>    simpletype = xs:boolean</div><div>    minOccurs = 0 </div></pre><pre><div>2.  <u>isOsiApproved</u>.  <span>True if the OSI has approved the license; false if not or unknown.</span></div><div>    xmlname = IsOsiApprovedIndicator </div><div>    type = IsOsiApprovedIndicatorType </div><div>    simpletype = xs:boolean</div><div>    minOccurs = 1 </div></pre><pre><div>3.  <u>IsFsfLibre</u>.  <span>True if the license is FSF Libre; false if not or unknown.</span></div><div>    type = IsFsfLibreType </div><div>    simpletype = xs:boolean</div><div>    minOccurs = 0 </div></pre><pre><div>4.  <u>standardLicenseHeader</u>.  <span>A data type for License author's preferred text to indicated that a file is covered by the license.</span></div><div>    xmlname = StandardLicenseHeaderText </div><div>    type = StandardLicenseHeaderTextType </div><div>    simpletype = xs:string</div><div>    minOccurs = 0 </div></pre><pre><div>5.  <u>licenseText</u>.  <span>A data type for Full text of the license.</span></div><div>    xmlname = LicenseText </div><div>    type = LicenseTextType </div><div>    simpletype = xs:string</div><div>    minOccurs = 1 </div></pre><pre><div>6.  <u>standardLicenseTemplate</u>.  <span>A data type for License template which describes sections of the license which can be varied. See License Template section of the specification for format information.</span></div><div>    xmlname = StandardLicenseTemplateText </div><div>    type = StandardLicenseTemplateTextType </div><div>    simpletype = xs:string</div><div>    minOccurs = 1 </div></pre></body></html>

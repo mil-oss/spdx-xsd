@@ -10,6 +10,8 @@
 
 5. Generate GoTest
 
+6. Marshal/Unmarshal Instance
 
+7. Validate all XML
 
-
+8. Secure Application Service

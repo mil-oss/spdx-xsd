@@ -48,10 +48,10 @@ func StartWeb(hcfg Cfg, appcfg []Cfg) {
 
 	log.Println("Port .. " + port)
 	router := http.NewServeMux()
+	router.Handle("/"+hcfg.Project+"/file/", GetResource(hcfg))
 	for c := range appcfg {
 		router.Handle("/"+appcfg[c].Project+"/", AppIndex(appcfg[c]))
 		router.Handle("/"+appcfg[c].Project+"/file/", GetResource(appcfg[c]))
-		router.Handle("/"+appcfg[c].Project+"/iepd/", GetResource(appcfg[c]))
 		router.Handle("/"+appcfg[c].Project+"/dload", Dload(appcfg[c]))
 	}
 	router.Handle("/", Index())
@@ -120,13 +120,16 @@ func Index() http.Handler {
 		fmt.Fprintln(w, "<div><b>SPDX Information Exchange Package Documentation (IEPD)</b></div>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<table>")
-		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-ref-xsd</td><td><a href='/spdx-ref-xsd/'>SPDX REFERENCE XSD</a></td></tr>")
-		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-ref-xsd</td><td><a href='/spdx-ref-xsd/'>SPDX Reference Test Data</a></td></tr>")
-		fmt.Fprintln(w, "<tr></tr>")
-		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-doc</td><td><a href='/spdx-doc/'>SPDX Document IEPD</a></td></tr>")
-		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-license</td><td><a href='/spdx-license/'>SPDX License IEPD</a></td></tr>")
-		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-security</td><td><a href='/spdx-security/'>SPDX Security IEPD</a></td></tr>")
-		fmt.Fprintln(w, "<tr><td style='width:100px'>/spdx-sec-ism</td><td><a href='/spdx-sec-ism/'>SPDX Security IEPD with ISM markings</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-ref-xsd</td><td><a href='/spdx-xml/file/refxsd'>SPDX Reference XSD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-ref-xsd-json</td><td><a href='/spdx-xml/file/refxsdjson'>SPDX Reference XSD JSON</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-test-data</td><td><a href='/spdx-xml/file/testdataxml'>SPDX Reference Test Data</a></td></tr>")
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-doc</td><td><a href='/spdx-doc/'>SPDX Document IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-license</td><td><a href='/spdx-license/'>SPDX License IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-security</td><td><a href='/spdx-security/'>SPDX Security IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-sec-ism</td><td><a href='/spdx-sec-ism/'>SPDX Security IEPD with ISM markings</a></td></tr>")
 		fmt.Fprintln(w, "</table>")
 		fmt.Fprintln(w, "</div>")
 		fmt.Fprintln(w, "<table>")
@@ -166,6 +169,7 @@ func AppIndex(cfg Cfg) http.Handler {
 		fmt.Fprintln(w, "<div><b>REST Endpoints:</b></div>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div><a href='"+pth+"dload'>"+pth+"dload</a> - Get zipped package</div>")
+		fmt.Fprintln(w, "<div><a href='"+pth+"file/dochtml'>"+pth+"file/dochtml"+"</a> - Documentation</div>")
 		fmt.Fprintln(w, "</p>")
 		fmt.Fprintln(w, "<div style='float:left; width:50%;margin-bottom:12px;'>")
 		fmt.Fprintln(w, "<div><b>XML Schema:</b></div>")
@@ -271,7 +275,11 @@ func GetResource(cfg Cfg) http.Handler {
 			}
 			f, err := ioutil.ReadFile(cfg.Temppath + resources[p])
 			check(err)
-			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			if p == "dochtml" {
+				w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			} else {
+				w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			}
 			setHeader(w)
 			w.Write(f)
 			return
@@ -285,7 +293,7 @@ func Dload(cfg Cfg) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
-			DownloadFile(cfg.Temppath+name+"-iepd.zip", w)
+			DownloadFile(cfg.Tempdir+name+"-iepd.zip", w)
 			AppIndex(cfg)
 			w.WriteHeader(http.StatusOK)
 			return
@@ -402,6 +410,7 @@ func RebuildAll() http.Handler {
 		setHeader(w)
 		cfgs = []Cfg{}
 		if atomic.LoadInt32(&healthy) == 1 {
+			Index()
 			for i := range hostCfg.Implementations {
 				log.Println(hostCfg.Implementations[i].Name)
 				log.Println(hostCfg.Implementations[i].Src)
@@ -410,7 +419,6 @@ func RebuildAll() http.Handler {
 				InitXSDProv(hostCfg.Implementations[i].Src)
 				BuildIep(appDatastruct)
 			}
-			StartWeb(hostCfg, cfgs)
 			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)

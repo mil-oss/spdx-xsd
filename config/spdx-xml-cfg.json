@@ -3,7 +3,10 @@
     "title":"XML Schema Implementations of SPDX",
     "host":"https://spdx-xml.specchain.org/",
     "port":":8080",
+    "dbloc": "tmp/spdx-xml/db/spdx-xml.db",
     "configfile": "config/spdx-xml-cfg.json",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/spdx-test-data.xml",
     "configurl": "https://spdx-xml.specchain.org/config",
     "tempdir":"tmp/",
     "temppath":"tmp/spdx-xml/",
@@ -23,7 +26,7 @@
             "description": "JSON Representation of Reference XML Schema for SPDX data"
         },
         {
-            "name": "reftestdataxml",
+            "name": "testdataxml",
             "filename": "spdx-test-data.xml",
             "src": "xml/instance/spdx-test-data.xml",
             "path": "xml/instance/spdx-test-data.xml",

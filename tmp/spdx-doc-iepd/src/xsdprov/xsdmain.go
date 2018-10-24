@@ -129,9 +129,17 @@ func generateResources() {
 	GenerateResource(respath("gogenxsdxsl"), respath("iepxsd"), respath("structgo"))
 	//iep.xsd - Golang test iep.go
 	GenerateResource(respath("gotestgenxsl"), respath("iepxsd"), respath("structtestgo"))
+	//iep.xsd - Golang test iep.go
+	GenerateResource(respath("gendocxsl"), respath("iepxsd"), respath("dochtml"))
 	//Marshal instance
 	MarshalXML(respath("instancexml"), respath("instancegolangxml"), datastruct)
+}
 
+func genDoc() {
+	doc, err := DoTransform(respath("gendocxsl"), respath("iepxsd"))
+	check(err)
+	ferr := WriteFile(respath("dochtml"), doc)
+	check(ferr)
 }
 
 func respath(str string) string {
