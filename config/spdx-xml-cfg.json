@@ -1,7 +1,7 @@
 {
     "project":"spdx-xml",
     "title":"XML Schema Implementations of SPDX",
-    "host":"https://spdx-xml.specchain.org/",
+    "host":"https://spdx-xml.specchain.org/spdx-xml/",
     "port":":8080",
     "dbloc": "tmp/spdx-xml/db/spdx-xml.db",
     "configfile": "config/spdx-xml-cfg.json",
