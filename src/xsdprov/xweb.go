@@ -331,6 +331,7 @@ func DocVerify() http.Handler {
 // Validate ...
 func Validate() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
@@ -455,7 +456,6 @@ func tracing(nextRequestID func() string) func(http.Handler) http.Handler {
 
 func setHeader(w http.ResponseWriter) {
 	w.Header().Set("X-Content-Type-Options", "nosniff")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("X-Request-Id", requestID)
 	w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
 	w.Header().Set("Cache-Control", "no-cache, private, max-age=0")

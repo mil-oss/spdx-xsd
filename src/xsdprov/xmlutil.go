@@ -29,7 +29,8 @@ func WriteStructXML(filepath string, xsdstruct interface{}) string {
 	var strct = xsdstruct
 	output, err := xml.MarshalIndent(strct, "  ", "    ")
 	check(err)
-	ferr := ioutil.WriteFile(filepath, output, 0666)
+	var xmlrslt = []byte(xml.Header + string(output))
+	ferr := ioutil.WriteFile(filepath, xmlrslt, 0666)
 	check(ferr)
 	return filepath
 }
