@@ -76,7 +76,7 @@ func TransformXML(transform TransformData) ([]byte, error) {
 	cmd := exec.Cmd{
 		Args: []string{"xsltproc", transform.XSLPath, transform.XMLPath},
 		Env:  os.Environ(),
-		Path: "xsltproc",
+		Path: "/usr/bin/xsltproc",
 	}
 	resultstring, err := cmd.Output()
 	return resultstring, err
