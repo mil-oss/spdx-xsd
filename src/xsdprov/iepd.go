@@ -93,10 +93,11 @@ func ProvenanceRpt() []byte {
 }
 
 //GenerateResource ... generate IepXsd using XSLT
-func GenerateResource(xslpath string, xmlpath string, resultpath string) (ProvEntry, error) {
+func GenerateResource(project string, xslpath string, xmlpath string, resultpath string) (ProvEntry, error) {
 	log.Println("GenerateResource: " + resultpath + "  from " + xmlpath + "  with " + xslpath)
 	var resultname = filepath.Base(resultpath)
 	pe := provEntry("GenerateResource", resultname)
+	pe.Project = project
 	pe.XslPath = xslpath
 	doc, err := DoTransform(xslpath, xmlpath)
 	check(err)
@@ -114,7 +115,7 @@ func GenerateResource(xslpath string, xmlpath string, resultpath string) (ProvEn
 }
 
 //GenerateResourceParam ... generate IepXsd using XSLT
-func GenerateResourceParam(xslpath string, xmlpath string, resultpath string, paramstr string) ProvEntry {
+func GenerateResourceParam(project string, xslpath string, xmlpath string, resultpath string, paramstr string) ProvEntry {
 	log.Println("GenerateResourceParam: " + resultpath + "  from " + xmlpath)
 	var resultname = filepath.Base(resultpath)
 	pe := provEntry("GenerateResource", resultname)
@@ -135,7 +136,7 @@ func GenerateResourceParam(xslpath string, xmlpath string, resultpath string, pa
 }
 
 //MarshalXML ...
-func MarshalXML(srcpath string, destpath string, dstruct interface{}) ProvEntry {
+func MarshalXML(project string, srcpath string, destpath string, dstruct interface{}) ProvEntry {
 	log.Println("MarshalXML: " + srcpath + "  to " + destpath)
 	var s = ReadStructXML(srcpath, dstruct)
 	var name = filepath.Base(destpath)
@@ -148,7 +149,7 @@ func MarshalXML(srcpath string, destpath string, dstruct interface{}) ProvEntry 
 }
 
 //ValidateFile ... validate XML using XSD
-func ValidateFile(xmlname string, xsdname string) (pe ProvEntry, errs []error, err error) {
+func ValidateFile(project string, xmlname string, xsdname string) (pe ProvEntry, errs []error, err error) {
 	var xsdpath = temppath + resources[xsdname]
 	var xmlpath = temppath + resources[xmlname]
 	if val, ok := tempfiles[xsdname]; ok {
@@ -194,7 +195,7 @@ func spaceMap(str string) string {
 }
 
 // LoadRemote ...
-func LoadRemote(name string, path string, link string) ProvEntry {
+func LoadRemote(project string, name string, path string, link string) ProvEntry {
 	pe := provEntry("Load Remote Match", path)
 	var err = WgetFile(path, link)
 	check(err)
@@ -206,7 +207,7 @@ func LoadRemote(name string, path string, link string) ProvEntry {
 }
 
 // CheckDigest ...
-func CheckDigest(fpath string, auth string, test string) ProvEntry {
+func CheckDigest(project string, fpath string, auth string, test string) ProvEntry {
 	pe := provEntry("Authenticity Check", fpath)
 	pe.Status = "Pass"
 	pe.Digest = test
