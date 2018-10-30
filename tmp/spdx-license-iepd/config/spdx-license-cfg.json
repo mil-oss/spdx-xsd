@@ -25,13 +25,6 @@
             "description": "NIEM Conformant Reference XML Schema for SPDX data"
         },
         {
-            "name": "reftestdataxml",
-            "filename": "spdx-test-data.xml",
-            "src": "xml/instance/spdx-test-data.xml",
-            "path": "xml/instance/spdx-test-data.xml",
-            "description": "Test values for all SPDX data items"
-        },
-        {
             "name": "iepxsd",
             "filename": "spdx-license-iep.xsd",
             "src": "iepd/spdx-license/xml/xsd/spdx-license-iep.xsd",
