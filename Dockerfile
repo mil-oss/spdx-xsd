@@ -15,11 +15,6 @@ ADD xml /go/xml
 ADD tmp /go/tmp
 WORKDIR /go
 
-#build the binary with debug information removed
-
-#RUN go build -ldflags '-w -s' -a -installsuffix cgo -o xsdprov
-#RUN go build -ldflags '-w -s' -a -installsuffix cgo -o spdx-doc
-#RUN go install spdx-doc
 RUN chmod -Rf 777 tmp
 RUN go build xsdprov
 RUN go build spdx
