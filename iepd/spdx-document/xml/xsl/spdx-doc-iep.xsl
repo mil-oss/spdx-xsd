@@ -77,6 +77,10 @@
             <xsl:sort select="@name"/>
             <xsl:copy-of select="."/>
         </xsl:for-each>
+        <xsl:for-each select="exsl:node-set($allnodes)/xs:attribute">
+            <xsl:sort select="@name"/>
+            <xsl:copy-of select="."/>
+        </xsl:for-each>
     </xsl:variable>
     
     <xsl:template name="main">
