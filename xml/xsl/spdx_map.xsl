@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" 
-    xmlns:xs="http://www.w3.org/2001/XMLSchema" 
-    xmlns:owl="http://www.w3.org/2002/07/owl#"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" version="2.0"
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#" version="2.0"
     exclude-result-prefixes="xs owl rdf ns rdfs">
     <xsl:output method="xml" indent="yes"/>
-
+    
     <xsl:variable name="changes" select="document('../instance/spdx-changes.xml')/SpdxChanges"/>
+
+    <xsl:variable name="a" select="'&amp;'"/>
+    <xsl:variable name="r" select="'rdfs;'" />
+    <xsl:variable name="rdfstr" select="concat($a,$r)"/>
 
     <xsl:template name="mapSpdx">
         <xsl:param name="rdfData"/>
@@ -91,6 +91,9 @@
                 <xsl:attribute name="subpropertyof">
                     <xsl:apply-templates select="rdfs:subPropertyOf/@rdf:resource" mode="getname"/>
                 </xsl:attribute>
+            </xsl:if>
+            <xsl:if test="@rdf:about=concat($rdfstr,'comment')">
+                <xsl:attribute name="range" select="'String'"/>
             </xsl:if>
             <xsl:apply-templates select="*"/>
         </Datatype>
@@ -237,8 +240,8 @@
 
     <xsl:template match="owl:onDataRange" mode="att">
         <xsl:attribute name="ondatarange">
+            <xsl:value-of select="concat('xsd:',substring-after(@rdf:resource, ';'))"/>
             <xsl:value-of select="substring-after(@rdf:resource, '#')"/>
-            <xsl:value-of select="substring-after(@rdf:resource, ';')"/>
         </xsl:attribute>
     </xsl:template>
 
@@ -331,6 +334,7 @@
         <xsl:variable name="n">
             <xsl:apply-templates select="@rdf:about" mode="xmlname"/>
         </xsl:variable>
+
         <xsl:choose>
             <xsl:when test="rdfs:range/owl:Class"/>
             <xsl:otherwise> </xsl:otherwise>
@@ -366,7 +370,7 @@
         </xs:element>
     </xsl:template>
 
-    <xsl:template name="CapWord">
+    <xsl:template name="UCaseWord">
         <xsl:param name="text"/>
         <xsl:variable name="w">
             <xsl:value-of select="translate(substring($text, 1, 1), 'abcdefghijklmnopqrstuvwxyz', 'ABCDEFGHIJKLMNOPQRSTUVWXYZ')"/>
@@ -410,7 +414,6 @@
         </xsl:choose>
     </xsl:template>
 
-
     <xsl:template match="@*" mode="xmlname">
         <xsl:variable name="n">
             <xsl:choose>
@@ -419,14 +422,14 @@
                     <xsl:text>SimpleLicensingInfo</xsl:text>
                 </xsl:when>
                 <xsl:when test="contains(., '#')">
-                    <xsl:call-template name="CapWord">
+                    <xsl:call-template name="UCaseWord">
                         <xsl:with-param name="text">
                             <xsl:value-of select="substring-after(., '#')"/>
                         </xsl:with-param>
                     </xsl:call-template>
                 </xsl:when>
                 <xsl:when test="contains(., 'xsd;')">
-                    <xsl:call-template name="CapWord">
+                    <xsl:call-template name="UCaseWord">
                         <xsl:with-param name="text">
                             <xsl:value-of select="substring-after(., 'xsd;')"/>
                         </xsl:with-param>
@@ -442,12 +445,12 @@
         <xsl:choose>
             <xsl:when test="contains($n, '_')">
                 <xsl:variable name="pre">
-                    <!-- <xsl:call-template name="CapWord">
+                    <xsl:call-template name="UCaseWord">
                         <xsl:with-param name="text" select="substring-before($n, '_')"/>
-                    </xsl:call-template>-->
+                    </xsl:call-template>
                 </xsl:variable>
                 <xsl:variable name="suf">
-                    <xsl:call-template name="CapWord">
+                    <xsl:call-template name="UCaseWord">
                         <xsl:with-param name="text" select="substring-after($n, '_')"/>
                     </xsl:call-template>
                 </xsl:variable>

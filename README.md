@@ -1,11 +1,18 @@
 # spdx-xsd
+
 XML Schema for the Software Package Documentation Exchange (SPDX) Format
 
-XSDCCM SPDX License Demo:
+SPDX XML:  https://spdx-xml.specchain.org
 
-https://spdx-xsd.specchain.org
+SPDX Document XML: https://spdx-xml.specchain.org/spdx-doc
 
-# License
+SPDX License XML: https://spdx-xml.specchain.org/spdx-license
+
+SPDX Security XML: https://spdx-xml.specchain.org/spdx-security
+
+SPDX Security ISM XML: https://spdx-xml.specchain.org/spdx-sec-ism
+
+## License
 
 SPDX-License-Identifier: CC-BY-3.0 and Apache-2.0
 

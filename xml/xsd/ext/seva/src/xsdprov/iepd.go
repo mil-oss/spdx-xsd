@@ -12,8 +12,8 @@ import (
 )
 
 var (
-	reflink      = "https://raw.githubusercontent.com/ion-channel/SEVA/master/ref_xsd/ref.xsd?token=AAVJcOXbi1SCgAcKSmP3st-jKYmxRpWxks5bYJi4wA%3D%3D"
-	testlink     = "https://raw.githubusercontent.com/ion-channel/SEVA/master/iepd/xml/instance/test_data.xml?token=AAVJcOJMzUXTo-fdpYsd3VZv0UYZSEUpks5bYJl4wA%3D%3D"
+	reflink      = "https://raw.githubusercontent.com/ion-channel/security/master/ref_xsd/ref.xsd?token=AAVJcOXbi1SCgAcKSmP3st-jKYmxRpWxks5bYJi4wA%3D%3D"
+	testlink     = "https://raw.githubusercontent.com/ion-channel/security/master/iepd/xml/instance/test_data.xml?token=AAVJcOJMzUXTo-fdpYsd3VZv0UYZSEUpks5bYJl4wA%3D%3D"
 	testinstance string
 	iepderr      error
 	valerr       []error
@@ -32,7 +32,7 @@ func BuildIep() (map[int64]ProvEntry, []error, error) {
 }
 
 func zipIEPD() {
-	cerr := compress(tpath+"/iepd", tpath+"/SevA.zip")
+	cerr := compress(tpath+"/iepd", tpath+"/security.zip")
 	check(cerr)
 }
 

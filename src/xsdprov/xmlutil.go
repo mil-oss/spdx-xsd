@@ -11,16 +11,8 @@ import (
 	xsd "github.com/lestrrat/go-libxml2/xsd"
 )
 
-<<<<<<< HEAD
-func init() {
-	resdigests = getDigests(resources, Tpath, "Sha256")
-}
-
-func readStructXML(filepath string, xsdstruct interface{}) interface{} {
-=======
 // ReadStructXML ...
 func ReadStructXML(filepath string, xsdstruct interface{}) interface{} {
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	xf, ferr := ioutil.ReadFile(filepath)
 	check(ferr)
 	var strct = xsdstruct
@@ -37,18 +29,15 @@ func WriteStructXML(filepath string, xsdstruct interface{}) string {
 	var strct = xsdstruct
 	output, err := xml.MarshalIndent(strct, "  ", "    ")
 	check(err)
-	ferr := ioutil.WriteFile(filepath, output, 0666)
+	var xmlrslt = []byte(xml.Header + string(output))
+	ferr := ioutil.WriteFile(filepath, xmlrslt, 0666)
 	check(ferr)
 	return filepath
 }
 
 // Verify ... verify hash digest against known original
 func Verify(verifydata VerifyData) bool {
-<<<<<<< HEAD
-	resdigests = getDigests(resources, Tpath, "Sha256")
-=======
 	resdigests = getDigests(resources, temppath, "Sha256")
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	//log.Println("Verify")
 	log.Println("verifydata.ID " + verifydata.ID)
 	log.Println("verifydata.Digest " + verifydata.Digest)
@@ -65,12 +54,9 @@ func ValidateXML(validationdata ValidationData) (bool, []error) {
 	log.Println("ValidateXML")
 	log.Println("xml: " + validationdata.XMLName)
 	log.Println("xsd: " + validationdata.XSDName)
-<<<<<<< HEAD
-	var xsddoc, derr = xsd.ParseFromFile(Tpath + resources[validationdata.XSDName])
-=======
 	var xsddoc, derr = xsd.ParseFromFile(temppath + resources[validationdata.XSDName])
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	check(derr)
+	defer xsddoc.Free()
 	//ioutil.ReadFile(validationdata.XMLPath)
 	doc, err := libxml2.ParseString(validationdata.XMLString)
 	check(err)
@@ -91,7 +77,7 @@ func TransformXML(transform TransformData) ([]byte, error) {
 	cmd := exec.Cmd{
 		Args: []string{"xsltproc", transform.XSLPath, transform.XMLPath},
 		Env:  os.Environ(),
-		Path: "xsltproc",
+		Path: "/usr/bin/xsltproc",
 	}
 	resultstring, err := cmd.Output()
 	return resultstring, err

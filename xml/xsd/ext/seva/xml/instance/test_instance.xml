@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:seva::1.0" xsi:schemaLocation="urn:seva::1.0  https://seva.specchain.org/iepd/iep.xsd">
+<SoftwareEvidenceArchive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:security::1.0" xsi:schemaLocation="urn:security::1.0  ../xsd/iep.xsd">
   <SoftwareInformation>
     <ProductTitleText>Line text max length 48 characters.</ProductTitleText>
     <SoftwareNameText>Line text max length 48 characters.</SoftwareNameText>

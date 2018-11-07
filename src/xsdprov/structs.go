@@ -5,6 +5,7 @@ type ProvEntry struct {
 	EntryType string   `json:"entrytype"`
 	Status    string   `json:"status"`
 	Timestamp int64    `json:"timestamp,omitempty"`
+	SrcPath   string   `json:"srcpath,omitempty"`
 	FilePath  string   `json:"filepath,omitempty"`
 	XslPath   string   `json:"xslpath,omitempty"`
 	XsdPath   string   `json:"xsdpath,omitempty"`

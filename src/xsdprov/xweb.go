@@ -11,6 +11,8 @@ import (
 	"os"
 	"os/signal"
 	"path/filepath"
+	"sort"
+	"strings"
 	"sync/atomic"
 	"time"
 
@@ -24,31 +26,45 @@ const (
 )
 
 var (
-	listenAddr string
-	healthy    int32
-	xsdstruct  interface{}
-	project    string
+	listenAddr    string
+	healthy       int32
+	xsdstruct     interface{}
+	project       string
+	config        string
+	configdata    []Cfg
+	appDatastruct interface{}
+	hostCfg       Cfg
+	cfgs          []Cfg
+	requestID     string
 )
 
 //StartWeb .. simple web server
-func StartWeb() {
+func StartWeb(hcfg Cfg, appcfg []Cfg) {
+	hostCfg = hcfg
+	var port = hcfg.Port
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"*"},
 	})
+
 	log.Println("Port .. " + port)
+	router := http.NewServeMux()
+	router.Handle("/"+hcfg.Project+"/file/", GetResource(hcfg))
+	for c := range appcfg {
+		router.Handle("/"+appcfg[c].Project+"/", AppIndex(appcfg[c]))
+		router.Handle("/"+appcfg[c].Project+"/file/", GetResource(appcfg[c]))
+		router.Handle("/"+appcfg[c].Project+"/dload", Dload(appcfg[c]))
+	}
+	router.Handle("/", Index())
+	router.Handle("/config", getConfig())
+	router.Handle("/validate", Validate())
+	router.Handle("/transform", Transform())
+	router.Handle("/verify", DocVerify())
+	router.Handle("/rebuild", Rebuild())
+	router.Handle("/rebuildall", RebuildAll())
 	flag.StringVar(&listenAddr, "listen-addr", port, "server listen address")
 	flag.Parse()
 	logger := log.New(os.Stdout, "http: ", log.LstdFlags)
 	logger.Println("Starting HTTP Server. .. ")
-	router := http.NewServeMux()
-	router.Handle("/", index())
-	router.Handle("/file/", getResource())
-	router.Handle("/license/", getLicense())
-	router.Handle("/iepd/", getResource())
-	router.Handle("/dload", dload())
-	router.Handle("/validate", validate())
-	router.Handle("/transform", transform())
-	router.Handle("/verify", verify())
 	nextRequestID := func() string {
 		return fmt.Sprintf("%d", time.Now().UnixNano())
 	}
@@ -85,83 +101,211 @@ func StartWeb() {
 	<-done
 	logger.Println("Server stopped")
 }
-func index() http.Handler {
+
+// Index ...
+func Index() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path != "/" {
 			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
 			return
 		}
-<<<<<<< HEAD
-		if cfg.Redirect != "" {
-			http.Redirect(w, r, cfg.Redirect, 301)
-		} else {
-			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-			w.Header().Set("X-Content-Type-Options", "nosniff")
-			w.WriteHeader(http.StatusOK)
-			fmt.Fprintln(w, "SPDX-XSD 1.0")
-			//fmt.Fprintln(w, temppath)
-		}
-=======
-		//http.Redirect(w, r, "https://sevaxsd.specchain.org", 301)
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		setHeader(w)
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintln(w, name)
-		//fmt.Fprintln(w, temppath)
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
+		fmt.Fprintln(w, "<html>")
+		fmt.Fprintln(w, "<body>")
+		fmt.Fprintln(w, "<div><b>SPDX XML</b></div>")
+		fmt.Fprintln(w, "<hr>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>SPDX Information Exchange Package Documentation (IEPD)</b></div>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-ref-xsd</td><td><a href='/spdx-xml/file/refxsd'>SPDX Reference XSD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-ref-xsd-json</td><td><a href='/spdx-xml/file/refxsdjson'>SPDX Reference XSD JSON</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-test-data</td><td><a href='/spdx-xml/file/testdataxml'>SPDX Reference Test Data</a></td></tr>")
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-doc</td><td><a href='/spdx-doc/'>SPDX Document IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-license</td><td><a href='/spdx-license/'>SPDX License IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-security</td><td><a href='/spdx-security/'>SPDX Security IEPD</a></td></tr>")
+		fmt.Fprintln(w, "<tr><td style='width:140px'>/spdx-sec-ism</td><td><a href='/spdx-sec-ism/'>SPDX Security IEPD with ISM markings</a></td></tr>")
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</div>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td><b>Operations:</b></td><td></td></tr>")
+		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/rebuild ..</td><td>json payload:  Config:{json data}</td></tr>")
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</body>")
+		fmt.Fprintln(w, "</html>")
 	})
 }
 
-func getResource() http.Handler {
+// AppIndex ...
+func AppIndex(cfg Cfg) http.Handler {
+	var pth = "/" + cfg.Project + "/"
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		//log.Println(pth)
+		//log.Println(r.URL.Path)
+		if r.URL.Path != pth {
+			http.Error(w, http.StatusText(http.StatusNotFound), http.StatusNotFound)
+			return
+		}
+		var resources = map[string]string{}
+		for r := range cfg.Resources {
+			resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
+		}
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+		setHeader(w)
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprintln(w, "<html>")
+		fmt.Fprintln(w, "<body>")
+		fmt.Fprintln(w, "<div><b>"+strings.ToUpper(name)+"</b></div>")
+		fmt.Fprintln(w, "<hr>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>REST Endpoints:</b></div>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><a href='"+pth+"dload'>"+pth+"dload</a> - Get zipped package</div>")
+		fmt.Fprintln(w, "<div><a href='"+pth+"file/dochtml'>"+pth+"file/dochtml"+"</a> - Documentation</div>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div style='float:left; width:50%;margin-bottom:12px;'>")
+		fmt.Fprintln(w, "<div><b>XML Schema:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		var sr = sortMap(resources)
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".xsd") {
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>XSLT:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".xsl") {
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>XML Instances:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".xml") {
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</div>")
+
+		fmt.Fprintln(w, "<div style='width:50%;float:left'>")
+		fmt.Fprintln(w, "<div><b>JSON:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".json") {
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</p>")
+		fmt.Fprintln(w, "<div><b>GOLANG:</b></div>")
+		fmt.Fprintln(w, "<table>")
+		for _, p := range sr {
+			if strings.Contains(resources[p], ".go") {
+				fmt.Fprintln(w, "<tr><td style='width:250px'>"+pth+"file/"+p+"</td><td><a href='"+pth+"file/"+p+"'>"+filepath.Base(resources[p])+"</a></td></tr>")
+			}
+		}
+		fmt.Fprintln(w, "</table>")
+		fmt.Fprintln(w, "</div>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "<tr><td><b>Operations:</b></td><td></td></tr>")
+		fmt.Fprintln(w, "<tr><td>/validate ..</td><td>json payload:  ValidationData:{xmlname='',xmlpath='',xmlstring='',xsdname='',xsdpath='',xsdstring=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/transform ..</td><td>json payload:  TransformData:{xmlname='',xmlpath='',xmlstring='',xslname='',xslpath='',xslstring='',resultpath='',params=[{'':''},{'':''}]}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/verify ..</td><td>json payload:  VerifyData:{id='',xmlpath='',digest=''}</td></tr>")
+		fmt.Fprintln(w, "<tr><td>/rebuild ..</td><td>json payload:  Config:{json file}</td></tr>")
+		fmt.Fprintln(w, "<table>")
+		fmt.Fprintln(w, "</body>")
+		fmt.Fprintln(w, "</html>")
+	})
+}
+
+func sortMap(m map[string]string) []string {
+	type kv struct {
+		Key   string
+		Value string
+	}
+	var ss []kv
+	for k, v := range m {
+		ss = append(ss, kv{k, v})
+	}
+	sort.Slice(ss, func(i, j int) bool {
+		return ss[i].Value > ss[j].Value
+	})
+	var k []string
+	for _, kv := range ss {
+		k = append(k, kv.Key)
+	}
+	return k
+}
+
+func getConfig() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
-<<<<<<< HEAD
-=======
-			var p = filepath.Base(r.URL.Path)
-			f, err := ioutil.ReadFile(temppath + resources[p])
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
+			f, err := ioutil.ReadFile(hostCfg.Configfile)
 			check(err)
-			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
-			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
-			w.Header().Set("Pragma", "no-cache")
-			w.Header().Set("X-Accel-Expires", "0")
-			var p = filepath.Base(r.URL.Path)
-			f, err := ioutil.ReadFile(Tpath + resources[p])
-			check(err)
+			setHeader(w)
 			w.Write(f)
-
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-<<<<<<< HEAD
-func getLicense() http.Handler {
+
+// GetResource ...
+func GetResource(cfg Cfg) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if atomic.LoadInt32(&healthy) == 1 {
-			check(err)
-			w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-			w.Header().Set("Access-Control-Allow-Origin", "*")
-			w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
-			w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
-			w.Header().Set("Pragma", "no-cache")
-			w.Header().Set("X-Accel-Expires", "0")
 			var p = filepath.Base(r.URL.Path)
-			f, err := ioutil.ReadFile(Tpath + "resources/licenses/" + p)
+			var resources = map[string]string{}
+			for r := range cfg.Resources {
+				resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
+			}
+			f, err := ioutil.ReadFile(cfg.Temppath + resources[p])
 			check(err)
+			if p == "dochtml" {
+				w.Header().Set("Content-Type", "text/html; charset=utf-8")
+			} else {
+				w.Header().Set("Content-Type", "text/plain; charset=utf-8")
+			}
+			setHeader(w)
 			w.Write(f)
-
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-=======
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
-func verify() http.Handler {
+
+// Dload ...
+func Dload(cfg Cfg) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		setHeader(w)
+		if atomic.LoadInt32(&healthy) == 1 {
+			DownloadFile(cfg.Tempdir+name+"-iepd.zip", w)
+			AppIndex(cfg)
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+
+// DocVerify ...
+func DocVerify() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
 			decoder := json.NewDecoder(r.Body)
@@ -178,15 +322,17 @@ func verify() http.Handler {
 				HandleError(&w, 500, "Verification Error", "Verification Error", err)
 				return
 			}
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-func validate() http.Handler {
+
+// Validate ...
+func Validate() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
 			decoder := json.NewDecoder(r.Body)
@@ -200,18 +346,19 @@ func validate() http.Handler {
 			if valid {
 				log.Println("Validation Successful")
 				HandleSuccess(&w, Success{Status: true})
-			} else {
-				HandleValidationErrors(&w, "Validation Errors", errs)
+				return
 			}
+			HandleValidationErrors(&w, "Validation Errors", errs)
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-func transform() http.Handler {
+
+// Transform ...
+func Transform() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
 			defer r.Body.Close()
 			decoder := json.NewDecoder(r.Body)
@@ -224,24 +371,61 @@ func transform() http.Handler {
 			rslt, err := TransformXML(transform)
 			if err != nil {
 				HandleError(&w, 500, "Internal Server Error", "Transformation error", err)
+				return
 			}
 			HandleSuccess(&w, Success{Status: true, Content: fmt.Sprint(rslt)})
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
-func dload() http.Handler {
+
+// Rebuild ...
+func Rebuild() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("X-Content-Type-Options", "nosniff")
+		setHeader(w)
 		if atomic.LoadInt32(&healthy) == 1 {
-			DownloadFile("/tmp/IEPD/"+name+".zip", w)
-			//w.WriteHeader(http.StatusOK)
-			index()
+			defer r.Body.Close()
+			decoder := json.NewDecoder(r.Body)
+			var confgdata Cfg
+			err := decoder.Decode(&confgdata)
+			if err != nil {
+				HandleError(&w, 500, "Internal Server Error", "Error reading data from body", err)
+				return
+			}
+			c, err := json.Marshal(confgdata)
+			check(err)
+			WriteFile(confgdata.Configfile, c)
+			http.Redirect(w, r, "/", 301)
+			InitXSDProv(confgdata.Configfile)
+			BuildIep(appDatastruct)
+			return
 		}
 		w.WriteHeader(http.StatusServiceUnavailable)
 	})
 }
+
+// RebuildAll ...
+func RebuildAll() http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		setHeader(w)
+		cfgs = []Cfg{}
+		if atomic.LoadInt32(&healthy) == 1 {
+			Index()
+			for i := range hostCfg.Implementations {
+				log.Println(hostCfg.Implementations[i].Name)
+				log.Println(hostCfg.Implementations[i].Src)
+				var c = ReadConfig(hostCfg.Implementations[i].Src)
+				cfgs = append(cfgs, c)
+				InitXSDProv(hostCfg.Implementations[i].Src)
+				BuildIep(appDatastruct)
+			}
+			return
+		}
+		w.WriteHeader(http.StatusServiceUnavailable)
+	})
+}
+
 func logging(logger *log.Logger) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -264,10 +448,19 @@ func tracing(nextRequestID func() string) func(http.Handler) http.Handler {
 				requestID = nextRequestID()
 			}
 			ctx := context.WithValue(r.Context(), requestIDKey, requestID)
-			w.Header().Set("X-Request-Id", requestID)
+			//w.Header().Set("X-Request-Id", requestID)
 			next.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
+}
+
+func setHeader(w http.ResponseWriter) {
+	w.Header().Set("X-Content-Type-Options", "nosniff")
+	w.Header().Set("X-Request-Id", requestID)
+	w.Header().Set("Expires", time.Unix(0, 0).Format(time.RFC1123))
+	w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+	w.Header().Set("Pragma", "no-cache")
+	w.Header().Set("X-Accel-Expires", "0")
 }
 
 //HandleSuccess ... handle success response

@@ -7,16 +7,18 @@ LABEL version="1.0"
 RUN apk add --update gcc g++ make wget curl bash libxslt libc-dev libxml2 libxml2-dev zip
 RUN apk --no-cache add openssh curl 
 
+ADD pkg /go/pkg
 ADD src /go/src
+ADD config /go/config
+ADD iepd /go/iepd
+ADD xml /go/xml
+ADD tmp /go/tmp
+WORKDIR /go
 
-WORKDIR /go/src/spdx
-ADD  config /go/src/config
-ADD . .
-
-#build the binary with debug information removed
-RUN go build -ldflags '-w -s' -a -installsuffix cgo -o xsdprov
-RUN go build -ldflags '-w -s' -a -installsuffix cgo -o spdx
+RUN chmod -Rf 777 tmp
+RUN go build xsdprov
+RUN go build spdx
 RUN go install spdx
 
 EXPOSE 8080
-CMD ["spdx"]
+CMD ["./spdx"]

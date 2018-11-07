@@ -1,105 +1,87 @@
 package xsdprov
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/boltdb/bolt"
 )
 
-<<<<<<< HEAD
-var tempfiles = map[string]string{}
-var resdigests = map[string]string{}
-var tempdigests = map[string]string{}
-var resources = map[string]string{}
-var resourcedirs = map[string]string{}
-var name string
-var dbloc string
-var cfg Cfg
-var reflink string
-var testlink string
-var port string
-
-//Tpath ...
-var Tpath string
-
-//Datastruct ...
-var Datastruct interface{}
-
-//Setup ...
-func Setup(temppath string, resrces map[string]string, dirs map[string]string, dstruct interface{}) {
-	cfg := getConfig()
-	Datastruct = dstruct
-	dbloc = "/tmp/" + cfg.Project
-=======
 var (
-	resources    map[string]string
-	resourcedirs map[string]string
+	datastruct   interface{}
+	rsrcs        []Resource
+	rsrcdirs     []Resource
+	resources    = map[string]string{}
+	resourcedirs = map[string]string{}
+	sources      = map[string]string{}
+	tempdir      string
 	temppath     string
-	tempfiles    = map[string]string{}
-	resdigests   = map[string]string{}
-	tempdigests  = map[string]string{}
-	name         string
-	dbloc        string
-	cfg          Cfg
-	reflink      string
-	testlink     string
-	port         string
-	db           *bolt.DB
-	//Provreport ...
-	Provreport = map[int64]ProvEntry{}
+	// Homeurl ...
+	Homeurl     string
+	tempfiles   = map[string]string{}
+	resdigests  = map[string]string{}
+	tempdigests = map[string]string{}
+	name        string
+	dbloc       string
+	cfg         Cfg
+	reflink     string
+	testlink    string
+	port        string
+	// ProvDB ...
+	ProvDB     *bolt.DB
+	errorlist  []error
+	provreport = map[int64]ProvEntry{}
 )
 
 // InitXSDProv ...
-func InitXSDProv(rsrcs map[string]string, rsrcdirs map[string]string, config string) {
-	resources = rsrcs
-	resourcedirs = rsrcdirs
-	cfg := GetConfig(config)
+func InitXSDProv(config string) {
+	cfg := ReadConfig(config)
+	for r := range cfg.Resources {
+		resources[cfg.Resources[r].Name] = cfg.Resources[r].Path
+		sources[cfg.Resources[r].Name] = cfg.Resources[r].Src
+	}
+	for r := range cfg.Directories {
+		resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Path
+		resourcedirs[cfg.Directories[r].Name] = cfg.Directories[r].Src
+	}
 	dbloc = cfg.Dbloc
+	tempdir = cfg.Tempdir
 	temppath = cfg.Temppath
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	name = cfg.Project
 	reflink = cfg.Reflink
 	testlink = cfg.Testlink
 	port = cfg.Port
-<<<<<<< HEAD
-	resources = resrces
-	resourcedirs = dirs
-	Tpath = temppath
-	err = os.MkdirAll(dbloc+"/db", 0777)
-=======
 	resdigests = getDigests(resources, temppath, "Sha256")
-	err := os.MkdirAll(dbloc, 0777)
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
+	dbp := filepath.Dir(dbloc)
+	err := os.MkdirAll(dbp, 0777)
 	if err != nil {
 		return
 	}
 	DirSetup()
-<<<<<<< HEAD
-	//BuildIep()
-	//StartWeb(Tpath)
-=======
-	//CopyDirs(temppath, resourcedirs)
-	db, err := DbSetup(dbloc + "/spdx-lic.db")
-	check(err)
-	// InitTempDir ...
-	InitTempDir(db)
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
+	InitTempDir()
 }
 
 // InitTempDir ...
-func InitTempDir(db *bolt.DB) (err error) {
-	log.Println("TempDir ")
-	tempdir, err := queryDB(db, "ADMIN", dbloc+"/spdx-lic.db")
-	log.Println("TEMPDIR " + dbloc + "/spdx-lic.db")
-	ferr := os.RemoveAll(dbloc + "/spdx-lic.db")
-	err = ferr
-<<<<<<< HEAD
-	dberr := updateDB(db, "ADMIN", "tempdir", []byte(Tpath))
-=======
-	dberr := updateDB(db, "ADMIN", tempdir, []byte(dbloc+"/spdx-lic.db"))
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
+func InitTempDir() (err error) {
+	log.Println("InitTempDir")
+	db, err := DbSetup(dbloc)
+	check(err)
+	var v = []byte{}
+	verr := db.View(func(tx *bolt.Tx) error {
+		val := tx.Bucket([]byte(pdb)).Bucket([]byte("ADMIN")).Get([]byte(temppath))
+		v = val
+		fmt.Println(byteStr(v))
+		return nil
+	})
+	err = verr
+	//td, err := queryDB("ADMIN", temppath)
+	log.Println("TempPath " + string(v))
+	//ferr := os.RemoveAll(dbloc)
+	//err = ferr
+	dberr := updateTransact("ADMIN", temppath, []byte(dbloc))
 	err = dberr
 	return err
 }
@@ -107,17 +89,91 @@ func InitTempDir(db *bolt.DB) (err error) {
 // DirSetup ...
 func DirSetup() (e error) {
 	log.Println("DirSetup")
-	for _, rp := range resources {
-<<<<<<< HEAD
-		p := filepath.Dir(Tpath + rp)
-		os.MkdirAll(p, os.ModePerm)
-	}
-	CopyDirs(Tpath, resourcedirs)
-=======
-		p := filepath.Dir(temppath + rp)
-		os.MkdirAll(p, os.ModePerm)
+	for f := range resources {
+		dest := filepath.Dir(temppath + resources[f])
+		os.MkdirAll(dest, os.ModePerm)
+		if sources[f] != "" {
+			CopyFile(sources[f], temppath+resources[f])
+		}
 	}
 	CopyDirs(temppath, resourcedirs)
->>>>>>> e6eb595232f7a1b0a8351ded210e2bbe11538545
 	return
+}
+
+//BuildIep ... Generate XML, Code and Test Artifacts
+func BuildIep(dstruct interface{}) (map[int64]ProvEntry, []error) {
+	datastruct = dstruct
+	GetSourceResources()
+	generateResources()
+	validateResources()
+	ResrcJSON(respath("resourcesjson"))
+	ProvenanceRpt()
+	ZipIEPD(temppath, "tmp/"+resources["zipiepd"])
+	return provreport, errorlist
+}
+
+func generateResources() {
+	log.Println("Generate Resources")
+	//GenerateResource - iep.xsd - Information Exchange Package XML Schema
+	GenerateResource(respath("iepxsdxsl"), respath("refxsd"), respath("iepxsd"))
+	//test_instance.xml - Information Exchange Package XML Instance
+	GenerateResource(respath("instancexsl"), respath("iepxsd"), respath("instancexml"))
+	//JSON
+	//iep.ref.json - JSON representation of ref.xsd
+	GenerateResource(respath("xsdjsonxsl"), respath("refxsd"), respath("refxsdjson"))
+	//iep.xsd.json - JSON representation of iep.xsd
+	GenerateResource(respath("xsdjsonxsl"), respath("iepxsd"), respath("iepxsdjson"))
+	//xml.json - JSON representation test_instance.xml
+	GenerateResource(respath("xmljsonxsl"), respath("instancexml"), respath("instancejson"))
+	//iep.xsd - Golang struct iep.go
+	GenerateResource(respath("gogenxsdxsl"), respath("iepxsd"), respath("structgo"))
+	//iep.xsd - Golang test iep.go
+	GenerateResource(respath("gotestgenxsl"), respath("iepxsd"), respath("structtestgo"))
+	//iep.xsd - Golang test iep.go
+	GenerateResource(respath("gendocxsl"), respath("iepxsd"), respath("dochtml"))
+	//Marshal instance
+	MarshalXML(respath("instancexml"), respath("instancegolangxml"), datastruct)
+}
+
+func genDoc() {
+	doc, err := DoTransform(respath("gendocxsl"), respath("iepxsd"))
+	check(err)
+	ferr := WriteFile(respath("dochtml"), doc)
+	check(ferr)
+}
+
+func respath(str string) string {
+	return temppath + resources[str]
+}
+
+func validateResources() {
+	log.Println("Validate Resources")
+	ValidateFile("refxsd", "xmlschemaxsd")
+	ValidateFile("iepxsd", "xmlschemaxsd")
+	ValidateFile("instancexml", "iepxsd")
+	ValidateFile("instancexml", "refxsd")
+	ValidateFile("instancegolangxml", "iepxsd")
+	ValidateFile("instancegolangxml", "refxsd")
+}
+
+func valerr(er []error, e error) {
+	if er != nil {
+		fmt.Printf("error: %v\n", e)
+		for ve := range er {
+			errorlist = append(errorlist, er[ve])
+		}
+	}
+	if e != nil {
+		fmt.Printf("error: %v\n", e)
+		errorlist = append(errorlist, e)
+	}
+}
+
+func beforeStr(value string, a string) string {
+	// Get substring before a string.
+	pos := strings.Index(value, a)
+	if pos == -1 {
+		return ""
+	}
+	return value[0:pos]
 }

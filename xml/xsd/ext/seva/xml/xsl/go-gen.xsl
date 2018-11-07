@@ -160,7 +160,7 @@
             <xsl:if test="@name = $rootname">
                 <xsl:value-of select="concat($in, $in, '// Required for the proper namespacing', $n, $cr)"/>
                 <xsl:value-of select="concat($in, $in, 'AttrXmlnsXsi', ':', $qt, 'http://www.w3.org/2001/XMLSchema-instance', $qt, $cm, $cr)"/>
-                <xsl:value-of select="concat($in, $in, 'AttrXmlns', ':', $qt, 'urn:seva::1.0', $qt, $cm, $cr)"/>
+                <xsl:value-of select="concat($in, $in, 'AttrXmlns', ':', $qt, 'urn:security::1.0', $qt, $cm, $cr)"/>
             </xsl:if>
             <xsl:for-each select="//xs:complexType[@name = $t]//xs:element[@ref]">
                 <xsl:variable name="r" select="@ref"/>

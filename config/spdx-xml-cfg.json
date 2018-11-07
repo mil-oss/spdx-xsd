@@ -1,0 +1,66 @@
+{
+    "project":"spdx-xml",
+    "title":"XML Schema Implementations of SPDX",
+    "host":"https://spdx-xml.specchain.org/spdx-xml/",
+    "port":":8080",
+    "dbloc": "tmp/spdx-xml/db/spdx-xml.db",
+    "configfile": "config/spdx-xml-cfg.json",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/instance/spdx-test-data.xml",
+    "configurl": "https://spdx-xml.specchain.org/config",
+    "tempdir":"tmp/",
+    "temppath":"tmp/spdx-xml/",
+    "resources": [
+        {
+            "name": "refxsd",
+            "filename": "spdx-xml-ref.xsd",
+            "src": "xml/xsd/spdx-xml-ref.xsd",
+            "path": "xml/xsd/spdx-xml-ref.xsd",
+            "description": "NIEM Conformant Reference XML Schema for SPDX data"
+        },
+        {
+            "name": "refxsdjson",
+            "filename": "spdx-xml-ref-xsd.json",
+            "src": "json/spdx-xml-ref-xsd.json",
+            "path": "json/spdx-xml-ref-xsd.json",
+            "description": "JSON Representation of Reference XML Schema for SPDX data"
+        },
+        {
+            "name": "testdataxml",
+            "filename": "spdx-test-data.xml",
+            "src": "xml/instance/spdx-test-data.xml",
+            "path": "xml/instance/spdx-test-data.xml",
+            "description": "Test values for all SPDX data items"
+        }
+    ],
+    "implementations": [
+        {
+            "name": "spdx-doc",
+            "src": "config/spdx-doc-cfg.json",
+            "srcurl": "https://spdx-xml.specchain.org/spdx-doc/file/config",
+            "path": "config/spdx-doc-cfg.json",
+            "description": "SPDX Document XML Information Exchange Package"
+        },
+        {
+            "name": "spdx-license",
+            "src": "config/spdx-license-cfg.json",
+            "srcurl": "https://spdx-xml.specchain.org/spdx-license/file/config",
+            "path": "config/spdx-license-cfg.json",
+            "description": "SPDX License XML Information Exchange Package"
+        },
+        {
+            "name": "spdx-security",
+            "src":  "config/spdx-security-cfg.json",
+            "srcurl": "https://spdx-xml.specchain.org/spdx-security/file/config",
+            "path":  "config/spdx-security-cfg.json",
+            "description": "SPDX Security XML Information Exchange Package"
+        },
+        {
+            "name": "spdx-sec-ism",
+            "src": "config/spdx-sec-ism-cfg.json",
+            "srcurl": "https://spdx-xml.specchain.org/spdx-sec-ism/file/config",
+            "path": "config/spdx-sec-ism-cfg.json",
+            "description": "SPDX Security with ISM XML Information Exchange Package"
+        }
+    ]
+}

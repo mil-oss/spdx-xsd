@@ -1,0 +1,17 @@
+1. Generate IEP XSD
+
+2. Generate Instance
+
+3. Generate XSD JSON
+
+3. Generate Instance JSON
+
+4. Generate Golang
+
+5. Generate GoTest
+
+6. Marshal/Unmarshal Instance
+
+7. Validate all XML
+
+8. Secure Application Service

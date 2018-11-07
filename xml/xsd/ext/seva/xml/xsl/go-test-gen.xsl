@@ -9,7 +9,7 @@
 
     <xsl:param name="TestData" select="'../instance/test_instance.xml'"/>
 
-    <xsl:variable name="package" select="'seva'"/>
+    <xsl:variable name="package" select="'security'"/>
     <xsl:variable name="rootname" select="'SoftwareEvidenceArchive'"/>
 
     <xsl:variable name="a">
@@ -74,21 +74,21 @@
         <xsl:value-of select="concat($in, $qt, 'test_data.xml', $qt, ':', '               ', $qt, 'xml/test_data.xml', $qt, $cm, $cr)"/>
         <xsl:value-of select="concat($in, $qt, 'test_instance.xml', $qt, ':', '      ', $qt, 'xml/test_instance.xml', $qt, $cm, $cr, $rb, $cr)"/>
 
-        <xsl:value-of select="concat('func TestSeva(t *testing.T) {', $cr, $in, 'g := Goblin(t)', $cr)"/>
+        <xsl:value-of select="concat('func Testsecurity(t *testing.T) {', $cr, $in, 'g := Goblin(t)', $cr)"/>
         <xsl:value-of select="concat($in, 'RegisterFailHandler(func(m string, _ ...int) { g.Fail(m) })', $cr, $cr)"/>
         <xsl:value-of select="concat($in, 'xf, ferr := ioutil.ReadFile(testinstances[', $qt, 'test_instance.xml', $qt, '])', $cr)"/>
         <xsl:value-of select="concat($in, 'if ferr != nil {', $cr)"/>
         <xsl:value-of select="concat($in, $in, 'fmt.Printf(ferr.Error())', $cr, $in, '}', $cr)"/>
-        <xsl:value-of select="concat($in, 'var seva = NewSoftwareEvidenceArchive()', $cr)"/>
-        <xsl:value-of select="concat($in, 'err := xml.Unmarshal([]byte(xf), ', $a, 'seva)', $cr)"/>
+        <xsl:value-of select="concat($in, 'var security = NewSoftwareEvidenceArchive()', $cr)"/>
+        <xsl:value-of select="concat($in, 'err := xml.Unmarshal([]byte(xf), ', $a, 'security)', $cr)"/>
         <xsl:value-of select="concat($in, 'if err != nil {', $cr)"/>
         <xsl:value-of select="concat($in, $in, 'fmt.Printf(err.Error())', $cr, $in, '}', $cr)"/>
 
-        <xsl:value-of select="concat($in, 'g.Describe(', $qt, 'SEVA', $qt, $cm, 'func() {', $cr)"/>
+        <xsl:value-of select="concat($in, 'g.Describe(', $qt, 'security', $qt, $cm, 'func() {', $cr)"/>
         <xsl:for-each select="/xs:schema/xs:complexType[@name = $roottype]//xs:element[@ref]">
             <xsl:variable name="msgtext" select="concat('Must have ', xs:annotation//*/@name)"/>
             <xsl:value-of select="concat($in, $in, 'g.It(', $qt, $msgtext, $qt, $cm, 'func() {', $cr)"/>
-            <!--<xsl:value-of select="concat($in, $in, $in, 'seva := New', $rootname, '()', $cr)"/>-->
+            <!--<xsl:value-of select="concat($in, $in, $in, 'security := New', $rootname, '()', $cr)"/>-->
             <xsl:variable name="rr" select="@ref"/>
             <xsl:variable name="ty" select="/xs:schema/xs:element[@name = $rr]/@type"/>
             <xsl:for-each select="/xs:schema/xs:complexType[@name = $ty]//xs:element[@ref]">
@@ -156,7 +156,7 @@
             </xsl:when>
             <xsl:otherwise>
                 <xsl:element name="p">
-                    <xsl:value-of select="concat('seva.', $path)"/>
+                    <xsl:value-of select="concat('security.', $path)"/>
                 </xsl:element>
             </xsl:otherwise>
         </xsl:choose>

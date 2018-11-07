@@ -8,7 +8,7 @@
     <Node rdf="http://spdx.org/rdf/terms#contextualExample" xmlname="ContextualExampleText"/>
     <Node rdf="http://spdx.org/rdf/terms#created" xmlname="CreatedDateTime"/>    
     <Node rdf="http://spdx.org/rdf/terms#creator" xmlname="CreatorText"/>
-    <Node rdf="http://spdx.org/rdf/terms#dataLicense" xmlname="DataLicenseText"/>
+    <Node rdf="http://spdx.org/rdf/terms#dataLicense" xmlname="DataLicenseID"/>
     <Node rdf="http://spdx.org/rdf/terms#description" xmlname="DescriptionText"/>
     <Node rdf="http://spdx.org/rdf/terms#documentation" xmlname="DocumentationURI"/>
     <Node rdf="http://spdx.org/rdf/terms#downloadLocation" xmlname="DownloadLocationURI"/>
