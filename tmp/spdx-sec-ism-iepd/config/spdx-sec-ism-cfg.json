@@ -45,6 +45,13 @@
             "description": "W3C XSLT Schema for XSLT validation"
         },
         {
+            "name": "ismxsd",
+            "filename": "ic-ism.xsd",
+            "src": "xml/xsd/ext/ic-xml/ic-ism.xsd",
+            "path": "xml/xsd/ext/ic-xml/ic-ism.xsd",
+            "description": "IC-ISM Schema for Security Tag validation"
+        },
+        {
             "name": "iepxsdxsl",
             "filename": "spdx-sec-ism-iep.xsl",
             "src": "iepd/spdx-sec-ism/xml/xsl/spdx-sec-ism-iep.xsl",

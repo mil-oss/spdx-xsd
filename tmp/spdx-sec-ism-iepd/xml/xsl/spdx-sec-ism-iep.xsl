@@ -127,7 +127,7 @@
     <xsl:template name="main">
         <xs:schema xmlns="urn:spdx-xml:1.0" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-xml:1.0" version="1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
             xmlns:structures="http://release.niem.gov/niem/structures/4.0/" xmlns:ism="urn:us:gov:ic:ism">
-            <xs:import namespace="urn:us:gov:ic:ism" schemaLocation="ext/ic-xml/IC-ISM.xsd"/>
+            <xs:import namespace="urn:us:gov:ic:ism" schemaLocation="ext/ic-xml/ic-ism.xsd"/>
             <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd" namespace="http://release.niem.gov/niem/structures/4.0/"/>
             <xsl:apply-templates select="exsl:node-set($xsddata)/*" mode="xsdcopy"/>
         </xs:schema>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<SpdxDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="urn:spdx-xml:1.0" xsi:schemaLocation="urn:spdx-xml:1.0  https://spdx-xml.specchain.org/spdx-doc/file/iepxsd">
+  <SpdxID>urn:anyuri.org</SpdxID>
+  <Annotation>
+    <Date>2018-04-12T13:20:00</Date>
+    <AnnotationTypeCode>AnnotationTypeOther</AnnotationTypeCode>
+    <CommentText>Test string one</CommentText>
+    <AnnotatorText>Test string one</AnnotatorText>
+  </Annotation>
+  <Name>Test string one</Name>
+  <CommentText>Test string one</CommentText>
+  <Relationship>
+    <RelationshipTypeCode>RelationshipTypeAmendment</RelationshipTypeCode>
+    <CommentText>Test string one</CommentText>
+    <RelatedSpdxElementID>Test string one</RelatedSpdxElementID>
+  </Relationship>
+  <DescribesPackageID>Test string one</DescribesPackageID>
+  <DescribesFileID>Test string one</DescribesFileID>
+  <HasExtractedLicensingInfoID>Test string one</HasExtractedLicensingInfoID>
+  <CreationInfo>
+    <LicenseListVersionText>Test string one</LicenseListVersionText>
+    <CreatedDateTime>2018-04-12T13:20:00</CreatedDateTime>
+    <CommentText>Test string one</CommentText>
+    <CreatorText>Test string one</CreatorText>
+  </CreationInfo>
+  <SpecVersionText>Test string one</SpecVersionText>
+  <ExternalDocumentRef>
+    <Checksum>
+      <ChecksumValue>6865726F6E6779616E672E636F6D</ChecksumValue>
+      <AlgorithmCode>ChecksumAlgorithmMd5</AlgorithmCode>
+    </Checksum>
+    <ExternalDocumentID>Test string one</ExternalDocumentID>
+    <SpdxDocumentID>Test string one</SpdxDocumentID>
+  </ExternalDocumentRef>
+  <DataLicenseID>Test string one</DataLicenseID>
+</SpdxDocument>

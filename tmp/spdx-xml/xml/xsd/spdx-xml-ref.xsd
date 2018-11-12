@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD:IEPD/spdx-seva/xml/xsd/spdx-ref.xsd
-<xs:schema xmlns="spdx:xsd::1.0"
-           xmlns:spdx="spdx:xsd::1.0"
-           xmlns:ns="http://www.w3.org/2003/06/sw-vocab-status/ns#"
-           xmlns:xs="http://www.w3.org/2001/XMLSchema"
-=======
 <xs:schema xmlns="urn:spdx-xml:1.0"
->>>>>>> aa70dacbe68dfa39803845d72529721d41c4c3a0:xml/xsd/spdx-xml-ref.xsd
            xmlns:ct="http://release.niem.gov/niem/conformanceTargets/3.0/"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xmlns:structures="http://release.niem.gov/niem/structures/4.0/"

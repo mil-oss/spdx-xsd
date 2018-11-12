@@ -176,6 +176,15 @@
          </xs:enumeration>
       </xs:restriction>
    </xs:simpleType>
+   <xs:simpleType name="CopyrightTextSimpleType">
+      <xs:annotation>
+         <xs:documentation>A data type for CopyrightText properties</xs:documentation>
+         <xs:appinfo>
+            <SimpleType name="CopyrightTextSimpleType"/>
+         </xs:appinfo>
+      </xs:annotation>
+      <xs:union memberTypes='ParagraphTextSimpleType CopyrightTextCodeSimpleType'/>
+   </xs:simpleType>
    <xs:simpleType name="DataCountSimpleType">
       <xs:annotation>
          <xs:documentation>A data type for the occurrence of an artifact</xs:documentation>
@@ -5048,7 +5057,7 @@
          </xs:appinfo>
       </xs:annotation>
       <xs:simpleContent>
-         <xs:extension base="xs:string">
+         <xs:extension base="CopyrightTextSimpleType">
             <xs:attributeGroup ref="structures:SimpleObjectAttributeGroup"/>
          </xs:extension>
       </xs:simpleContent>
