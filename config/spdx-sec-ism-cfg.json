@@ -24,6 +24,13 @@
             "description": "NIEM Conformant Reference XML Schema for SPDX data"
         },
         {
+            "name": "ismxsd",
+            "filename": "ic-ism.xsd",
+            "src": "xml/xsd/ext/ic-xml/ic-ism.xsd",
+            "path": "xml/xsd/ext/ic-xml/ic-ism.xsd",
+            "description": "NIEM Conformant Reference XML Schema for SPDX data"
+        },
+        {
             "name": "iepxsd",
             "filename": "spdx-sec-ism-iep.xsd",
             "src": "iepd/spdx-sec-ism/xml/xsd/spdx-sec-ism-iep.xsd",
