@@ -45,6 +45,13 @@
             "description": "W3C XML Schema for XSD validation"
         },
         {
+            "name": "structuresxsd",
+            "filename": "structures.xsd",
+            "src": "xml/xsd/ext/niem/utility/structures/4.0/structures.xsd",
+            "path": "xml/xsd/ext/niem/utility/structures/4.0/structures.xsd",
+            "description": "NIEM Object Definitions for XSD validation"
+        },
+        {
             "name": "xsltxsd",
             "filename": "xslt.xsd",
             "src": "xml/xsd/ext/w3c/xslt.xsd",

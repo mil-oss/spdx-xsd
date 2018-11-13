@@ -24,6 +24,13 @@
             "description": "NIEM Conformant Reference XML Schema for SPDX data"
         },
         {
+            "name": "ismxsd",
+            "filename": "ic-ism.xsd",
+            "src": "xml/xsd/ext/ic-xml/ic-ism.xsd",
+            "path": "xml/xsd/ext/ic-xml/ic-ism.xsd",
+            "description": "NIEM Conformant Reference XML Schema for SPDX data"
+        },
+        {
             "name": "iepxsd",
             "filename": "spdx-sec-ism-iep.xsd",
             "src": "iepd/spdx-sec-ism/xml/xsd/spdx-sec-ism-iep.xsd",
@@ -36,6 +43,13 @@
             "src": "xml/xsd/ext/w3c/XMLSchema.xsd",
             "path": "xml/xsd/ext/w3c/XMLSchema.xsd",
             "description": "W3C XML Schema for XSD validation"
+        },
+        {
+            "name": "structuresxsd",
+            "filename": "structures.xsd",
+            "src": "xml/xsd/ext/niem/utility/structures/4.0/structures.xsd",
+            "path": "xml/xsd/ext/niem/utility/structures/4.0/structures.xsd",
+            "description": "NIEM Object Definitions for XSD validation"
         },
         {
             "name": "xsltxsd",
