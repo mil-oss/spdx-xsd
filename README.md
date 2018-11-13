@@ -2,6 +2,10 @@
 
 XML Schema for the Software Package Documentation Exchange (SPDX) Format
 
+DEMO UI: https://spdx-ccm.specchain.org
+
+REST ENDPOINTS:
+
 SPDX XML:  https://spdx-xml.specchain.org
 
 SPDX Document XML: https://spdx-xml.specchain.org/spdx-doc
