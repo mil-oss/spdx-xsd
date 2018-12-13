@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="urn:spdx-xml:1.0" xmlns:structures="http://release.niem.gov/niem/structures/4.0/" xmlns:ism="urn:us:gov:ic:ism" xmlns:exsl="http://exslt.org/common" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="urn:spdx-xml:1.0" version="1">
-   <xs:import namespace="urn:us:gov:ic:ism" schemaLocation="ext/ic-xml/IC-ISM.xsd"/>
+   <xs:import namespace="urn:us:gov:ic:ism" schemaLocation="ext/ic-xml/ic-ism.xsd"/>
    <xs:import schemaLocation="ext/niem/utility/structures/4.0/structures.xsd" namespace="http://release.niem.gov/niem/structures/4.0/"/>
    <xs:annotation>
       <xs:documentation>XML Schema for Software Evidence Archive Information Exchange</xs:documentation>
