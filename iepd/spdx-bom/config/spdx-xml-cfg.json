@@ -41,6 +41,20 @@
             "path": "config/spdx-doc-cfg.json",
             "description": "SPDX Document XML Information Exchange Package"
         },
+         {
+            "name": "spdx-bom",
+            "src": "config/spdx-bom-cfg.json",
+            "srcurl": "https://spdx-xml.specchain.org/spdx-bom/file/config",
+            "path": "config/spdx-bom-cfg.json",
+            "description": "SPDX Document XML Information Exchange Package"
+        },
+         {
+            "name": "spdx-bom-ism",
+            "src": "config/spdx-bom-ism-cfg.json",
+            "srcurl": "https://spdx-xml.specchain.org/spdx-bom-ism/file/config",
+            "path": "config/spdx-bom-ism-cfg.json",
+            "description": "SPDX Document XML Information Exchange Package"
+        },
         {
             "name": "spdx-license",
             "src": "config/spdx-license-cfg.json",

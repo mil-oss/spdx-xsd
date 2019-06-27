@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/><style type="text/css">
+                    body {
+                        width: 7in;
+                        padding: .75in;
+                        font-family: "Courier New", Courier, monospace;
+                        font-size: .9em;
+                        border: thin black solid;
+                    }
+                    pre {
+                        white-space: pre-wrap; /* css-3 */
+                        white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+                        white-space: -pre-wrap; /* Opera 4-6 */
+                        white-space: -o-pre-wrap; /* Opera 7 */
+                        word-wrap: break-word;
+                        font-family: "Courier New", Courier, monospace;
+                        font-size: .9em;
+                    }
+                    
+                    .tab {
+                        padding-right: .2in;
+                    }
+                    .lvl2 {
+                        display: inline;
+                    }
+                    .lvl3 {
+                        display: inline;
+                        padding-left: .3in;
+                    }
+                    .lvl4 {
+                        display: inline;
+                        padding-left: .6in;
+                    }
+                    .lvl5 {
+                        display: inline;
+                        padding-left: 1in;
+                    }
+                    .lvl6 {
+                        display: inline;
+                        padding-left: 1.4in;
+                    }
+                    .lvl7 {
+                        display: inline;
+                        padding-left: 1.8in;
+                    }
+                    .lvl8 {
+                        display: inline;
+                        padding-left: 2.2in;
+                    }
+                    .lvl9 {
+                        display: inline;
+                        padding-left: 2.6in;
+                    }
+                    .uline {
+                        text-decoration: underline;
+                    }
+                    .ctr_title {
+                        text-align: center;
+                    }
+                    .center
+                    {
+                        margin-left: auto;
+                        margin-right: auto;
+                        width: 100%;
+                    }
+                    P.pagebreak
+                    {
+                        page-break-before: always
+                    }</style></head><body><pre><div style="text-align:center">SPDX XML</div></pre><pre><div style="text-align:center"><b><span class="lvl1">SpdxDocument</span></b></div><div style="text-align:center"><span>A data type for SpdxDocument type</span></div></pre><pre><div>1.  <u>describesPackage</u>.  <span>A data item for The describesPackage property relates an SpdxDocument to the package which it describes.</span></div><div>    xmlname = DescribesPackageID </div><div>    type = SpdxIDType </div><div>    simpletype = xs:string</div></pre><pre><div>2.  <u>describesFile</u>.  <span>A data item for The describesFile property relates an SpdxDocument to the file which it describes.</span></div><div>    xmlname = DescribesFile </div><div>    type = SpdxIDType </div><div>    simpletype = xs:string</div></pre><pre><div>3.  <u>HasExtractedLicensingInfoID</u>.  <span>A data item for Indicates that a particular ExtractedLicensingInfo was defined in the subject SpdxDocument.</span></div><div>    xmlname = HasExtractedLicensingInfo </div><div>    type = SpdxIDType </div><div>    simpletype = xs:string</div><div>    minOccurs = 1 </div><div>    maxOccurs = 1 </div></pre><pre><div>4.  <u>CreationInfo</u>.  <span>A data item for CreationInfo</span></div><div>    xmlname = CreationInfo </div><div>    type = CreationInfoType </div><div>    minOccurs = 1 </div><div>    maxOccurs = 1 </div></pre><pre><div>5.  <u>specVersion</u>.  <span>A data type for Identifies the version of this specification that was used to produce this SPDX document. The value for this version of the spec is SPDX-1.2. The values SPDX-1.0 and SPDX-1.1 may also be supported by SPDX tools for backwards compatibility purposes.</span></div><div>    xmlname = SpecVersionText </div><div>    type = SpecVersionTextType </div><div>    simpletype = xs:string</div><div>    minOccurs = 1 </div><div>    maxOccurs = 1 </div></pre><pre><div>6.  <u>ExternalDocumentRef</u>.  <span>A data item for ExternalDocumentRef</span></div><div>    xmlname = ExternalDocumentRef </div><div>    type = ExternalDocumentRefType </div><div>    minOccurs = 0 </div></pre><pre><div>7.  <u>dataLicense</u>.  <span>A data item for The licensing under which the creator of this SPDX document allows related data to be reproduced. The only valid value for this property is http://spdx.org/licenses/CC0-1.0. This is to alleviate any concern that content (the data) in an SPDX file is subject to any form of intellectual property right that could restrict the re-use of the information or the creation of another SPDX file for the same project(s). This approach avoids intellectual property and related restrictions over the SPDX file, however individuals can still contract one to one to restrict release of specific collections of SPDX files (which map to software bill of materials) and the identification of the supplier of SPDX files.</span></div><div>    xmlname = DataLicenseID </div><div>    type = LicenseIDType </div><div>    simpletype = xs:string</div></pre></body></html>

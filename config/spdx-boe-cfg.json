@@ -1,0 +1,234 @@
+{
+    "project": "spdx-boe",
+    "configfile": "spdx-boe-cfg.json",
+    "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
+    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-boe/xml/instance/spdx-boe-test-data.xml",
+    "host": "https://spdx-xml.specchain.org/spdx-boe/",
+    "port": ":8080",
+    "dbloc": "tmp/spdx-boe-iepd/db/spdx-boe.db",
+    "tempdir": "tmp/",
+    "temppath": "tmp/spdx-boe-iepd/",
+    "resources": [
+        {
+            "name": "config",
+            "filename": "spdx-boe-cfg.json",
+            "src": "config/spdx-boe-cfg.json",
+            "path": "config/spdx-boe-cfg.json",
+            "description": "Configuration Information"
+        },
+        {
+            "name": "refxsd",
+            "filename": "spdx-xml-ref.xsd",
+            "src": "xml/xsd/spdx-xml-ref.xsd",
+            "path": "xml/xsd/spdx-xml-ref.xsd",
+            "description": "NIEM Conformant Reference XML Schema for SPDX data"
+        },
+        {
+            "name": "iepxsd",
+            "filename": "spdx-boe-iep.xsd",
+            "src": "iepd/spdx-boe/xml/xsd/spdx-boe-iep.xsd",
+            "path": "xml/xsd/spdx-boe-iep.xsd",
+            "description": "XML Schema for SPDX Software Evaluation Data information exchange"
+        },
+        {
+            "name": "xmlschemaxsd",
+            "filename": "XMLSchema.xsd",
+            "src": "xml/xsd/ext/w3c/XMLSchema.xsd",
+            "path": "xml/xsd/ext/w3c/XMLSchema.xsd",
+            "description": "W3C XML Schema for XSD validation"
+        },
+        {
+            "name": "xsltxsd",
+            "filename": "xslt.xsd",
+            "src": "xml/xsd/ext/w3c/xslt.xsd",
+            "path": "xml/xsd/ext/w3c/xslt.xsd",
+            "description": "W3C XSLT Schema for XSLT validation"
+        },
+        {
+            "name": "iepxsdxsl",
+            "src": "iepd/spdx-boe/xml/xsl/spdx-boe-iep.xsl",
+            "path": "xml/xsl/spdx-boe-iep.xsl",
+            "description": "XSLT to generate the SPDX Security Implementation Schema"
+        
+        },
+        {
+            "name": "instancexsl",
+            "src": "iepd/spdx-boe/xml/xsl/spdx-boe-instance.xsl",
+            "path": "xml/xsl/spdx-boe-instance.xsl",
+            "description": "XSLT to generate a SPDX Security instance using test values"
+        
+        },
+        {
+            "name": "gogenxsdxsl",
+            "filename": "spdx-boe-go-gen.xsl",
+            "src": "iepd/spdx-boe/xml/xsl/spdx-boe-go-gen.xsl",
+            "path": "xml/xsl/spdx-boe-go-gen.xsl",
+            "description": "XSLT to generate a GOLANG Struct for SPDX Security information"
+        
+        },
+        {
+            "name": "gotestgenxsl",
+            "filename": "spdx-boe-go-test-gen.xsl",
+            "src": "iepd/spdx-boe/xml/xsl/spdx-boe-go-test-gen.xsl",
+            "path": "xml/xsl/spdx-boe-go-test-gen.xsl",
+            "description": "XSLT to generate GOLANG Unit Tests for SPDX Security information using test data"
+        
+        },
+        {
+            "name": "testdataxml",
+            "filename":"spdx-boe-test-data.xml",
+            "src": "iepd/spdx-boe/xml/instance/spdx-boe-test-data.xml",
+            "path": "xml/instance/spdx-boe-test-data.xml",
+            "description": "Test data for SPDX Security information"
+        },
+        {
+            "name": "instancexml",
+            "filename": "spdx-boe-instance.xml",
+            "src": "iepd/spdx-boe/xml/instance/spdx-boe-instance.xml",
+            "path": "xml/instance/spdx-boe-instance.xml",
+            "description": "SPDX Security XML Instance generated using XSLT"
+        },
+        {
+            "name": "instancegolangxml",
+            "filename": "spdx-boe-instance-golang.xml",
+            "src": "iepd/spdx-boe/xml/instance/spdx-boe-instance-golang.xml",
+            "path": "xml/instance/spdx-boe-instance-golang.xml",
+            "description": "SPDX License XML Instance created by marshalling XML instance using GOLANG struct"
+        },
+        {
+            "name": "structgo",
+            "filename": "spdx-boe-struct.go",
+            "src": "src/spdx-boe/spdx-boe-struct.go",
+            "path": "src/spdx-boe/spdx-boe-struct.go",
+            "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
+        
+        },
+        {
+            "name": "structtestgo",
+            "filename": "spdx-boe-struct_test.go",
+            "src": "src/spdx-boe/spdx-boe-struct_test.go",
+            "path": "src/spdx-boe/spdx-boe-struct_test.go",
+            "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
+       
+        },
+        {
+            "name": "maingo",
+            "filename": "spdx-boe.go",
+            "src": "src/spdx-boe/spdx-boe.go",
+            "path": "src/spdx-boe/spdx-boe.go",
+            "description": "Golang start class"
+        },
+        {
+            "name": "iepxsdjson",
+            "filename": "spdx-boe-iep-xsd.json",
+            "src": "iepd/spdx-boe/json/spdx-boe-iep-xsd.json",
+            "path": "json/spdx-boe-iep-xsd.json",
+            "description": "JSON Representation of SPDX Security Schema"
+        },
+        {
+            "name": "refxsdjson",
+            "filename": "spdx-xml-ref-xsd.json",
+            "src": "iepd/spdx-boe/json/spdx-xml-ref-xsd.json",
+            "path": "json/spdx-boe-ref-xsd.json",
+            "description": "JSON Representation of SPDX Reference XML Schema"
+        },
+        {
+            "name": "instancejson",
+            "filename": "spdx-boe-instance.json",
+            "src": "iepd/spdx-boe/json/spdx-boe-instance.json",
+            "path": "json/spdx-boe-instance.json",
+            "description": "JSON Representation of SPDX Security XML Test Instance"
+        },
+        {
+            "name": "provenancereportjson",
+            "filename": "spdx-boe-provenance-report.json",
+            "src": "iepd/spdx-boe/json/spdx-boe-provenance-report.json",
+            "path": "json/spdx-boe-provenance-report.json"
+        },
+        {
+            "name": "resourcesjson",
+            "filename": "spdx-boe-resources.json",
+            "src": "iepd/spdx-boe/json/spdx-boe-resources.json",
+            "path": "json/spdx-boe-resources.json"
+        },
+        {
+            "name": "iepxsl",
+            "filename": "iep.xsl",
+            "src": "xml/xsl/iep.xsl",
+            "path": "xml/xsl/common/iep.xsl",
+            "description": "Common XSLT utility for generating Implementaion XSDs from Reference XSDs"
+        },
+        {
+            "name": "xmlinstancexsl",
+            "filename": "xml-instance.xsl",
+            "src": "xml/xsl/xml-instance.xsl",
+            "path": "xml/xsl/common/xml-instance.xsl",
+            "description": "Common XSLT utility for generating XML Instances from Implemtation XSDs using test data"
+        },
+        {
+            "name": "gogenxsl",
+            "filename": "go-gen.xsl",
+            "src": "xml/xsl/go-gen.xsl",
+            "path": "xml/xsl/common/go-gen.xsl",
+            "description": "Common XSLT utility for generating GOLANG structs and Unit Tests from Implemtation XSDs using test data"
+        },
+        {
+            "name": "xsdjsonxsl",
+            "filename": "xsd-json.xsl",
+            "src": "xml/xsl/xsd-json.xsl",
+            "path": "xml/xsl/common/xsd-json.xsl",
+            "description": "Common XSLT utility for generating a JSON representation of an XML Schema"
+       
+        },
+        {
+            "name": "xmljsonxsl",
+            "filename": "xml-json.xsl",
+            "src": "xml/xsl/xml-json.xsl",
+            "path": "xml/xsl/common/xml-json.xsl",
+            "description": "Common XSLT utility for generating a JSON representation of an XML Instance"
+        },
+        {
+            "name": "gendocxsl",
+            "filename": "docgen.xsl",
+            "src": "xml/xsl/docgen.xsl",
+            "path": "xml/xsl/common/docgen.xsl",
+            "description": "XSLT to generate Documentation from XML Schema"
+        },
+        {
+            "name": "dochtml",
+            "filename": "spdx-boe-documentation.html",
+            "src": "iepd/spdx-boe/xml/instance/spdx-boe-documentation.html",
+            "path": "iepd/spdx-boe/xml/instance/spdx-boe-documentation.html",
+            "description": "Autogenerated documentation"
+        },
+        {
+            "name": "zipiepd",
+            "filename": "spdx-boe-iepd.zip",
+            "src": "",
+            "path": "spdx-boe-iepd.zip",
+            "description": "Zipped archive of all Resources"
+        }
+    ],
+    "directories": [
+        {
+            "name": "niem",
+            "src": "xml/xsd/ext/niem",
+            "path": "xml/xsd/ext/niem"
+        },
+        {
+            "name": "w3c",
+            "src": "xml/xsd/ext/w3c",
+            "path": "xml/xsd/ext/w3c"
+        },
+        {
+            "name": "gostruct",
+            "src": "src/spdx-boe",
+            "path": "src/spdx-boe"
+        },
+        {
+            "name": "gocode",
+            "src": "src/xsdprov",
+            "path": "src/xsdprov"
+        }
+    ]
+}

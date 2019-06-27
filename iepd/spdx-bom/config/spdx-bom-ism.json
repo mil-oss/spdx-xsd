@@ -1,19 +1,19 @@
 {
-    "project": "spdx-security",
-    "configfile": "spdx-security-cfg.json",
+    "project":"spdx-bom-ism",
+    "configfile": "spdx-bom-ism-cfg.json",
     "reflink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/xml/xsd/spdx-xml-ref.xsd",
-    "testlink": "https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-security/xml/instance/spdx-security-test-data.xml",
-    "host": "https://spdx-xml.specchain.org/spdx-security/",
-    "port": ":8080",
-    "dbloc": "tmp/spdx-security-iepd/db/spdx-security.db",
-    "tempdir": "tmp/",
-    "temppath": "tmp/spdx-security-iepd/",
+    "testlink":"https://raw.githubusercontent.com/mil-oss/spdx-xsd/master/iepd/spdx-document/xml/instance/spdx-bom-ism-test-data.xml",
+    "host":"https://spdx-xml.specchain.org/spdx-doc/",
+    "port":":8080",
+    "dbloc":"tmp/spdx-bom-ism-iepd/db/spdx-doc.db",
+    "tempdir":"tmp/",
+    "temppath":"tmp/spdx-bom-ism-iepd/",
     "resources": [
         {
             "name": "config",
-            "filename": "spdx-security-cfg.json",
-            "src": "config/spdx-security-cfg.json",
-            "path": "config/spdx-security-cfg.json",
+            "filename": "spdx-bom-ism-cfg.json",
+            "src": "config/spdx-bom-ism-cfg.json",
+            "path": "config/spdx-bom-ism-cfg.json",
             "description": "Configuration Information"
         },
         {
@@ -25,10 +25,10 @@
         },
         {
             "name": "iepxsd",
-            "filename": "spdx-security-iep.xsd",
-            "src": "iepd/spdx-security/xml/xsd/spdx-security-iep.xsd",
-            "path": "xml/xsd/spdx-security-iep.xsd",
-            "description": "XML Schema for SPDX Software Evaluation Data information exchange"
+            "filename": "spdx-bom-ism-iep.xsd",
+            "src": "iepd/spdx-document/xml/xsd/spdx-bom-ism-iep.xsd",
+            "path": "xml/xsd/spdx-bom-ism-iep.xsd",
+            "description": "XML Schema for SPDX Document information exchange"
         },
         {
             "name": "xmlschemaxsd",
@@ -46,110 +46,108 @@
         },
         {
             "name": "iepxsdxsl",
-            "src": "iepd/spdx-security/xml/xsl/spdx-security-iep.xsl",
-            "path": "xml/xsl/spdx-security-iep.xsl",
-            "description": "XSLT to generate the SPDX Security Implementation Schema"
+            "src": "iepd/spdx-document/xml/xsl/spdx-bom-ism-iep.xsl",
+            "path": "xml/xsl/spdx-bom-ism-iep.xsl",
+            "description": "XSLT to generate the SPDX Document Implementation Schema"
         
         },
         {
             "name": "instancexsl",
-            "src": "iepd/spdx-security/xml/xsl/spdx-security-instance.xsl",
-            "path": "xml/xsl/spdx-security-instance.xsl",
-            "description": "XSLT to generate a SPDX Security instance using test values"
+            "src": "iepd/spdx-document/xml/xsl/spdx-bom-ism-instance.xsl",
+            "path": "xml/xsl/spdx-bom-ism-instance.xsl",
+            "description": "XSLT to generate a SPDX Document instance using test values"
         
         },
         {
             "name": "gogenxsdxsl",
-            "filename": "spdx-security-go-gen.xsl",
-            "src": "iepd/spdx-security/xml/xsl/spdx-security-go-gen.xsl",
-            "path": "xml/xsl/spdx-security-go-gen.xsl",
-            "description": "XSLT to generate a GOLANG Struct for SPDX Security information"
+            "filename": "spdx-bom-ism-go-gen.xsl",
+            "src": "iepd/spdx-document/xml/xsl/spdx-bom-ism-go-gen.xsl",
+            "path": "xml/xsl/spdx-bom-ism-go-gen.xsl",
+            "description": "XSLT to generate a GOLANG Struct for SPDX Document information"
         
         },
         {
             "name": "gotestgenxsl",
-            "filename": "spdx-security-go-test-gen.xsl",
-            "src": "iepd/spdx-security/xml/xsl/spdx-security-go-test-gen.xsl",
-            "path": "xml/xsl/spdx-security-go-test-gen.xsl",
-            "description": "XSLT to generate GOLANG Unit Tests for SPDX Security information using test data"
+            "filename": "spdx-bom-ism-go-test-gen.xsl",
+            "src": "iepd/spdx-document/xml/xsl/spdx-bom-ism-go-test-gen.xsl",
+            "path": "xml/xsl/spdx-bom-ism-go-test-gen.xsl",
+            "description": "XSLT to generate GOLANG Unit Tests for SPDX Document information using test data"
         
         },
         {
             "name": "testdataxml",
-            "filename":"spdx-security-test-data.xml",
-            "src": "iepd/spdx-security/xml/instance/spdx-security-test-data.xml",
-            "path": "xml/instance/spdx-security-test-data.xml",
-            "description": "Test data for SPDX Security information"
+            "filename":"spdx-bom-ism-test-data.xml",
+            "src": "iepd/spdx-document/xml/instance/spdx-bom-ism-test-data.xml",
+            "path": "xml/instance/spdx-bom-ism-test-data.xml",
+            "description": "Test data for SPDX Document information"
         },
         {
             "name": "instancexml",
-            "filename": "spdx-security-instance.xml",
-            "src": "iepd/spdx-security/xml/instance/spdx-security-instance.xml",
-            "path": "xml/instance/spdx-security-instance.xml",
-            "description": "SPDX Security XML Instance generated using XSLT"
+            "filename": "spdx-bom-ism-instance.xml",
+            "src": "iepd/spdx-document/xml/instance/spdx-bom-ism-instance.xml",
+            "path": "xml/instance/spdx-bom-ism-instance.xml",
+            "description": "SPDX Document XML Instance generated using XSLT"
         },
         {
             "name": "instancegolangxml",
-            "filename": "spdx-security-instance-golang.xml",
-            "src": "iepd/spdx-security/xml/instance/spdx-security-instance-golang.xml",
-            "path": "xml/instance/spdx-security-instance-golang.xml",
-            "description": "SPDX License XML Instance created by marshalling XML instance using GOLANG struct"
+            "filename": "spdx-bom-ism-instance-golang.xml",
+            "src": "iepd/spdx-document/xml/instance/spdx-bom-ism-instance-golang.xml",
+            "path": "xml/instance/spdx-bom-ism-instance-golang.xml",
+            "description": "SPDX Document XML Instance created by marshalling XML instance using GOLANG struct"
         },
         {
             "name": "structgo",
-            "filename": "spdx-security-struct.go",
-            "src": "src/spdx-security/spdx-security-struct.go",
-            "path": "src/spdx-security/spdx-security-struct.go",
+            "filename": "spdx-bom-ism-struct.go",
+            "src": "src/spdx-doc/spdx-bom-ism-struct.go",
+            "path": "src/spdx-doc/spdx-bom-ism-struct.go",
             "description": "Auto-generated code structure for marshalling and unmarshalling XML Instances using Golang"
-        
         },
         {
             "name": "structtestgo",
-            "filename": "spdx-security-struct_test.go",
-            "src": "src/spdx-security/spdx-security-struct_test.go",
-            "path": "src/spdx-security/spdx-security-struct_test.go",
+            "filename": "spdx-bom-ism-struct_test.go",
+            "src": "src/spdx-doc/spdx-bom-ism-struct_test.go",
+            "path": "src/spdx-doc/spdx-bom-ism-struct_test.go",
             "description": "Auto-generated code tests for marshalling and unmarshalling XML Instances using Golang"
-       
         },
         {
             "name": "maingo",
-            "filename": "spdx-security.go",
-            "src": "src/spdx-security/spdx-security.go",
-            "path": "src/spdx-security/spdx-security.go",
+            "filename": "spdx-document.go",
+            "src": "src/spdx-doc/spdx-document.go",
+            "path": "src/spdx-doc/spdx-document.go",
             "description": "Golang start class"
         },
         {
             "name": "iepxsdjson",
-            "filename": "spdx-security-iep-xsd.json",
-            "src": "iepd/spdx-security/json/spdx-security-iep-xsd.json",
-            "path": "json/spdx-security-iep-xsd.json",
-            "description": "JSON Representation of SPDX Security Schema"
+            "filename": "spdx-bom-ism-iep-xsd.json",
+            "src": "iepd/spdx-document/json/spdx-bom-ism-iep-xsd.json",
+            "path": "json/spdx-bom-ism-iep-xsd.json",
+            "description": "JSON Representation of SPDX Document Schema"
         },
         {
             "name": "refxsdjson",
             "filename": "spdx-xml-ref-xsd.json",
-            "src": "iepd/spdx-security/json/spdx-xml-ref-xsd.json",
-            "path": "json/spdx-security-ref-xsd.json",
+            "src": "iepd/spdx-document/json/spdx-xml-ref-xsd.json",
+            "path": "json/spdx-xml-ref-xsd.json",
             "description": "JSON Representation of SPDX Reference XML Schema"
         },
         {
             "name": "instancejson",
-            "filename": "spdx-security-instance.json",
-            "src": "iepd/spdx-security/json/spdx-security-instance.json",
-            "path": "json/spdx-security-instance.json",
-            "description": "JSON Representation of SPDX Security XML Test Instance"
+            "filename": "spdx-bom-ism-instance.json",
+            "src": "iepd/spdx-document/json/spdx-bom-ism-instance.json",
+            "path": "json/spdx-bom-ism-instance.json",
+            "description": "JSON Representation of SPDX Document XML Test Instance"
         },
         {
             "name": "provenancereportjson",
-            "filename": "spdx-security-provenance-report.json",
-            "src": "iepd/spdx-security/json/spdx-security-provenance-report.json",
-            "path": "json/spdx-security-provenance-report.json"
+            "filename": "spdx-bom-ism-provenance-report.json",
+            "src": "iepd/spdx-document/json/spdx-bom-ism-provenance-report.json",
+            "path": "json/spdx-bom-ism-provenance-report.json"
         },
         {
             "name": "resourcesjson",
-            "filename": "spdx-security-resources.json",
-            "src": "iepd/spdx-security/json/spdx-security-resources.json",
-            "path": "json/spdx-security-resources.json"
+            "filename": "spdx-bom-ism-resources.json",
+            "src": "iepd/spdx-document/json/spdx-bom-ism-resources.json",
+            "path": "json/spdx-bom-ism-resources.json"
         },
         {
             "name": "iepxsl",
@@ -196,16 +194,16 @@
         },
         {
             "name": "dochtml",
-            "filename": "spdx-security-documentation.html",
-            "src": "iepd/spdx-security/xml/instance/spdx-security-documentation.html",
-            "path": "iepd/spdx-security/xml/instance/spdx-security-documentation.html",
+            "filename":"spdx-bom-ism-documentation.html",
+            "src": "iepd/spdx-document/xml/instance/spdx-bom-ism-documentation.html",
+            "path": "xml/instance/spdx-bom-ism-documentation.html",
             "description": "Autogenerated documentation"
         },
         {
             "name": "zipiepd",
-            "filename": "spdx-security-iepd.zip",
+            "filename": "spdx-bom-ism-iepd.zip",
             "src": "",
-            "path": "spdx-security-iepd.zip",
+            "path": "spdx-bom-ism-iepd.zip",
             "description": "Zipped archive of all Resources"
         }
     ],
@@ -222,8 +220,8 @@
         },
         {
             "name": "gostruct",
-            "src": "src/spdx-security",
-            "path": "src/spdx-security"
+            "src": "src/spdx-doc",
+            "path": "src/spdx-doc"
         },
         {
             "name": "gocode",
